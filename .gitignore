@@ -10,6 +10,10 @@
 #Ignorar imagenes
 /ServidorCentral/src/imgUsers/*
 
+#Settings
+/.settings/
+*.cfg.xml
+
 # Mobile Tools for Java (J2ME)
 /Entrenamos.uy/mtj.tmp/
 
