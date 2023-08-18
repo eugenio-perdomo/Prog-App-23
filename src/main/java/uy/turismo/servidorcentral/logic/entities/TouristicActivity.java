@@ -39,7 +39,7 @@ public class TouristicActivity extends BaseEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "department")
-	Provider department;
+	Department department;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	List<TouristicBundle> touristicBundle;
@@ -108,10 +108,10 @@ public class TouristicActivity extends BaseEntity {
 	public void setProvider(Provider provider) {
 		this.provider = provider;
 	}
-	public Provider getDepartment() {
+	public Department getDepartment() {
 		return department;
 	}
-	public void setDepartment(Provider department) {
+	public void setDepartment(Department department) {
 		this.department = department;
 	}
 	

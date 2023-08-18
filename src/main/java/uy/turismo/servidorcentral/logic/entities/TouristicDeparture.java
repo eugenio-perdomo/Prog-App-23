@@ -26,10 +26,14 @@ public class TouristicDeparture extends BaseEntity {
 	
 	@Column(name = "departure_date_time")
 	private LocalDateTime departureDateTime;
+
+	@Column(length = 150)
+	private String place;
 	
 	@ManyToOne
 	@JoinColumn(name = "touristic_activity")
 	TouristicActivity touristicActivity;
+
 
 //  Constructors
 	
@@ -38,12 +42,13 @@ public class TouristicDeparture extends BaseEntity {
 	}
 	
 	public TouristicDeparture(Long id, String name, Integer maxTourist, LocalDate uploadDate,
-			LocalDateTime departureDateTime) {
+			LocalDateTime departureDateTime, String place) {
 		super(id);
 		this.name = name;
 		this.maxTourist = maxTourist;
 		this.uploadDate = uploadDate;
 		this.departureDateTime = departureDateTime;
+		this.place = place;
 	}
 
 //	Getters and Setter
@@ -85,9 +90,14 @@ public class TouristicDeparture extends BaseEntity {
 	public void setDepartureDateTime(LocalDateTime departureDateTime) {
 		this.departureDateTime = departureDateTime;
 	}
-	
-	
-	
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
 	
 	
 }
