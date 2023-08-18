@@ -10,6 +10,8 @@ public class Main {
 	public static void main(String[] args) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
+        String yellow = "\u001B[33m";
+		System.out.println(yellow + "INFO: Done" + yellow);
 
 	}
 

@@ -1,6 +1,7 @@
 package uy.turismo.servidorcentral.logic.entities;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -26,8 +27,8 @@ public class TouristicActivity extends BaseEntity {
 	@Column(name = "cost_per_tourist")
 	private Double costPerTourist;
 	
-	@Column(name = "upload_date_time")
-	private LocalDateTime uploadDateTime;
+	@Column(name = "upload_date")
+	private LocalDate uploadDate;
 	
 	@Column(length = 50)
 	private String city;
@@ -49,13 +50,13 @@ public class TouristicActivity extends BaseEntity {
 		// TODO Auto-generated constructor stub
 	}
 	public TouristicActivity(Long id, String name, String description, Double duration, Double costPerTourist,
-			LocalDateTime uploadDateTime, String city) {
+			LocalDate uploadDate, String city) {
 		super(id);
 		this.name = name;
 		this.description = description;
 		this.duration = duration;
 		this.costPerTourist = costPerTourist;
-		this.uploadDateTime = uploadDateTime;
+		this.uploadDate = uploadDate;
 		this.city = city;
 	}
 
@@ -89,11 +90,11 @@ public class TouristicActivity extends BaseEntity {
 	public void setCostPerTourist(Double costPerTourist) {
 		this.costPerTourist = costPerTourist;
 	}
-	public LocalDateTime getUploadDateTime() {
-		return uploadDateTime;
+	public LocalDate getuploadDate() {
+		return uploadDate;
 	}
-	public void setUploadDateTime(LocalDateTime uploadDateTime) {
-		this.uploadDateTime = uploadDateTime;
+	public void setuploadDate(LocalDate uploadDate) {
+		this.uploadDate = uploadDate;
 	}
 	public String getCity() {
 		return city;

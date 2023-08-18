@@ -1,5 +1,7 @@
 package uy.turismo.servidorcentral.logic.entities;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
@@ -16,20 +18,25 @@ public class TouristicBundle extends BaseEntity {
 	
 	private Double discount;
 	
+	@Column(name = "upload_date")
+	private LocalDate uploadDate;
+	
 	//Constructors
 	public TouristicBundle() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TouristicBundle(Long id, String name, String description, Integer validityPeriod, Double discount) {
+	public TouristicBundle(Long id, String name, String description, Integer validityPeriod, Double discount, LocalDate uploadDate) {
 		super(id);
 		this.name = name;
 		this.description = description;
 		this.validityPeriod = validityPeriod;
 		this.discount = discount;
+		this.uploadDate = uploadDate;
 	}
 	
 	
+
 	//Getters and Setters
 	public String getName() {
 		return name;
@@ -64,5 +71,12 @@ public class TouristicBundle extends BaseEntity {
 	}
 	
 
+	public LocalDate getUploadDate() {
+		return uploadDate;
+	}
+	
+	public void setUploadDate(LocalDate uploadDate) {
+		this.uploadDate = uploadDate;
+	}
 
 }

@@ -10,7 +10,7 @@ public class Department extends BaseEntity {
 	@Column(length = 50, unique = true)
 	private String name;
 	
-	@Column(length = 150)
+	@Column(length = 250)
 	private String description;
 	
 	@Column(length = 60, name = "web_site")

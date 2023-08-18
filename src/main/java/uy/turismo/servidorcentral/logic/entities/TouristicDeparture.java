@@ -3,6 +3,7 @@
  */
 package uy.turismo.servidorcentral.logic.entities;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -20,8 +21,8 @@ public class TouristicDeparture extends BaseEntity {
 	@Column(name = "max_tourist")
 	private Integer maxTourist;
 	
-	@Column(name = "upload_date_time")
-	private LocalDateTime uploadDateTime;
+	@Column(name = "upload_date")
+	private LocalDate uploadDate;
 	
 	@Column(name = "departure_date_time")
 	private LocalDateTime departureDateTime;
@@ -36,12 +37,12 @@ public class TouristicDeparture extends BaseEntity {
 		
 	}
 	
-	public TouristicDeparture(Long id, String name, Integer maxTourist, LocalDateTime uploadDateTime,
+	public TouristicDeparture(Long id, String name, Integer maxTourist, LocalDate uploadDate,
 			LocalDateTime departureDateTime) {
 		super(id);
 		this.name = name;
 		this.maxTourist = maxTourist;
-		this.uploadDateTime = uploadDateTime;
+		this.uploadDate = uploadDate;
 		this.departureDateTime = departureDateTime;
 	}
 
@@ -66,13 +67,13 @@ public class TouristicDeparture extends BaseEntity {
 	}
 
 
-	public LocalDateTime getUploadDateTime() {
-		return uploadDateTime;
+	public LocalDate getuploadDate() {
+		return uploadDate;
 	}
 
 
-	public void setUploadDateTime(LocalDateTime uploadDateTime) {
-		this.uploadDateTime = uploadDateTime;
+	public void setuploadDate(LocalDate uploadDate) {
+		this.uploadDate = uploadDate;
 	}
 
 

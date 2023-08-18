@@ -7,7 +7,7 @@
     <session-factory>
     	<!-- Configuration -->
     	<!-- <property name="connection.url">jdbc:mysql://localhost:3306/Turismo_UY_BD</property> -->
-    	<property name="connection.url">jdbc:mysql://0.tcp.sa.ngrok.io:16769/Turismo_UY_BD</property>
+    	<property name="connection.url">jdbc:mysql://0.tcp.sa.ngrok.io:16000/Turismo_UY_BD</property>
     	<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
     	<property name="connection.username">admin</property>
     	<property name="connection.password">admin</property>
@@ -17,7 +17,7 @@
     	<property name="current_session_context_class">thread</property>
     	
     	<!-- Strategies -->
-    	<property name="hibernate.hbm2ddl.auto">create</property>
+    	<property name="hibernate.hbm2ddl.auto">update</property>
     	
     	<!-- Entities -->
     	<mapping class="uy.turismo.servidorcentral.logic.entities.BaseEntity"/>
