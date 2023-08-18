@@ -12,7 +12,7 @@
 
 #Settings
 /.settings/
-*.cfg.xml
+#*.cfg.xml
 
 # Mobile Tools for Java (J2ME)
 /Entrenamos.uy/mtj.tmp/
