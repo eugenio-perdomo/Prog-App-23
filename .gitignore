@@ -9,10 +9,10 @@
 
 #Settings
 /.settings/
-*.cfg.xml
+hibernate.cfg.xml
 
 # Carpeta target
-/target/*
+target/*
 
 # Package Files #
 #*.jar
