@@ -1,9 +1,13 @@
 package uy.turismo.servidorcentral.logic.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 
 @Entity(name = "Touristic_Bundle")
 public class TouristicBundle extends BaseEntity {
@@ -20,6 +24,9 @@ public class TouristicBundle extends BaseEntity {
 	
 	@Column(name = "upload_date")
 	private LocalDate uploadDate;
+
+	@ManyToMany(mappedBy = "touristicBundle")
+	private List<TouristicActivity> touristicActivities;
 	
 	//Constructors
 	public TouristicBundle() {
@@ -35,6 +42,10 @@ public class TouristicBundle extends BaseEntity {
 		this.uploadDate = uploadDate;
 	}
 	
+	//Iniciadores	
+	private void InitLists() {
+		this.touristicActivities = new ArrayList<TouristicActivity>();
+	}
 	
 
 	//Getters and Setters
@@ -77,6 +88,14 @@ public class TouristicBundle extends BaseEntity {
 	
 	public void setUploadDate(LocalDate uploadDate) {
 		this.uploadDate = uploadDate;
+	}
+	
+	/**
+	 * Crea un DtTouristicBundle con id y nombre del objeto
+	 * @return
+	 */
+	public DtTouristicBundle getShortDt() {
+		return null;
 	}
 
 }

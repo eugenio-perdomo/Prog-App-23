@@ -7,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -72,5 +73,22 @@ public abstract class User extends BaseEntity {
 	protected void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
+	
+	//Methods
+	
+	/**
+	 * Crea un DtUser con id, nickname y name del objeto y lo devuelve
+	 * @return 
+	 */
+	public DtUser getShortDt() {
+		
+		return null;
+	}
+	
+	/**
+	 * Operacion abstracta que implementaran Provider y Tourist
+	 * @return
+	 */
+	public abstract DtUser getDt();
 
 }

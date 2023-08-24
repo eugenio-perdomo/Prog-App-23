@@ -25,11 +25,11 @@ public class Purchase extends BaseEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "tourist")
-	Tourist tourist;
+	private Tourist tourist;
 	
 	@ManyToOne
 	@JoinColumn(name = "touristic_bundle")
-	TouristicBundle touristicBundle;
+	private TouristicBundle touristicBundle;
 	
 //	Constructors
 	public Purchase() {

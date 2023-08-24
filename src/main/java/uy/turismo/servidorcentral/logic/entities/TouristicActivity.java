@@ -11,6 +11,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 
 
 @Entity(name = "Touristic_Activity")
@@ -36,14 +38,17 @@ public class TouristicActivity extends BaseEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "provider")
-	Provider provider;	
+	private Provider provider;	
 	
 	@ManyToOne
 	@JoinColumn(name = "department")
-	Department department;
+	private Department department;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
-	List<TouristicBundle> touristicBundle;
+	private List<TouristicBundle> touristicBundle;
+	
+	@OneToMany(mappedBy = "touristicActivity")
+	private List<TouristicDeparture> touristicDepartues;
 
 	
 	//Constructor
@@ -51,7 +56,7 @@ public class TouristicActivity extends BaseEntity {
 		// TODO Auto-generated constructor stub
 	}
 	public TouristicActivity(Long id, String name, String description, Double duration, Double costPerTourist,
-			LocalDate uploadDate, String city) {
+			LocalDate uploadDate, String city, Provider provider, Department department) {
 		super(id);
 		this.name = name;
 		this.description = description;
@@ -59,6 +64,15 @@ public class TouristicActivity extends BaseEntity {
 		this.costPerTourist = costPerTourist;
 		this.uploadDate = uploadDate;
 		this.city = city;
+		this.provider = provider;
+		this.department = department;
+		this.InitLists();
+	}
+	
+	//Iniciadores 
+	private void InitLists() {
+		this.touristicBundle = new ArrayList<TouristicBundle>();
+		this.touristicDepartues = new ArrayList<TouristicDeparture>();
 	}
 
 	//Getters y Setters
@@ -91,10 +105,10 @@ public class TouristicActivity extends BaseEntity {
 	public void setCostPerTourist(Double costPerTourist) {
 		this.costPerTourist = costPerTourist;
 	}
-	public LocalDate getuploadDate() {
+	public LocalDate getUploadDate() {
 		return uploadDate;
 	}
-	public void setuploadDate(LocalDate uploadDate) {
+	public void setUploadDate(LocalDate uploadDate) {
 		this.uploadDate = uploadDate;
 	}
 	public String getCity() {
@@ -114,6 +128,36 @@ public class TouristicActivity extends BaseEntity {
 	}
 	public void setDepartment(Department department) {
 		this.department = department;
+	}
+	
+	public List<TouristicBundle> getTouristicBundle() {
+		return touristicBundle;
+	}
+	public void setTouristicBundle(List<TouristicBundle> touristicBundle) {
+		this.touristicBundle = touristicBundle;
+	}
+	public List<TouristicDeparture> getTouristicDepartues() {
+		return touristicDepartues;
+	}
+	public void setTouristicDepartues(List<TouristicDeparture> touristicDepartues) {
+		this.touristicDepartues = touristicDepartues;
+	}
+	
+	/**
+	 * Devuelve un DtTouristicActivity con id y nombre del objeto 
+	 * @return
+	 */
+	public DtTouristicActivity getShortDt() {
+		return null;
+	}
+	
+	/**
+	 * Devuelve un DtTouristicActivity con todos los datos del objeto 
+	 * @return
+	 */
+	
+	public DtTouristicActivity getDt() {
+		return null;	
 	}
 	
 }

@@ -21,11 +21,11 @@ public class Inscription extends BaseEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "tourist")
-	Tourist tourist;
+	private Tourist tourist;
 	
 	@ManyToOne
 	@JoinColumn(name = "touristic_departure")
-	TouristicDeparture touristicDeparture;
+	private TouristicDeparture touristicDeparture;
 
 //	Constructor
 	public Inscription() {

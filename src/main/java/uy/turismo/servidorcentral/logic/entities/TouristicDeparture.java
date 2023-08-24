@@ -5,12 +5,16 @@ package uy.turismo.servidorcentral.logic.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 
 @Entity(name = "Touristic_Departure")
 public class TouristicDeparture extends BaseEntity {
@@ -32,8 +36,10 @@ public class TouristicDeparture extends BaseEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "touristic_activity")
-	TouristicActivity touristicActivity;
-
+	private TouristicActivity touristicActivity;
+	
+	@OneToMany(mappedBy = "touristicDeparture")
+	private List<Inscription> inscriptions;
 
 //  Constructors
 	
@@ -42,13 +48,20 @@ public class TouristicDeparture extends BaseEntity {
 	}
 	
 	public TouristicDeparture(Long id, String name, Integer maxTourist, LocalDate uploadDate,
-			LocalDateTime departureDateTime, String place) {
+			LocalDateTime departureDateTime, String place, TouristicActivity touristicActivity) {
 		super(id);
 		this.name = name;
 		this.maxTourist = maxTourist;
 		this.uploadDate = uploadDate;
 		this.departureDateTime = departureDateTime;
 		this.place = place;
+		this.touristicActivity = touristicActivity;
+		this.initLists();
+	}
+	
+	//Iniciadores
+	private void initLists() {
+		this.inscriptions = new ArrayList<Inscription>();
 	}
 
 //	Getters and Setter
@@ -97,6 +110,22 @@ public class TouristicDeparture extends BaseEntity {
 
 	public void setPlace(String place) {
 		this.place = place;
+	}
+	
+	/**
+	 * Crea un DtTouristicDeparture con el id y el nombre del objeto
+	 * @return
+	 */
+	public DtTouristicDeparture getShortDt() {
+		return null;
+	}
+	
+	/**
+	 * Crea un DtTouristicDeparture con todos los datos del objeto
+	 * @return
+	 */
+	public DtTouristicDeparture getDt() {
+		return null;
 	}
 	
 	

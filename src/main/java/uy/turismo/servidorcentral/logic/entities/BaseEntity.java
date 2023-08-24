@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -38,7 +39,5 @@ public abstract class BaseEntity implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
 	
 }

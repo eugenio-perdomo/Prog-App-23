@@ -1,9 +1,14 @@
 package uy.turismo.servidorcentral.logic.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
+import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 
 @Entity
 public class Provider extends User {
@@ -13,6 +18,9 @@ public class Provider extends User {
 	
 	@Column(length = 60, name = "web_site")
 	private String webSite; 
+	
+	@OneToMany(mappedBy = "provider")
+	private List<TouristicActivity> touristicActivities;
 
 	//Constructors
 	public Provider() {
@@ -23,9 +31,15 @@ public class Provider extends User {
 		super(id, name, nickname, email, lastName, birthDate);
 		this.description = description;
 		this.webSite = webSite;
-		
+		this.InitLists();
 		// TODO Auto-generated constructor stub
 	}
+	
+	//Iniciadores	
+	private void InitLists() {
+		this.touristicActivities = new ArrayList<TouristicActivity>();
+	}
+
 
 	//Getters and Setters
 	public String getDescription() {
@@ -44,6 +58,13 @@ public class Provider extends User {
 		this.webSite = webSite;
 	}
 	
-	
+	/**
+	 * Crea un DtProvdier con todos los datos del objeto y lo devuelve
+	 * @return
+	 */
+	@Override
+	public DtUser getDt() {
+		return null;
+	}
 
 }
