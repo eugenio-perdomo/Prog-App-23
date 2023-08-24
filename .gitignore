@@ -12,7 +12,7 @@
 *.cfg.xml
 
 # Carpeta target
-/target/
+/target/*
 
 # Package Files #
 #*.jar
