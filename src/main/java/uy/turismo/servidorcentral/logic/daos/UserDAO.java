@@ -31,7 +31,7 @@ public interface UserDAO {
 	public User findById(Long id);
 	/**
 	 * Persiste un nuevo usuario en la BD
-	 * @param user
+	 * @param user 
 	 * @throws Exception si no se pudo persistir el usuario
 	 */
 	public void create(User user) throws Exception;

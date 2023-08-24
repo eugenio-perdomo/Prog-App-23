@@ -80,7 +80,6 @@ public class UserDAOImpl implements UserDAO {
 			throw new Exception("No se pudo actualizar el Usuario: " + user.getNickname() +
 					"\nError: " + e.getMessage());
 		}
-		
 		session.close();
 		
 	}

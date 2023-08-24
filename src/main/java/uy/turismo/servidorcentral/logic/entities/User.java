@@ -1,6 +1,5 @@
 package uy.turismo.servidorcentral.logic.entities;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -42,35 +41,35 @@ public abstract class User extends BaseEntity {
 	}
 
 	// Getters and Setter
-	protected String getNickname() {
+	public String getNickname() {
 		return nickname;
 	}
 
-	protected void setNickname(String nickname) {
+	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 
-	protected String getEmail() {
+	public String getEmail() {
 		return email;
 	}
 
-	protected void setEmail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	protected String getLastName() {
+	public String getLastName() {
 		return lastName;
 	}
 
-	protected void setLastName(String lastName) {
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	protected LocalDate getBirthDate() {
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 
-	protected void setBirthDate(LocalDate birthDate) {
+	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
 	
