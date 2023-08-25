@@ -26,13 +26,13 @@ public interface BundleDAO {
 	 * @param Bundle -> Paquete
 	 * @throws Exception -> en caso de no poder crear un paquete.
 	 */
-	public void createBundle(TouristicBundle Bundle) throws Exception;
+	public void createBundle(TouristicBundle bundle) throws Exception;
 	
 	/**
 	 * 
 	 * @param Bundle -> Paquete
 	 * @throws Exception -> En caso de no poder agregar un paquete.
 	 */
-	public void updateBundle(TouristicBundle  Bundle) throws Exception;
+	public void updateBundle(TouristicBundle  bundle) throws Exception;
 	
 }
