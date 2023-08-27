@@ -25,7 +25,7 @@ public interface DepartureDAO {
 	/**
 	 * 
 	 * @param activityId -> identificador de la actividad turistica
-	 * @return -> Devuelve una lista de las salidas turisticas de aquellas actividades turistcas cuyo id = activityId
+	 * @return -> Devuelve una lista de las salidas turisticas de aquellas actividades turisticas cuyo id = activityId
 	 */
 	public List<TouristicDeparture> findDepartureByActivity(TouristicActivity activity);
 	
