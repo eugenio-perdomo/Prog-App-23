@@ -28,6 +28,16 @@ public class DtTouristicBundle extends DtBaseEntity {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	public DtTouristicBundle(Long id, String  name, String description, Integer validity, Double discount, LocalDate uploadDate, List<DtTouristicActivity> activities) {
+		super (id,name);
+		this.description  = description;
+		this.validityPeriod = validity;
+		this.discount = discount;
+		this.uploadDate = uploadDate;
+		this.activities  = activities;
+	}
+	
 	public String getDescription() {
 		return description;
 	}

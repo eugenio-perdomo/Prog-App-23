@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 
 @Entity(name = "Touristic_Departure")
@@ -117,7 +118,10 @@ public class TouristicDeparture extends BaseEntity {
 	 * @return
 	 */
 	public DtTouristicDeparture getShortDt() {
-		return null;
+		DtTouristicDeparture dtDepartureShort = new DtTouristicDeparture(
+				this.id,
+				this.name);
+		return dtDepartureShort;
 	}
 	
 	/**
@@ -125,7 +129,22 @@ public class TouristicDeparture extends BaseEntity {
 	 * @return
 	 */
 	public DtTouristicDeparture getDt() {
-		return null;
+		List<DtTourist> listTourist = new ArrayList<DtTourist>();
+		
+		for(Inscription ins : this.inscriptions) {
+			listTourist.add(ins.getTouristShortDt());
+		}
+		
+		DtTouristicDeparture dtDeparture = new DtTouristicDeparture(
+				this.id,
+				this.name,
+				this.maxTourist,
+				this.uploadDate,
+				this.departureDateTime,
+				this.place,
+				this.touristicActivity.getShortDt(),
+				listTourist);
+		return dtDeparture;
 	}
 	
 	
