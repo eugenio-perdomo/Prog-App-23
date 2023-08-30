@@ -6,6 +6,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+//import uy.turismo.servidorcentral.logic.datatypes.DtDepartment; to clean later
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 
 @Entity
@@ -76,12 +77,16 @@ public abstract class User extends BaseEntity {
 	//Methods
 	
 	/**
-	 * Crea un DtUser con id, nickname y name del objeto y lo devuelve
+	 * Crea un DtUser con id, nickname y email del objeto y lo devuelve
 	 * @return 
 	 */
 	public DtUser getShortDt() {
-		
-		return null;
+		DtUser dtOutput = new DtUser(
+				this.id, 
+				this.nickname,
+				this.email);
+	
+		return dtOutput;
 	}
 	
 	/**

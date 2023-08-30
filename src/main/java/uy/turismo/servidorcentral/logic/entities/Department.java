@@ -5,7 +5,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+//import jakarta.persistence.ManyToOne; to clean later
 import jakarta.persistence.OneToMany;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
@@ -84,15 +84,31 @@ public class Department extends BaseEntity {
 	 * @return
 	 */
 	public DtDepartment getShortDt() {
-		return null;
+		DtDepartment dtOutput = new DtDepartment(
+				this.id, 
+				this.name);
+		return dtOutput;
 	}
 	
 	/**
-	 * Devuelve un DtDepartment con id, nombre y las actividades del objeto
+	 * Devuelve un DtDepartment con todos los datos y sus actividades turisticas
 	 * @return
 	 */
 	public DtDepartment getDtWithActivities() {
-		return null;
+		
+		List<DtTouristicActivity> listDtActivities = new ArrayList<DtTouristicActivity>();
+		
+		for(TouristicActivity td : this.touristicActivities) {
+			listDtActivities.add(td.getShortDt());
+		}
+		
+		DtDepartment dtOutput = new DtDepartment(
+				this.id,
+				this.name,
+				this.description,
+				this.webSite,
+				listDtActivities);
+		return dtOutput;
 	}
 
 }

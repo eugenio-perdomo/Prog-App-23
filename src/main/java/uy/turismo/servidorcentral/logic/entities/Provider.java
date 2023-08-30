@@ -8,6 +8,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 
 @Entity
@@ -64,7 +65,23 @@ public class Provider extends User {
 	 */
 	@Override
 	public DtUser getDt() {
-		return null;
+		
+		List<DtTouristicActivity> listDtActivities = new ArrayList<DtTouristicActivity>();
+		
+		for(TouristicActivity td : this.touristicActivities) {
+			listDtActivities.add(td.getShortDt());
+		}
+		
+		DtProvider DtOutput = new DtProvider(
+				this.id,
+				this.name,
+				this.nickname,
+				this.email,
+				this.lastName,
+				this.birthDate,
+				this.webSite,
+				this.description,
+				listDtActivities);	
+		return DtOutput;
 	}
-
 }
