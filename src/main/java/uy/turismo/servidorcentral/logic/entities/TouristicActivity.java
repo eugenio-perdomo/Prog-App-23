@@ -12,7 +12,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 
 
 @Entity(name = "Touristic_Activity")
@@ -55,6 +58,7 @@ public class TouristicActivity extends BaseEntity {
 	public TouristicActivity() {
 		// TODO Auto-generated constructor stub
 	}
+	
 	public TouristicActivity(Long id, String name, String description, Double duration, Double costPerTourist,
 			LocalDate uploadDate, String city, Provider provider, Department department) {
 		super(id);
@@ -148,16 +152,43 @@ public class TouristicActivity extends BaseEntity {
 	 * @return
 	 */
 	public DtTouristicActivity getShortDt() {
-		return null;
+		DtTouristicActivity dtOutput = new DtTouristicActivity(
+				this.id, 
+				this.name);
+		return dtOutput;
 	}
 	
 	/**
 	 * Devuelve un DtTouristicActivity con todos los datos del objeto 
 	 * @return
 	 */
-	
 	public DtTouristicActivity getDt() {
-		return null;	
+		List<DtTouristicDeparture> listDtDepartures = new ArrayList<DtTouristicDeparture>();
+		List<DtTouristicBundle> listDtBundles = new ArrayList<DtTouristicBundle>();
+		
+		for(TouristicDeparture td : this.touristicDepartues) {
+			listDtDepartures.add(td.getShortDt());
+		}
+		
+		for(TouristicBundle tb : this.touristicBundle) {
+			listDtBundles.add(tb.getShortDt());
+		}
+		
+		DtTouristicActivity dtOutput;
+		dtOutput = new DtTouristicActivity(
+				this.id,
+				this.name,
+				this.description,
+				this.duration,
+				this.costPerTourist,
+				this.city,
+				this.uploadDate,
+				(DtProvider) this.provider.getShortDt(),
+				this.department.getShortDt(),
+				listDtDepartures,
+				listDtBundles);
+		
+		return dtOutput;	
 	}
 	
 }
