@@ -7,7 +7,9 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 
 @Entity(name = "Touristic_Bundle")
 public class TouristicBundle extends BaseEntity {
@@ -101,7 +103,23 @@ public class TouristicBundle extends BaseEntity {
 	 * @return
 	 */
 	public DtTouristicBundle getShortDt() {
-		return null;
+		DtTouristicBundle shortDt = new  DtTouristicBundle(this.id, this.name);
+		return shortDt;
+	}
+	
+	public DtTouristicBundle getBundleDt() {
+		
+		List<DtTouristicActivity> listActivities = new ArrayList<DtTouristicActivity>();
+		
+		TouristicActivity activity = (TouristicActivity) this.touristicActivities;
+		
+		for (int i = 0; i < listActivities.size(); i++) {
+			listActivities.add(activity.getShortDt());
+		}
+		
+		DtTouristicBundle dt = new DtTouristicBundle(this.id, this.name, this.description, this.validityPeriod, 
+				this.discount, this.uploadDate, listActivities);
+		return dt;
 	}
 
 }
