@@ -166,7 +166,7 @@ public class TouristicActivity extends BaseEntity {
 		List<DtTouristicDeparture> listDtDepartures = new ArrayList<DtTouristicDeparture>();
 		List<DtTouristicBundle> listDtBundles = new ArrayList<DtTouristicBundle>();
 		
-		for(TouristicDeparture td : this.touristicDepartues) {
+		for(TouristicDeparture td : this.touristicDepartures) {
 			listDtDepartures.add(td.getShortDt());
 		}
 		

@@ -7,6 +7,8 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 
 @Entity
@@ -50,7 +52,23 @@ public class Tourist extends User {
 	 */
 	@Override
 	public DtUser getDt() {
-		return null;
+		List<DtTouristicDeparture> listDepartures = new ArrayList<DtTouristicDeparture>();
+		for(Inscription inscription : this.inscriptions) {
+			listDepartures.add(inscription.getDepartureShortDt());
+		}
+		
+		DtTourist dtTourist = new DtTourist(
+				this.id,
+				this.name,
+				this.nickname,
+				this.email,
+				this.lastName,
+				this.birthDate,
+				this.nationality,
+				listDepartures
+				);
+		
+		return dtTourist;
 	}
 	
 	
