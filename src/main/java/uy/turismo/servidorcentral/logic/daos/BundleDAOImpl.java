@@ -5,51 +5,62 @@ import java.util.List;
 import org.hibernate.Session;
 
 import jakarta.persistence.PersistenceException;
-import uy.turismo.servidorcentral.logic.entities.Department;
+import uy.turismo.servidorcentral.logic.entities.TouristicBundle;
 import uy.turismo.servidorcentral.logic.util.HibernateUtil;
 
-public class DepartmentDAOImpl implements DepartmentDAO {
+public class BundleDAOImpl implements BundleDAO {
 
 	@Override
-	public List<Department> findAll() {
+	public List<TouristicBundle> findAllBundles() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		List<Department> departments = session.createQuery("from Department", Department.class).list();
+		List<TouristicBundle> bundles = session.createQuery("from Touristic_Bundle", TouristicBundle.class).list();
 		session.close();
-		return departments;
-		
+		return bundles;
 	}
 
+	
 	@Override
-	public void create(Department department) throws Exception{
+	public TouristicBundle findBundleById(Long id) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		TouristicBundle bundle = session.find(TouristicBundle.class, id);
+		session.close();
+		return bundle;
+	}
+
+	@Override
+	public void createBundle(TouristicBundle bundle) throws Exception {
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
-			session.persist(department);
+			session.persist(bundle);
 			session.getTransaction().commit();
 		} catch (PersistenceException e) {
 			session.getTransaction().rollback();
 			session.close();
-			throw new Exception("No se pudo persistir el Departamento: " + department.getName() +
+			throw new Exception("No se pudo dar de alta el Paquete turístico: " + bundle.getName() +
 					"\nError: " + e.getMessage());
 		}
 		session.close();
 	}
 
 	@Override
-	public void update(Department department) throws Exception{
+	public void updateBundle(TouristicBundle bundle) throws Exception {
+		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
-			session.merge(department);
+			session.merge(bundle);
 			session.getTransaction().commit();
+			
 		} catch (PersistenceException e) {
 			session.getTransaction().rollback();
 			session.close();
-			throw new Exception("No se pudo actualizar el Departamento: " + department.getName() +
+			throw new Exception("No se pudo modificar el paquete turístico: " + bundle.getName() +
 					"\nError: " + e.getMessage());
+			
 		}
-		session.close();
+		session.close();	
 	}
 
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import uy.turismo.servidorcentral.logic.entities.Department;
 
 public interface DepartmentDAO {
-	
 	/**
 	 * 
 	 * @return lista con todos los Departamentos de la BD
@@ -23,4 +22,5 @@ public interface DepartmentDAO {
 	 * @throws Exception si no se pudo mergear en la BD
 	 */
 	public void update(Department department) throws Exception;
+
 }

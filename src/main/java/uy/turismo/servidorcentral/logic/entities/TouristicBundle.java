@@ -42,6 +42,8 @@ public class TouristicBundle extends BaseEntity {
 		this.uploadDate = uploadDate;
 	}
 	
+	
+	
 	//Iniciadores	
 	private void InitLists() {
 		this.touristicActivities = new ArrayList<TouristicActivity>();
@@ -88,6 +90,10 @@ public class TouristicBundle extends BaseEntity {
 	
 	public void setUploadDate(LocalDate uploadDate) {
 		this.uploadDate = uploadDate;
+	}
+
+	public List<TouristicActivity> getTouristicActivities() {
+		return touristicActivities;
 	}
 	
 	/**

@@ -51,7 +51,7 @@ public class TouristicActivity extends BaseEntity {
 	private List<TouristicBundle> touristicBundle;
 	
 	@OneToMany(mappedBy = "touristicActivity")
-	private List<TouristicDeparture> touristicDepartues;
+	private List<TouristicDeparture> touristicDepartures;
 
 	
 	//Constructor
@@ -76,7 +76,7 @@ public class TouristicActivity extends BaseEntity {
 	//Iniciadores 
 	private void InitLists() {
 		this.touristicBundle = new ArrayList<TouristicBundle>();
-		this.touristicDepartues = new ArrayList<TouristicDeparture>();
+		this.touristicDepartures = new ArrayList<TouristicDeparture>();
 	}
 
 	//Getters y Setters
@@ -140,11 +140,11 @@ public class TouristicActivity extends BaseEntity {
 	public void setTouristicBundle(List<TouristicBundle> touristicBundle) {
 		this.touristicBundle = touristicBundle;
 	}
-	public List<TouristicDeparture> getTouristicDepartues() {
-		return touristicDepartues;
+	public List<TouristicDeparture> getTouristicDepartures() {
+		return touristicDepartures;
 	}
-	public void setTouristicDepartues(List<TouristicDeparture> touristicDepartues) {
-		this.touristicDepartues = touristicDepartues;
+	public void setTouristicDepartures(List<TouristicDeparture> touristicDepartures) {
+		this.touristicDepartures = touristicDepartures;
 	}
 	
 	/**
