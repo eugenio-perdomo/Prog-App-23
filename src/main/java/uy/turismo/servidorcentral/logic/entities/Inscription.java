@@ -6,6 +6,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 
 @Entity
 public class Inscription extends BaseEntity {
@@ -76,6 +77,9 @@ public class Inscription extends BaseEntity {
 		return touristicDeparture;
 	}
 	
+	public DtTouristicDeparture getDepartureShortDt() {
+		return this.touristicDeparture.getShortDt();
+	}
 	
 	
 	
