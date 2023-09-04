@@ -26,4 +26,14 @@ public class DtTourist extends DtUser {
 		// TODO Auto-generated constructor stub
 	}
 
+	public String getNationality() {
+		return nationality;
+	}
+
+	public List<DtTouristicDeparture> getDepartures() {
+		return departures;
+	}
+	
+	
+
 }
