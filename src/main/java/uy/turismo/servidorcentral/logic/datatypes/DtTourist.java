@@ -18,7 +18,8 @@ public class DtTourist extends DtUser {
 	}
 
 	public DtTourist(Long id, String name, String nickname,
-			String email, String lastName, LocalDate birthDate, String nationality,
+			String email, String lastName, LocalDate birthDate,
+			String nationality,
 			List<DtTouristicDeparture> departures) {
 		super(id, name, nickname, email, lastName, birthDate);
 		this.nationality = nationality;
