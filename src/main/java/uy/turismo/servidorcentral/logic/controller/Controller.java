@@ -6,6 +6,8 @@ import java.util.List;
 import uy.turismo.servidorcentral.logic.daos.UserDAO;
 import uy.turismo.servidorcentral.logic.daos.UserDAOImpl;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
+import uy.turismo.servidorcentral.logic.entities.Provider;
+import uy.turismo.servidorcentral.logic.entities.Tourist;
 import uy.turismo.servidorcentral.logic.entities.User;
 
 public class Controller implements IController {
@@ -38,6 +40,23 @@ public class Controller implements IController {
 		}
 		
 		return usersOutput;
+	}
+
+	@Override
+	public DtUser getUserData(Long id) {
+		UserDAO userDao = new UserDAOImpl();
+		User user = userDao.findById(id);
+		DtUser userOutput;
+		if(user instanceof Provider) {
+			Provider provider = (Provider) user;
+			userOutput = provider.getDt();
+		}else {
+			Tourist tourist = (Tourist) user;
+			userOutput = tourist.getDt();
+			
+		}
+		
+		return userOutput;
 	}
 	
 	

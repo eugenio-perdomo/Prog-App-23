@@ -11,4 +11,11 @@ public interface IController {
 	 * @return
 	 */
 	public List<DtUser> getListUser();
+	
+	/**
+	 * Busca y devuelve los datos de un usuario
+	 * @param id del usuario a encontrar
+	 * @return DtUser
+	 */
+	public DtUser getUserData(Long id);
 }
