@@ -88,14 +88,8 @@ public abstract class User implements Serializable  {
 	 * Crea un DtUser con id, nickname y email del objeto y lo devuelve
 	 * @return 
 	 */
-	public DtUser getShortDt() {
-		DtUser dtOutput = new DtUser(
-				this.id, 
-				this.nickname,
-				this.email);
+	public abstract DtUser getShortDt();
 	
-		return dtOutput;
-	}
 	
 	/**
 	 * Operacion abstracta que implementaran Provider y Tourist

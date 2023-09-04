@@ -2,7 +2,7 @@ package uy.turismo.servidorcentral.logic.datatypes;
 
 import java.time.LocalDate;
 
-public class DtUser extends DtBaseEntity {
+public abstract class DtUser extends DtBaseEntity {
 	
 	private String nickname;
 	private String email;

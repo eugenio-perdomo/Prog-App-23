@@ -1,6 +1,6 @@
 package uy.turismo.servidorcentral.logic.datatypes;
 
-public class DtBaseEntity {
+public abstract class DtBaseEntity {
 	
 	private Long id; 
 	private String name;

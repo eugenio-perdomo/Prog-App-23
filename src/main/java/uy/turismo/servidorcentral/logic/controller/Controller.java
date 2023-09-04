@@ -64,8 +64,8 @@ public class Controller implements IController {
 	
 	@Override
 	public List<DtTourist>  getListTourist(){
-		UserDAO user = new UserDAOImpl();
-		List<Tourist> users = user.findAllTourists();
+		UserDAO userDAO = new UserDAOImpl();
+		List<Tourist> users = userDAO.findAllTourists();
 		List<DtTourist> userOutput = new ArrayList<DtTourist>();
 		
 		for(Tourist tur : users){
