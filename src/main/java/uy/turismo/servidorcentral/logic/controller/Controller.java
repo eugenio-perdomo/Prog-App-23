@@ -118,5 +118,39 @@ public class Controller implements IController {
 			}
 		}
 		
+		
 	}
+	
+	
+	public void registerUser(DtUser usrData) {
+		UserDAO usrDAO = new UserDAOImpl();
+		
+		if(usrData instanceof DtProvider) {
+			DtProvider provData = (DtProvider) usrData;
+			
+			
+			Provider provUsr = new Provider(provData.getId(), provData.getName(), provData.getNickname(), provData.getEmail(),
+					provData.getLastName(), provData.getBirthDate(), provData.getDescription(), provData.getUrl());
+			
+			try {
+				usrDAO.create(provUsr);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+		}else {
+			DtTourist touristData = (DtTourist) usrData;
+			
+			Tourist touristUsr = new Tourist(touristData.getId(), touristData.getName(), touristData.getNickname(), touristData.getEmail(),
+				touristData.getLastName(), touristData.getBirthDate(), touristData.getNationality());
+
+			try {
+				usrDAO.create(touristUsr);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		
+	}
+	
 }
