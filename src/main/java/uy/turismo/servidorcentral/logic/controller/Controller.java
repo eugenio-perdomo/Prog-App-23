@@ -6,11 +6,8 @@ import java.util.List;
 import uy.turismo.servidorcentral.logic.daos.UserDAO;
 import uy.turismo.servidorcentral.logic.daos.UserDAOImpl;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
-<<<<<<< HEAD
 import uy.turismo.servidorcentral.logic.entities.Provider;
-=======
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
->>>>>>> 48cd3464c4090a904d0d5f917e0d7f2350c614c9
 import uy.turismo.servidorcentral.logic.entities.Tourist;
 import uy.turismo.servidorcentral.logic.entities.User;
 
@@ -66,8 +63,8 @@ public class Controller implements IController {
 	
 	@Override
 	public List<DtTourist>  getListTourist(){
-		UserDAO user = new UserDAOImpl();
-		List<Tourist> users = user.findAllTourists();
+		UserDAO userDAO = new UserDAOImpl();
+		List<Tourist> users = userDAO.findAllTourists();
 		List<DtTourist> userOutput = new ArrayList<DtTourist>();
 		
 		for(Tourist tur : users){

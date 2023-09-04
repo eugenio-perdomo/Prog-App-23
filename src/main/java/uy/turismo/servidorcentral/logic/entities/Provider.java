@@ -86,4 +86,14 @@ public class Provider extends User {
 				listDtActivities);	
 		return DtOutput;
 	}
+
+	@Override
+	public DtUser getShortDt() {
+		DtUser dtOutput = new DtProvider(
+				this.id, 
+				this.nickname,
+				this.email);
+	
+		return dtOutput;
+	}
 }

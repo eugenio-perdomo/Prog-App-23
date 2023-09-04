@@ -12,19 +12,16 @@ public interface IController {
 	 */
 	public List<DtUser> getListUser();
 	
-<<<<<<< HEAD
 	/**
 	 * Busca y devuelve los datos de un usuario
 	 * @param id del usuario a encontrar
 	 * @return DtUser
 	 */
 	public DtUser getUserData(Long id);
-=======
 	
 	/**
 	 * Devuelve una lista de todos los Turistas con el nickname, el email y su id.
 	 * @return
 	 */
 	public List<DtTourist>  getListTourist();
->>>>>>> 48cd3464c4090a904d0d5f917e0d7f2350c614c9
 }

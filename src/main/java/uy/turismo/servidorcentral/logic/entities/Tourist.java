@@ -72,6 +72,16 @@ public class Tourist extends User {
 		
 		return dtTourist;
 	}
+
+	@Override
+	public DtUser getShortDt() {
+		DtUser dtOutput = new DtTourist(
+				this.id, 
+				this.nickname,
+				this.email);
+	
+		return dtOutput;
+	}
 	
 	
 

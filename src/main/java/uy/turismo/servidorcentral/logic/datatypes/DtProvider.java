@@ -16,7 +16,10 @@ public class DtProvider extends DtUser {
 		this.url = url;
 		this.description = description;
 		this.touristicActivities = touristicActivities;
-		// TODO Auto-generated constructor stub
+	}
+	
+	public DtProvider(Long id, String nickname, String email) {
+		super(id, nickname, email);
 	}
 
 	public String getUrl() {
@@ -30,7 +33,5 @@ public class DtProvider extends DtUser {
 	public List<DtTouristicActivity> getTouristicActivities() {
 		return touristicActivities;
 	}
-	
-	
 
 }
