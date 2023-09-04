@@ -1,5 +1,6 @@
 package uy.turismo.servidorcentral.logic.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,10 +9,15 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
@@ -19,9 +25,12 @@ import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 
 
 @Entity(name = "Touristic_Activity")
-public class TouristicActivity extends BaseEntity {
+public class TouristicActivity implements Serializable{
 	
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
 	@Column(length = 100, unique = true)
 	protected String name;
 	
@@ -47,10 +56,10 @@ public class TouristicActivity extends BaseEntity {
 	@JoinColumn(name = "department")
 	private Department department;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "touristicActivities", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<TouristicBundle> touristicBundle;
 	
-	@OneToMany(mappedBy = "touristicActivity")
+	@OneToMany(mappedBy = "touristicActivity", fetch = FetchType.EAGER)
 	private List<TouristicDeparture> touristicDepartures;
 
 	
@@ -59,9 +68,14 @@ public class TouristicActivity extends BaseEntity {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public TouristicActivity(Long id, String name, String description, Double duration, Double costPerTourist,
-			LocalDate uploadDate, String city, Provider provider, Department department) {
-		super(id);
+	public TouristicActivity(Long id,
+			String name,
+			String description,
+			Double duration,
+			Double costPerTourist,
+			LocalDate uploadDate,
+			String city, Provider provider, Department department) {
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.duration = duration;

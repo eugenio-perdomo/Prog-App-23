@@ -3,6 +3,7 @@
  */
 package uy.turismo.servidorcentral.logic.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,16 +11,26 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 
 @Entity(name = "Touristic_Departure")
-public class TouristicDeparture extends BaseEntity {
+public class TouristicDeparture implements Serializable {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
 	@Column(length = 100, unique = true)
 	private String name;
 	
@@ -35,11 +46,12 @@ public class TouristicDeparture extends BaseEntity {
 	@Column(length = 150)
 	private String place;
 	
-	@ManyToOne
+	@ManyToOne(targetEntity = TouristicActivity.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "touristic_activity")
 	private TouristicActivity touristicActivity;
 	
-	@OneToMany(mappedBy = "touristicDeparture")
+	@Transient
+	@OneToMany(mappedBy = "touristicDeparture", fetch = FetchType.EAGER)
 	private List<Inscription> inscriptions;
 
 //  Constructors
@@ -50,7 +62,7 @@ public class TouristicDeparture extends BaseEntity {
 	
 	public TouristicDeparture(Long id, String name, Integer maxTourist, LocalDate uploadDate,
 			LocalDateTime departureDateTime, String place, TouristicActivity touristicActivity) {
-		super(id);
+		this.id = id;
 		this.name = name;
 		this.maxTourist = maxTourist;
 		this.uploadDate = uploadDate;
@@ -86,12 +98,12 @@ public class TouristicDeparture extends BaseEntity {
 	}
 
 
-	public LocalDate getuploadDate() {
+	public LocalDate getUploadDate() {
 		return uploadDate;
 	}
 
 
-	public void setuploadDate(LocalDate uploadDate) {
+	public void setUploadDate(LocalDate uploadDate) {
 		this.uploadDate = uploadDate;
 	}
 
@@ -113,6 +125,22 @@ public class TouristicDeparture extends BaseEntity {
 		this.place = place;
 	}
 	
+	public TouristicActivity getTouristicActivity() {
+		return touristicActivity;
+	}
+
+	public void setTouristicActivity(TouristicActivity touristicActivity) {
+		this.touristicActivity = touristicActivity;
+	}
+
+	public List<Inscription> getInscriptions() {
+		return inscriptions;
+	}
+
+	public void setInscriptions(List<Inscription> inscriptions) {
+		this.inscriptions = inscriptions;
+	}
+
 	/**
 	 * Crea un DtTouristicDeparture con el id y el nombre del objeto
 	 * @return

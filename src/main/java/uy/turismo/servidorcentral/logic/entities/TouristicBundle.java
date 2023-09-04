@@ -1,18 +1,30 @@
 package uy.turismo.servidorcentral.logic.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Transient;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 
 @Entity(name = "Touristic_Bundle")
-public class TouristicBundle extends BaseEntity {
+public class TouristicBundle implements Serializable  {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
 	@Column(length = 100, unique = true)
 	private String name;
@@ -27,7 +39,11 @@ public class TouristicBundle extends BaseEntity {
 	@Column(name = "upload_date")
 	private LocalDate uploadDate;
 
-	@ManyToMany(mappedBy = "touristicBundle")
+	@ManyToMany
+	@JoinTable(
+			name = "Activities_In_Bundles",
+			joinColumns = @JoinColumn(name = "bundle"),
+			inverseJoinColumns = @JoinColumn(name = "activity"))
 	private List<TouristicActivity> touristicActivities;
 	
 	//Constructors
@@ -36,7 +52,7 @@ public class TouristicBundle extends BaseEntity {
 	}
 
 	public TouristicBundle(Long id, String name, String description, Integer validityPeriod, Double discount, LocalDate uploadDate) {
-		super(id);
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.validityPeriod = validityPeriod;

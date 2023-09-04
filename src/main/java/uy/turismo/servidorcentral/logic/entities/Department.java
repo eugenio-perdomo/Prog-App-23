@@ -1,19 +1,28 @@
 package uy.turismo.servidorcentral.logic.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 //import jakarta.persistence.ManyToOne; to clean later
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 
 @Entity
-public class Department extends BaseEntity {
+public class Department implements Serializable {
 
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
 	@Column(length = 50, unique = true)
 	private String name;
 	
@@ -23,7 +32,7 @@ public class Department extends BaseEntity {
 	@Column(length = 60, name = "web_site")
 	private String webSite; 
 	
-	@OneToMany(mappedBy = "department")
+	@OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
 	private List<TouristicActivity> touristicActivities;
 	
 	//Constructor
@@ -32,7 +41,7 @@ public class Department extends BaseEntity {
 	}
 
 	public Department(Long id, String name, String description, String webSite) {
-		super(id);
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.webSite = webSite;

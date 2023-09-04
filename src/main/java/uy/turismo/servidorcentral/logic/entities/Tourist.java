@@ -6,7 +6,9 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
@@ -17,7 +19,7 @@ public class Tourist extends User {
 	@Column(length = 20)
 	private String nationality;
 	
-	@OneToMany(mappedBy = "tourist")
+	@OneToMany(mappedBy = "tourist", fetch = FetchType.EAGER)
 	private List<Inscription> inscriptions;
 
 	//Constructors

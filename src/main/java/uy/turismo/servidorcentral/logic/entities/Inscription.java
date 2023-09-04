@@ -1,17 +1,26 @@
 package uy.turismo.servidorcentral.logic.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 
 @Entity
-public class Inscription extends BaseEntity {
-
+public class Inscription implements Serializable {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
 	@Column(name = "inscription_date")
 	private LocalDate inscriptionDate;
 	
@@ -21,11 +30,11 @@ public class Inscription extends BaseEntity {
 	@Column(name = "tourist_amount")
 	private Integer touristAmount;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "tourist")
 	private Tourist tourist;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "touristic_departure")
 	private TouristicDeparture touristicDeparture;
 
@@ -36,7 +45,7 @@ public class Inscription extends BaseEntity {
 	
 	public Inscription(Long id, LocalDate inscriptionDate, Double totalCost, Integer touristAmount, Tourist tourist,
 			TouristicDeparture touristicDeparture) {
-		super(id);
+		this.id = id;
 		this.inscriptionDate = inscriptionDate;
 		this.totalCost = totalCost;
 		this.touristAmount = touristAmount;

@@ -1,15 +1,24 @@
 package uy.turismo.servidorcentral.logic.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
-public class Purchase extends BaseEntity {
+public class Purchase implements Serializable {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
 	@Column(name = "purchase_date")
 	private LocalDate purchaseDate;
@@ -23,11 +32,11 @@ public class Purchase extends BaseEntity {
 	@Column(name = "expire_date")
 	private LocalDate expireDate;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "tourist")
 	private Tourist tourist;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "touristic_bundle")
 	private TouristicBundle touristicBundle;
 	
@@ -38,7 +47,7 @@ public class Purchase extends BaseEntity {
 
 	public Purchase(Long id, LocalDate purchaseDate, Integer touristAmount, Double totalCost, LocalDate expireDate,
 			Tourist tourist, TouristicBundle touristicBundle) {
-		super(id);
+		this.id = id;
 		this.purchaseDate = purchaseDate;
 		this.touristAmount = touristAmount;
 		this.totalCost = totalCost;

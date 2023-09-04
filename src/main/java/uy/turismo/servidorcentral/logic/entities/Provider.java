@@ -6,7 +6,9 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
@@ -20,7 +22,7 @@ public class Provider extends User {
 	@Column(length = 60, name = "web_site")
 	private String webSite; 
 	
-	@OneToMany(mappedBy = "provider")
+	@OneToMany(mappedBy = "provider", fetch = FetchType.EAGER)
 	private List<TouristicActivity> touristicActivities;
 
 	//Constructors
