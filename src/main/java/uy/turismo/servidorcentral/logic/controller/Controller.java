@@ -7,6 +7,7 @@ import uy.turismo.servidorcentral.logic.daos.UserDAO;
 import uy.turismo.servidorcentral.logic.daos.UserDAOImpl;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 import uy.turismo.servidorcentral.logic.entities.Provider;
+import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.entities.Tourist;
 import uy.turismo.servidorcentral.logic.entities.User;
@@ -73,4 +74,83 @@ public class Controller implements IController {
 		
 		return userOutput;
 	}
+
+	@Override
+	public void updateUser(DtUser userData) {
+		UserDAO userDao = new UserDAOImpl();
+		if(userData instanceof DtProvider) {
+			DtProvider providerData = (DtProvider) userData;
+			
+			Provider provider = new Provider(
+						providerData.getId(),
+						providerData.getName(),
+						providerData.getNickname(),
+						providerData.getEmail(),
+						providerData.getLastName(),
+						providerData.getBirthDate(),
+						providerData.getDescription(),
+						providerData.getUrl()
+					);
+			try {
+				userDao.update(provider);
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+		}else {
+			DtTourist touristData = (DtTourist) userData;
+			
+			Tourist tourist = new Tourist(
+						touristData.getId(),
+						touristData.getName(),
+						touristData.getNickname(),
+						touristData.getEmail(),
+						touristData.getLastName(),
+						touristData.getBirthDate(),
+						touristData.getNationality()
+					);
+			try {
+				userDao.update(tourist);
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		
+	}
+	
+	
+	public void registerUser(DtUser usrData) {
+		UserDAO usrDAO = new UserDAOImpl();
+		
+		if(usrData instanceof DtProvider) {
+			DtProvider provData = (DtProvider) usrData;
+			
+			
+			Provider provUsr = new Provider(provData.getId(), provData.getName(), provData.getNickname(), provData.getEmail(),
+					provData.getLastName(), provData.getBirthDate(), provData.getDescription(), provData.getUrl());
+			
+			try {
+				usrDAO.create(provUsr);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+		}else {
+			DtTourist touristData = (DtTourist) usrData;
+			
+			Tourist touristUsr = new Tourist(touristData.getId(), touristData.getName(), touristData.getNickname(), touristData.getEmail(),
+				touristData.getLastName(), touristData.getBirthDate(), touristData.getNationality());
+
+			try {
+				usrDAO.create(touristUsr);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		
+	}
+	
 }

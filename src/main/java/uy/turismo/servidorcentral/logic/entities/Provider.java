@@ -30,7 +30,9 @@ public class Provider extends User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Provider(Long id, String name, String nickname, String email, String lastName, LocalDate birthDate, String description, String webSite) {
+	public Provider(Long id, String name, String nickname,
+			String email, String lastName, LocalDate birthDate,
+			String description, String webSite) {
 		super(id, name, nickname, email, lastName, birthDate);
 		this.description = description;
 		this.webSite = webSite;

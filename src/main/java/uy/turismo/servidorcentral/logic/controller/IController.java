@@ -24,4 +24,17 @@ public interface IController {
 	 * @return
 	 */
 	public List<DtTourist>  getListTourist();
+	
+	/**
+	 * Modifica un usuario ya existente con nuevos datos
+	 * @param userData
+	 */
+	public void updateUser(DtUser userData);
+	
+	/**
+	 * Da de alta un usuario con los datos pasados por parametros (puede ser tanto turista como proveedor)
+	 * @param userData
+	 */
+	
+	public void registerUser(DtUser userData);
 }

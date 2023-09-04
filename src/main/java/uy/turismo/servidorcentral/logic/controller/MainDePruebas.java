@@ -15,6 +15,7 @@ public class MainDePruebas {
 
 	public static void main(String[] args) {
 
+
 		String yellow = "\u001B[33m";      
         Controller controlador = Controller.getInstance();
         
@@ -27,7 +28,13 @@ public class MainDePruebas {
         List<DtDepartment> pruebaDepartment = controlador.getListDepartment(true);
     	
     	System.out.println(yellow + "Info: DONE" + yellow);
-        
+
+		String yellow = "\u001B[33m";
+		
+//		initSession();
+		
+		
+        System.out.println(yellow + "Info: DONE" + yellow);
 	}
 	
 	public static void initSession() {

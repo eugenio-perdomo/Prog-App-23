@@ -27,7 +27,9 @@ public class Tourist extends User {
 
 	}
 
-	public Tourist(Long id, String name, String nickname, String email, String lastName, LocalDate birthDate, String nationality) {
+	public Tourist(Long id, String name, 
+			String nickname, String email, String lastName, 
+			LocalDate birthDate, String nationality) {
 		super(id, name, nickname, email, lastName, birthDate);
 		this.nationality = nationality;
 		this.initLists();
