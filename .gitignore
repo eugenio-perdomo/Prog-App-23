@@ -9,7 +9,7 @@
 
 #Settings
 /.settings/
-hibernate.cfg.xml
+#hibernate.cfg.xml
 
 # Carpeta target
 target/*

@@ -5,13 +5,11 @@ import java.util.List;
 
 
 
-public interface BundleDAO {
-
-
+public interface TouristicBundleDAO {
 	/**
 	 * @return Devuelve una lista con los paquetes turisticos registrados en la bd. 
 	 * */
-	public List<TouristicBundle> findAllBundles();
+	public List<TouristicBundle> findAll();
 	
 	
 	/**
@@ -19,20 +17,20 @@ public interface BundleDAO {
 	 * @param id -> id del paquete turistico.
 	 * @return Devuelve un paquete turistico especifico.
 	 */
-	public TouristicBundle findBundleById(Long id);
+	public TouristicBundle findById(Long id);
 	
 	/**
 	 * 
 	 * @param Bundle -> Paquete
 	 * @throws Exception -> en caso de no poder crear un paquete.
 	 */
-	public void createBundle(TouristicBundle bundle) throws Exception;
+	public void create(TouristicBundle bundle) throws Exception;
 	
 	/**
 	 * 
 	 * @param Bundle -> Paquete
 	 * @throws Exception -> En caso de no poder agregar un paquete.
 	 */
-	public void updateBundle(TouristicBundle  bundle) throws Exception;
+	public void update(TouristicBundle  bundle) throws Exception;
 	
 }

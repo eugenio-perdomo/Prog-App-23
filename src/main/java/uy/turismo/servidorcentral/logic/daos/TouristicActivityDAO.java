@@ -2,6 +2,8 @@ package uy.turismo.servidorcentral.logic.daos;
 
 import java.util.List;
 
+import uy.turismo.servidorcentral.logic.entities.Department;
+import uy.turismo.servidorcentral.logic.entities.Provider;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
 
 public interface TouristicActivityDAO {
@@ -11,7 +13,7 @@ public interface TouristicActivityDAO {
 	 * @param touristicActivity -> Actividad turistica a crear
 	 * @throws Exception -> En caso de no poder crear la actividad turistica
 	 */
-	public void createTouristicActivity(TouristicActivity touristicActivity) throws Exception;
+	public void create(TouristicActivity touristicActivity) throws Exception;
 	
 	/**
 	 * 
@@ -19,13 +21,19 @@ public interface TouristicActivityDAO {
 	 * @return actividad turistica en particular
 	 */
 	
-	public TouristicActivity getTouristicActivityData(Long touristicActivityId);
+	public TouristicActivity findById(Long id);
 	
 	/**
 	 * 
 	 * @return Devuelve todas las actividades turisticas.
 	 */
 	
-	public List<TouristicActivity> getAllTouristicActivities();
+	public List<TouristicActivity> findAll();
+	
+	/**
+	 * Devuelve una lista de las actividades de dicho proveedor
+	 * @param provider
+	 * @return
+	 */
 	
 }
