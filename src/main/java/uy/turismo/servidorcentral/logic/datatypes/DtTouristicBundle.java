@@ -3,7 +3,6 @@ package uy.turismo.servidorcentral.logic.datatypes;
 import java.time.LocalDate;
 import java.util.List;
 
-import uy.turismo.servidorcentral.logic.entities.BaseEntity;
 
 public class DtTouristicBundle extends DtBaseEntity {
 
