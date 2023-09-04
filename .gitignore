@@ -15,7 +15,6 @@
 target/*
 
 # Main
-src/main/java/uy/turismo/servidorcentral/logic/controller/Main.java
 
 # Package Files #
 #*.jar
