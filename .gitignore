@@ -14,6 +14,9 @@
 # Carpeta target
 target/*
 
+# Main
+MainDePruebas.java
+
 # Package Files #
 #*.jar
 *.war
