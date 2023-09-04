@@ -15,7 +15,11 @@ import uy.turismo.servidorcentral.logic.entities.User;
 import uy.turismo.servidorcentral.logic.util.HibernateUtil;
 
 public class DepartmentDAOImpl implements DepartmentDAO {
-
+	
+	/**
+	 * Devuelve todos los departamentos de la BD.
+	 * @return List<Department>
+	 */
 	@Override
 	public List<Department> findAll() {
 		Session session = HibernateUtil
