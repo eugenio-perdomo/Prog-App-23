@@ -2,6 +2,7 @@ package uy.turismo.servidorcentral.logic.controller;
 
 import java.util.List;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
+import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 
 public interface IController {
@@ -21,7 +22,7 @@ public interface IController {
 	
 	/**
 	 * Devuelve una lista de todos los Turistas con el nickname, el email y su id.
-	 * @return
+	 * @return List<DtTourist>
 	 */
 	public List<DtTourist>  getListTourist();
 	
@@ -31,10 +32,17 @@ public interface IController {
 	 */
 	public void updateUser(DtUser userData);
 	
+	
 	/**
 	 * Da de alta un usuario con los datos pasados por parametros (puede ser tanto turista como proveedor)
 	 * @param userData
 	 */
-	
 	public void registerUser(DtUser userData);
+	
+	
+	/**
+	 * Devuelve una lista con el id, el nombre de todos los Departamentos. Si el parametro alsoActivities es true, tambien devuelve las Actividades que se hacen en el Departamento
+	 * @return List<DtDepartment>
+	 */
+	public List<DtDepartment> getListDepartment(Boolean alsoActivities); 
 }

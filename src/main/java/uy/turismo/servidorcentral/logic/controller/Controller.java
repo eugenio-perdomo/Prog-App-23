@@ -3,11 +3,15 @@ package uy.turismo.servidorcentral.logic.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import uy.turismo.servidorcentral.logic.daos.DepartmentDAO;
+import uy.turismo.servidorcentral.logic.daos.DepartmentDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.UserDAO;
 import uy.turismo.servidorcentral.logic.daos.UserDAOImpl;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
+import uy.turismo.servidorcentral.logic.entities.Department;
 import uy.turismo.servidorcentral.logic.entities.Provider;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
+import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.entities.Tourist;
 import uy.turismo.servidorcentral.logic.entities.User;
@@ -153,4 +157,23 @@ public class Controller implements IController {
 		
 	}
 	
+
+	public List<DtDepartment> getListDepartment(Boolean alsoActivities) {
+		DepartmentDAO departmentDAO = new DepartmentDAOImpl();
+		List<Department> depas = departmentDAO.findAll();
+		List<DtDepartment> departmentOutput = new ArrayList<DtDepartment>();
+		
+		if(alsoActivities) {
+			for(Department der : depas) {
+				departmentOutput.add(der.getDtWithActivities());
+			}
+			return departmentOutput;
+			
+		}else {
+			for(Department der : depas) {
+				departmentOutput.add(der.getShortDt());
+			}
+			return departmentOutput;
+		}
+	}
 }
