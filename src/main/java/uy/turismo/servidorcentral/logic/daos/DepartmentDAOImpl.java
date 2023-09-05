@@ -70,4 +70,17 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
 	}
 
+	@Override
+	public Department findById(Long id) {
+		Session session = HibernateUtil
+				.getSessionFactory()
+				.openSession();
+		
+		Department department = session
+				.find(Department.class, id);
+		
+		session.close();
+		return department;
+	}
+
 }

@@ -5,6 +5,8 @@ import java.util.List;
 
 import uy.turismo.servidorcentral.logic.daos.DepartmentDAO;
 import uy.turismo.servidorcentral.logic.daos.DepartmentDAOImpl;
+import uy.turismo.servidorcentral.logic.daos.TouristicActivityDAO;
+import uy.turismo.servidorcentral.logic.daos.TouristicActivityDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.UserDAO;
 import uy.turismo.servidorcentral.logic.daos.UserDAOImpl;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
@@ -13,18 +15,22 @@ import uy.turismo.servidorcentral.logic.entities.Provider;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.entities.Tourist;
+import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
 import uy.turismo.servidorcentral.logic.entities.User;
 
 public class Controller implements IController {
 	
-	//Definicion como Singleton
+	//Unica instancia del constructor en todo el sistema
 	private static Controller _instance;
 	
+	//Constructor
 	private Controller() {
 		
 	}
 	
+	//Devuelve una nueva instancia del controlador si no existe una
 	public static Controller getInstance() {
 		if(_instance == null) {
 			_instance = new Controller();
@@ -174,6 +180,39 @@ public class Controller implements IController {
 				departmentOutput.add(der.getShortDt());
 			}
 			return departmentOutput;
+		}
+	}
+	
+
+	@Override
+	public void registeTouristicActivity(DtTouristicActivity touristicActivityData) {
+		DepartmentDAO departmentDao = new DepartmentDAOImpl();
+		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
+		UserDAO userDao = new UserDAOImpl(); 
+		
+		Department department = departmentDao.findById(touristicActivityData
+				.getDepartment()
+				.getId());
+		
+		Provider provider = (Provider) userDao.findById(touristicActivityData
+				.getProvider()
+				.getId());
+		
+		TouristicActivity activity = new TouristicActivity(
+				touristicActivityData.getId(),
+				touristicActivityData.getName(),
+				touristicActivityData.getDescription(),
+				touristicActivityData.getDuration(),
+				touristicActivityData.getCostPerTourist(),
+				touristicActivityData.getUploadDate(),
+				touristicActivityData.getCity(),
+				provider,
+				department
+				);
+		try {
+			activityDao.create(activity);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 	}
 }

@@ -68,13 +68,16 @@ public class TouristicActivity implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public TouristicActivity(Long id,
+	public TouristicActivity(
+			Long id,
 			String name,
 			String description,
 			Double duration,
 			Double costPerTourist,
 			LocalDate uploadDate,
-			String city, Provider provider, Department department) {
+			String city, 
+			Provider provider, 
+			Department department) {
 		this.id = id;
 		this.name = name;
 		this.description = description;

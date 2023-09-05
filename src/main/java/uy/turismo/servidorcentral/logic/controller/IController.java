@@ -4,6 +4,7 @@ import java.util.List;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 
 public interface IController {
 	
@@ -45,4 +46,10 @@ public interface IController {
 	 * @return List<DtDepartment>
 	 */
 	public List<DtDepartment> getListDepartment(Boolean alsoActivities); 
+	
+	/**
+	 * Da de alta una Actividad Turistica con los datos pasados por parametro
+	 * @param touristicActivityData
+	 */
+	public void registeTouristicActivity(DtTouristicActivity touristicActivityData);
 }
