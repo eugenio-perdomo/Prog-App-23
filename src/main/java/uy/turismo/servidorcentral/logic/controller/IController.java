@@ -4,6 +4,8 @@ import java.util.List;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 
 public interface IController {
 	
@@ -45,4 +47,23 @@ public interface IController {
 	 * @return List<DtDepartment>
 	 */
 	public List<DtDepartment> getListDepartment(Boolean alsoActivities); 
+	
+	/**
+	 * 
+	 * @param touristicActivityId
+	 * @return Devuelve los datos de la actividad Turistica con id = touristicActivityId
+	 */
+	
+	public DtTouristicActivity getTouristicActivityData(Long touristicActivityId);
+	
+	/**
+	 * 
+	 * @param touristicActivityId
+	 * @return Devuelve una lista de Salidas Turisticas de aquellas actividades turisticas con id = touristicActivityId
+	 */
+	
+	public List<DtTouristicDeparture> getListTouristicDeparture(Long touristicActivityId); 
+	
+	
+	
 }

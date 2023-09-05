@@ -94,6 +94,14 @@ public class TouristicActivity implements Serializable{
 	}
 
 	//Getters y Setters
+	public Long getId() {
+		return id;
+	}
+	
+	public void SetName(Long id) {
+		this.id = id;
+	}
+	
 	public String getName() {
 		return name;
 	}
