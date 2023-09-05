@@ -88,12 +88,17 @@ public interface IController {
 	 */
 	public List<DtTouristicDeparture> getListTouristicDeparture();
 	
-	
 	/**
 	 * 
 	 * @param touristicBundleData
 	 * Da de alta un paquete Turistico con los datos pasados por parametros.
 	 */
 	public void registerTouristicBundle(DtTouristicBundle touristicBundleData);
-
+	
+	/**
+	 * 
+	 * @param departmentData
+	 * Da de alta un departamento con los datos pasados por parametro.
+	 */
+	public void registerDepartment(DtDepartment departmentData);
 }

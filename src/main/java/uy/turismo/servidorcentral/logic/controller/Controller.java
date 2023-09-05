@@ -324,5 +324,22 @@ public class Controller implements IController {
 		
 	}
 	
+	public void registerDepartment(DtDepartment departmentData) {
+		DepartmentDAO departmentDAO = new DepartmentDAOImpl();
+		
+		Department department = new Department(null, departmentData.getName(), departmentData.getDescription(), departmentData.getWebSite());
+		
+		/**this.id = id;
+		this.name = name;
+		this.description = description;
+		this.webSite = webSite;*/
+		
+		try {
+			departmentDAO.create(department);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+	}
 
 }
