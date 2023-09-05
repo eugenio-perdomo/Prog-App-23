@@ -5,6 +5,8 @@ import java.util.List;
 
 import uy.turismo.servidorcentral.logic.daos.DepartmentDAO;
 import uy.turismo.servidorcentral.logic.daos.DepartmentDAOImpl;
+import uy.turismo.servidorcentral.logic.daos.TouristicDepartureDAO;
+import uy.turismo.servidorcentral.logic.daos.TouristicDepartureDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.UserDAO;
 import uy.turismo.servidorcentral.logic.daos.UserDAOImpl;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
@@ -13,7 +15,9 @@ import uy.turismo.servidorcentral.logic.entities.Provider;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.Tourist;
+import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.User;
 
 public class Controller implements IController {
@@ -176,4 +180,18 @@ public class Controller implements IController {
 			return departmentOutput;
 		}
 	}
+
+	@Override
+	public List<DtTouristicDeparture> getListTouristicDeparture() {
+		TouristicDepartureDAO departureDAO = new TouristicDepartureDAOImpl();
+		List<TouristicDeparture> departures = departureDAO.findAll();
+		List<DtTouristicDeparture> departureOutput = new ArrayList<DtTouristicDeparture>();
+		
+		for(TouristicDeparture der : departures ) {
+			departureOutput.add(der.getShortDt());
+		}
+		return departureOutput;
+	}
+	
+
 }
