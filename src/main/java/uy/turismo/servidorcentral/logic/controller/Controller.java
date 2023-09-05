@@ -6,6 +6,8 @@ import java.util.List;
 
 import uy.turismo.servidorcentral.logic.daos.DepartmentDAO;
 import uy.turismo.servidorcentral.logic.daos.DepartmentDAOImpl;
+import uy.turismo.servidorcentral.logic.daos.InscriptionDAO;
+import uy.turismo.servidorcentral.logic.daos.InscriptionDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.TouristicActivityDAO;
 import uy.turismo.servidorcentral.logic.daos.TouristicActivityDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.TouristicBundleDAO;
@@ -16,22 +18,18 @@ import uy.turismo.servidorcentral.logic.daos.UserDAO;
 import uy.turismo.servidorcentral.logic.daos.UserDAOImpl;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 import uy.turismo.servidorcentral.logic.entities.Department;
+import uy.turismo.servidorcentral.logic.entities.Inscription;
 import uy.turismo.servidorcentral.logic.entities.Provider;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
+import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
-
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.Tourist;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
 import uy.turismo.servidorcentral.logic.entities.TouristicBundle;
-import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
-import uy.turismo.servidorcentral.logic.entities.Tourist;
-import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
-import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
-import uy.turismo.servidorcentral.logic.entities.Tourist;
 
 import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.User;
@@ -305,6 +303,14 @@ public class Controller implements IController {
 		return departureOutput;
 	}
 
+	public DtTouristicDeparture getTouristicDepartureData(long touristicDepartureId){
+		
+		TouristicDepartureDAO touristicDepartureDAO = new TouristicDepartureDAOImpl();
+		TouristicDeparture tourDeparture = touristicDepartureDAO.findById(touristicDepartureId);
+		DtTouristicDeparture dtTouristicActivity = tourDeparture.getDt();
+		return dtTouristicActivity;
+	}
+
 	@Override
 	public List<DtTouristicBundle> getListTouristicBundle() {
 		TouristicBundleDAO bundleDAO = new TouristicBundleDAOImpl();
@@ -361,8 +367,31 @@ public class Controller implements IController {
 		return outputBundle;
 	}
 	
+	public void registerInscription(DtInscription inscriptionData) {
+		InscriptionDAO inscDAO = new InscriptionDAOImpl();
+		TouristicDepartureDAO departureDao = new TouristicDepartureDAOImpl();
+		UserDAO touristDao = new UserDAOImpl();
+		
+		User user = touristDao.findById(inscriptionData.getTourist().getDt().getId());	
+		Tourist tourist = (Tourist) user;
+		
+		TouristicDeparture touristicDeparture = departureDao.findById(inscriptionData.getTouristicDeparture().getDt().getId());
+		
+		Inscription inscCreation = new Inscription(
+				inscriptionData.getId(),
+				inscriptionData.getInscriptionDate(),
+				inscriptionData.getTotalCost(),
+				inscriptionData.getTouristAmount(),
+				tourist,
+				touristicDeparture);
+		try {
+			inscDAO.create(inscCreation);
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 	
-
 	public void addTouristicActivityToBundle(Long touristicBundleId, Long touristicActivityId) {
 		TouristicBundleDAO bundleDao = new TouristicBundleDAOImpl();
 		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
@@ -376,6 +405,6 @@ public class Controller implements IController {
 			bundleDao.update(bundle);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			}
+		}
 	}
 }
