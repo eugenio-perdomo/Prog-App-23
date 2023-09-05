@@ -12,6 +12,7 @@ import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
@@ -75,5 +76,15 @@ public class ControllerTest {
 		controller.registerTouristicDeparture(departure);
 		
 		System.out.println(yellow + "Info: DONE" + yellow);
+	}
+	
+	@Test
+	public void getListTouristicBundle() {
+		IController controller = ControllerFactory.getIController();
+
+		List<DtTouristicBundle> pruebaBundle = new ArrayList<DtTouristicBundle>();
+		pruebaBundle = controller.getListTouristicBundle();
+		
+		System.out.println(pruebaBundle);
 	}
 }

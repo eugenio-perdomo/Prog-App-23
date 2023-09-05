@@ -5,6 +5,7 @@ import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 
 public interface IController {
@@ -58,18 +59,15 @@ public interface IController {
 	 * @param touristicActivityId
 	 * @return Devuelve los datos de la actividad Turistica con id = touristicActivityId
 	 */
-	
 	public DtTouristicActivity getTouristicActivityData(Long touristicActivityId);
+	
 	
 	/**
 	 * 
 	 * @param touristicActivityId
 	 * @return Devuelve una lista de Salidas Turisticas de aquellas actividades turisticas con id = touristicActivityId
 	 */
-	
 	public List<DtTouristicDeparture> getListTouristicDeparture(Long touristicActivityId); 
-	
-	
 	
 
 	/**
@@ -78,16 +76,24 @@ public interface IController {
 	 */
 	public void registeTouristicActivity(DtTouristicActivity touristicActivityData);
 
+	
 	/**
 	 * Da de alta una Salida Turistica con los datos pasados por parametros
 	 * @param touristicDepartureData
 	 */
 	public void registerTouristicDeparture(DtTouristicDeparture touristicDepartureData);
 	
+	
 	/**
 	 * Devuelve una lista con el id y el nombre de todas las Salidas Turisticas
 	 * @return List<DtTouristicDeparture>
 	 */
 	public List<DtTouristicDeparture> getListTouristicDeparture();
+	
+	/**
+	 * Devuelve una lista con el id y el nombre de todos los Paquetes Turisticos
+	 * @return List<DtTouristBundle>
+	 */
+	public List<DtTouristicBundle> getListTouristicBundle();
 
 }

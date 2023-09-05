@@ -8,6 +8,8 @@ import uy.turismo.servidorcentral.logic.daos.DepartmentDAO;
 import uy.turismo.servidorcentral.logic.daos.DepartmentDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.TouristicActivityDAO;
 import uy.turismo.servidorcentral.logic.daos.TouristicActivityDAOImpl;
+import uy.turismo.servidorcentral.logic.daos.TouristicBundleDAO;
+import uy.turismo.servidorcentral.logic.daos.TouristicBundleDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.TouristicDepartureDAO;
 import uy.turismo.servidorcentral.logic.daos.TouristicDepartureDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.UserDAO;
@@ -24,7 +26,7 @@ import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.Tourist;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
-
+import uy.turismo.servidorcentral.logic.entities.TouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.Tourist;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
@@ -301,6 +303,18 @@ public class Controller implements IController {
 			departureOutput.add(der.getShortDt());
 		}
 		return departureOutput;
+	}
+
+	@Override
+	public List<DtTouristicBundle> getListTouristicBundle() {
+		TouristicBundleDAO bundleDAO = new TouristicBundleDAOImpl();
+		List<TouristicBundle> bundles = bundleDAO.findAll();
+		List<DtTouristicBundle> outputBundles = new ArrayList<DtTouristicBundle>();
+		
+		for(TouristicBundle bun : bundles) {
+			outputBundles.add(bun.getShortDt());
+		}
+		return outputBundles;
 	}
 	
 
