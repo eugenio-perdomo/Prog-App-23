@@ -7,6 +7,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,7 +40,7 @@ public class TouristicBundle implements Serializable  {
 	@Column(name = "upload_date")
 	private LocalDate uploadDate;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "Activities_In_Bundles",
 			joinColumns = @JoinColumn(name = "bundle"),
@@ -125,16 +126,16 @@ public class TouristicBundle implements Serializable  {
 	
 	public DtTouristicBundle getBundleDt() {
 		
-		List<DtTouristicActivity> listActivities = new ArrayList<DtTouristicActivity>();
+		//List<DtTouristicActivity> listActivities = new ArrayList<DtTouristicActivity>();
 		
-		TouristicActivity activity = (TouristicActivity) this.touristicActivities;
+		List<DtTouristicActivity> activities = new ArrayList<DtTouristicActivity>();
 		
-		for (int i = 0; i < listActivities.size(); i++) {
-			listActivities.add(activity.getShortDt());
+		for (int i = 0; i < this.touristicActivities.size(); i++) {
+			activities.add(touristicActivities.get(i).getShortDt());
 		}
 		
 		DtTouristicBundle dt = new DtTouristicBundle(this.id, this.name, this.description, this.validityPeriod, 
-				this.discount, this.uploadDate, listActivities);
+				this.discount, this.uploadDate, activities);
 		return dt;
 	}
 

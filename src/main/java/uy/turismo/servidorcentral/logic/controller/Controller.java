@@ -351,4 +351,15 @@ public class Controller implements IController {
 			System.out.println(e.getMessage());
 		}
 	}
+
+	@Override
+	public DtTouristicBundle getTouristicBundleData(long touristicBundleId) {
+		TouristicBundleDAO bundleDAO = new TouristicBundleDAOImpl();
+		TouristicBundle bundle = bundleDAO.findById(touristicBundleId);
+		
+		DtTouristicBundle outputBundle = bundle.getBundleDt();
+		return outputBundle;
+	}
+	
+	
 }

@@ -108,4 +108,12 @@ public interface IController {
 	 * Da de alta un departamento con los datos pasados por parametro.
 	 */
 	public void registerDepartment(DtDepartment departmentData);
+	
+	
+	/**
+	 * Devuelve los datos del Paquete Turistico con id = touristicBundleId
+	 * @param touristicBundleId
+	 * @return DtTouristicBundle
+	 */
+	public DtTouristicBundle getTouristicBundleData(long touristicBundleId);
 }

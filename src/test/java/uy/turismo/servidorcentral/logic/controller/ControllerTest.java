@@ -79,12 +79,25 @@ public class ControllerTest {
 	}
 	
 	@Test
-	public void getListTouristicBundle() {
+	public void getListTouristicBundleTest() {
 		IController controller = ControllerFactory.getIController();
 
 		List<DtTouristicBundle> pruebaBundle = new ArrayList<DtTouristicBundle>();
 		pruebaBundle = controller.getListTouristicBundle();
 		
 		System.out.println(pruebaBundle);
+	}
+	
+	@Test
+	public void getTouristicBundleDataTest() {
+		IController controller = ControllerFactory.getIController();
+		
+		DtTouristicBundle pruebaBundle = controller.getTouristicBundleData(1);
+		
+		System.out.println(pruebaBundle.getName() + "/" +
+						   pruebaBundle.getId() + "/" +
+						   pruebaBundle.getDescription() + "/" +
+						   pruebaBundle.getDiscount() + "%" + "/" +
+						   pruebaBundle.getUploadDate());
 	}
 }
