@@ -225,7 +225,7 @@ public class Controller implements IController {
 		
 		//agrego salidas al dt.
 		List<DtTouristicDeparture> dtTouristicDeparture = (List<DtTouristicDeparture>) new DtTouristicDeparture();
-		
+
 		for (int i = 0; i < touristicDepartureByAct.size(); i++) {
 			dtTouristicDeparture.add((DtTouristicDeparture) touristicDepartureByAct);
 		}
