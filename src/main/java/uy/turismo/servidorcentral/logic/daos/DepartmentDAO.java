@@ -10,6 +10,14 @@ public interface DepartmentDAO {
 	 * @return lista con todos los Departamentos de la BD
 	 */
 	public List<Department> findAll();
+	
+	/**
+	 * Busca un Departamento por id
+	 * @param id
+	 * @return
+	 */
+	public Department findById(Long id);
+	
 	/**
 	 * Persiste un nuevo departamento en la BD
 	 * @param department

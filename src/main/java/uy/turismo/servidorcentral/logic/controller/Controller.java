@@ -19,22 +19,32 @@ import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
+
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.Tourist;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
+
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
+import uy.turismo.servidorcentral.logic.entities.Tourist;
+import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
+import uy.turismo.servidorcentral.logic.entities.Tourist;
+
 import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.User;
 
 public class Controller implements IController {
 	
-	//Definicion como Singleton
+	//Unica instancia del constructor en todo el sistema
 	private static Controller _instance;
 	
+	//Constructor
 	private Controller() {
 		
 	}
 	
+	//Devuelve una nueva instancia del controlador si no existe una
 	public static Controller getInstance() {
 		if(_instance == null) {
 			_instance = new Controller();
@@ -187,6 +197,7 @@ public class Controller implements IController {
 		}
 	}
 
+
 	@Override
 	public DtTouristicActivity getTouristicActivityData(Long touristicActivityId) {
 		
@@ -222,8 +233,75 @@ public class Controller implements IController {
 	}
 	
 	
+	@Override
+	public void registeTouristicActivity(DtTouristicActivity touristicActivityData) {
+		DepartmentDAO departmentDao = new DepartmentDAOImpl();
+		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
+		UserDAO userDao = new UserDAOImpl(); 
+		
+		Department department = departmentDao.findById(touristicActivityData
+				.getDepartment()
+				.getId());
+		
+		Provider provider = (Provider) userDao.findById(touristicActivityData
+				.getProvider()
+				.getId());
+		
+		TouristicActivity activity = new TouristicActivity(
+				touristicActivityData.getId(),
+				touristicActivityData.getName(),
+				touristicActivityData.getDescription(),
+				touristicActivityData.getDuration(),
+				touristicActivityData.getCostPerTourist(),
+				touristicActivityData.getUploadDate(),
+				touristicActivityData.getCity(),
+				provider,
+				department
+				);
+		try {
+			activityDao.create(activity);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	@Override
+	public void registerTouristicDeparture(DtTouristicDeparture touristicDepartureData) {
+		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
+		TouristicDepartureDAO departureDao = new TouristicDepartureDAOImpl();
+		
+		TouristicActivity activity = activityDao.findById(touristicDepartureData
+				.getTouristicActivity().getId());
+		
+		TouristicDeparture departure = new TouristicDeparture(
+				touristicDepartureData.getId(),
+				touristicDepartureData.getName(),
+				touristicDepartureData.getMaxTourist(),
+				touristicDepartureData.getUploadDate(),
+				touristicDepartureData.getDepartureDateTime(),
+				touristicDepartureData.getPlace(),
+				activity
+				);
+		
+		try {
+			departureDao.create(departure);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+	}
+
+	@Override
+	public List<DtTouristicDeparture> getListTouristicDeparture() {
+		TouristicDepartureDAO departureDAO = new TouristicDepartureDAOImpl();
+		List<TouristicDeparture> departures = departureDAO.findAll();
+		List<DtTouristicDeparture> departureOutput = new ArrayList<DtTouristicDeparture>();
+		
+		for(TouristicDeparture der : departures ) {
+			departureOutput.add(der.getShortDt());
+		}
+		return departureOutput;
+	}
 	
-	
-	
-	
+
 }
