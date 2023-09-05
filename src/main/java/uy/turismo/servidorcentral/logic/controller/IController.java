@@ -5,6 +5,7 @@ import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 
 public interface IController {
@@ -69,9 +70,6 @@ public interface IController {
 	
 	public List<DtTouristicDeparture> getListTouristicDeparture(Long touristicActivityId); 
 	
-	
-	
-
 	/**
 	 * Da de alta una Actividad Turistica con los datos pasados por parametro
 	 * @param touristicActivityData
@@ -89,5 +87,13 @@ public interface IController {
 	 * @return List<DtTouristicDeparture>
 	 */
 	public List<DtTouristicDeparture> getListTouristicDeparture();
+	
+	
+	/**
+	 * 
+	 * @param touristicBundleData
+	 * Da de alta un paquete Turistico con los datos pasados por parametros.
+	 */
+	public void registerTouristicBundle(DtTouristicBundle touristicBundleData);
 
 }

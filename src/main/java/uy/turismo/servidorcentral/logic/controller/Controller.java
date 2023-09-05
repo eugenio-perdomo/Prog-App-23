@@ -8,6 +8,8 @@ import uy.turismo.servidorcentral.logic.daos.DepartmentDAO;
 import uy.turismo.servidorcentral.logic.daos.DepartmentDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.TouristicActivityDAO;
 import uy.turismo.servidorcentral.logic.daos.TouristicActivityDAOImpl;
+import uy.turismo.servidorcentral.logic.daos.TouristicBundleDAO;
+import uy.turismo.servidorcentral.logic.daos.TouristicBundleDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.TouristicDepartureDAO;
 import uy.turismo.servidorcentral.logic.daos.TouristicDepartureDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.UserDAO;
@@ -24,7 +26,7 @@ import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.Tourist;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
-
+import uy.turismo.servidorcentral.logic.entities.TouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.Tourist;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
@@ -145,7 +147,7 @@ public class Controller implements IController {
 		
 	}
 	
-	
+	//testeo pendiente
 	public void registerUser(DtUser usrData) {
 		UserDAO usrDAO = new UserDAOImpl();
 		
@@ -153,7 +155,7 @@ public class Controller implements IController {
 			DtProvider provData = (DtProvider) usrData;
 			
 			
-			Provider provUsr = new Provider(provData.getId(), provData.getName(), provData.getNickname(), provData.getEmail(),
+			Provider provUsr = new Provider(null, provData.getName(), provData.getNickname(), provData.getEmail(),
 					provData.getLastName(), provData.getBirthDate(), provData.getDescription(), provData.getUrl());
 			
 			try {
@@ -165,7 +167,7 @@ public class Controller implements IController {
 		}else {
 			DtTourist touristData = (DtTourist) usrData;
 			
-			Tourist touristUsr = new Tourist(touristData.getId(), touristData.getName(), touristData.getNickname(), touristData.getEmail(),
+			Tourist touristUsr = new Tourist(null, touristData.getName(), touristData.getNickname(), touristData.getEmail(),
 				touristData.getLastName(), touristData.getBirthDate(), touristData.getNationality());
 
 			try {
@@ -197,7 +199,7 @@ public class Controller implements IController {
 		}
 	}
 
-
+	//testeo pendiente
 	@Override
 	public DtTouristicActivity getTouristicActivityData(Long touristicActivityId) {
 		
@@ -209,7 +211,7 @@ public class Controller implements IController {
 		return dtTouristicActivity;
 		
 	}
-
+	//testeo pendiente
 	@Override
 	public List<DtTouristicDeparture> getListTouristicDeparture(Long touristicActivityId) {
 				
@@ -301,6 +303,25 @@ public class Controller implements IController {
 			departureOutput.add(der.getShortDt());
 		}
 		return departureOutput;
+	}
+
+	//testeo pendiente
+	@Override
+	public void registerTouristicBundle(DtTouristicBundle touristicBundleData) {
+		
+		TouristicBundleDAO touristicBundleDAO = new TouristicBundleDAOImpl();
+		
+		
+		TouristicBundle bundle = new TouristicBundle(null, touristicBundleData.getName(),
+				touristicBundleData.getDescription(), touristicBundleData.getValidityPeriod(), 
+				touristicBundleData.getDiscount(), touristicBundleData.getUploadDate());
+		
+		try {
+			touristicBundleDAO.create(bundle);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
 	}
 	
 
