@@ -147,7 +147,7 @@ public class Controller implements IController {
 		
 	}
 	
-	
+	//testeo pendiente
 	public void registerUser(DtUser usrData) {
 		UserDAO usrDAO = new UserDAOImpl();
 		
@@ -155,7 +155,7 @@ public class Controller implements IController {
 			DtProvider provData = (DtProvider) usrData;
 			
 			
-			Provider provUsr = new Provider(provData.getId(), provData.getName(), provData.getNickname(), provData.getEmail(),
+			Provider provUsr = new Provider(null, provData.getName(), provData.getNickname(), provData.getEmail(),
 					provData.getLastName(), provData.getBirthDate(), provData.getDescription(), provData.getUrl());
 			
 			try {
@@ -167,7 +167,7 @@ public class Controller implements IController {
 		}else {
 			DtTourist touristData = (DtTourist) usrData;
 			
-			Tourist touristUsr = new Tourist(touristData.getId(), touristData.getName(), touristData.getNickname(), touristData.getEmail(),
+			Tourist touristUsr = new Tourist(null, touristData.getName(), touristData.getNickname(), touristData.getEmail(),
 				touristData.getLastName(), touristData.getBirthDate(), touristData.getNationality());
 
 			try {
@@ -199,7 +199,7 @@ public class Controller implements IController {
 		}
 	}
 
-
+	//testeo pendiente
 	@Override
 	public DtTouristicActivity getTouristicActivityData(Long touristicActivityId) {
 		
@@ -211,7 +211,7 @@ public class Controller implements IController {
 		return dtTouristicActivity;
 		
 	}
-
+	//testeo pendiente
 	@Override
 	public List<DtTouristicDeparture> getListTouristicDeparture(Long touristicActivityId) {
 				
@@ -314,8 +314,41 @@ public class Controller implements IController {
 		for(TouristicBundle bun : bundles) {
 			outputBundles.add(bun.getShortDt());
 		}
+		//testeo pendiente
 		return outputBundles;
 	}
 	
-
+	@Override
+	public void registerTouristicBundle(DtTouristicBundle touristicBundleData) {
+		
+		TouristicBundleDAO touristicBundleDAO = new TouristicBundleDAOImpl();
+		
+		
+		TouristicBundle bundle = new TouristicBundle(null, touristicBundleData.getName(),
+				touristicBundleData.getDescription(), touristicBundleData.getValidityPeriod(), 
+				touristicBundleData.getDiscount(), touristicBundleData.getUploadDate());
+		
+		try {
+			touristicBundleDAO.create(bundle);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void registerDepartment(DtDepartment departmentData) {
+		DepartmentDAO departmentDAO = new DepartmentDAOImpl();
+		
+		Department department = new Department(null, departmentData.getName(), departmentData.getDescription(), departmentData.getWebSite());
+		
+		/**this.id = id;
+		this.name = name;
+		this.description = description;
+		this.webSite = webSite;*/
+		
+		try {
+			departmentDAO.create(department);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }
