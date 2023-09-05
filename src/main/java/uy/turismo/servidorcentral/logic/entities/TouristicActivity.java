@@ -191,4 +191,5 @@ public class TouristicActivity extends BaseEntity {
 		return dtOutput;	
 	}
 	
+	
 }
