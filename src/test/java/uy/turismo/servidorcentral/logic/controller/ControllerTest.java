@@ -87,4 +87,10 @@ public class ControllerTest {
 		
 		System.out.println(pruebaBundle);
 	}
+	
+	@Test
+	public void addActivityToBundleTest() {
+		IController controller = ControllerFactory.getIController();
+		controller.addTouristicActivityToBundle(1L, 5L);
+	}	
 }

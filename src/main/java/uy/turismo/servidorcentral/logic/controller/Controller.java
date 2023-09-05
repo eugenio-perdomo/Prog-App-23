@@ -351,4 +351,20 @@ public class Controller implements IController {
 			System.out.println(e.getMessage());
 		}
 	}
+
+	@Override
+	public void addTouristicActivityToBundle(Long touristicBundleId, Long touristicActivityId) {
+		TouristicBundleDAO bundleDao = new TouristicBundleDAOImpl();
+		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
+		
+		TouristicBundle bundle = bundleDao.findById(touristicBundleId);
+		TouristicActivity activity = activityDao.findById(touristicActivityId);
+		
+		bundle.addActivity(activity);
+		
+		try {
+			bundleDao.update(bundle);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());		}
+	}
 }

@@ -108,4 +108,11 @@ public interface IController {
 	 * Da de alta un departamento con los datos pasados por parametro.
 	 */
 	public void registerDepartment(DtDepartment departmentData);
+	
+	/**
+	 * Agrega una actividad turistica a un paquete turistico
+	 * @param touristicBundleId
+	 * @param touristicActivityId
+	 */
+	public void addTouristicActivityToBundle(Long touristicBundleId, Long touristicActivityId);
 }
