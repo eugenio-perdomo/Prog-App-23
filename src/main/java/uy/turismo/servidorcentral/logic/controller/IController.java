@@ -5,6 +5,7 @@ import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 
 public interface IController {
 	
@@ -52,4 +53,10 @@ public interface IController {
 	 * @param touristicActivityData
 	 */
 	public void registeTouristicActivity(DtTouristicActivity touristicActivityData);
+
+	/**
+	 * Da de alta una Salida Turistica con los datos pasados por parametros
+	 * @param touristicDepartureData
+	 */
+	public void registerTouristicDeparture(DtTouristicDeparture touristicDepartureData);
 }

@@ -60,8 +60,14 @@ public class TouristicDeparture implements Serializable {
 		
 	}
 	
-	public TouristicDeparture(Long id, String name, Integer maxTourist, LocalDate uploadDate,
-			LocalDateTime departureDateTime, String place, TouristicActivity touristicActivity) {
+	public TouristicDeparture(
+			Long id, 
+			String name, 
+			Integer maxTourist,
+			LocalDate uploadDate,
+			LocalDateTime departureDateTime, 
+			String place,
+			TouristicActivity touristicActivity) {
 		this.id = id;
 		this.name = name;
 		this.maxTourist = maxTourist;
@@ -164,7 +170,7 @@ public class TouristicDeparture implements Serializable {
 		}
 		
 		DtTouristicDeparture dtDeparture = new DtTouristicDeparture(
-				this.id,
+				id,
 				this.name,
 				this.maxTourist,
 				this.uploadDate,

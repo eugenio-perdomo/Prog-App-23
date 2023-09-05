@@ -29,8 +29,15 @@ public class DtTouristicDeparture extends DtBaseEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public DtTouristicDeparture(Long id, String name, Integer maxTourist, LocalDate uploadDate, LocalDateTime departureDateTime, String place,
-			DtTouristicActivity touristicActivity, List<DtTourist> tourists) {
+	public DtTouristicDeparture(
+			Long id, 
+			String name, 
+			Integer maxTourist, 
+			LocalDate uploadDate, 
+			LocalDateTime departureDateTime, 
+			String place,
+			DtTouristicActivity touristicActivity, 
+			List<DtTourist> tourists) {
 		super(id, name);
 		this.maxTourist = maxTourist;
 		this.uploadDate = uploadDate;
@@ -39,6 +46,33 @@ public class DtTouristicDeparture extends DtBaseEntity {
 		this.touristicActivity = touristicActivity;
 		this.tourists = tourists;
 	}
+
+	//Getters
+	public Integer getMaxTourist() {
+		return maxTourist;
+	}
+
+	public LocalDate getUploadDate() {
+		return uploadDate;
+	}
+
+	public LocalDateTime getDepartureDateTime() {
+		return departureDateTime;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public DtTouristicActivity getTouristicActivity() {
+		return touristicActivity;
+	}
+
+	public List<DtTourist> getTourists() {
+		return tourists;
+	}
+	
+	
 	
 	
 

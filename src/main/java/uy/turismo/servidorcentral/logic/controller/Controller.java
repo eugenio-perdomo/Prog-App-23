@@ -7,6 +7,8 @@ import uy.turismo.servidorcentral.logic.daos.DepartmentDAO;
 import uy.turismo.servidorcentral.logic.daos.DepartmentDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.TouristicActivityDAO;
 import uy.turismo.servidorcentral.logic.daos.TouristicActivityDAOImpl;
+import uy.turismo.servidorcentral.logic.daos.TouristicDepartureDAO;
+import uy.turismo.servidorcentral.logic.daos.TouristicDepartureDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.UserDAO;
 import uy.turismo.servidorcentral.logic.daos.UserDAOImpl;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
@@ -16,8 +18,10 @@ import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.Tourist;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
+import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.User;
 
 public class Controller implements IController {
@@ -214,5 +218,31 @@ public class Controller implements IController {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	@Override
+	public void registerTouristicDeparture(DtTouristicDeparture touristicDepartureData) {
+		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
+		TouristicDepartureDAO departureDao = new TouristicDepartureDAOImpl();
+		
+		TouristicActivity activity = activityDao.findById(touristicDepartureData
+				.getTouristicActivity().getId());
+		
+		TouristicDeparture departure = new TouristicDeparture(
+				touristicDepartureData.getId(),
+				touristicDepartureData.getName(),
+				touristicDepartureData.getMaxTourist(),
+				touristicDepartureData.getUploadDate(),
+				touristicDepartureData.getDepartureDateTime(),
+				touristicDepartureData.getPlace(),
+				activity
+				);
+		
+		try {
+			departureDao.create(departure);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
 	}
 }
