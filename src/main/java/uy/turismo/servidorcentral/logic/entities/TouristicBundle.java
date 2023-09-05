@@ -124,6 +124,10 @@ public class TouristicBundle implements Serializable  {
 		return shortDt;
 	}
 	
+	/**
+	 * Devuelve un DtTouristicBundle con todos los datos del paquete
+	 * @return
+	 */
 	public DtTouristicBundle getBundleDt() {
 		
 		//List<DtTouristicActivity> listActivities = new ArrayList<DtTouristicActivity>();
@@ -137,6 +141,14 @@ public class TouristicBundle implements Serializable  {
 		DtTouristicBundle dt = new DtTouristicBundle(this.id, this.name, this.description, this.validityPeriod, 
 				this.discount, this.uploadDate, activities);
 		return dt;
+	}
+	
+	/**
+	 * Agrega una actividad turistica al paquete
+	 * @param activity
+	 */
+	public void addActivity(TouristicActivity activity) {
+		this.touristicActivities.add(activity);
 	}
 
 }

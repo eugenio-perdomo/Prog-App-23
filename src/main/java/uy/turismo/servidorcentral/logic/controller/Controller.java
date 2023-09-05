@@ -225,7 +225,7 @@ public class Controller implements IController {
 		
 		//agrego salidas al dt.
 		List<DtTouristicDeparture> dtTouristicDeparture = (List<DtTouristicDeparture>) new DtTouristicDeparture();
-		
+
 		for (int i = 0; i < touristicDepartureByAct.size(); i++) {
 			dtTouristicDeparture.add((DtTouristicDeparture) touristicDepartureByAct);
 		}
@@ -362,4 +362,20 @@ public class Controller implements IController {
 	}
 	
 	
+
+	public void addTouristicActivityToBundle(Long touristicBundleId, Long touristicActivityId) {
+		TouristicBundleDAO bundleDao = new TouristicBundleDAOImpl();
+		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
+		
+		TouristicBundle bundle = bundleDao.findById(touristicBundleId);
+		TouristicActivity activity = activityDao.findById(touristicActivityId);
+		
+		bundle.addActivity(activity);
+		
+		try {
+			bundleDao.update(bundle);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			}
+	}
 }
