@@ -13,9 +13,13 @@ import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
+import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
 
 public class ControllerTest {
 
+	
+	
 	@Test
 	public void registerActivityTest() {
 		IController controller = ControllerFactory.getIController();
@@ -24,7 +28,15 @@ public class ControllerTest {
 		DtDepartment department = departments.stream()
 			.filter(d -> d.getName().equals("Maldonado"))
 			.findFirst()
-			.get();
+			.get();		
+	}
+	
+	
+	@Test
+	public void getListTouristicDepartureTest() {
+		IController controller = ControllerFactory.getIController();
+		
+		List<DtTouristicDeparture> departuresTest = new ArrayList<DtTouristicDeparture>();
 		
 		//TODO : Cuando este implementada findAllProviders se puede continuar con este test
 	}

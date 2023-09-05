@@ -15,6 +15,7 @@ public interface IController {
 	 */
 	public List<DtUser> getListUser();
 	
+	
 	/**
 	 * Busca y devuelve los datos de un usuario
 	 * @param id del usuario a encontrar
@@ -22,11 +23,13 @@ public interface IController {
 	 */
 	public DtUser getUserData(Long id);
 	
+	
 	/**
 	 * Devuelve una lista de todos los Turistas con el nickname, el email y su id.
 	 * @return List<DtTourist>
 	 */
 	public List<DtTourist>  getListTourist();
+	
 	
 	/**
 	 * Modifica un usuario ya existente con nuevos datos
@@ -44,10 +47,10 @@ public interface IController {
 	
 	/**
 	 * Devuelve una lista con el id, el nombre de todos los Departamentos. Si el parametro alsoActivities es true, tambien devuelve las Actividades que se hacen en el Departamento
+	 * @param alsoActivities
 	 * @return List<DtDepartment>
 	 */
 	public List<DtDepartment> getListDepartment(Boolean alsoActivities); 
-	
 	/**
 	 * Da de alta una Actividad Turistica con los datos pasados por parametro
 	 * @param touristicActivityData
@@ -59,4 +62,10 @@ public interface IController {
 	 * @param touristicDepartureData
 	 */
 	public void registerTouristicDeparture(DtTouristicDeparture touristicDepartureData);
+	
+	/**
+	 * Devuelve una lista con el id y el nombre de todas las Salidas Turisticas
+	 * @return List<DtTouristicDeparture>
+	 */
+	public List<DtTouristicDeparture> getListTouristicDeparture();
 }

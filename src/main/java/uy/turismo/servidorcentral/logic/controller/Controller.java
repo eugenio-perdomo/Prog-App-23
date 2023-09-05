@@ -21,6 +21,8 @@ import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.Tourist;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
+import uy.turismo.servidorcentral.logic.entities.Tourist;
 import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.User;
 
@@ -187,7 +189,6 @@ public class Controller implements IController {
 		}
 	}
 	
-
 	@Override
 	public void registeTouristicActivity(DtTouristicActivity touristicActivityData) {
 		DepartmentDAO departmentDao = new DepartmentDAOImpl();
@@ -245,4 +246,18 @@ public class Controller implements IController {
 		}
 		
 	}
+
+	@Override
+	public List<DtTouristicDeparture> getListTouristicDeparture() {
+		TouristicDepartureDAO departureDAO = new TouristicDepartureDAOImpl();
+		List<TouristicDeparture> departures = departureDAO.findAll();
+		List<DtTouristicDeparture> departureOutput = new ArrayList<DtTouristicDeparture>();
+		
+		for(TouristicDeparture der : departures ) {
+			departureOutput.add(der.getShortDt());
+		}
+		return departureOutput;
+	}
+	
+
 }
