@@ -55,6 +55,14 @@ public class Inscription implements Serializable {
 
 	
 //  Getters and Setters
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public LocalDate getInscriptionDate() {
 		return inscriptionDate;
 	}

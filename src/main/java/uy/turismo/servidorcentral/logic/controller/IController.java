@@ -3,6 +3,7 @@ package uy.turismo.servidorcentral.logic.controller;
 import java.util.List;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
+import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
@@ -123,4 +124,8 @@ public interface IController {
 	 * @param touristicActivityId
 	 */
 	public void addTouristicActivityToBundle(Long touristicBundleId, Long touristicActivityId);
+	
+	public DtTouristicDeparture getTouristicDepartureData(long touristicDepartureId);
+
+	void registerInscription(DtInscription inscriptionData);
 }
