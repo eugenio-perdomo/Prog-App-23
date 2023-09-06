@@ -10,8 +10,8 @@ public class DtInscription extends DtBaseEntity {
 	private LocalDate inscriptionDate;
 	private Double totalCost;
 	private Integer touristAmount;
-	private Tourist tourist;
-	private TouristicDeparture departure;
+	private DtTourist tourist;
+	private DtTouristicDeparture departure;
 	
 	public DtInscription() {
 		// TODO Auto-generated constructor stub
@@ -26,8 +26,8 @@ public class DtInscription extends DtBaseEntity {
 			LocalDate inscriptionDate,
 			Double totalCost,
 			Integer touristAmount,
-			Tourist tourist,
-			TouristicDeparture departure) {
+			DtTourist tourist,
+			DtTouristicDeparture departure) {
 		super(id);
 		this.inscriptionDate = inscriptionDate;
 		this.totalCost = totalCost;
@@ -48,11 +48,11 @@ public class DtInscription extends DtBaseEntity {
 		return touristAmount;
 	}
 	
-	public Tourist getTourist() {
+	public DtTourist getTourist() {
 		return tourist;
 	}
 	
-	public TouristicDeparture getTouristicDeparture() {
+	public DtTouristicDeparture getTouristicDeparture() {
 		return departure;
 	}
 

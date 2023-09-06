@@ -372,10 +372,10 @@ public class Controller implements IController {
 		TouristicDepartureDAO departureDao = new TouristicDepartureDAOImpl();
 		UserDAO touristDao = new UserDAOImpl();
 		
-		User user = touristDao.findById(inscriptionData.getTourist().getDt().getId());	
+		User user = touristDao.findById(inscriptionData.getTourist().getId());	
 		Tourist tourist = (Tourist) user;
 		
-		TouristicDeparture touristicDeparture = departureDao.findById(inscriptionData.getTouristicDeparture().getDt().getId());
+		TouristicDeparture touristicDeparture = departureDao.findById(inscriptionData.getTouristicDeparture().getId());
 		
 		Inscription inscCreation = new Inscription(
 				inscriptionData.getId(),
