@@ -98,6 +98,19 @@ public class Controller implements IController {
 		
 		return userOutput;
 	}
+	
+	@Override
+	public List<DtProvider>  getListProvider(){
+		UserDAO userDAO = new UserDAOImpl();
+		List<Provider> users = userDAO.findAllProviders();
+		List<DtProvider> userOutput = new ArrayList<DtProvider>();
+		
+		for(Provider prov : users){
+			userOutput.add((DtProvider)prov.getShortDt());
+		}
+		
+		return userOutput;
+	}
 
 	@Override
 	public void updateUser(DtUser userData) {

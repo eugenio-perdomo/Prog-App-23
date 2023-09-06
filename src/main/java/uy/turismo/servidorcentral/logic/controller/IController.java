@@ -4,6 +4,7 @@ import java.util.List;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
+import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
@@ -13,7 +14,7 @@ public interface IController {
 	
 	/**
 	 * Devuelve una Lista de DtUser con id, nickname y email
-	 * @return
+	 * @return List<DtUser>
 	 */
 	public List<DtUser> getListUser();
 	
@@ -32,6 +33,11 @@ public interface IController {
 	 */
 	public List<DtTourist>  getListTourist();
 	
+	/**
+	 * Devuelve una lista de todos los Turistas con el nickname, el email y su id.
+	 * @return List<DtProvider>
+	 */
+	public List<DtProvider>  getListProvider();
 	
 	/**
 	 * Modifica un usuario ya existente con nuevos datos
