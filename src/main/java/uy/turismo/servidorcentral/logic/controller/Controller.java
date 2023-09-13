@@ -390,10 +390,14 @@ public class Controller implements IController {
 		
 		TouristicDeparture touristicDeparture = departureDao.findById(inscriptionData.getTouristicDeparture().getId());
 		
+		Double totalCost = 
+				touristicDeparture.getTouristicActivity().getCostPerTourist() * 
+				inscriptionData.getTouristAmount();
+		
 		Inscription inscCreation = new Inscription(
 				inscriptionData.getId(),
 				inscriptionData.getInscriptionDate(),
-				inscriptionData.getTotalCost(),
+				totalCost,
 				inscriptionData.getTouristAmount(),
 				tourist,
 				touristicDeparture);

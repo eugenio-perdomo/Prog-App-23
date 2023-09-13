@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
+import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
@@ -101,10 +102,44 @@ public class ControllerTest {
 						   pruebaBundle.getUploadDate());
 	}
 	
+	@Test
+	public void getActivityDataTest() {
+		IController controller = ControllerFactory.getIController();
+		
+		DtTouristicActivity activity = controller.getTouristicActivityData(1L);
+		
+		
+		
+		
+	}
 	
 	
+	@Test
 	public void addActivityToBundleTest() {
 		IController controller = ControllerFactory.getIController();
 		controller.addTouristicActivityToBundle(1L, 5L);
 	}
+	
+	@Test
+	public void registerInscriptionTest() {
+		IController controller = ControllerFactory.getIController();
+        String yellow = "\u001B[33m";
+		
+		DtTourist tourist = (DtTourist) controller.getUserData(4L);
+		DtTouristicDeparture departure = controller.getTouristicDepartureData(5L);
+		
+		DtInscription inscription = new DtInscription(
+				null,
+				LocalDate.of(2023, 10, 8),
+				null,
+				3,
+				tourist,
+				departure
+				);
+		
+		controller.registerInscription(inscription);
+		
+		System.out.println(yellow + "Info: DONE" + yellow);
+	}
+	
 }

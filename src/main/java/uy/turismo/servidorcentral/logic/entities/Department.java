@@ -107,9 +107,12 @@ public class Department implements Serializable {
 		
 		List<DtTouristicActivity> listDtActivities = new ArrayList<DtTouristicActivity>();
 		
-		for(TouristicActivity td : this.touristicActivities) {
-			listDtActivities.add(td.getShortDt());
+		if(this.touristicActivities != null) {
+			for(TouristicActivity td : this.touristicActivities) {
+				listDtActivities.add(td.getShortDt());
+			}
 		}
+		
 		
 		DtDepartment dtOutput = new DtDepartment(
 				this.id,

@@ -57,9 +57,14 @@ public class Tourist extends User {
 	@Override
 	public DtUser getDt() {
 		List<DtTouristicDeparture> listDepartures = new ArrayList<DtTouristicDeparture>();
-		for(Inscription inscription : this.inscriptions) {
-			listDepartures.add(inscription.getDepartureShortDt());
+		
+		if(this.inscriptions != null) {
+			for(Inscription inscription : this.inscriptions) {
+				listDepartures.add(inscription.getDepartureShortDt());
+			}
+			
 		}
+		
 		
 		DtTourist dtTourist = new DtTourist(
 				this.id,

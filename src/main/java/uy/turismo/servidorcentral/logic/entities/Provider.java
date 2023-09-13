@@ -72,9 +72,13 @@ public class Provider extends User {
 		
 		List<DtTouristicActivity> listDtActivities = new ArrayList<DtTouristicActivity>();
 		
-		for(TouristicActivity td : this.touristicActivities) {
-			listDtActivities.add(td.getShortDt());
+		if(this.touristicActivities != null) {
+			for(TouristicActivity td : this.touristicActivities) {
+				listDtActivities.add(td.getShortDt());
+			}
+			
 		}
+		
 		
 		DtProvider DtOutput = new DtProvider(
 				this.id,

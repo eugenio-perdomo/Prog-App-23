@@ -165,9 +165,13 @@ public class TouristicDeparture implements Serializable {
 	public DtTouristicDeparture getDt() {
 		List<DtTourist> listTourist = new ArrayList<DtTourist>();
 		
-		for(Inscription ins : this.inscriptions) {
-			listTourist.add(ins.getTouristShortDt());
+		if(this.inscriptions != null) {
+			
+			for(Inscription ins : this.inscriptions) {
+				listTourist.add(ins.getTouristShortDt());
+			}
 		}
+		
 		
 		DtTouristicDeparture dtDeparture = new DtTouristicDeparture(
 				id,

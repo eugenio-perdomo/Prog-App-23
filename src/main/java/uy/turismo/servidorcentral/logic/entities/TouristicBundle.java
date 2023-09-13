@@ -134,9 +134,13 @@ public class TouristicBundle implements Serializable  {
 		
 		List<DtTouristicActivity> activities = new ArrayList<DtTouristicActivity>();
 		
-		for (int i = 0; i < this.touristicActivities.size(); i++) {
-			activities.add(touristicActivities.get(i).getShortDt());
+		if(this.touristicActivities != null) {
+			for (int i = 0; i < this.touristicActivities.size(); i++) {
+				activities.add(touristicActivities.get(i).getShortDt());
+			}
+			
 		}
+		
 		
 		DtTouristicBundle dt = new DtTouristicBundle(this.id, this.name, this.description, this.validityPeriod, 
 				this.discount, this.uploadDate, activities);

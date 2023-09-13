@@ -191,12 +191,18 @@ public class TouristicActivity implements Serializable{
 		List<DtTouristicDeparture> listDtDepartures = new ArrayList<DtTouristicDeparture>();
 		List<DtTouristicBundle> listDtBundles = new ArrayList<DtTouristicBundle>();
 		
-		for(TouristicDeparture td : this.touristicDepartures) {
-			listDtDepartures.add(td.getShortDt());
+		if(this.touristicDepartures != null) {
+			
+			for(TouristicDeparture td : this.touristicDepartures) {
+				listDtDepartures.add(td.getShortDt());
+			}
 		}
 		
-		for(TouristicBundle tb : this.touristicBundle) {
-			listDtBundles.add(tb.getShortDt());
+		if(this.touristicBundle != null) {
+			for(TouristicBundle tb : this.touristicBundle) {
+				listDtBundles.add(tb.getShortDt());
+			}
+			
 		}
 		
 		DtTouristicActivity dtOutput;
