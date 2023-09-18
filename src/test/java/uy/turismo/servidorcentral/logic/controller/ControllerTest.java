@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.Session;
 import org.junit.jupiter.api.Test;
 
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
@@ -17,10 +18,15 @@ import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
+import uy.turismo.servidorcentral.logic.util.HibernateUtil;
 
 public class ControllerTest {
 
-	
+	@Test
+	public void initDataBase() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.close();
+	}
 	
 	@Test
 	public void registerActivityTest() {
