@@ -1,6 +1,5 @@
 package uy.turismo.servidorcentral.logic.controller;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,21 +15,20 @@ import uy.turismo.servidorcentral.logic.daos.TouristicDepartureDAO;
 import uy.turismo.servidorcentral.logic.daos.TouristicDepartureDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.UserDAO;
 import uy.turismo.servidorcentral.logic.daos.UserDAOImpl;
-import uy.turismo.servidorcentral.logic.datatypes.DtUser;
-import uy.turismo.servidorcentral.logic.entities.Department;
-import uy.turismo.servidorcentral.logic.entities.Inscription;
-import uy.turismo.servidorcentral.logic.entities.Provider;
-import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
+import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
+import uy.turismo.servidorcentral.logic.datatypes.DtUser;
+import uy.turismo.servidorcentral.logic.entities.Department;
+import uy.turismo.servidorcentral.logic.entities.Inscription;
+import uy.turismo.servidorcentral.logic.entities.Provider;
 import uy.turismo.servidorcentral.logic.entities.Tourist;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
 import uy.turismo.servidorcentral.logic.entities.TouristicBundle;
-
 import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.User;
 
@@ -222,7 +220,8 @@ public class Controller implements IController {
 		return dtTouristicActivity;
 		
 	}
-	//testeo pendiente
+	
+	//testeo pendiente QUE NUNCA LLEGO
 	@Override
 	public List<DtTouristicDeparture> getListTouristicDeparture(Long touristicActivityId) {
 				
@@ -235,11 +234,16 @@ public class Controller implements IController {
 		//lista de salidas turisticas con esa actividad.
 		
 		//agrego salidas al dt.
-		List<DtTouristicDeparture> dtTouristicDeparture = (List<DtTouristicDeparture>) new DtTouristicDeparture();
+//		List<DtTouristicDeparture> dtTouristicDeparture = (List<DtTouristicDeparture>) new DtTouristicDeparture();
+		List<DtTouristicDeparture> dtTouristicDeparture = new ArrayList<DtTouristicDeparture>();
 
-		for (int i = 0; i < touristicDepartureByAct.size(); i++) {
-			dtTouristicDeparture.add((DtTouristicDeparture) touristicDepartureByAct);
-		}
+//		for (int i = 0; i < touristicDepartureByAct.size(); i++) {
+//			dtTouristicDeparture.add((DtTouristicDeparture) touristicDepartureByAct);
+//		}
+		
+		touristicDepartureByAct.forEach(departure -> {
+			dtTouristicDeparture.add(departure.getShortDt());
+		});
 		
 		
 		return dtTouristicDeparture;

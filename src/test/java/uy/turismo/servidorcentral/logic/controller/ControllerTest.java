@@ -142,4 +142,25 @@ public class ControllerTest {
 		System.out.println(yellow + "Info: DONE" + yellow);
 	}
 	
+	@Test
+	public void listDepartureTest() {
+		IController controller = ControllerFactory.getIController();
+		
+		List<DtTouristicDeparture> departures = controller.getListTouristicDeparture(1L);
+		
+		System.out.println();
+	
+	}
+	
+	@Test
+	public void getDepartureTest() {
+		IController controller = ControllerFactory.getIController();
+		
+		DtTouristicDeparture departure = controller.getTouristicDepartureData(1);
+		
+		System.out.println();
+		
+	}
+
+	
 }

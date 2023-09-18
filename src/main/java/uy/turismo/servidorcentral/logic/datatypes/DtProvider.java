@@ -9,8 +9,10 @@ public class DtProvider extends DtUser {
 	private String description;
 	private List<DtTouristicActivity> touristicActivities;
 
-	public DtProvider(Long id, String name, String nickname, String email,
-			String lastName, LocalDate birthDate, String url, String description,
+	public DtProvider(Long id, String name,
+			String nickname, String email,
+			String lastName, LocalDate birthDate,
+			String url, String description,
 			List<DtTouristicActivity> touristicActivities) {
 		super(id, name, nickname, email, lastName, birthDate);
 		this.url = url;

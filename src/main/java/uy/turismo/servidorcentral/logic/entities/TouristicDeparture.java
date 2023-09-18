@@ -50,7 +50,6 @@ public class TouristicDeparture implements Serializable {
 	@JoinColumn(name = "touristic_activity")
 	private TouristicActivity touristicActivity;
 	
-	@Transient
 	@OneToMany(mappedBy = "touristicDeparture", fetch = FetchType.EAGER)
 	private List<Inscription> inscriptions;
 
