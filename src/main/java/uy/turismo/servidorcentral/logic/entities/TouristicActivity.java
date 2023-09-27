@@ -14,10 +14,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
+import uy.turismo.servidorcentral.logic.datatypes.DtCategory;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
@@ -61,13 +63,22 @@ public class TouristicActivity implements Serializable{
 	
 	@OneToMany(mappedBy = "touristicActivity", fetch = FetchType.EAGER)
 	private List<TouristicDeparture> touristicDepartures;
-
+	
+	
+	//codigo agregado:LT
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "Activity_Categories", joinColumns = @JoinColumn(name = "activity"), inverseJoinColumns = @JoinColumn(name = "category"))	
+	private List<Category> categories;
+	
 	
 	//Constructor
 	public TouristicActivity() {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	
+	//meter categorias en este bicho
 	public TouristicActivity(
 			Long id,
 			String name,
@@ -77,7 +88,8 @@ public class TouristicActivity implements Serializable{
 			LocalDate uploadDate,
 			String city, 
 			Provider provider, 
-			Department department) {
+			Department department,
+			List<Category> categories) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -88,12 +100,14 @@ public class TouristicActivity implements Serializable{
 		this.provider = provider;
 		this.department = department;
 		this.InitLists();
+		this.categories = categories;
 	}
 	
 	//Iniciadores 
 	private void InitLists() {
 		this.touristicBundle = new ArrayList<TouristicBundle>();
 		this.touristicDepartures = new ArrayList<TouristicDeparture>();
+		this.categories = new ArrayList<Category>();
 	}
 
 	//Getters y Setters
@@ -172,6 +186,17 @@ public class TouristicActivity implements Serializable{
 		this.touristicDepartures = touristicDepartures;
 	}
 	
+	
+	//codigo agregado : LT.
+	public List<Category> getCategories(){
+		return categories;
+	}
+	
+	public void setCategory(List<Category> category) {
+		this.categories = category;
+	}
+	
+	
 	/**
 	 * Devuelve un DtTouristicActivity con id y nombre del objeto 
 	 * @return
@@ -190,6 +215,8 @@ public class TouristicActivity implements Serializable{
 	public DtTouristicActivity getDt() {
 		List<DtTouristicDeparture> listDtDepartures = new ArrayList<DtTouristicDeparture>();
 		List<DtTouristicBundle> listDtBundles = new ArrayList<DtTouristicBundle>();
+		List<DtCategory> listDtCategories= new ArrayList<DtCategory>();
+		
 		
 		if(this.touristicDepartures != null) {
 			
@@ -205,6 +232,14 @@ public class TouristicActivity implements Serializable{
 			
 		}
 		
+		//codigo agregado:LT
+		if(this.categories != null) {
+			for(Category cat: this.categories) {
+				listDtCategories.add(cat.getShortDt());
+			}
+		}
+		
+		
 		DtTouristicActivity dtOutput;
 		dtOutput = new DtTouristicActivity(
 				this.id,
@@ -217,7 +252,8 @@ public class TouristicActivity implements Serializable{
 				(DtProvider) this.provider.getShortDt(),
 				this.department.getShortDt(),
 				listDtDepartures,
-				listDtBundles);
+				listDtBundles,
+				listDtCategories);
 		
 		return dtOutput;	
 	}

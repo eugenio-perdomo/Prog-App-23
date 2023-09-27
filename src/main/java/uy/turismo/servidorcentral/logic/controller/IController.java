@@ -2,6 +2,7 @@ package uy.turismo.servidorcentral.logic.controller;
 
 import java.util.List;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
+import uy.turismo.servidorcentral.logic.datatypes.DtCategory;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
@@ -134,4 +135,11 @@ public interface IController {
 	public DtTouristicDeparture getTouristicDepartureData(long touristicDepartureId);
 
 	void registerInscription(DtInscription inscriptionData);
+	
+	/**
+	 * Registra una nueva categoria.
+	 * @param category -> Datos de la categoria a registrar
+	 */
+	public void registerCategory(DtCategory category);
+	
 }

@@ -15,7 +15,8 @@ public class DtTouristicActivity extends DtBaseEntity {
 	private DtDepartment department;
 	private List<DtTouristicDeparture> departures;
 	private List<DtTouristicBundle> bundles;
-	
+	//codigo agregado: LT
+	private List<DtCategory> categories;
 	
 	public DtTouristicActivity() {
 		// TODO Auto-generated constructor stub
@@ -32,9 +33,10 @@ public class DtTouristicActivity extends DtBaseEntity {
 	}
 	
 	
+	//codigo agregado: LT
 	public DtTouristicActivity(Long id, String name, String description, Double duration, Double costPerTourist, String city,
 			LocalDate uploadDate, DtProvider provider, DtDepartment department, List<DtTouristicDeparture> departures,
-			List<DtTouristicBundle> bundles) {
+			List<DtTouristicBundle> bundles, List<DtCategory> categories) {
 		super(id, name);
 		this.description = description;
 		this.duration = duration;
@@ -45,8 +47,11 @@ public class DtTouristicActivity extends DtBaseEntity {
 		this.department = department;
 		this.departures = departures;
 		this.bundles = bundles;
+		this.categories = categories;
 	}
 
+	
+	
 	public String getDescription() {
 		return description;
 	}
@@ -81,6 +86,11 @@ public class DtTouristicActivity extends DtBaseEntity {
 
 	public List<DtTouristicBundle> getBundles() {
 		return bundles;
+	}
+	
+	//codigo agregado: LT
+	public List<DtCategory> getCategories(){
+		return categories;
 	}
 	
 }

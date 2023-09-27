@@ -13,8 +13,11 @@ import uy.turismo.servidorcentral.logic.daos.TouristicBundleDAO;
 import uy.turismo.servidorcentral.logic.daos.TouristicBundleDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.TouristicDepartureDAO;
 import uy.turismo.servidorcentral.logic.daos.TouristicDepartureDAOImpl;
+import uy.turismo.servidorcentral.logic.daos.CategoryDAO;
+import uy.turismo.servidorcentral.logic.daos.CategoryDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.UserDAO;
 import uy.turismo.servidorcentral.logic.daos.UserDAOImpl;
+import uy.turismo.servidorcentral.logic.datatypes.DtCategory;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
@@ -23,6 +26,7 @@ import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
+import uy.turismo.servidorcentral.logic.entities.Category;
 import uy.turismo.servidorcentral.logic.entities.Department;
 import uy.turismo.servidorcentral.logic.entities.Inscription;
 import uy.turismo.servidorcentral.logic.entities.Provider;
@@ -255,6 +259,7 @@ public class Controller implements IController {
 		DepartmentDAO departmentDao = new DepartmentDAOImpl();
 		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
 		UserDAO userDao = new UserDAOImpl(); 
+		CategoryDAO categoryDAO = new CategoryDAOImpl();
 		
 		Department department = departmentDao.findById(touristicActivityData
 				.getDepartment()
@@ -264,6 +269,9 @@ public class Controller implements IController {
 				.getProvider()
 				.getId());
 		
+		//List<Category> categories = categoryDAO.findAll();
+		
+		//pasar categorias
 		TouristicActivity activity = new TouristicActivity(
 				touristicActivityData.getId(),
 				touristicActivityData.getName(),
@@ -273,7 +281,7 @@ public class Controller implements IController {
 				touristicActivityData.getUploadDate(),
 				touristicActivityData.getCity(),
 				provider,
-				department
+				department,null 
 				);
 		try {
 			activityDao.create(activity);
@@ -427,5 +435,24 @@ public class Controller implements IController {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	@Override
+	public void registerCategory(DtCategory categoryData) {
+		// TODO Auto-generated method stub
+		
+		TouristicActivityDAO activityDAO = new TouristicActivityDAOImpl();
+		//como pasar actividades.
+		
+		CategoryDAO categoryDAO = new CategoryDAOImpl();
+		
+		Category category = new Category(null, categoryData.getName(), null);
+		
+		try {
+			categoryDAO.create(category);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	
 	}
 }
