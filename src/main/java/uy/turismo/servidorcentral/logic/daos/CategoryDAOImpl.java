@@ -1,5 +1,6 @@
 package uy.turismo.servidorcentral.logic.daos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -10,6 +11,8 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import uy.turismo.servidorcentral.logic.entities.Category;
+import uy.turismo.servidorcentral.logic.entities.Department;
+import uy.turismo.servidorcentral.logic.entities.TouristicBundle;
 import uy.turismo.servidorcentral.logic.util.HibernateUtil;
 
 public class CategoryDAOImpl implements CategoryDAO{
@@ -62,6 +65,35 @@ public class CategoryDAOImpl implements CategoryDAO{
 					"\nError: " + e.getMessage());
 		}
 		session.close();
+	}
+
+	@Override
+	public List<Category> findManyById(ArrayList<Long> id) {
+		Session session = HibernateUtil
+				.getSessionFactory()
+				.openSession();
+		
+		ArrayList<Category> categories = new ArrayList<>();
+		
+		for (int i = 0; i < id.size(); i++) {
+		categories.add(session.find(Category.class, id.get(i)));	
+		}
+		
+		session.close();
+		return categories;
+	}
+
+	
+	@Override
+	public Category findById(Long id) {
+		Session session = HibernateUtil
+				.getSessionFactory()
+				.openSession();
+		Category category = session
+				.find(Category.class, id);
+		
+		session.close();
+		return category;
 	}
 
 }

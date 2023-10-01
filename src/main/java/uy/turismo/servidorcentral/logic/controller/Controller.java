@@ -269,7 +269,16 @@ public class Controller implements IController {
 				.getProvider()
 				.getId());
 		
-		//List<Category> categories = categoryDAO.findAll();
+		//categorias seleccionadas
+		List<DtCategory> categoriesSelected = touristicActivityData.getCategories();
+		
+		ArrayList<Long> categories = new ArrayList<>();
+		
+		for (int i = 0; i < categoriesSelected.size(); i++) {
+			categories.add(categoriesSelected.get(i).getId());
+		}
+		
+		List<Category> categoriesSelectedList = categoryDAO.findManyById(categories);
 		
 		//pasar categorias
 		TouristicActivity activity = new TouristicActivity(
@@ -281,7 +290,7 @@ public class Controller implements IController {
 				touristicActivityData.getUploadDate(),
 				touristicActivityData.getCity(),
 				provider,
-				department,null 
+				department,categoriesSelectedList
 				);
 		try {
 			activityDao.create(activity);
@@ -454,5 +463,29 @@ public class Controller implements IController {
 			System.out.println(e.getMessage());
 		}
 	
+	}
+
+	@Override
+	public List<DtCategory> getListCategory() {
+		CategoryDAO  categoryDAO = new CategoryDAOImpl();
+		
+		List<Category> categories = categoryDAO.findAll();
+		
+		List<DtCategory> categoriesDt = new ArrayList<DtCategory>();
+		
+		for (Category cat : categories) {
+			categoriesDt.add(cat.getShortDt());
+		}
+		
+		return categoriesDt;
+	}
+
+	@Override
+	public DtCategory getCategory(Long categoryId) {
+		CategoryDAO categoryDAO = new CategoryDAOImpl();
+		Category category = categoryDAO.findById(categoryId);
+		
+		DtCategory categoryData = category.getCategoryDt();
+		return categoryData;
 	}
 }

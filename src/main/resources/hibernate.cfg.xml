@@ -31,7 +31,7 @@
     	<mapping class="uy.turismo.servidorcentral.logic.entities.TouristicDeparture"/>
     	<mapping class="uy.turismo.servidorcentral.logic.entities.Purchase"/>
     	<mapping class="uy.turismo.servidorcentral.logic.entities.Inscription"/>
-    	
+    	<mapping class="uy.turismo.servidorcentral.logic.entities.Category"/>
     	
     </session-factory>
 </hibernate-configuration>

@@ -142,4 +142,12 @@ public interface IController {
 	 */
 	public void registerCategory(DtCategory category);
 	
+	/**
+	 * 
+	 * @return devuelve una  lista  de categorias con nombre e id.
+	 */
+	public List<DtCategory>  getListCategory();
+	
+	public DtCategory getCategory(Long categoryId);
+	
 }
