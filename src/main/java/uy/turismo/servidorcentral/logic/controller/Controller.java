@@ -474,7 +474,7 @@ public class Controller implements IController {
 		List<DtCategory> categoriesDt = new ArrayList<DtCategory>();
 		
 		for (Category cat : categories) {
-			categoriesDt.add(cat.getShortDt());
+			categoriesDt.add(cat.getCategoryDt());
 		}
 		
 		return categoriesDt;
