@@ -128,7 +128,8 @@ public class Controller implements IController {
 						providerData.getLastName(),
 						providerData.getBirthDate(),
 						providerData.getDescription(),
-						providerData.getUrl()
+						providerData.getUrl(),
+						providerData.getPassword()
 					);
 			try {
 				userDao.update(provider);
@@ -147,7 +148,8 @@ public class Controller implements IController {
 						touristData.getEmail(),
 						touristData.getLastName(),
 						touristData.getBirthDate(),
-						touristData.getNationality()
+						touristData.getNationality(),
+						touristData.getPassword()
 					);
 			try {
 				userDao.update(tourist);
@@ -169,7 +171,7 @@ public class Controller implements IController {
 			
 			
 			Provider provUsr = new Provider(null, provData.getName(), provData.getNickname(), provData.getEmail(),
-					provData.getLastName(), provData.getBirthDate(), provData.getDescription(), provData.getUrl());
+					provData.getLastName(), provData.getBirthDate(), provData.getDescription(), provData.getUrl(), provData.getPassword());
 			
 			try {
 				usrDAO.create(provUsr);
@@ -181,7 +183,7 @@ public class Controller implements IController {
 			DtTourist touristData = (DtTourist) usrData;
 			
 			Tourist touristUsr = new Tourist(null, touristData.getName(), touristData.getNickname(), touristData.getEmail(),
-				touristData.getLastName(), touristData.getBirthDate(), touristData.getNationality());
+				touristData.getLastName(), touristData.getBirthDate(), touristData.getNationality(), touristData.getPassword());
 
 			try {
 				usrDAO.create(touristUsr);

@@ -8,6 +8,7 @@ public abstract class DtUser extends DtBaseEntity {
 	private String email;
 	private String lastName;
 	private LocalDate birthDate;
+	private String password;
 	
 	public DtUser() {
 		
@@ -21,12 +22,13 @@ public abstract class DtUser extends DtBaseEntity {
 	}
 
 
-	public DtUser(Long id, String name, String nickname, String email, String lastName, LocalDate birthDate) {
+	public DtUser(Long id, String name, String nickname, String email, String lastName, LocalDate birthDate, String password) {
 		super(id, name);
 		this.nickname = nickname;
 		this.email = email;
 		this.lastName = lastName;
 		this.birthDate = birthDate;
+		this.password = password;
 	}
 
 	public String getNickname() {
@@ -44,7 +46,9 @@ public abstract class DtUser extends DtBaseEntity {
 	public LocalDate getBirthDate() {
 		return birthDate;
 	} 
-	
+	public String getPassword() {
+		return password;
+	}
 	
 	
 	

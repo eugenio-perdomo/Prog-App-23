@@ -13,8 +13,8 @@ public class DtProvider extends DtUser {
 			String nickname, String email,
 			String lastName, LocalDate birthDate,
 			String url, String description,
-			List<DtTouristicActivity> touristicActivities) {
-		super(id, name, nickname, email, lastName, birthDate);
+			List<DtTouristicActivity> touristicActivities, String password) {
+		super(id, name, nickname, email, lastName, birthDate, password);
 		this.url = url;
 		this.description = description;
 		this.touristicActivities = touristicActivities;

@@ -32,8 +32,8 @@ public class Provider extends User {
 
 	public Provider(Long id, String name, String nickname,
 			String email, String lastName, LocalDate birthDate,
-			String description, String webSite) {
-		super(id, name, nickname, email, lastName, birthDate);
+			String description, String webSite, String password) {
+		super(id, name, nickname, email, lastName, birthDate, password);
 		this.description = description;
 		this.webSite = webSite;
 		this.InitLists();
@@ -89,7 +89,8 @@ public class Provider extends User {
 				this.birthDate,
 				this.webSite,
 				this.description,
-				listDtActivities);	
+				listDtActivities,
+				this.password);	
 		return DtOutput;
 	}
 
