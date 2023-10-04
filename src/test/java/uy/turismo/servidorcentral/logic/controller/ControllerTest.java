@@ -26,6 +26,7 @@ import uy.turismo.servidorcentral.logic.entities.Provider;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
 import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
 import uy.turismo.servidorcentral.logic.util.HibernateUtil;
+import uy.turismos.servidorcentral.logic.enums.ActivityState;
 
 public class ControllerTest {
 
@@ -46,7 +47,7 @@ public class ControllerTest {
 		DtDepartment department = departments.stream()
 			.filter(d -> d.getName().equals("Rocha"))
 			.findFirst()
-			.get();	
+			.get();
 		
 
 		DtProvider provider = (DtProvider) controller.getUserData(11L);
@@ -57,6 +58,7 @@ public class ControllerTest {
 		Double costPerTourist = 120d;
 		LocalDate date = LocalDate.now();
 		String city = "Rocha";
+		ActivityState state = ActivityState.ADDED;
 		
 		
 		List<DtCategory> categories = new ArrayList<DtCategory>();
@@ -65,7 +67,7 @@ public class ControllerTest {
 		
 		categories.add(catTest);
 		
-		DtTouristicActivity activityTest = new DtTouristicActivity(null, name, description, duration, costPerTourist, city, date, provider, department, null,
+		DtTouristicActivity activityTest = new DtTouristicActivity(null, name, description, duration, costPerTourist, city,state, date, provider, department, null,
 				null, categories);
 		
 		controller.registeTouristicActivity(activityTest);

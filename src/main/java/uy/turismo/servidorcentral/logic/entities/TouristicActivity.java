@@ -24,6 +24,7 @@ import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
+import uy.turismos.servidorcentral.logic.enums.ActivityState;
 
 
 @Entity(name = "Touristic_Activity")
@@ -50,6 +51,8 @@ public class TouristicActivity implements Serializable{
 	@Column(length = 50)
 	private String city;
 	
+	private ActivityState state;
+	
 	@ManyToOne
 	@JoinColumn(name = "provider")
 	private Provider provider;	
@@ -63,6 +66,8 @@ public class TouristicActivity implements Serializable{
 	
 	@OneToMany(mappedBy = "touristicActivity", fetch = FetchType.EAGER)
 	private List<TouristicDeparture> touristicDepartures;
+	
+	
 	
 	
 	//codigo agregado:LT
@@ -85,11 +90,13 @@ public class TouristicActivity implements Serializable{
 			String description,
 			Double duration,
 			Double costPerTourist,
+			String city,
+			ActivityState state,
 			LocalDate uploadDate,
-			String city, 
 			Provider provider, 
 			Department department,
 			List<Category> categories) {
+		
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -97,6 +104,7 @@ public class TouristicActivity implements Serializable{
 		this.costPerTourist = costPerTourist;
 		this.uploadDate = uploadDate;
 		this.city = city;
+		this.state = state;
 		this.provider = provider;
 		this.department = department;
 		this.InitLists();
@@ -248,6 +256,7 @@ public class TouristicActivity implements Serializable{
 				this.duration,
 				this.costPerTourist,
 				this.city,
+				this.state,
 				this.uploadDate,
 				(DtProvider) this.provider.getShortDt(),
 				this.department.getShortDt(),

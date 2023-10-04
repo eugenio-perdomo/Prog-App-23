@@ -3,6 +3,8 @@ package uy.turismo.servidorcentral.logic.datatypes;
 import java.time.LocalDate;
 import java.util.List;
 
+import uy.turismos.servidorcentral.logic.enums.ActivityState;
+
 
 public class DtTouristicActivity extends DtBaseEntity {
 
@@ -10,6 +12,7 @@ public class DtTouristicActivity extends DtBaseEntity {
 	private Double duration;
 	private Double costPerTourist;
 	private String city;
+	private ActivityState state;
 	private LocalDate uploadDate;
 	private DtProvider provider;
 	private DtDepartment department;
@@ -34,14 +37,27 @@ public class DtTouristicActivity extends DtBaseEntity {
 	
 	
 	//codigo agregado: LT
-	public DtTouristicActivity(Long id, String name, String description, Double duration, Double costPerTourist, String city,
-			LocalDate uploadDate, DtProvider provider, DtDepartment department, List<DtTouristicDeparture> departures,
-			List<DtTouristicBundle> bundles, List<DtCategory> categories) {
+	public DtTouristicActivity(
+			Long id,
+			String name,
+			String description,
+			Double duration,
+			Double costPerTourist,
+			String city,
+			ActivityState state,
+			LocalDate uploadDate,
+			DtProvider provider,
+			DtDepartment department,
+			List<DtTouristicDeparture> departures,
+			List<DtTouristicBundle> bundles,
+			List<DtCategory> categories) {
+		
 		super(id, name);
 		this.description = description;
 		this.duration = duration;
 		this.costPerTourist = costPerTourist;
 		this.city = city;
+		this.state = state;
 		this.uploadDate = uploadDate;
 		this.provider = provider;
 		this.department = department;
@@ -91,6 +107,10 @@ public class DtTouristicActivity extends DtBaseEntity {
 	//codigo agregado: LT
 	public List<DtCategory> getCategories(){
 		return categories;
+	}
+	
+	public ActivityState getState() {
+		return state;
 	}
 	
 }

@@ -50,7 +50,7 @@ public class TouristicBundle implements Serializable  {
 	
 	//preguntar a los pibe, ambos, lo del mappedBy, y si está bien en general
 	//y como testearlo obvio xD
-	@OneToMany(mappedBy = "touristic_bundle", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "touristicBundle", fetch = FetchType.EAGER)
 	private List<Purchase> purchases;
 	
 	//Constructors

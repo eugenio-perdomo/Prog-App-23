@@ -287,10 +287,12 @@ public class Controller implements IController {
 				touristicActivityData.getDescription(),
 				touristicActivityData.getDuration(),
 				touristicActivityData.getCostPerTourist(),
-				touristicActivityData.getUploadDate(),
 				touristicActivityData.getCity(),
+				touristicActivityData.getState(),
+				touristicActivityData.getUploadDate(),
 				provider,
-				department,categoriesSelectedList
+				department,
+				categoriesSelectedList
 				);
 		try {
 			activityDao.create(activity);
