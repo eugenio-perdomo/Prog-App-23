@@ -34,8 +34,8 @@ public class Tourist extends User {
 
 	public Tourist(Long id, String name, 
 			String nickname, String email, String lastName, 
-			LocalDate birthDate, String nationality) {
-		super(id, name, nickname, email, lastName, birthDate);
+			LocalDate birthDate, String nationality, String password) {
+		super(id, name, nickname, email, lastName, birthDate, password);
 		this.nationality = nationality;
 		this.initLists();
 		// TODO Auto-generated constructor stub
@@ -79,8 +79,8 @@ public class Tourist extends User {
 				this.lastName,
 				this.birthDate,
 				this.nationality,
-				listDepartures
-				);
+				listDepartures,
+				this.password);
 		
 		return dtTourist;
 	}

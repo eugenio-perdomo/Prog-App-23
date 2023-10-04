@@ -26,7 +26,7 @@ public abstract class User implements Serializable  {
 
 	@Column(unique = true, length = 30)
 	protected String nickname;
-
+		
 	@Column(unique = true, length = 50)
 	protected String email;
 
@@ -36,18 +36,22 @@ public abstract class User implements Serializable  {
 	@Column(name = "birth_date")
 	protected LocalDate birthDate;
 
+	@Column(length = 100)
+	protected String password;
+	
 	// Constructor
 
 	public User() {
 	}
 
-	public User(Long id, String name, String nickname, String email, String lastName, LocalDate birthDate) {
+	public User(Long id, String name, String nickname, String email, String lastName, LocalDate birthDate, String password) {
 		this.id = id;
 		this.name = name;
 		this.nickname = nickname;
 		this.email = email;
 		this.lastName = lastName;
 		this.birthDate = birthDate;
+		this.password = password;
 	}
 
 	// Getters and Setter
@@ -81,6 +85,14 @@ public abstract class User implements Serializable  {
 
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	//Methods
