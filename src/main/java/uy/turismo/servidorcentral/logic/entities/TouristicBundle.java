@@ -15,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
@@ -46,6 +47,11 @@ public class TouristicBundle implements Serializable  {
 			joinColumns = @JoinColumn(name = "bundle"),
 			inverseJoinColumns = @JoinColumn(name = "activity"))
 	private List<TouristicActivity> touristicActivities;
+	
+	//preguntar a los pibe, ambos, lo del mappedBy, y si está bien en general
+	//y como testearlo obvio xD
+	@OneToMany(mappedBy = "touristic_bundle", fetch = FetchType.EAGER)
+	private List<Purchase> purchases;
 	
 	//Constructors
 	public TouristicBundle() {

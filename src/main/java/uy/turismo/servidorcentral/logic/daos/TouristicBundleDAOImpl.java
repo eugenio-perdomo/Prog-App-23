@@ -95,8 +95,37 @@ public class TouristicBundleDAOImpl implements TouristicBundleDAO {
 					"\nError: " + e.getMessage());
 		}
 		session.close();
-
-
+	}
+	
+	//preguntar si esto está, con tilde, bien
+	@Override
+	public List<TouristicBundle> findPurchaseless() {
+		Session session = HibernateUtil
+				.getSessionFactory()
+				.openSession();
+		
+		EntityManager em = session
+				.getEntityManagerFactory()
+				.createEntityManager();  
+		
+		CriteriaBuilder cb = em
+				.getCriteriaBuilder();
+		
+		CriteriaQuery<TouristicBundle> cq = cb.createQuery(TouristicBundle.class);
+		
+		Root<TouristicBundle> entityRoot = cq.from(TouristicBundle.class);
+		entityRoot.alias("touristic_bundle");
+		
+		cq.select(entityRoot).where(cb.isNull(entityRoot.get("purchases")));
+		
+		List<TouristicBundle> bundles = em
+				.createQuery(cq)
+				.getResultList();
+		
+		em.close();
+		session.close();
+		
+		return bundles;
 	}
 
 }

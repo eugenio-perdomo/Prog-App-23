@@ -22,6 +22,11 @@ public class Tourist extends User {
 	@OneToMany(mappedBy = "tourist", fetch = FetchType.EAGER)
 	private List<Inscription> inscriptions;
 
+	//preguntar a los pibe
+	@OneToMany(mappedBy = "tourist", fetch = FetchType.EAGER)
+	private List<Purchase> purchases;
+
+	
 	//Constructors
 	public Tourist() {
 
