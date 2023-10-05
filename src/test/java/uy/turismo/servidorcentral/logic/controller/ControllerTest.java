@@ -217,4 +217,19 @@ public class ControllerTest {
 		System.out.println(yellow + "Info: DONE" + yellow);
 		
 	}
+	
+	@Test
+	public void changeActivityStateTest() {
+		IController controller = ControllerFactory.getIController();
+		String yellow = "\u001B[33m";
+		
+		DtTouristicActivity activity = controller.getTouristicActivityData(1L);
+		ActivityState state = ActivityState.ADDED;
+		try {
+			controller.changeActivityState(1L,state);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

@@ -35,6 +35,7 @@ import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
 import uy.turismo.servidorcentral.logic.entities.TouristicBundle;
 import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.User;
+import uy.turismos.servidorcentral.logic.enums.ActivityState;
 
 public class Controller implements IController {
 	
@@ -491,5 +492,21 @@ public class Controller implements IController {
 		
 		DtCategory categoryData = category.getCategoryDt();
 		return categoryData;
+	}
+
+	
+	@Override
+	public void changeActivityState(Long id, ActivityState state) throws Exception {
+		
+		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
+		TouristicActivity touristicActivity = activityDao.findById(id);
+		
+		touristicActivity.setActivityState(state);
+		
+		try {
+			activityDao.update(touristicActivity);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

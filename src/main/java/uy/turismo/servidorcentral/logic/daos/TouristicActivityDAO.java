@@ -29,6 +29,8 @@ public interface TouristicActivityDAO {
 	 */
 	
 	public List<TouristicActivity> findAll();
+
+	void update(TouristicActivity activity) throws Exception;
 	
 	/**
 	 * Devuelve una lista de las actividades de dicho proveedor
