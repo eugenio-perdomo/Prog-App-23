@@ -21,8 +21,11 @@ import uy.turismo.servidorcentral.logic.daos.TouristicBundleDAO;
 import uy.turismo.servidorcentral.logic.daos.TouristicBundleDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.TouristicDepartureDAO;
 import uy.turismo.servidorcentral.logic.daos.TouristicDepartureDAOImpl;
+import uy.turismo.servidorcentral.logic.daos.CategoryDAO;
+import uy.turismo.servidorcentral.logic.daos.CategoryDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.UserDAO;
 import uy.turismo.servidorcentral.logic.daos.UserDAOImpl;
+import uy.turismo.servidorcentral.logic.datatypes.DtCategory;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
@@ -31,6 +34,7 @@ import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
+import uy.turismo.servidorcentral.logic.entities.Category;
 import uy.turismo.servidorcentral.logic.entities.Department;
 import uy.turismo.servidorcentral.logic.entities.Inscription;
 import uy.turismo.servidorcentral.logic.entities.Provider;
@@ -134,8 +138,10 @@ public class Controller implements IController {
 						providerData.getLastName(),
 						providerData.getBirthDate(),
 						providerData.getDescription(),
-						providerData.getUrl()
+						providerData.getUrl(),
+						providerData.getPassword()
 					);
+			
 			if(providerData.getImage() != null) {
 				provider.setImage(providerData.getImage());
 			}
@@ -158,8 +164,10 @@ public class Controller implements IController {
 						touristData.getEmail(),
 						touristData.getLastName(),
 						touristData.getBirthDate(),
-						touristData.getNationality()
+						touristData.getNationality(),
+						touristData.getPassword()
 					);
+			
 			if(touristData.getImage() != null) {
 				tourist.setImage(touristData.getImage());
 			}
@@ -191,7 +199,8 @@ public class Controller implements IController {
 					provData.getLastName(), 
 					provData.getBirthDate(),
 					provData.getDescription(), 
-					provData.getUrl());
+					provData.getUrl(), 
+					provData.getPassword());
 			
 			if(provData.getImage() != null) {
 				provUsr.setImage(provData.getImage());
@@ -214,12 +223,13 @@ public class Controller implements IController {
 					touristData.getEmail(),
 					touristData.getLastName(), 
 					touristData.getBirthDate(),
-					touristData.getNationality());
+					touristData.getNationality(),
+					touristData.getPassword());
 			
 			if(touristData.getImage() != null) {
 				touristUsr.setImage(touristData.getImage());
 			}
-
+			
 			try {
 				usrDAO.create(touristUsr);
 			} catch (Exception e) {
@@ -297,6 +307,7 @@ public class Controller implements IController {
 		DepartmentDAO departmentDao = new DepartmentDAOImpl();
 		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
 		UserDAO userDao = new UserDAOImpl(); 
+		CategoryDAO categoryDAO = new CategoryDAOImpl();
 		
 		Department department = departmentDao.findById(touristicActivityData
 				.getDepartment()
@@ -306,16 +317,30 @@ public class Controller implements IController {
 				.getProvider()
 				.getId());
 		
+		//categorias seleccionadas
+		List<DtCategory> categoriesSelected = touristicActivityData.getCategories();
+		
+		ArrayList<Long> categories = new ArrayList<>();
+		
+		for (int i = 0; i < categoriesSelected.size(); i++) {
+			categories.add(categoriesSelected.get(i).getId());
+		}
+		
+		List<Category> categoriesSelectedList = categoryDAO.findManyById(categories);
+		
+		//pasar categorias
 		TouristicActivity activity = new TouristicActivity(
 				touristicActivityData.getId(),
 				touristicActivityData.getName(),
 				touristicActivityData.getDescription(),
 				touristicActivityData.getDuration(),
 				touristicActivityData.getCostPerTourist(),
-				touristicActivityData.getUploadDate(),
 				touristicActivityData.getCity(),
+				touristicActivityData.getState(),
+				touristicActivityData.getUploadDate(),
 				provider,
-				department
+				department,
+				categoriesSelectedList
 				);
 		
 		if(touristicActivityData.getImage() != null) {
@@ -482,5 +507,48 @@ public class Controller implements IController {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	@Override
+	public void registerCategory(DtCategory categoryData) {
+		// TODO Auto-generated method stub
+		
+		TouristicActivityDAO activityDAO = new TouristicActivityDAOImpl();
+		//como pasar actividades.
+		
+		CategoryDAO categoryDAO = new CategoryDAOImpl();
+		
+		Category category = new Category(null, categoryData.getName(), null);
+		
+		try {
+			categoryDAO.create(category);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	
+	}
+
+	@Override
+	public List<DtCategory> getListCategory() {
+		CategoryDAO  categoryDAO = new CategoryDAOImpl();
+		
+		List<Category> categories = categoryDAO.findAll();
+		
+		List<DtCategory> categoriesDt = new ArrayList<DtCategory>();
+		
+		for (Category cat : categories) {
+			categoriesDt.add(cat.getCategoryDt());
+		}
+		
+		return categoriesDt;
+	}
+
+	@Override
+	public DtCategory getCategory(Long categoryId) {
+		CategoryDAO categoryDAO = new CategoryDAOImpl();
+		Category category = categoryDAO.findById(categoryId);
+		
+		DtCategory categoryData = category.getCategoryDt();
+		return categoryData;
 	}
 }

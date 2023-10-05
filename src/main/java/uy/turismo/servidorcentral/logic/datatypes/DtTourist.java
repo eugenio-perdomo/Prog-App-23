@@ -23,8 +23,8 @@ public class DtTourist extends DtUser {
 	public DtTourist(Long id, String name, String nickname,
 			String email, String lastName, LocalDate birthDate,
 			BufferedImage image, String nationality,
-			List<DtTouristicDeparture> departures) {
-		super(id, name, nickname, email, lastName, birthDate, image);
+			List<DtTouristicDeparture> departures, String password) {
+		super(id, name, nickname, email, lastName, birthDate, image, password);
 		this.nationality = nationality;
 		this.departures = departures;
 		// TODO Auto-generated constructor stub
@@ -37,7 +37,5 @@ public class DtTourist extends DtUser {
 	public List<DtTouristicDeparture> getDepartures() {
 		return departures;
 	}
-	
-	
 
 }

@@ -22,15 +22,20 @@ public class Tourist extends User {
 	@OneToMany(mappedBy = "tourist", fetch = FetchType.EAGER)
 	private List<Inscription> inscriptions;
 
+	//preguntar a los pibe
+	@OneToMany(mappedBy = "tourist", fetch = FetchType.EAGER)
+	private List<Purchase> purchases;
+
+	
 	//Constructors
 	public Tourist() {
 
 	}
 
-	public Tourist(Long id, String name, 
-			String nickname, String email, 
-			String lastName, LocalDate birthDate, String nationality) {
-		super(id, name, nickname, email, lastName, birthDate);
+	public Tourist(Long id, String name,
+			String nickname, String email, String lastName, 
+			LocalDate birthDate, String nationality, String password) {
+		super(id, name, nickname, email, lastName, birthDate, password);
 		this.nationality = nationality;
 		this.initLists();
 		// TODO Auto-generated constructor stub
@@ -75,8 +80,8 @@ public class Tourist extends User {
 				this.birthDate,
 				this.getImage(),
 				this.nationality,
-				listDepartures
-				);
+				listDepartures,
+				this.password);
 		
 		return dtTourist;
 	}

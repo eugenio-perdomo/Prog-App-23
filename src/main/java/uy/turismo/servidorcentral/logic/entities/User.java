@@ -33,7 +33,7 @@ public abstract class User implements Serializable  {
 
 	@Column(unique = true, length = 30)
 	protected String nickname;
-
+		
 	@Column(unique = true, length = 50)
 	protected String email;
 
@@ -46,18 +46,21 @@ public abstract class User implements Serializable  {
 	@Column(length = 34)
 	protected String image;
 
+	@Column(length = 100)
+	protected String password;
+	
 	// Constructor
 
 	public User() {
 	}
-
 	public User(
 			Long id,
 			String name,
 			String nickname,
 			String email,
 			String lastName,
-			LocalDate birthDate) {
+			LocalDate birthDate,
+			String password) {
 		this.id = id;
 		this.name = name;
 		this.nickname = nickname;
@@ -65,6 +68,7 @@ public abstract class User implements Serializable  {
 		this.lastName = lastName;
 		this.birthDate = birthDate;
 		this.image = null;
+		this.password = password;
 	}
 	
 	
@@ -137,7 +141,16 @@ public abstract class User implements Serializable  {
 		
 		return image;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	
+	//Methods
 	
 	
 	

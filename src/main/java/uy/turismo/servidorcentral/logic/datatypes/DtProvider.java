@@ -17,8 +17,9 @@ public class DtProvider extends DtUser {
 			String lastName, LocalDate birthDate,
 			BufferedImage image,
 			String url, String description,
-			List<DtTouristicActivity> touristicActivities) {
-		super(id, name, nickname, email, lastName, birthDate, image);
+			List<DtTouristicActivity> touristicActivities, String password) {
+		super(id, name, nickname, email, lastName, birthDate, image, password);
+
 		this.url = url;
 		this.description = description;
 		this.touristicActivities = touristicActivities;

@@ -12,6 +12,7 @@ public abstract class DtUser extends DtBaseEntity {
 	private String lastName;
 	private LocalDate birthDate;
 	private BufferedImage image;
+	private String password;
 	
 	public DtUser() {
 		
@@ -24,20 +25,20 @@ public abstract class DtUser extends DtBaseEntity {
 		this.email = email;
 	}
 
-
 	public DtUser(Long id, 
 			String name, 
 			String nickname, 
 			String email, 
 			String lastName, 
 			LocalDate birthDate,
-			BufferedImage image) {
-		super(id, name);
+			BufferedImage image,
+			String password) {
 		this.nickname = nickname;
 		this.email = email;
 		this.lastName = lastName;
 		this.birthDate = birthDate;
 		this.image = image;
+		this.password = password;
 	}
 
 	public String getNickname() {
@@ -59,7 +60,9 @@ public abstract class DtUser extends DtBaseEntity {
 	public BufferedImage getImage() {
 		return image;
 	} 
-	
+	public String getPassword() {
+		return password;
+	}
 	
 	
 	

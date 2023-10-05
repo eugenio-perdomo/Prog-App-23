@@ -8,6 +8,9 @@ import java.util.List;
 import org.hibernate.Session;
 import org.junit.jupiter.api.Test;
 
+import uy.turismo.servidorcentral.logic.daos.CategoryDAO;
+import uy.turismo.servidorcentral.logic.daos.CategoryDAOImpl;
+import uy.turismo.servidorcentral.logic.datatypes.DtCategory;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
@@ -15,9 +18,8 @@ import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
-import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
-import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
 import uy.turismo.servidorcentral.logic.util.HibernateUtil;
+import uy.turismos.servidorcentral.logic.enums.ActivityState;
 
 public class ControllerTest {
 
@@ -31,11 +33,50 @@ public class ControllerTest {
 	public void registerActivityTest() {
 		IController controller = ControllerFactory.getIController();
 		
+		CategoryDAO categoryDAO = new CategoryDAOImpl();
+		
 		ArrayList<DtDepartment> departments = (ArrayList<DtDepartment>) controller.getListDepartment(false);
+		
 		DtDepartment department = departments.stream()
-			.filter(d -> d.getName().equals("Maldonado"))
+			.filter(d -> d.getName().equals("Rocha"))
 			.findFirst()
-			.get();		
+			.get();
+		
+
+		DtProvider provider = (DtProvider) controller.getUserData(11L);
+		
+		String name = "volar";
+		String description = "algo ekisde";
+		Double duration = 1d;
+		Double costPerTourist = 120d;
+		LocalDate date = LocalDate.now();
+		String city = "Rocha";
+		ActivityState state = ActivityState.ADDED;
+		
+		
+		List<DtCategory> categories = new ArrayList<DtCategory>();
+		
+		DtCategory catTest = new DtCategory(1L, "Recorridos", null);
+		
+		categories.add(catTest);
+		
+		DtTouristicActivity activityTest = new DtTouristicActivity(
+				null, 
+				name, 
+				description, 
+				duration, 
+				costPerTourist, 
+				city,
+				null,
+				state, 
+				date, 
+				provider, 
+				department, 
+				null,
+				null, 
+				categories);
+		
+		controller.registeTouristicActivity(activityTest);
 	}
 	
 	
@@ -168,5 +209,19 @@ public class ControllerTest {
 		
 	}
 
-	
+	@Test
+	public void registerCategoryTest() {
+		
+		IController controller = ControllerFactory.getIController();
+		String yellow = "\u001B[33m";
+		
+		
+		
+		DtCategory categoryTest = new DtCategory(null, "Playas" , null);
+		
+		controller.registerCategory(categoryTest);
+		
+		System.out.println(yellow + "Info: DONE" + yellow);
+		
+	}
 }

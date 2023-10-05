@@ -57,7 +57,9 @@ public class TouristicBundle implements Serializable  {
 			inverseJoinColumns = @JoinColumn(name = "activity"))
 	private List<TouristicActivity> touristicActivities;
 	
-	@OneToMany(mappedBy = "touristicBundle", fetch =  FetchType.EAGER)
+	//preguntar a los pibe, ambos, lo del mappedBy, y si está bien en general
+	//y como testearlo obvio xD
+	@OneToMany(mappedBy = "touristicBundle", fetch = FetchType.EAGER)
 	private List<Purchase> purchases;
 	
 	//Constructors
@@ -192,9 +194,11 @@ public class TouristicBundle implements Serializable  {
 		
 		List<DtTouristicActivity> activities = new ArrayList<DtTouristicActivity>();
 		
+		//Modifico codigo : LT : cambio shortDT por dt Entero, para dar categorias de actividades al paquete
+		
 		if(this.touristicActivities != null) {
 			for (int i = 0; i < this.touristicActivities.size(); i++) {
-				activities.add(touristicActivities.get(i).getShortDt());
+				activities.add(touristicActivities.get(i).getDt());
 			}
 			
 		}

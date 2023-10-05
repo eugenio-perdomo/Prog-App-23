@@ -33,4 +33,9 @@ public interface TouristicBundleDAO {
 	 */
 	public void update(TouristicBundle  bundle) throws Exception;
 	
+	
+	/**
+	 * @return Devuelve una lista con los paquetes turisticos que no han sido comprados registrados en la bd. 
+	 * */
+	public List<TouristicBundle> findPurchaseless();
 }
