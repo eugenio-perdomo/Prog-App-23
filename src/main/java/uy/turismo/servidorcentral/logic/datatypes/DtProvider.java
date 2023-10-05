@@ -1,5 +1,8 @@
 package uy.turismo.servidorcentral.logic.datatypes;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -12,9 +15,10 @@ public class DtProvider extends DtUser {
 	public DtProvider(Long id, String name,
 			String nickname, String email,
 			String lastName, LocalDate birthDate,
+			BufferedImage image,
 			String url, String description,
 			List<DtTouristicActivity> touristicActivities) {
-		super(id, name, nickname, email, lastName, birthDate);
+		super(id, name, nickname, email, lastName, birthDate, image);
 		this.url = url;
 		this.description = description;
 		this.touristicActivities = touristicActivities;

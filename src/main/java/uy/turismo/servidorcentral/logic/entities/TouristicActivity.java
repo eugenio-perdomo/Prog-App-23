@@ -1,10 +1,16 @@
 package uy.turismo.servidorcentral.logic.entities;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
+import javax.imageio.ImageIO;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -48,6 +54,9 @@ public class TouristicActivity implements Serializable{
 	@Column(length = 50)
 	private String city;
 	
+	@Column(length = 104)
+	private String image;
+	
 	@ManyToOne
 	@JoinColumn(name = "provider")
 	private Provider provider;	
@@ -85,6 +94,7 @@ public class TouristicActivity implements Serializable{
 		this.costPerTourist = costPerTourist;
 		this.uploadDate = uploadDate;
 		this.city = city;
+		this.image = null;
 		this.provider = provider;
 		this.department = department;
 		this.InitLists();
@@ -146,6 +156,51 @@ public class TouristicActivity implements Serializable{
 	public void setCity(String city) {
 		this.city = city;
 	}
+	
+	public BufferedImage getImage() {
+		
+		BufferedImage image = null;
+		
+		if(this.image == null) {
+			return image;
+		}
+		
+		InputStream inputStram = getClass().getClassLoader().getResourceAsStream("config.properties");
+		Properties properties = new Properties();
+		
+		try {
+			properties.load(inputStram);
+			String imagesDirPath = properties.getProperty("imagesDirPath").concat("Activity/");
+			File readFile = new File(imagesDirPath + this.image);
+			image = ImageIO.read(readFile);
+			
+		} catch (Exception e) {
+			System.err.println("Error al cargar la imagen: " + e.getMessage());
+		}
+		
+		return image;	
+	}
+	
+	public void setImage(BufferedImage image) {
+
+		String imageName = this.name + ".png";
+		InputStream inputStram = getClass().getClassLoader().getResourceAsStream("config.properties");
+		Properties properties = new Properties();
+		
+		try {
+			properties.load(inputStram);
+			String imagesDirPath = properties.getProperty("imagesDirPath").concat("Activity/");
+			File saveFile = new File(imagesDirPath + imageName);
+			ImageIO.write(image, "png", saveFile);
+			
+		} catch (Exception e) {
+			System.err.println("Error al guardar la imagen: " + e.getMessage());
+		}finally {
+			this.image = imageName;
+		}
+		
+	}
+	
 	public Provider getProvider() {
 		return provider;
 	}
@@ -213,6 +268,7 @@ public class TouristicActivity implements Serializable{
 				this.duration,
 				this.costPerTourist,
 				this.city,
+				this.getImage(),
 				this.uploadDate,
 				(DtProvider) this.provider.getShortDt(),
 				this.department.getShortDt(),

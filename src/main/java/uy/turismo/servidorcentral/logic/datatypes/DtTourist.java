@@ -1,5 +1,8 @@
 package uy.turismo.servidorcentral.logic.datatypes;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -19,9 +22,9 @@ public class DtTourist extends DtUser {
 
 	public DtTourist(Long id, String name, String nickname,
 			String email, String lastName, LocalDate birthDate,
-			String nationality,
+			BufferedImage image, String nationality,
 			List<DtTouristicDeparture> departures) {
-		super(id, name, nickname, email, lastName, birthDate);
+		super(id, name, nickname, email, lastName, birthDate, image);
 		this.nationality = nationality;
 		this.departures = departures;
 		// TODO Auto-generated constructor stub

@@ -1,7 +1,14 @@
 package uy.turismo.servidorcentral.logic.entities;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.time.LocalDate;
+import java.util.Properties;
+
+import javax.imageio.ImageIO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,19 +42,43 @@ public abstract class User implements Serializable  {
 
 	@Column(name = "birth_date")
 	protected LocalDate birthDate;
+	
+	@Column(length = 34)
+	protected String image;
 
 	// Constructor
 
 	public User() {
 	}
 
-	public User(Long id, String name, String nickname, String email, String lastName, LocalDate birthDate) {
+	public User(
+			Long id,
+			String name,
+			String nickname,
+			String email,
+			String lastName,
+			LocalDate birthDate) {
 		this.id = id;
 		this.name = name;
 		this.nickname = nickname;
 		this.email = email;
 		this.lastName = lastName;
 		this.birthDate = birthDate;
+		this.image = null;
+	}
+	
+	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	// Getters and Setter
@@ -83,8 +114,58 @@ public abstract class User implements Serializable  {
 		this.birthDate = birthDate;
 	}
 	
-	//Methods
+	public BufferedImage getImage() {
+		
+		BufferedImage image = null;
+		
+		if(this.image == null) {
+			return image;
+		}
+		
+		InputStream inputStram = getClass().getClassLoader().getResourceAsStream("config.properties");
+		Properties properties = new Properties();
+		
+		try {
+			properties.load(inputStram);
+			String imagesDirPath = properties.getProperty("imagesDirPath").concat("User/");
+			File readFile = new File(imagesDirPath + this.image);
+			image = ImageIO.read(readFile);
+			
+		} catch (Exception e) {
+			System.err.println("Error al cargar la imagen: " + e.getMessage());
+		}
+		
+		return image;
+	}
 	
+	
+	
+	
+	/**
+	 * Guarda una nueva imagen de usuario o modifica la existente
+	 * @param image
+	 */
+	public void setImage(BufferedImage image) {
+
+		String imageName = this.nickname + ".png";
+		InputStream inputStram = getClass().getClassLoader().getResourceAsStream("config.properties");
+		Properties properties = new Properties();
+		
+		try {
+			properties.load(inputStram);
+			String imagesDirPath = properties.getProperty("imagesDirPath").concat("User/");
+			File saveFile = new File(imagesDirPath + imageName);
+			ImageIO.write(image, "png", saveFile);
+		} catch (Exception e) {
+			System.err.println("Error al guardar la imagen: " + e.getMessage());
+		}finally {
+			this.image = imageName;
+		}
+		
+	}
+
+	//Methods
+
 	/**
 	 * Crea un DtUser con id, nickname y email del objeto y lo devuelve
 	 * @return 

@@ -31,13 +31,13 @@ public class Provider extends User {
 	}
 
 	public Provider(Long id, String name, String nickname,
-			String email, String lastName, LocalDate birthDate,
+			String email, String lastName, 
+			LocalDate birthDate,
 			String description, String webSite) {
 		super(id, name, nickname, email, lastName, birthDate);
 		this.description = description;
 		this.webSite = webSite;
 		this.InitLists();
-		// TODO Auto-generated constructor stub
 	}
 	
 	//Iniciadores	
@@ -87,6 +87,7 @@ public class Provider extends User {
 				this.email,
 				this.lastName,
 				this.birthDate,
+				this.getImage(),
 				this.webSite,
 				this.description,
 				listDtActivities);	

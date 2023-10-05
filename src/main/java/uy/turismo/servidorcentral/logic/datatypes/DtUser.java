@@ -1,5 +1,8 @@
 package uy.turismo.servidorcentral.logic.datatypes;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.InputStream;
 import java.time.LocalDate;
 
 public abstract class DtUser extends DtBaseEntity {
@@ -8,6 +11,7 @@ public abstract class DtUser extends DtBaseEntity {
 	private String email;
 	private String lastName;
 	private LocalDate birthDate;
+	private BufferedImage image;
 	
 	public DtUser() {
 		
@@ -21,12 +25,19 @@ public abstract class DtUser extends DtBaseEntity {
 	}
 
 
-	public DtUser(Long id, String name, String nickname, String email, String lastName, LocalDate birthDate) {
+	public DtUser(Long id, 
+			String name, 
+			String nickname, 
+			String email, 
+			String lastName, 
+			LocalDate birthDate,
+			BufferedImage image) {
 		super(id, name);
 		this.nickname = nickname;
 		this.email = email;
 		this.lastName = lastName;
 		this.birthDate = birthDate;
+		this.image = image;
 	}
 
 	public String getNickname() {
@@ -43,7 +54,13 @@ public abstract class DtUser extends DtBaseEntity {
 
 	public LocalDate getBirthDate() {
 		return birthDate;
+	}
+
+	public BufferedImage getImage() {
+		return image;
 	} 
+	
+	
 	
 	
 	

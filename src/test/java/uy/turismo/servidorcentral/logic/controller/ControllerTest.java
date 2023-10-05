@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.hibernate.Session;
 import org.junit.jupiter.api.Test;
@@ -25,7 +24,7 @@ public class ControllerTest {
 	@Test
 	public void initDataBase() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		session.close();
+		session.close();	
 	}
 	
 	@Test
@@ -76,6 +75,7 @@ public class ControllerTest {
 				LocalDate.now(),
 				LocalDateTime.of(2023, 10, 17, 14, 0),
 				"Sociedad Agropecuaria de Rocha",
+				null,
 				activity,
 				null
 				);

@@ -1,5 +1,6 @@
 package uy.turismo.servidorcentral.logic.datatypes;
 
+import java.awt.image.BufferedImage;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class DtTouristicActivity extends DtBaseEntity {
 	private Double duration;
 	private Double costPerTourist;
 	private String city;
+	private BufferedImage image;
 	private LocalDate uploadDate;
 	private DtProvider provider;
 	private DtDepartment department;
@@ -33,13 +35,14 @@ public class DtTouristicActivity extends DtBaseEntity {
 	
 	
 	public DtTouristicActivity(Long id, String name, String description, Double duration, Double costPerTourist, String city,
-			LocalDate uploadDate, DtProvider provider, DtDepartment department, List<DtTouristicDeparture> departures,
+			BufferedImage image, LocalDate uploadDate, DtProvider provider, DtDepartment department, List<DtTouristicDeparture> departures,
 			List<DtTouristicBundle> bundles) {
 		super(id, name);
 		this.description = description;
 		this.duration = duration;
 		this.costPerTourist = costPerTourist;
 		this.city = city;
+		this.image = image;
 		this.uploadDate = uploadDate;
 		this.provider = provider;
 		this.department = department;
@@ -61,6 +64,11 @@ public class DtTouristicActivity extends DtBaseEntity {
 
 	public String getCity() {
 		return city;
+	}
+	
+	
+	public BufferedImage getImage() {
+		return image;
 	}
 
 	public LocalDate getUploadDate() {

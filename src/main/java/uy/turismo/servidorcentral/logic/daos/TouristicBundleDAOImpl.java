@@ -33,6 +33,8 @@ public class TouristicBundleDAOImpl implements TouristicBundleDAO {
 		Root<TouristicBundle> entityRoot = cq.from(TouristicBundle.class);
 		entityRoot.alias("touristic_bundle");
 		
+//		criteriaQuery.where(criteriaBuilder.equal(entidadRoot.get("id"), idBuscado));
+		
 		cq.select(entityRoot);
 		
 		List<TouristicBundle> bundles = em
