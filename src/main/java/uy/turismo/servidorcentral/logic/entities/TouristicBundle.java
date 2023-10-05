@@ -1,9 +1,15 @@
 package uy.turismo.servidorcentral.logic.entities;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
+import javax.imageio.ImageIO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,6 +46,9 @@ public class TouristicBundle implements Serializable  {
 	
 	@Column(name = "upload_date")
 	private LocalDate uploadDate;
+	
+	@Column(length = 104)
+	private String image;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
@@ -65,6 +74,7 @@ public class TouristicBundle implements Serializable  {
 		this.validityPeriod = validityPeriod;
 		this.discount = discount;
 		this.uploadDate = uploadDate;
+		this.image = null;
 	}
 	
 	
@@ -116,6 +126,50 @@ public class TouristicBundle implements Serializable  {
 	public void setUploadDate(LocalDate uploadDate) {
 		this.uploadDate = uploadDate;
 	}
+	
+	public BufferedImage getImage() {
+		
+		BufferedImage image = null;
+		
+		if(this.image == null) {
+			return image;
+		}
+		
+		InputStream inputStram = getClass().getClassLoader().getResourceAsStream("config.properties");
+		Properties properties = new Properties();
+		
+		try {
+			properties.load(inputStram);
+			String imagesDirPath = properties.getProperty("imagesDirPath").concat("Bundle/");
+			File readFile = new File(imagesDirPath + this.image);
+			image = ImageIO.read(readFile);
+			
+		} catch (Exception e) {
+			System.err.println("Error al cargar la imagen: " + e.getMessage());
+		}
+		
+		return image;	
+	}
+	
+	public void setImage(BufferedImage image) {
+
+		String imageName = this.name + ".png";
+		InputStream inputStram = getClass().getClassLoader().getResourceAsStream("config.properties");
+		Properties properties = new Properties();
+		
+		try {
+			properties.load(inputStram);
+			String imagesDirPath = properties.getProperty("imagesDirPath").concat("Bundle/");
+			File saveFile = new File(imagesDirPath + imageName);
+			ImageIO.write(image, "png", saveFile);
+			
+		} catch (Exception e) {
+			System.err.println("Error al guardar la imagen: " + e.getMessage());
+		}finally {
+			this.image = imageName;
+		}
+		
+	}
 
 	public List<TouristicActivity> getTouristicActivities() {
 		return touristicActivities;
@@ -151,7 +205,7 @@ public class TouristicBundle implements Serializable  {
 		
 		
 		DtTouristicBundle dt = new DtTouristicBundle(this.id, this.name, this.description, this.validityPeriod, 
-				this.discount, this.uploadDate, activities);
+				this.discount, this.uploadDate, this.getImage(), activities);
 		return dt;
 	}
 	
