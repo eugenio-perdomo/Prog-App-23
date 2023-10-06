@@ -63,7 +63,7 @@ public class ControllerTest {
 		
 		List<DtCategory> categories = new ArrayList<DtCategory>();
 		
-		DtCategory catTest = new DtCategory(1L, "Recorridos", null);
+		DtCategory catTest = new DtCategory(1L, "Recorridos", null, null);
 		
 		categories.add(catTest);
 		
@@ -157,6 +157,7 @@ public class ControllerTest {
 	@Test
 	public void addActivityToBundleTest() {
 		IController controller = ControllerFactory.getIController();
+		//controller.addTouristicActivityToBundle(1L, 3L);
 		controller.addTouristicActivityToBundle(1L, 5L);
 	}
 	
@@ -210,7 +211,7 @@ public class ControllerTest {
 		
 		
 		
-		DtCategory categoryTest = new DtCategory(null, "Playas" , null);
+		DtCategory categoryTest = new DtCategory(null, "Playas" , null, null);
 		
 		controller.registerCategory(categoryTest);
 		

@@ -94,8 +94,7 @@ public class TouristicActivity implements Serializable{
 			ActivityState state,
 			LocalDate uploadDate,
 			Provider provider, 
-			Department department,
-			List<Category> categories) {
+			Department department) {
 		
 		this.id = id;
 		this.name = name;
@@ -108,7 +107,6 @@ public class TouristicActivity implements Serializable{
 		this.provider = provider;
 		this.department = department;
 		this.InitLists();
-		this.categories = categories;
 	}
 	
 	//Iniciadores 

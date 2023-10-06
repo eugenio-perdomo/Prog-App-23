@@ -11,7 +11,7 @@ public class DtTouristicBundle extends DtBaseEntity {
 	private Double discount;
 	private LocalDate uploadDate;
 	private List<DtTouristicActivity> activities;
-	
+	private List<DtCategory> categories;
 	
 	public DtTouristicBundle() {
 		// TODO Auto-generated constructor stub
@@ -28,13 +28,15 @@ public class DtTouristicBundle extends DtBaseEntity {
 	}
 
 	
-	public DtTouristicBundle(Long id, String  name, String description, Integer validity, Double discount, LocalDate uploadDate, List<DtTouristicActivity> activities) {
+	public DtTouristicBundle(Long id, String  name, String description, Integer validity, Double discount, LocalDate uploadDate,
+			List<DtTouristicActivity> activities, List<DtCategory> categories) {
 		super (id,name);
 		this.description  = description;
 		this.validityPeriod = validity;
 		this.discount = discount;
 		this.uploadDate = uploadDate;
 		this.activities  = activities;
+		this.categories = categories;
 	}
 	
 	public String getDescription() {
@@ -55,6 +57,10 @@ public class DtTouristicBundle extends DtBaseEntity {
 
 	public List<DtTouristicActivity> getActivities() {
 		return activities;
+	}
+	
+	public List<DtCategory> getCategories(){
+		return categories;
 	}
 
 	

@@ -293,9 +293,11 @@ public class Controller implements IController {
 				touristicActivityData.getState(),
 				touristicActivityData.getUploadDate(),
 				provider,
-				department,
-				categoriesSelectedList
+				department
 				);
+		
+		activity.setCategory(categoriesSelectedList);
+		
 		try {
 			activityDao.create(activity);
 		} catch (Exception e) {
@@ -441,8 +443,11 @@ public class Controller implements IController {
 		TouristicBundle bundle = bundleDao.findById(touristicBundleId);
 		TouristicActivity activity = activityDao.findById(touristicActivityId);
 		
-		bundle.addActivity(activity);
+		//mandar adentro de addact
+		bundle.addCategories(activity.getCategories());
 		
+		bundle.addActivity(activity);
+				
 		try {
 			bundleDao.update(bundle);
 		} catch (Exception e) {
@@ -459,7 +464,7 @@ public class Controller implements IController {
 		
 		CategoryDAO categoryDAO = new CategoryDAOImpl();
 		
-		Category category = new Category(null, categoryData.getName(), null);
+		Category category = new Category(null, categoryData.getName());
 		
 		try {
 			categoryDAO.create(category);
