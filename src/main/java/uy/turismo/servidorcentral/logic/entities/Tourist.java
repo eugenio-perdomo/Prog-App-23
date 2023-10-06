@@ -32,7 +32,7 @@ public class Tourist extends User {
 
 	}
 
-	public Tourist(Long id, String name, 
+	public Tourist(Long id, String name,
 			String nickname, String email, String lastName, 
 			LocalDate birthDate, String nationality, String password) {
 		super(id, name, nickname, email, lastName, birthDate, password);
@@ -78,6 +78,7 @@ public class Tourist extends User {
 				this.email,
 				this.lastName,
 				this.birthDate,
+				this.getImage(),
 				this.nationality,
 				listDepartures,
 				this.password);

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.hibernate.Session;
 import org.junit.jupiter.api.Test;
@@ -19,22 +18,16 @@ import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
-import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
-import uy.turismo.servidorcentral.logic.entities.Category;
-import uy.turismo.servidorcentral.logic.entities.Department;
-import uy.turismo.servidorcentral.logic.entities.Provider;
-import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
-import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
 import uy.turismo.servidorcentral.logic.util.HibernateUtil;
 import uy.turismos.servidorcentral.logic.enums.ActivityState;
 
 public class ControllerTest {
 
 	@Test
-    public void initDataBase() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.close();
-    }
+	public void initDataBase() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.close();	
+	}
 	
 	@Test
 	public void registerActivityTest() {
@@ -67,8 +60,21 @@ public class ControllerTest {
 		
 		categories.add(catTest);
 		
-		DtTouristicActivity activityTest = new DtTouristicActivity(null, name, description, duration, costPerTourist, city,state, date, provider, department, null,
-				null, categories);
+		DtTouristicActivity activityTest = new DtTouristicActivity(
+				null, 
+				name, 
+				description, 
+				duration, 
+				costPerTourist, 
+				city,
+				null,
+				state, 
+				date, 
+				provider, 
+				department, 
+				null,
+				null, 
+				categories);
 		
 		controller.registeTouristicActivity(activityTest);
 	}
@@ -110,6 +116,7 @@ public class ControllerTest {
 				LocalDate.now(),
 				LocalDateTime.of(2023, 10, 17, 14, 0),
 				"Sociedad Agropecuaria de Rocha",
+				null,
 				activity,
 				null
 				);
@@ -217,5 +224,20 @@ public class ControllerTest {
 		
 		System.out.println(yellow + "Info: DONE" + yellow);
 		
+	}
+	
+	@Test
+	public void changeActivityStateTest() {
+		IController controller = ControllerFactory.getIController();
+		String yellow = "\u001B[33m";
+		
+		DtTouristicActivity activity = controller.getTouristicActivityData(1L);
+		ActivityState state = ActivityState.ADDED;
+		try {
+			controller.changeActivityState(1L,state);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

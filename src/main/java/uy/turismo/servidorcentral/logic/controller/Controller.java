@@ -1,7 +1,15 @@
 package uy.turismo.servidorcentral.logic.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+import javax.imageio.ImageIO;
 
 import uy.turismo.servidorcentral.logic.daos.DepartmentDAO;
 import uy.turismo.servidorcentral.logic.daos.DepartmentDAOImpl;
@@ -35,6 +43,7 @@ import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
 import uy.turismo.servidorcentral.logic.entities.TouristicBundle;
 import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.User;
+import uy.turismos.servidorcentral.logic.enums.ActivityState;
 
 public class Controller implements IController {
 	
@@ -117,6 +126,8 @@ public class Controller implements IController {
 	@Override
 	public void updateUser(DtUser userData) {
 		UserDAO userDao = new UserDAOImpl();
+			
+		
 		if(userData instanceof DtProvider) {
 			DtProvider providerData = (DtProvider) userData;
 			
@@ -131,6 +142,12 @@ public class Controller implements IController {
 						providerData.getUrl(),
 						providerData.getPassword()
 					);
+			
+			if(providerData.getImage() != null) {
+				provider.setImage(providerData.getImage());
+			}
+			
+			
 			try {
 				userDao.update(provider);
 				
@@ -151,6 +168,11 @@ public class Controller implements IController {
 						touristData.getNationality(),
 						touristData.getPassword()
 					);
+			
+			if(touristData.getImage() != null) {
+				tourist.setImage(touristData.getImage());
+			}
+			
 			try {
 				userDao.update(tourist);
 				
@@ -170,8 +192,20 @@ public class Controller implements IController {
 			DtProvider provData = (DtProvider) usrData;
 			
 			
-			Provider provUsr = new Provider(null, provData.getName(), provData.getNickname(), provData.getEmail(),
-					provData.getLastName(), provData.getBirthDate(), provData.getDescription(), provData.getUrl(), provData.getPassword());
+			Provider provUsr = new Provider(
+					null, 
+					provData.getName(), 
+					provData.getNickname(), 
+					provData.getEmail(),
+					provData.getLastName(), 
+					provData.getBirthDate(),
+					provData.getDescription(), 
+					provData.getUrl(), 
+					provData.getPassword());
+			
+			if(provData.getImage() != null) {
+				provUsr.setImage(provData.getImage());
+			}
 			
 			try {
 				usrDAO.create(provUsr);
@@ -179,17 +213,30 @@ public class Controller implements IController {
 				System.out.println(e.getMessage());
 			}
 			
+			
 		}else {
 			DtTourist touristData = (DtTourist) usrData;
 			
-			Tourist touristUsr = new Tourist(null, touristData.getName(), touristData.getNickname(), touristData.getEmail(),
-				touristData.getLastName(), touristData.getBirthDate(), touristData.getNationality(), touristData.getPassword());
-
+			Tourist touristUsr = new Tourist(
+					null, 
+					touristData.getName(), 
+					touristData.getNickname(), 
+					touristData.getEmail(),
+					touristData.getLastName(), 
+					touristData.getBirthDate(),
+					touristData.getNationality(),
+					touristData.getPassword());
+			
+			if(touristData.getImage() != null) {
+				touristUsr.setImage(touristData.getImage());
+			}
+			
 			try {
 				usrDAO.create(touristUsr);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
+			
 		}
 		
 	}
@@ -296,7 +343,13 @@ public class Controller implements IController {
 				department
 				);
 		
+
 		activity.setCategory(categoriesSelectedList);
+
+		if(touristicActivityData.getImage() != null) {
+			activity.setImage(touristicActivityData.getImage());
+		}
+
 		
 		try {
 			activityDao.create(activity);
@@ -322,6 +375,10 @@ public class Controller implements IController {
 				touristicDepartureData.getPlace(),
 				activity
 				);
+		
+		if(touristicDepartureData.getImage() != null) {
+			departure.setImage(touristicDepartureData.getImage());
+		}
 		
 		try {
 			departureDao.create(departure);
@@ -373,6 +430,10 @@ public class Controller implements IController {
 		TouristicBundle bundle = new TouristicBundle(null, touristicBundleData.getName(),
 				touristicBundleData.getDescription(), touristicBundleData.getValidityPeriod(), 
 				touristicBundleData.getDiscount(), touristicBundleData.getUploadDate());
+		
+		if(touristicBundleData.getImage() != null) {
+			bundle.setImage(touristicBundleData.getImage());
+		}
 		
 		try {
 			touristicBundleDAO.create(bundle);
@@ -496,5 +557,21 @@ public class Controller implements IController {
 		
 		DtCategory categoryData = category.getCategoryDt();
 		return categoryData;
+	}
+
+	
+	@Override
+	public void changeActivityState(Long id, ActivityState state) throws Exception {
+		
+		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
+		TouristicActivity touristicActivity = activityDao.findById(id);
+		
+		touristicActivity.setActivityState(state);
+		
+		try {
+			activityDao.update(touristicActivity);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

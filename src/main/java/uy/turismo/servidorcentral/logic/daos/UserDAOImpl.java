@@ -138,8 +138,8 @@ public class UserDAOImpl implements UserDAO {
 			throw new Exception("No se pudo crear el Usuario : " + user.getNickname() +
 					"\nError: " + e.getMessage());
 		}
-		session.close();
-
+		session.close(); 
+	
 	}
 
 	@Override
