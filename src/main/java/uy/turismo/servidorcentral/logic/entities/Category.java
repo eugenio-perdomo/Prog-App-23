@@ -118,6 +118,20 @@ public class Category implements Serializable{
 		DtCategory dt = new DtCategory(this.id, this.name, activities, bundles);
 		return dt;
 	}
+	
+	 @Override
+	 public boolean equals(Object obj) {
+		 
+		 if(!(obj instanceof Category)) {
+			 return false;
+		 }
+		 
+		 if(this.id == ((Category) obj).getId()) {
+			 return true;
+		 }
+		 
+		 return false;
+	 }
 	 
 }
 

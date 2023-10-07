@@ -155,9 +155,6 @@ public class ControllerTest {
 		
 		DtTouristicActivity activity = controller.getTouristicActivityData(1L);
 		
-		
-		
-		
 	}
 	
 	

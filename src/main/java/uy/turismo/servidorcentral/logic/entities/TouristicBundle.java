@@ -233,6 +233,7 @@ public class TouristicBundle implements Serializable  {
 	 */
 	public void addActivity(TouristicActivity activity) {
 		this.touristicActivities.add(activity);
+		this.addCategories(activity.getCategories());
 	}
 	
 	public void addCategories(List<Category> categoriesList) {
@@ -243,20 +244,11 @@ public class TouristicBundle implements Serializable  {
 			});
 		} 
 		else {
-			for(Category categoryBundle : this.categories ) {
-				for(Category categoryActivity :  categoriesList){
-					if(categoryBundle.getId() == categoryActivity.getId()) {
-						this.categories.add(categoryActivity);
-					}
+			for(Category category : categoriesList ) {
+				if(!this.categories.contains(category)) {
+					this.categories.add(category);
 				}
-			}		
-			/*this.categories.forEach(categoryBundle -> {
-				categoriesList.forEach(categoryActivity -> {
-					if(categoryBundle.getId() == categoryActivity.getId()) {
-						categories.add(categoryActivity);
-					}
-				});
-			});*/
+			}	
 		}
 		
 	}

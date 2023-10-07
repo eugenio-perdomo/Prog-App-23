@@ -505,7 +505,7 @@ public class Controller implements IController {
 		TouristicActivity activity = activityDao.findById(touristicActivityId);
 		
 		//mandar adentro de addact
-		bundle.addCategories(activity.getCategories());
+//		bundle.addCategories(activity.getCategories());
 		
 		bundle.addActivity(activity);
 				
