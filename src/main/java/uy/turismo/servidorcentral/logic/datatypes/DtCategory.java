@@ -6,7 +6,7 @@ public class DtCategory extends DtBaseEntity{
 
 	
 	private List<DtTouristicActivity> activities;
-	
+	private List<DtTouristicBundle> bundles;
 	
 	public DtCategory() {
 		super();
@@ -24,13 +24,18 @@ public class DtCategory extends DtBaseEntity{
 	}
 
 
-	public DtCategory(Long id, String name, List<DtTouristicActivity> activities) {
+	public DtCategory(Long id, String name, List<DtTouristicActivity> activities, List<DtTouristicBundle> bundles) {
 		super(id,name);
 		this.activities = activities;
+		this.bundles = bundles;
 	}
 	
 	public List<DtTouristicActivity> getActivities() {
 		return activities;
+	}
+	
+	public List<DtTouristicBundle> getBundles(){
+		return bundles;
 	}
 	
 }

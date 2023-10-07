@@ -13,7 +13,7 @@ public class DtTouristicBundle extends DtBaseEntity {
 	private LocalDate uploadDate;
 	private BufferedImage image;
 	private List<DtTouristicActivity> activities;
-	
+	private List<DtCategory> categories;
 	
 	public DtTouristicBundle() {
 		// TODO Auto-generated constructor stub
@@ -30,8 +30,10 @@ public class DtTouristicBundle extends DtBaseEntity {
 	}
 
 	
+
 	public DtTouristicBundle(Long id, String  name, String description, Integer validity, Double discount, LocalDate uploadDate, 
-			BufferedImage image, List<DtTouristicActivity> activities) {
+			BufferedImage image, List<DtTouristicActivity> activities, List<DtCategory> categories) {
+
 		super (id,name);
 		this.description  = description;
 		this.validityPeriod = validity;
@@ -39,6 +41,7 @@ public class DtTouristicBundle extends DtBaseEntity {
 		this.uploadDate = uploadDate;
 		this.image = image;
 		this.activities  = activities;
+		this.categories = categories;
 	}
 	
 	public String getDescription() {
@@ -64,6 +67,10 @@ public class DtTouristicBundle extends DtBaseEntity {
 
 	public List<DtTouristicActivity> getActivities() {
 		return activities;
+	}
+	
+	public List<DtCategory> getCategories(){
+		return categories;
 	}
 
 	

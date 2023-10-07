@@ -12,6 +12,7 @@ import jakarta.persistence.criteria.Root;
 import uy.turismo.servidorcentral.logic.entities.Department;
 import uy.turismo.servidorcentral.logic.entities.Provider;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
+import uy.turismo.servidorcentral.logic.entities.User;
 import uy.turismo.servidorcentral.logic.util.HibernateUtil;
 
 public class TouristicActivityDAOImpl implements TouristicActivityDAO {
@@ -75,6 +76,25 @@ public class TouristicActivityDAOImpl implements TouristicActivityDAO {
 		em.close();
 		session.close();
 		return activities;
+	}
+	
+	@Override
+	public void update(TouristicActivity activity) throws Exception {
+		Session session = HibernateUtil
+				.getSessionFactory()
+				.openSession();
+		try {
+			session.beginTransaction();
+			session.merge(activity);
+			session.getTransaction().commit();
+			
+		} catch (PersistenceException e) {
+			session.getTransaction().rollback();
+			session.close();
+			throw new Exception("No se pudo actualizar la Actividad : " + activity.getName() +
+					"\nError: " + e.getMessage());
+		}
+		session.close();
 	}
 
 }

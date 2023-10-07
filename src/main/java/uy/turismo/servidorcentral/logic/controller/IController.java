@@ -2,6 +2,7 @@ package uy.turismo.servidorcentral.logic.controller;
 
 import java.util.List;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
+import uy.turismos.servidorcentral.logic.enums.ActivityState;
 import uy.turismo.servidorcentral.logic.datatypes.DtCategory;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
@@ -149,5 +150,12 @@ public interface IController {
 	public List<DtCategory>  getListCategory();
 	
 	public DtCategory getCategory(Long categoryId);
+	
+	
+	/**
+	 * Cambia el estado de una Actividad turistica
+	 * @param touristicActivityData
+	 */
+	public void changeActivityState(Long id, ActivityState state) throws Exception;
 	
 }

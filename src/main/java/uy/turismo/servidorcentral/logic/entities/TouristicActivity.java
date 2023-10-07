@@ -103,8 +103,7 @@ public class TouristicActivity implements Serializable{
 			ActivityState state,
 			LocalDate uploadDate,
 			Provider provider, 
-			Department department,
-			List<Category> categories) {
+			Department department) {
 		
 		this.id = id;
 		this.name = name;
@@ -118,7 +117,6 @@ public class TouristicActivity implements Serializable{
 		this.provider = provider;
 		this.department = department;
 		this.InitLists();
-		this.categories = categories;
 	}
 	
 	//Iniciadores 
@@ -163,22 +161,27 @@ public class TouristicActivity implements Serializable{
 	public Double getCostPerTourist() {
 		return costPerTourist;
 	}
+	
 	public void setCostPerTourist(Double costPerTourist) {
 		this.costPerTourist = costPerTourist;
 	}
+	
 	public LocalDate getUploadDate() {
 		return uploadDate;
 	}
+	
 	public void setUploadDate(LocalDate uploadDate) {
 		this.uploadDate = uploadDate;
 	}
+	
 	public String getCity() {
 		return city;
 	}
+	
 	public void setCity(String city) {
 		this.city = city;
 	}
-	
+
 	public BufferedImage getImage() {
 		
 		BufferedImage image = null;
@@ -223,15 +226,19 @@ public class TouristicActivity implements Serializable{
 		
 	}
 	
+
 	public Provider getProvider() {
 		return provider;
 	}
+	
 	public void setProvider(Provider provider) {
 		this.provider = provider;
 	}
+	
 	public Department getDepartment() {
 		return department;
 	}
+	
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
@@ -239,17 +246,22 @@ public class TouristicActivity implements Serializable{
 	public List<TouristicBundle> getTouristicBundle() {
 		return touristicBundle;
 	}
+	
 	public void setTouristicBundle(List<TouristicBundle> touristicBundle) {
 		this.touristicBundle = touristicBundle;
 	}
+	
 	public List<TouristicDeparture> getTouristicDepartures() {
 		return touristicDepartures;
 	}
+	
 	public void setTouristicDepartures(List<TouristicDeparture> touristicDepartures) {
 		this.touristicDepartures = touristicDepartures;
 	}
 	
-	
+	public void setActivityState(ActivityState state) {
+		this.state = state;
+	}
 	//codigo agregado : LT.
 	public List<Category> getCategories(){
 		return categories;

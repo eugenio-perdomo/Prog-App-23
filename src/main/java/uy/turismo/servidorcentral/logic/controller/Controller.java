@@ -43,6 +43,7 @@ import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
 import uy.turismo.servidorcentral.logic.entities.TouristicBundle;
 import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.User;
+import uy.turismos.servidorcentral.logic.enums.ActivityState;
 
 public class Controller implements IController {
 	
@@ -339,13 +340,16 @@ public class Controller implements IController {
 				touristicActivityData.getState(),
 				touristicActivityData.getUploadDate(),
 				provider,
-				department,
-				categoriesSelectedList
+				department
 				);
 		
+
+		activity.setCategory(categoriesSelectedList);
+
 		if(touristicActivityData.getImage() != null) {
 			activity.setImage(touristicActivityData.getImage());
 		}
+
 		
 		try {
 			activityDao.create(activity);
@@ -500,8 +504,11 @@ public class Controller implements IController {
 		TouristicBundle bundle = bundleDao.findById(touristicBundleId);
 		TouristicActivity activity = activityDao.findById(touristicActivityId);
 		
-		bundle.addActivity(activity);
+		//mandar adentro de addact
+		bundle.addCategories(activity.getCategories());
 		
+		bundle.addActivity(activity);
+				
 		try {
 			bundleDao.update(bundle);
 		} catch (Exception e) {
@@ -518,7 +525,7 @@ public class Controller implements IController {
 		
 		CategoryDAO categoryDAO = new CategoryDAOImpl();
 		
-		Category category = new Category(null, categoryData.getName(), null);
+		Category category = new Category(null, categoryData.getName());
 		
 		try {
 			categoryDAO.create(category);
@@ -550,5 +557,21 @@ public class Controller implements IController {
 		
 		DtCategory categoryData = category.getCategoryDt();
 		return categoryData;
+	}
+
+	
+	@Override
+	public void changeActivityState(Long id, ActivityState state) throws Exception {
+		
+		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
+		TouristicActivity touristicActivity = activityDao.findById(id);
+		
+		touristicActivity.setActivityState(state);
+		
+		try {
+			activityDao.update(touristicActivity);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

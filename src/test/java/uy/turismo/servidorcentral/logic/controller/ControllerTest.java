@@ -56,7 +56,7 @@ public class ControllerTest {
 		
 		List<DtCategory> categories = new ArrayList<DtCategory>();
 		
-		DtCategory catTest = new DtCategory(1L, "Recorridos", null);
+		DtCategory catTest = new DtCategory(1L, "Recorridos", null, null);
 		
 		categories.add(catTest);
 		
@@ -164,6 +164,7 @@ public class ControllerTest {
 	@Test
 	public void addActivityToBundleTest() {
 		IController controller = ControllerFactory.getIController();
+		//controller.addTouristicActivityToBundle(1L, 3L);
 		controller.addTouristicActivityToBundle(1L, 5L);
 	}
 	
@@ -217,11 +218,26 @@ public class ControllerTest {
 		
 		
 		
-		DtCategory categoryTest = new DtCategory(null, "Playas" , null);
+		DtCategory categoryTest = new DtCategory(null, "Playas" , null, null);
 		
 		controller.registerCategory(categoryTest);
 		
 		System.out.println(yellow + "Info: DONE" + yellow);
 		
+	}
+	
+	@Test
+	public void changeActivityStateTest() {
+		IController controller = ControllerFactory.getIController();
+		String yellow = "\u001B[33m";
+		
+		DtTouristicActivity activity = controller.getTouristicActivityData(1L);
+		ActivityState state = ActivityState.ADDED;
+		try {
+			controller.changeActivityState(1L,state);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

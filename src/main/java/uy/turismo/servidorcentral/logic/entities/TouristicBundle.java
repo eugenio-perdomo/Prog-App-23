@@ -23,6 +23,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
+import uy.turismo.servidorcentral.logic.datatypes.DtCategory;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
@@ -62,6 +63,13 @@ public class TouristicBundle implements Serializable  {
 	@OneToMany(mappedBy = "touristicBundle", fetch = FetchType.EAGER)
 	private List<Purchase> purchases;
 	
+	
+	//codigo agregado:LT
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "Bundle_Categories", joinColumns = @JoinColumn(name = "bundle"), inverseJoinColumns = @JoinColumn(name = "category"))	
+	private List<Category> categories;
+	
+	
 	//Constructors
 	public TouristicBundle() {
 		// TODO Auto-generated constructor stub
@@ -74,7 +82,9 @@ public class TouristicBundle implements Serializable  {
 		this.validityPeriod = validityPeriod;
 		this.discount = discount;
 		this.uploadDate = uploadDate;
+		this.InitLists();
 		this.image = null;
+
 	}
 	
 	
@@ -82,6 +92,7 @@ public class TouristicBundle implements Serializable  {
 	//Iniciadores	
 	private void InitLists() {
 		this.touristicActivities = new ArrayList<TouristicActivity>();
+		this.categories = new ArrayList<Category>();
 	}
 	
 
@@ -190,7 +201,7 @@ public class TouristicBundle implements Serializable  {
 	 */
 	public DtTouristicBundle getBundleDt() {
 		
-		//List<DtTouristicActivity> listActivities = new ArrayList<DtTouristicActivity>();
+		List<DtCategory> categoriesList = new ArrayList<DtCategory>();
 		
 		List<DtTouristicActivity> activities = new ArrayList<DtTouristicActivity>();
 		
@@ -203,9 +214,16 @@ public class TouristicBundle implements Serializable  {
 			
 		}
 		
+		if(this.categories != null) {
+			for(int j = 0; j < this.categories.size(); j++) {
+				categoriesList.add(categories.get(j).getCategoryDt());
+			}
+		}
+		
+		
 		
 		DtTouristicBundle dt = new DtTouristicBundle(this.id, this.name, this.description, this.validityPeriod, 
-				this.discount, this.uploadDate, this.getImage(), activities);
+				this.discount, this.uploadDate, this.getImage(),activities,categoriesList);
 		return dt;
 	}
 	
@@ -215,6 +233,32 @@ public class TouristicBundle implements Serializable  {
 	 */
 	public void addActivity(TouristicActivity activity) {
 		this.touristicActivities.add(activity);
+	}
+	
+	public void addCategories(List<Category> categoriesList) {
+		
+		if(this.categories.isEmpty()) {
+			categoriesList.forEach(categoryActivity -> {
+				this.categories.add(categoryActivity);
+			});
+		} 
+		else {
+			for(Category categoryBundle : this.categories ) {
+				for(Category categoryActivity :  categoriesList){
+					if(categoryBundle.getId() == categoryActivity.getId()) {
+						this.categories.add(categoryActivity);
+					}
+				}
+			}		
+			/*this.categories.forEach(categoryBundle -> {
+				categoriesList.forEach(categoryActivity -> {
+					if(categoryBundle.getId() == categoryActivity.getId()) {
+						categories.add(categoryActivity);
+					}
+				});
+			});*/
+		}
+		
 	}
 
 }
