@@ -262,6 +262,11 @@ public class TouristicActivity implements Serializable{
 	public void setActivityState(ActivityState state) {
 		this.state = state;
 	}
+	
+	public ActivityState getActivityState() {
+		return this.state;
+	}
+	
 	//codigo agregado : LT.
 	public List<Category> getCategories(){
 		return categories;

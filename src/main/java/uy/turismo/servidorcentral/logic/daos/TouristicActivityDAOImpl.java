@@ -14,6 +14,7 @@ import uy.turismo.servidorcentral.logic.entities.Provider;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
 import uy.turismo.servidorcentral.logic.entities.User;
 import uy.turismo.servidorcentral.logic.util.HibernateUtil;
+import uy.turismos.servidorcentral.logic.enums.ActivityState;
 
 public class TouristicActivityDAOImpl implements TouristicActivityDAO {
 
@@ -95,6 +96,34 @@ public class TouristicActivityDAOImpl implements TouristicActivityDAO {
 					"\nError: " + e.getMessage());
 		}
 		session.close();
+	}
+
+	public List<TouristicActivity> findAllbyState(ActivityState state) {
+		Session session = HibernateUtil
+				.getSessionFactory()
+				.openSession();
+		
+		EntityManager em = session
+				.getEntityManagerFactory()
+				.createEntityManager();  
+		
+		CriteriaBuilder cb = em
+				.getCriteriaBuilder();
+		
+		CriteriaQuery<TouristicActivity> cq = cb.createQuery(TouristicActivity.class);
+		
+		Root<TouristicActivity> entityRoot = cq.from(TouristicActivity.class);
+		entityRoot.alias("touristic_activity");
+		
+		cq.select(entityRoot).where(cb.equal(entityRoot.get("state"), state));
+		
+		List<TouristicActivity> activities = em
+				.createQuery(cq)
+				.getResultList();
+		
+		em.close();
+		session.close();
+		return activities;
 	}
 
 }

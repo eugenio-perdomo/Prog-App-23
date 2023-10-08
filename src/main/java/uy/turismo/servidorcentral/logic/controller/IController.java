@@ -158,4 +158,11 @@ public interface IController {
 	 */
 	public void changeActivityState(Long id, ActivityState state) throws Exception;
 	
+	/**
+	 * Devuelve todas las actividades con el estado especificado
+	 * @return
+	 */
+	public List<DtTouristicActivity> getListActivityStated(ActivityState state);
+	
+	
 }

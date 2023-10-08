@@ -5,6 +5,7 @@ import java.util.List;
 import uy.turismo.servidorcentral.logic.entities.Department;
 import uy.turismo.servidorcentral.logic.entities.Provider;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
+import uy.turismos.servidorcentral.logic.enums.ActivityState;
 
 public interface TouristicActivityDAO {
 
@@ -29,6 +30,9 @@ public interface TouristicActivityDAO {
 	 */
 	
 	public List<TouristicActivity> findAll();
+	
+	public List<TouristicActivity> findAllbyState(ActivityState state);
+	
 
 	void update(TouristicActivity activity) throws Exception;
 	
