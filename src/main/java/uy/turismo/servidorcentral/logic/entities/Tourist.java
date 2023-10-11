@@ -32,6 +32,13 @@ public class Tourist extends User {
 
 	}
 
+	public Tourist(
+			Long id,
+			String nickname,
+			String email) {
+		super(id,nickname,email);
+	}
+	
 	public Tourist(Long id, String name,
 			String nickname, String email, String lastName, 
 			LocalDate birthDate, String nationality, String password) {

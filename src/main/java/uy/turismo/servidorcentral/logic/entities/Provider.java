@@ -29,6 +29,13 @@ public class Provider extends User {
 	public Provider() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Provider(
+			Long id,
+			String nickname,
+			String email) {
+		super(id,nickname,email);
+	}
 
 	public Provider(
 			Long id, 

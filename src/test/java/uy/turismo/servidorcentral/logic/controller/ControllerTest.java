@@ -18,6 +18,7 @@ import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
+import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 import uy.turismo.servidorcentral.logic.util.HibernateUtil;
 import uy.turismos.servidorcentral.logic.enums.ActivityState;
 
@@ -27,6 +28,22 @@ public class ControllerTest {
 	public void initDataBase() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.close();	
+	}
+	
+	@Test
+	public void checkCredentialsTest() {
+		IController controller = ControllerFactory.getIController();
+		Boolean userExists = controller.checkCredentials("mirtha.legrand.ok@hotmail.com.ar", "1234");
+		System.out.println(userExists);
+	}
+	
+	@Test
+	public void getUserListTest() {
+		IController controller = ControllerFactory.getIController();
+
+		List<DtUser> users = controller.getListUser();
+		
+		System.out.println();
 	}
 	
 	@Test
@@ -77,6 +94,11 @@ public class ControllerTest {
 				categories);
 		
 		controller.registeTouristicActivity(activityTest);
+	}
+	
+	@Test
+	public void getUserDataTest() {
+		ControllerFactory.getIController().getUserData(1L);
 	}
 	
 	

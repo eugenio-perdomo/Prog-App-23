@@ -33,6 +33,7 @@ public abstract class DtUser extends DtBaseEntity {
 			LocalDate birthDate,
 			BufferedImage image,
 			String password) {
+		super(id, name);
 		this.nickname = nickname;
 		this.email = email;
 		this.lastName = lastName;

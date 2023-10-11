@@ -65,6 +65,8 @@ public class Controller implements IController {
 	}
 
 	//Metodos
+	
+	
 
 	@Override
 	public List<DtUser> getListUser() {
@@ -573,5 +575,16 @@ public class Controller implements IController {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	@Override
+	public Boolean checkCredentials(String email, String password) {
+		UserDAO userDao = new UserDAOImpl();
+		
+		User user = userDao.checkCredentials(email, password);
+		if(user != null) {
+			return true;
+		}
+		return false;
 	}
 }

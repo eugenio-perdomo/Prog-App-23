@@ -15,6 +15,14 @@ import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 public interface IController {
 	
 	/**
+	 * Revisa si existe un usuario con email y password pasados
+	 * @param email
+	 * @param password
+	 * @return Devulve true si existe y false si no
+	 */
+	public Boolean checkCredentials(String email, String password);
+	
+	/**
 	 * Devuelve una Lista de DtUser con id, nickname y email
 	 * @return List<DtUser>
 	 */

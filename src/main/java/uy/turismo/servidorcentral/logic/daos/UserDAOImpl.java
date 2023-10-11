@@ -1,5 +1,6 @@
 package uy.turismo.servidorcentral.logic.daos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -9,6 +10,7 @@ import jakarta.persistence.PersistenceException;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 import uy.turismo.servidorcentral.logic.entities.Provider;
 import uy.turismo.servidorcentral.logic.entities.Tourist;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
@@ -35,16 +37,18 @@ public class UserDAOImpl implements UserDAO {
 		Root<User> entityRoot = cq.from(User.class);
 		entityRoot.alias("user");
 		
-		cq.select(entityRoot);
+//		cq.select(entityRoot);
+		
+	    cq.select(entityRoot);
 		
 		List<User> users = em
 				.createQuery(cq)
 				.getResultList();
+	
 		
 		em.close();
 		session.close();
 		
-		// TODO Auto-generated method stub
 		return users;
 	}
 
@@ -162,6 +166,52 @@ public class UserDAOImpl implements UserDAO {
 		
 		session.close();
 
+	}
+
+	@Override
+	public User checkCredentials(String email, String password) {
+		Session session = HibernateUtil
+				.getSessionFactory()
+				.openSession();
+		
+		EntityManager em = session
+				.getEntityManagerFactory()
+				.createEntityManager();  
+		
+		CriteriaBuilder cb = em
+				.getCriteriaBuilder();
+		
+		CriteriaQuery<User> cq = cb.createQuery(User.class);
+		
+		Root<User> entityRoot = cq.from(User.class);
+		entityRoot.alias("user");
+		
+//		cq.select(entityRoot);
+		
+	    cq.select(entityRoot)
+	    	.where( 
+	    			cb.and(
+	    					cb.equal(entityRoot.get("email"), email),
+	    					cb.equal(entityRoot.get("password"), password)
+	    			));
+		
+	    User user;
+	    
+	    try {
+	    	user = em
+	    			.createQuery(cq)
+	    			.getSingleResult();
+		} catch (Exception e) {
+			em.close();
+			session.close();
+			return null;
+		}
+	
+		
+		em.close();
+		session.close();
+		
+		return user;
 	}
 
 }

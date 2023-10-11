@@ -53,6 +53,16 @@ public abstract class User implements Serializable  {
 
 	public User() {
 	}
+	
+	public User(
+			Long id,
+			String nickname,
+			String email) {
+		this.id = id;
+		this.nickname = nickname;
+		this.email = email;
+	}
+
 	public User(
 			Long id,
 			String name,
