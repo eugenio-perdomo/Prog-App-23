@@ -587,4 +587,20 @@ public class Controller implements IController {
 		}
 		return false;
 	}
+		
+	public List<DtTouristicActivity> getListActivityStated(ActivityState state){
+		
+		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
+		List<TouristicActivity> activities = activityDao.findAllbyState(state);
+		List<DtTouristicActivity> activityOutput = new ArrayList<DtTouristicActivity>();
+		
+		if(activities != null || !activities.isEmpty()) {
+			
+			for(TouristicActivity acti : activities) {
+				activityOutput.add(acti.getShortDt());
+			}
+		}
+
+		return activityOutput;
+	}
 }

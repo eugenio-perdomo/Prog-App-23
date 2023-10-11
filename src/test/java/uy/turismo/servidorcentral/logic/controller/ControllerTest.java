@@ -250,13 +250,34 @@ public class ControllerTest {
 		IController controller = ControllerFactory.getIController();
 		String yellow = "\u001B[33m";
 		
-		DtTouristicActivity activity = controller.getTouristicActivityData(1L);
-		ActivityState state = ActivityState.ADDED;
+		ActivityState stateAdded = ActivityState.ADDED;
+		ActivityState stateRejected = ActivityState.REJECTED;
+		ActivityState stateAccepted = ActivityState.ACCEPTED;
 		try {
-			controller.changeActivityState(1L,state);
+			controller.changeActivityState(1L,stateRejected);
+			controller.changeActivityState(2L,stateRejected);
+			controller.changeActivityState(3L,stateAccepted);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	
+	@Test
+	public void getListActivityStatedTest() {
+		//tested!
+		//no puede ser nulo tho
+		IController controller = ControllerFactory.getIController();
+		String yellow = "\u001B[33m";
+		
+		ActivityState stateAdded = ActivityState.ADDED;
+		ActivityState stateRejected = ActivityState.REJECTED;
+		ActivityState stateAccepted = ActivityState.ACCEPTED;
+		
+		List<DtTouristicActivity> activities = controller.getListActivityStated(stateAccepted);
+		
+		System.out.println(activities);
+		
 	}
 }
