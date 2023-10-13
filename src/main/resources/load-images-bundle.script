@@ -1,0 +1,6 @@
+wget -O eclipse-workspace/servidor-central/src/main/resources/images/Bundle/'Disfrutar Rocha'.png https://i0.wp.com/uruguayosinfronteras.com/wp-content/uploads/2022/10/bg-inicio.jpg?resize=1024%2C467&ssl=1
+
+wget -O eclipse-workspace/servidor-central/src/main/resources/images/Bundle/'Un día en Colonia'.png tinyurl.com/4yzrdt8b
+
+wget -O eclipse-workspace/servidor-central/src/main/resources/images/Bundle/'Valle Del Lunarejo'.png tinyurl.com/mvteyv6y
+

@@ -1,0 +1,33 @@
+#S1
+wget -O eclipse-workspace/servidor-central/src/main/resources/images/Departure/'Degusta Agosto'.png tinyurl.com/4jwed4jx
+
+#S2
+wget -O eclipse-workspace/servidor-central/src/main/resources/images/Departure/'Degusta Setiembre'.png tinyurl.com/2maxmx6c
+
+#S3
+wget -O eclipse-workspace/servidor-central/src/main/resources/images/Departure/'Teatro con Sabores 1'.png tinyurl.com/2zturssk
+
+#S4
+wget -O eclipse-workspace/servidor-central/src/main/resources/images/Departure/'Teatro con Sabores 2'.png tinyurl.com/5d5vm953
+
+#S5
+wget -O eclipse-workspace/servidor-central/src/main/resources/images/Departure/'Tour Colonia del Sacramento 11-09'.png tinyurl.com/5n7ud8e7
+
+#S6
+wget -O eclipse-workspace/servidor-central/src/main/resources/images/Departure/'Tour Colonia del Sacramento 18-09'.png tinyurl.com/583b3mbs
+
+#S11
+wget -O eclipse-workspace/servidor-central/src/main/resources/images/Departure/'Cabalgata 1'.png tinyurl.com/2p9he77w
+
+#S13
+wget -O eclipse-workspace/servidor-central/src/main/resources/images/Departure/'Degusta Octubre'.png tinyurl.com/mryhyr5f
+
+#S14
+wget -O eclipse-workspace/servidor-central/src/main/resources/images/Departure/'Degusta Noviembre'.png tinyurl.com/yzz6b7et
+
+#S16
+wget -O eclipse-workspace/servidor-central/src/main/resources/images/Departure/'Tour Colonia del Sacramento 30-10'.png tinyurl.com/mv7etjx2
+
+#S17
+wget -O eclipse-workspace/servidor-central/src/main/resources/images/Departure/'Cabalgata Extrema'.png tinyurl.com/3vwzthcr
+
