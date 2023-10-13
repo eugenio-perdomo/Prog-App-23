@@ -578,14 +578,15 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public Boolean checkCredentials(String email, String password) {
+	public DtUser checkCredentials(String email, String password) {
 		UserDAO userDao = new UserDAOImpl();
 		
 		User user = userDao.checkCredentials(email, password);
-		if(user != null) {
-			return true;
+		if(user == null) {
+			return null;
+		}else {
+			return user.getDt();
 		}
-		return false;
 	}
 		
 	public List<DtTouristicActivity> getListActivityStated(ActivityState state){

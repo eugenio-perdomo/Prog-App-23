@@ -20,7 +20,7 @@ public interface IController {
 	 * @param password
 	 * @return Devulve true si existe y false si no
 	 */
-	public Boolean checkCredentials(String email, String password);
+	public DtUser checkCredentials(String email, String password);
 	
 	/**
 	 * Devuelve una Lista de DtUser con id, nickname y email

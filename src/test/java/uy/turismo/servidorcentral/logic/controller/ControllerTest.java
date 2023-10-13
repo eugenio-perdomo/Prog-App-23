@@ -33,8 +33,8 @@ public class ControllerTest {
 	@Test
 	public void checkCredentialsTest() {
 		IController controller = ControllerFactory.getIController();
-		Boolean userExists = controller.checkCredentials("mirtha.legrand.ok@hotmail.com.ar", "1234");
-		System.out.println(userExists);
+		DtUser user = controller.checkCredentials("eldiez@socfomturriv.org.uy", "123");
+		System.out.println("");
 	}
 	
 	@Test
