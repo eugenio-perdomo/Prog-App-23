@@ -17,6 +17,9 @@ target/*
 # Main
 Main.java
 
+# Todo archivo properties
+.properties
+
 # Package Files #
 #*.jar
 *.war

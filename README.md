@@ -6,6 +6,8 @@ mvn install
 
 ##Scripts para las imagenes 
 
+** SACAR LOS SCRIPTS DE LA CARPETA RESOURCES **
+
 chmod +x a cada script
 
 Luego ejecutar cada uno
