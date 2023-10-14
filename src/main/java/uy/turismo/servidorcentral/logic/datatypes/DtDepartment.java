@@ -11,6 +11,9 @@ public class DtDepartment extends DtBaseEntity {
 	public DtDepartment() {
 		// TODO Auto-generated constructor stub
 	}
+	public DtDepartment(Long id) {
+		super(id);
+	}
 
 	public DtDepartment(Long id, String name) {
 		super(id, name);
