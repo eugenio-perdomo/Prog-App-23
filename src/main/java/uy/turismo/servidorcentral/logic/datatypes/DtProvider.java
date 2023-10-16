@@ -25,8 +25,8 @@ public class DtProvider extends DtUser {
 		this.touristicActivities = touristicActivities;
 	}
 	
-	public DtProvider(Long id, String nickname, String email) {
-		super(id, nickname, email);
+	public DtProvider(Long id, String nickname, String email, BufferedImage image) {
+		super(id, nickname, email, image);
 	}
 
 	public String getUrl() {
