@@ -285,7 +285,8 @@ public class TouristicActivity implements Serializable{
 		DtTouristicActivity dtOutput = new DtTouristicActivity(
 				this.id, 
 				this.name,
-				this.getImage());
+				this.getImage(),
+				this.state);
 		return dtOutput;
 	}
 	
