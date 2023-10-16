@@ -98,7 +98,8 @@ public class Tourist extends User {
 		DtUser dtOutput = new DtTourist(
 				this.id, 
 				this.nickname,
-				this.email);
+				this.email,
+				this.getImage());
 	
 		return dtOutput;
 	}

@@ -19,10 +19,11 @@ public abstract class DtUser extends DtBaseEntity {
 	}
 	
 	
-	public DtUser(Long id, String nickname, String email) {
+	public DtUser(Long id, String nickname, String email, BufferedImage image) {
 		super(id);
 		this.nickname = nickname;
 		this.email = email;
+		this.image = image;
 	}
 
 	public DtUser(Long id, 

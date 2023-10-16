@@ -15,8 +15,8 @@ public class DtTourist extends DtUser {
 		// TODO Auto-generated constructor stub
 	}
 
-	public DtTourist(Long id, String nickname, String email) {
-		super(id, nickname, email);
+	public DtTourist(Long id, String nickname, String email, BufferedImage image) {
+		super(id, nickname, email, image);
 		// TODO Auto-generated constructor stub
 	}
 

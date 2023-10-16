@@ -113,7 +113,8 @@ public class Provider extends User {
 		DtUser dtOutput = new DtProvider(
 				this.id, 
 				this.nickname,
-				this.email);
+				this.email,
+				this.getImage());
 	
 		return dtOutput;
 	}
