@@ -26,8 +26,9 @@ public class DtTouristicDeparture extends DtBaseEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public DtTouristicDeparture(Long id, String name) {
+	public DtTouristicDeparture(Long id, String name, BufferedImage image) {
 		super(id, name);
+		this.image = image;
 		// TODO Auto-generated constructor stub
 	}
 
