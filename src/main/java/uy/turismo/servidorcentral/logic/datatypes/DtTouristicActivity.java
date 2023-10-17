@@ -32,10 +32,11 @@ public class DtTouristicActivity extends DtBaseEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public DtTouristicActivity(Long id, String name, BufferedImage image, ActivityState state) {
+	public DtTouristicActivity(Long id, String name, BufferedImage image, ActivityState state, String description) {
 		super(id, name);
 		this.image = image;
 		this.state = state;
+		this.description = description;
 		// TODO Auto-generated constructor stub
 	}
 	
