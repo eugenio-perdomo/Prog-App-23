@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
+import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
+import uy.turismo.servidorcentral.logic.datatypes.DtPurchase;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
@@ -51,6 +53,7 @@ public class Tourist extends User {
 	//Iniciadores
 	private void initLists() {
 		this.inscriptions = new ArrayList<Inscription>();
+		this.purchases = new ArrayList<Purchase>();
 	}
 
 	//Getters and Setter
@@ -69,16 +72,25 @@ public class Tourist extends User {
 	@Override
 	public DtUser getDt() {
 		List<DtTouristicDeparture> listDepartures = new ArrayList<DtTouristicDeparture>();
+		List<DtInscription> listInscriptions = new ArrayList<DtInscription>();
+		List<DtPurchase> listPurchases = new ArrayList<DtPurchase>();
 		
 		if(this.inscriptions != null) {
 			for(Inscription inscription : this.inscriptions) {
 				listDepartures.add(inscription.getDepartureShortDt());
+				listInscriptions.add(inscription.getDt());
 			}
 			
 		}
 		
+		if(this.purchases != null) {
+			for(Purchase purchase : this.purchases) {
+				listPurchases.add(purchase.getDtForTourist());
+			}
+		}
 		
-		DtTourist dtTourist = new DtTourist(
+		
+		return new DtTourist(
 				this.id,
 				this.name,
 				this.nickname,
@@ -88,9 +100,9 @@ public class Tourist extends User {
 				this.getImage(),
 				this.nationality,
 				listDepartures,
-				this.password);
-		
-		return dtTourist;
+				this.password,
+				listInscriptions,
+				listPurchases);
 	}
 
 	@Override

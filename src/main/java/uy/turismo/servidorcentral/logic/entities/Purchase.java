@@ -12,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import uy.turismo.servidorcentral.logic.datatypes.DtPurchase;
+import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 
 @Entity
 public class Purchase implements Serializable {
@@ -95,6 +97,17 @@ public class Purchase implements Serializable {
 
 	public TouristicBundle getTouristicBundle() {
 		return touristicBundle;
+	}
+	
+	public DtPurchase getDtForTourist() {
+		return new DtPurchase(
+				null,
+				this.purchaseDate,
+				this.touristAmount,
+				this.totalCost,
+				this.expireDate,
+				null,
+				this.touristicBundle.getShortDt());	
 	}
 	
 	

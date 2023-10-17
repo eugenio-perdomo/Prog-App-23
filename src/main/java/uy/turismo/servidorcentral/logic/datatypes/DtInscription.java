@@ -22,7 +22,8 @@ public class DtInscription extends DtBaseEntity {
 		// TODO Auto-generated constructor stub
 	}	
 	
-	public DtInscription(Long id,
+	public DtInscription(
+			Long id,
 			LocalDate inscriptionDate,
 			Double totalCost,
 			Integer touristAmount,
