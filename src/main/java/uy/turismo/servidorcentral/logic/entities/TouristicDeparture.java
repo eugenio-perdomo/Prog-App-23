@@ -208,7 +208,8 @@ public class TouristicDeparture implements Serializable {
 	public DtTouristicDeparture getShortDt() {
 		DtTouristicDeparture dtDepartureShort = new DtTouristicDeparture(
 				this.id,
-				this.name);
+				this.name,
+				this.getImage());
 		return dtDepartureShort;
 	}
 	

@@ -191,7 +191,11 @@ public class TouristicBundle implements Serializable  {
 	 * @return
 	 */
 	public DtTouristicBundle getShortDt() {
-		DtTouristicBundle shortDt = new  DtTouristicBundle(this.id, this.name);
+		DtTouristicBundle shortDt = new  DtTouristicBundle(
+				this.id,
+				this.name,
+				this.getImage());
+		
 		return shortDt;
 	}
 	

@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
+import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 
 @Entity
@@ -101,6 +102,19 @@ public class Inscription implements Serializable {
 	
 	public DtTourist getTouristShortDt() {
 		return (DtTourist) this.tourist.getShortDt();
+	}
+	
+	public DtInscription getDt() {
+		return new DtInscription(
+				null,
+				this.inscriptionDate,
+				this.totalCost,
+				this.touristAmount,
+				null,
+				null
+				);
+				
+				
 	}
 	
 	
