@@ -8,6 +8,6 @@ mvn install
 
 ** SACAR LOS SCRIPTS DE LA CARPETA RESOURCES **
 
-chmod +x a cada script
+chmod +x a load-images.script
 
-Luego ejecutar cada uno
+Ejecutar con ./load-images.script

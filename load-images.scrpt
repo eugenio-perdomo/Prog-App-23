@@ -1,0 +1,103 @@
+#Imagenes de Usuario
+
+rm src/main/resources/images/User/*.png
+
+wget -O src/main/resources/images/User/lachiqui.png tinyurl.com/2e3s66tw
+
+wget -O src/main/resources/images/User/isabelita.png https://media.revistavanityfair.es/photos/62de8ec79617e3f94e9f9f6f/master/w_1600%2Cc_limit/Isabel%2520II.png
+
+wget -O src/main/resources/images/User/anibal.png tinyurl.com/y2u3tybh
+
+wget -O src/main/resources/images/User/waston.png tinyurl.com/2p9ed8et
+
+wget -O src/main/resources/images/User/elelvis.png tinyurl.com/mtwppxxz
+
+wget -O src/main/resources/images/User/eleven11.png tinyurl.com/3ztpasya
+
+wget -O src/main/resources/images/User/bobesponja.png tinyurl.com/43zymcch
+
+wget -O src/main/resources/images/User/tony.png tinyurl.com/mr3a38w4
+
+wget -O src/main/resources/images/User/chino.png tinyurl.com/2b556k7t
+
+wget -O src/main/resources/images/User/mastropiero.png tinyurl.com/3mbeyawm
+
+wget -O src/main/resources/images/User/washington.png tinyurl.com/3whe8372
+
+wget -O src/main/resources/images/User/eldiez.png tinyurl.com/mu4jeas3
+
+wget -O src/main/resources/images/User/meche.png tinyurl.com/4hs4v9c5
+
+
+#Imagenes de Salidas
+
+rm src/main/resources/images/Departure/*.png
+
+#S1
+wget -O src/main/resources/images/Departure/'Degusta Agosto'.png tinyurl.com/4jwed4jx
+
+#S2
+wget -O src/main/resources/images/Departure/'Degusta Setiembre'.png tinyurl.com/2maxmx6c
+
+#S3
+wget -O src/main/resources/images/Departure/'Teatro con Sabores 1'.png tinyurl.com/2zturssk
+
+#S4
+wget -O src/main/resources/images/Departure/'Teatro con Sabores 2'.png tinyurl.com/5d5vm953
+
+#S5
+wget -O src/main/resources/images/Departure/'Tour Colonia del Sacramento 11-09'.png tinyurl.com/5n7ud8e7
+
+#S6
+wget -O src/main/resources/images/Departure/'Tour Colonia del Sacramento 18-09'.png tinyurl.com/583b3mbs
+
+#S11
+wget -O src/main/resources/images/Departure/'Cabalgata 1'.png tinyurl.com/2p9he77w
+
+#S13
+wget -O src/main/resources/images/Departure/'Degusta Octubre'.png tinyurl.com/mryhyr5f
+
+#S14
+wget -O src/main/resources/images/Departure/'Degusta Noviembre'.png tinyurl.com/yzz6b7et
+
+#S16
+wget -O src/main/resources/images/Departure/'Tour Colonia del Sacramento 30-10'.png tinyurl.com/mv7etjx2
+
+#S17
+wget -O src/main/resources/images/Departure/'Cabalgata Extrema'.png tinyurl.com/3vwzthcr
+
+
+#Imagenes de Actividad
+
+rm src/main/resources/images/Activity/*.png
+
+wget -O src/main/resources/images/Activity/Degusta.png tinyurl.com/bdehz9bb
+
+wget -O src/main/resources/images/Activity/'Teatro con Sabores'.png tinyurl.com/58fnr5j7
+
+wget -O src/main/resources/images/Activity/'Tour por Colonia del Sacramento'.png tinyurl.com/3rp2vvjf
+
+wget -O src/main/resources/images/Activity/'Almuerzo en el Real de San Carlos'.png tinyurl.com/2yeu66vb
+
+wget -O src/main/resources/images/Activity/'Almuerzo en Valle del Lunarejo'.png tinyurl.com/4yrs8y2c
+
+wget -O src/main/resources/images/Activity/'Cabalgata en Valle del Lunarejo'.png tinyurl.com/2vjd382t
+
+wget -O src/main/resources/images/Activity/'Bus turístico Colonia'.png tinyurl.com/bdzyrm93
+
+wget -O src/main/resources/images/Activity/'Colonia PremiumTour'.png tinyurl.com/284kr973
+
+wget -O src/main/resources/images/Activity/'Deportes náuticos sin uso de motor'.png tinyurl.com/yck2a92h
+
+wget -O src/main/resources/images/Activity/'Descubre Rivera'.png tinyurl.com/y4vbc4xc
+
+#Imagenes de Paquete
+
+rm src/main/resources/images/Bundle/*.png
+
+wget -O src/main/resources/images/Bundle/'Disfrutar Rocha'.png https://i0.wp.com/uruguayosinfronteras.com/wp-content/uploads/2022/10/bg-inicio.jpg?resize=1024%2C467&ssl=1
+
+wget -O src/main/resources/images/Bundle/'Un día en Colonia'.png tinyurl.com/4yzrdt8b
+
+wget -O src/main/resources/images/Bundle/'Valle Del Lunarejo'.png tinyurl.com/mvteyv6y
+
