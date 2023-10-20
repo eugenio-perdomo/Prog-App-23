@@ -286,7 +286,8 @@ public class TouristicActivity implements Serializable{
 				this.id, 
 				this.name,
 				this.getImage(),
-				this.state);
+				this.state,
+				this.description);
 		return dtOutput;
 	}
 	
