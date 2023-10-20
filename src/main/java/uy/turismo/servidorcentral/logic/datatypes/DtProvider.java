@@ -12,12 +12,18 @@ public class DtProvider extends DtUser {
 	private String description;
 	private List<DtTouristicActivity> touristicActivities;
 
-	public DtProvider(Long id, String name,
-			String nickname, String email,
-			String lastName, LocalDate birthDate,
+	public DtProvider(
+			Long id, 
+			String name,
+			String nickname, 
+			String email,
+			String lastName, 
+			LocalDate birthDate,
 			BufferedImage image,
-			String url, String description,
-			List<DtTouristicActivity> touristicActivities, String password) {
+			String url, 
+			String description,
+			List<DtTouristicActivity> touristicActivities, 
+			String password) {
 		super(id, name, nickname, email, lastName, birthDate, image, password);
 
 		this.url = url;

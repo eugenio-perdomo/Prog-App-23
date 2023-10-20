@@ -22,10 +22,17 @@ public class DtTourist extends DtUser {
 		// TODO Auto-generated constructor stub
 	}
 
-	public DtTourist(Long id, String name, String nickname,
-			String email, String lastName, LocalDate birthDate,
-			BufferedImage image, String nationality,
-			List<DtTouristicDeparture> departures, String password,
+	public DtTourist(
+			Long id, 
+			String name, 
+			String nickname,
+			String email, 
+			String lastName, 
+			LocalDate birthDate,
+			BufferedImage image, 
+			String nationality,
+			List<DtTouristicDeparture> departures, 
+			String password,
 			List<DtInscription> inscriptions,
 			List<DtPurchase> purchases) {
 		super(id, name, nickname, email, lastName, birthDate, image, password);
