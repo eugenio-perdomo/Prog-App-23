@@ -2,6 +2,7 @@ package uy.turismo.servidorcentral.logic.datatypes;
 
 import java.awt.image.BufferedImage;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import uy.turismos.servidorcentral.logic.enums.ActivityState;
@@ -32,11 +33,13 @@ public class DtTouristicActivity extends DtBaseEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public DtTouristicActivity(Long id, String name, BufferedImage image, ActivityState state, String description) {
+	public DtTouristicActivity(Long id, String name, BufferedImage image, ActivityState state, String description,DtDepartment department , List<DtCategory> categories) {
 		super(id, name);
 		this.image = image;
 		this.state = state;
 		this.description = description;
+		this.department = department;
+		this.categories = categories;
 		// TODO Auto-generated constructor stub
 	}
 	

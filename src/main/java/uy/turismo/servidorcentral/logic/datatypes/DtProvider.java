@@ -28,6 +28,8 @@ public class DtProvider extends DtUser {
 	public DtProvider(Long id, String nickname, String email, BufferedImage image) {
 		super(id, nickname, email, image);
 	}
+	
+
 
 	public String getUrl() {
 		return url;

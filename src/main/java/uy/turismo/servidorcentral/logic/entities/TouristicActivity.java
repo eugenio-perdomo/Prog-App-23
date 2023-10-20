@@ -282,12 +282,22 @@ public class TouristicActivity implements Serializable{
 	 * @return
 	 */
 	public DtTouristicActivity getShortDt() {
+		List<DtCategory> listDtCategories= new ArrayList<DtCategory>();
+		
+		if(this.categories != null) {
+			for(Category cat: this.categories) {
+				listDtCategories.add(cat.getShortDt());
+			}
+		}
+		
 		DtTouristicActivity dtOutput = new DtTouristicActivity(
 				this.id, 
 				this.name,
 				this.getImage(),
 				this.state,
-				this.description);
+				this.description,
+				this.department.getShortDt(),
+				listDtCategories);
 		return dtOutput;
 	}
 	

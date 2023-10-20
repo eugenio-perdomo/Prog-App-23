@@ -4,7 +4,6 @@ import java.util.List;
 
 public class DtCategory extends DtBaseEntity{
 
-	
 	private List<DtTouristicActivity> activities;
 	private List<DtTouristicBundle> bundles;
 	
@@ -37,5 +36,4 @@ public class DtCategory extends DtBaseEntity{
 	public List<DtTouristicBundle> getBundles(){
 		return bundles;
 	}
-	
 }
