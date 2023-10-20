@@ -2,6 +2,8 @@ package uy.turismo.servidorcentral.logic.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,8 +14,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import uy.turismo.servidorcentral.logic.datatypes.DtCategory;
 import uy.turismo.servidorcentral.logic.datatypes.DtPurchase;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 
 @Entity
 public class Purchase implements Serializable {
@@ -98,6 +103,20 @@ public class Purchase implements Serializable {
 	public TouristicBundle getTouristicBundle() {
 		return touristicBundle;
 	}
+	
+	public DtPurchase getPurchaseDt() {
+		
+		DtPurchase purchase = new DtPurchase(this.id,
+				this.purchaseDate,
+				this.touristAmount,
+				this.totalCost,
+				this.expireDate,
+				(DtTourist) this.tourist.getShortDt(),
+				this.touristicBundle.getShortDt());
+		
+		return purchase;
+	}
+	
 	
 	public DtPurchase getDtForTourist() {
 		return new DtPurchase(

@@ -10,6 +10,9 @@ public class DtTouristicBundle extends DtBaseEntity {
 	private String description;
 	private Integer validityPeriod;
 	private Double discount;
+
+	private Double price;
+	
 	private LocalDate uploadDate;
 	private BufferedImage image;
 	private List<DtTouristicActivity> activities;
@@ -33,7 +36,7 @@ public class DtTouristicBundle extends DtBaseEntity {
 	
 
 	public DtTouristicBundle(Long id, String  name, String description, Integer validity, Double discount, LocalDate uploadDate, 
-			BufferedImage image, List<DtTouristicActivity> activities, List<DtCategory> categories) {
+			BufferedImage image, List<DtTouristicActivity> activities, List<DtCategory> categories, Double price) {
 
 		super (id,name);
 		this.description  = description;
@@ -43,6 +46,7 @@ public class DtTouristicBundle extends DtBaseEntity {
 		this.image = image;
 		this.activities  = activities;
 		this.categories = categories;
+		this.price = price;
 	}
 	
 	public String getDescription() {
@@ -74,5 +78,7 @@ public class DtTouristicBundle extends DtBaseEntity {
 		return categories;
 	}
 
-	
+	public Double getPrice(){
+		return price;
+	}
 }

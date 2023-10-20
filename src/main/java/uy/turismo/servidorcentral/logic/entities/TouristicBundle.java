@@ -209,14 +209,20 @@ public class TouristicBundle implements Serializable  {
 		
 		List<DtTouristicActivity> activities = new ArrayList<DtTouristicActivity>();
 		
-		//Modifico codigo : LT : cambio shortDT por dt Entero, para dar categorias de actividades al paquete
+		
+		Double cost = 0d;
+		
+		Double price = 0d;
 		
 		if(this.touristicActivities != null) {
 			for (int i = 0; i < this.touristicActivities.size(); i++) {
-				activities.add(touristicActivities.get(i).getDt());
+				activities.add(touristicActivities.get(i).getShortDt());
+				cost += touristicActivities.get(i).getCostPerTourist();
 			}
 			
 		}
+		
+		price = cost - cost * (this.discount / 100);
 		
 		if(this.categories != null) {
 			for(int j = 0; j < this.categories.size(); j++) {
@@ -224,10 +230,9 @@ public class TouristicBundle implements Serializable  {
 			}
 		}
 		
-		
-		
+
 		DtTouristicBundle dt = new DtTouristicBundle(this.id, this.name, this.description, this.validityPeriod, 
-				this.discount, this.uploadDate, this.getImage(),activities,categoriesList);
+				this.discount, this.uploadDate, this.getImage(),activities,categoriesList,price);
 		return dt;
 	}
 	

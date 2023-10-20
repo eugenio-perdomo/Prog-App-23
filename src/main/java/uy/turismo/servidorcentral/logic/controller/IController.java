@@ -7,6 +7,7 @@ import uy.turismo.servidorcentral.logic.datatypes.DtCategory;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
+import uy.turismo.servidorcentral.logic.datatypes.DtPurchase;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
@@ -172,5 +173,11 @@ public interface IController {
 	 */
 	public List<DtTouristicActivity> getListActivityStated(ActivityState state);
 	
+	/**
+	 * Crea una nueva compra
+	 * @param purchase -> datos de la compra.
+	 */
+	public void registerPurchase(DtPurchase purchase);
 	
+	public DtPurchase getPurchase(Long purchaseId);
 }
