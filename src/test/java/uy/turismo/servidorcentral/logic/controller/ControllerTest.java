@@ -14,6 +14,7 @@ import uy.turismo.servidorcentral.logic.datatypes.DtCategory;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
+import uy.turismo.servidorcentral.logic.datatypes.DtPurchase;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
@@ -280,4 +281,25 @@ public class ControllerTest {
 		System.out.println(activities);
 		
 	}
+	
+	@Test
+	public void registerPurchase() {
+		IController controller = ControllerFactory.getIController();
+		String yellow = "\u001B[33m";
+		
+		 LocalDate fechaHardcodeada = LocalDate.of(2023, 1, 1);
+		 
+		 LocalDate fechaHardcodeada2 = LocalDate.of(2023, 2, 2);
+		 
+		 DtTourist tourist = (DtTourist) controller.getUserData(1l);
+		 
+		 DtTouristicBundle bundle = controller.getTouristicBundleData(1l);
+		 
+		DtPurchase purchaseTest = new DtPurchase(null,fechaHardcodeada,11,2000d,fechaHardcodeada2, tourist, bundle);
+		
+		controller.registerPurchase(purchaseTest);
+		
+		System.out.println(yellow + "Info: DONE" + yellow);
+	}
+	
 }

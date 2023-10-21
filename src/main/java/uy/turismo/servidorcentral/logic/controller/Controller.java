@@ -15,6 +15,8 @@ import uy.turismo.servidorcentral.logic.daos.DepartmentDAO;
 import uy.turismo.servidorcentral.logic.daos.DepartmentDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.InscriptionDAO;
 import uy.turismo.servidorcentral.logic.daos.InscriptionDAOImpl;
+import uy.turismo.servidorcentral.logic.daos.PurchaseDAO;
+import uy.turismo.servidorcentral.logic.daos.PurchaseDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.TouristicActivityDAO;
 import uy.turismo.servidorcentral.logic.daos.TouristicActivityDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.TouristicBundleDAO;
@@ -29,6 +31,7 @@ import uy.turismo.servidorcentral.logic.datatypes.DtCategory;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
+import uy.turismo.servidorcentral.logic.datatypes.DtPurchase;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
@@ -38,6 +41,7 @@ import uy.turismo.servidorcentral.logic.entities.Category;
 import uy.turismo.servidorcentral.logic.entities.Department;
 import uy.turismo.servidorcentral.logic.entities.Inscription;
 import uy.turismo.servidorcentral.logic.entities.Provider;
+import uy.turismo.servidorcentral.logic.entities.Purchase;
 import uy.turismo.servidorcentral.logic.entities.Tourist;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
 import uy.turismo.servidorcentral.logic.entities.TouristicBundle;
@@ -604,4 +608,46 @@ public class Controller implements IController {
 
 		return activityOutput;
 	}
+
+	@Override
+	public void registerPurchase(DtPurchase purchase) {
+		// TODO Auto-generated method stub
+		PurchaseDAO purchaseDAO = new PurchaseDAOImpl();
+		
+		TouristicBundleDAO bundleDAO = new TouristicBundleDAOImpl();
+		
+		UserDAO userDAO = new UserDAOImpl();
+		
+		TouristicBundle bundle = bundleDAO.findById(purchase.getBundle().getId());
+		
+		Tourist tourist = (Tourist) userDAO.findById(purchase.getTourist().getId());
+		
+		Purchase newPurchase = new Purchase(null,
+				purchase.getPurchaseDate(),
+				purchase.getTouristAmount(),
+				purchase.getTotalCost(),
+				purchase.getExpireDate(),
+				tourist,
+				bundle);
+		
+		try {
+			purchaseDAO.create(newPurchase);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}	
+	}
+
+	@Override
+	public DtPurchase getPurchase(Long purchaseId) {
+		
+		PurchaseDAO purchaseDAO = new PurchaseDAOImpl();
+		
+		Purchase purchase = purchaseDAO.findById(purchaseId);
+		
+		DtPurchase purchaseData = purchase.getPurchaseDt();
+
+		return purchaseData;
+	}
+	
+	
 }
