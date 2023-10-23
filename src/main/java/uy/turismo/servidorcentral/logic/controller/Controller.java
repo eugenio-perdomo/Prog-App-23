@@ -217,6 +217,8 @@ public class Controller implements IController {
 				usrDAO.create(provUsr);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
+				e = new Exception("el usuario: " + provData.getNickname() + " O el e-mail: " + provData.getEmail() +" ya existe.");
+				throw e;
 			}
 			
 			
@@ -241,6 +243,8 @@ public class Controller implements IController {
 				usrDAO.create(touristUsr);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
+				e = new Exception("el usuario: " + touristData.getNickname() + " O el e-mail: " + touristData.getEmail() +" ya existe.");
+				throw e;
 			}
 			
 		}
