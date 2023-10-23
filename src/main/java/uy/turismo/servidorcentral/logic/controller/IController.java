@@ -93,14 +93,14 @@ public interface IController {
 	 * Da de alta una Actividad Turistica con los datos pasados por parametro
 	 * @param touristicActivityData
 	 */
-	public void registeTouristicActivity(DtTouristicActivity touristicActivityData);
+	public void registeTouristicActivity(DtTouristicActivity touristicActivityData) throws Exception;
 
 	
 	/**
 	 * Da de alta una Salida Turistica con los datos pasados por parametros
 	 * @param touristicDepartureData
 	 */
-	public void registerTouristicDeparture(DtTouristicDeparture touristicDepartureData);
+	public void registerTouristicDeparture(DtTouristicDeparture touristicDepartureData) throws Exception;
 	
 	
 	/**
@@ -178,7 +178,7 @@ public interface IController {
 	 * Crea una nueva compra
 	 * @param purchase -> datos de la compra.
 	 */
-	public void registerPurchase(DtPurchase purchase);
+	public void registerPurchase(DtPurchase purchase) throws Exception;
 	
 	public DtPurchase getPurchase(Long purchaseId);
 }

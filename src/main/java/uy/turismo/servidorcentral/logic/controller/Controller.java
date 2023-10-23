@@ -314,7 +314,7 @@ public class Controller implements IController {
 	
 	
 	@Override
-	public void registeTouristicActivity(DtTouristicActivity touristicActivityData) {
+	public void registeTouristicActivity(DtTouristicActivity touristicActivityData) throws Exception {
 		DepartmentDAO departmentDao = new DepartmentDAOImpl();
 		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
 		UserDAO userDao = new UserDAOImpl(); 
@@ -364,12 +364,13 @@ public class Controller implements IController {
 		try {
 			activityDao.create(activity);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e = new Exception("Falló al crear la actividad");
+			throw e;
 		}
 	}
 
 	@Override
-	public void registerTouristicDeparture(DtTouristicDeparture touristicDepartureData) {
+	public void registerTouristicDeparture(DtTouristicDeparture touristicDepartureData) throws Exception{
 		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
 		TouristicDepartureDAO departureDao = new TouristicDepartureDAOImpl();
 		
@@ -393,7 +394,8 @@ public class Controller implements IController {
 		try {
 			departureDao.create(departure);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e = new Exception("Falló al crear la salida");
+			throw e;
 		}
 		
 	}
@@ -432,7 +434,7 @@ public class Controller implements IController {
 	}
 	
 	@Override
-	public void registerTouristicBundle(DtTouristicBundle touristicBundleData) {
+	public void registerTouristicBundle(DtTouristicBundle touristicBundleData)  {
 		
 		TouristicBundleDAO touristicBundleDAO = new TouristicBundleDAOImpl();
 		
@@ -614,7 +616,7 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public void registerPurchase(DtPurchase purchase) {
+	public void registerPurchase(DtPurchase purchase) throws Exception {
 		// TODO Auto-generated method stub
 		PurchaseDAO purchaseDAO = new PurchaseDAOImpl();
 		
@@ -637,7 +639,8 @@ public class Controller implements IController {
 		try {
 			purchaseDAO.create(newPurchase);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e = new Exception("Falló al realizar la compra, intente nuevamente.");
+			throw e;
 		}	
 	}
 

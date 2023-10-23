@@ -283,7 +283,7 @@ public class ControllerTest {
 	}
 	
 	@Test
-	public void registerPurchase() {
+	public void registerPurchase() throws Exception {
 		IController controller = ControllerFactory.getIController();
 		String yellow = "\u001B[33m";
 		
