@@ -65,8 +65,9 @@ public interface IController {
 	/**
 	 * Da de alta un usuario con los datos pasados por parametros (puede ser tanto turista como proveedor)
 	 * @param userData
+	 * @throws Exception 
 	 */
-	public void registerUser(DtUser userData);
+	public void registerUser(DtUser userData) throws Exception;
 	
 	
 	/**
