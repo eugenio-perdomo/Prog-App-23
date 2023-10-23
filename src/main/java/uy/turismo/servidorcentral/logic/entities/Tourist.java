@@ -68,9 +68,10 @@ public class Tourist extends User {
 	/**
 	 * Crea un DtTourist con todos los datos del objeto y lo devuelve
 	 * @return
+	 * @throws Exception 
 	 */
 	@Override
-	public DtUser getDt() {
+	public DtUser getDt() throws Exception {
 		List<DtTouristicDeparture> listDepartures = new ArrayList<DtTouristicDeparture>();
 		List<DtInscription> listInscriptions = new ArrayList<DtInscription>();
 		List<DtPurchase> listPurchases = new ArrayList<DtPurchase>();
@@ -89,29 +90,44 @@ public class Tourist extends User {
 			}
 		}
 		
+		DtTourist outTouristData = null;
 		
-		return new DtTourist(
-				this.id,
-				this.name,
-				this.nickname,
-				this.email,
-				this.lastName,
-				this.birthDate,
-				this.getImage(),
-				this.nationality,
-				listDepartures,
-				this.password,
-				listInscriptions,
-				listPurchases);
+		try {
+			outTouristData = new DtTourist(
+					this.id,
+					this.name,
+					this.nickname,
+					this.email,
+					this.lastName,
+					this.birthDate,
+					this.getImage(),
+					this.nationality,
+					listDepartures,
+					this.password,
+					listInscriptions,
+					listPurchases);
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return outTouristData;
 	}
 
 	@Override
-	public DtUser getShortDt() {
-		DtUser dtOutput = new DtTourist(
-				this.id, 
-				this.nickname,
-				this.email,
-				this.getImage());
+	public DtUser getShortDt() throws Exception {
+		
+		DtUser dtOutput = null;
+		
+		try {
+			dtOutput = new DtTourist(
+					this.id, 
+					this.nickname,
+					this.email,
+					this.getImage());
+			
+		} catch (Exception e) {
+			throw e;
+		}
 	
 		return dtOutput;
 	}

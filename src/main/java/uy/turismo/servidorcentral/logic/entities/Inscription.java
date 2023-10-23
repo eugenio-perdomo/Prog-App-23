@@ -101,7 +101,17 @@ public class Inscription implements Serializable {
 	}
 	
 	public DtTourist getTouristShortDt() {
-		return (DtTourist) this.tourist.getShortDt();
+		
+		DtTourist dtOutPut = null;
+		
+		try {
+			dtOutPut = (DtTourist) this.tourist.getShortDt();
+			
+		} catch (Exception e) {
+			System.out.println("Exception: " + e.getMessage());
+		}
+		
+		return dtOutPut;
 	}
 	
 	public DtInscription getDt() {

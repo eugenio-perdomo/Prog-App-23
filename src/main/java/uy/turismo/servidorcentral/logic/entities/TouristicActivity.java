@@ -333,22 +333,29 @@ public class TouristicActivity implements Serializable{
 		}
 		
 		
-		DtTouristicActivity dtOutput;
-		dtOutput = new DtTouristicActivity(
-				this.id,
-				this.name,
-				this.description,
-				this.duration,
-				this.costPerTourist,
-				this.city,
-				this.getImage(),
-				this.state,
-				this.uploadDate,
-				(DtProvider) this.provider.getShortDt(),
-				this.department.getShortDt(),
-				listDtDepartures,
-				listDtBundles,
-				listDtCategories);
+		DtTouristicActivity dtOutput =null;
+		
+		try {
+			
+			dtOutput = new DtTouristicActivity(
+					this.id,
+					this.name,
+					this.description,
+					this.duration,
+					this.costPerTourist,
+					this.city,
+					this.getImage(),
+					this.state,
+					this.uploadDate,
+					(DtProvider) this.provider.getShortDt(),
+					this.department.getShortDt(),
+					listDtDepartures,
+					listDtBundles,
+					listDtCategories);
+			
+		}catch (Exception e) {
+			System.out.println("Exception: " + e.getMessage());
+		}
 		
 		return dtOutput;	
 	}

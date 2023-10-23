@@ -20,35 +20,40 @@ public interface IController {
 	 * @param email
 	 * @param password
 	 * @return Devulve true si existe y false si no
+	 * @throws Exception 
 	 */
-	public DtUser checkCredentials(String email, String password);
+	public DtUser checkCredentials(String email, String password) throws Exception;
 	
 	/**
 	 * Devuelve una Lista de DtUser con id, nickname y email
 	 * @return List<DtUser>
+	 * @throws Exception 
 	 */
-	public List<DtUser> getListUser();
+	public List<DtUser> getListUser() throws Exception;
 	
 	
 	/**
 	 * Busca y devuelve los datos de un usuario
 	 * @param id del usuario a encontrar
 	 * @return DtUser
+	 * @throws Exception 
 	 */
-	public DtUser getUserData(Long id);
+	public DtUser getUserData(Long id) throws Exception;
 	
 	
 	/**
 	 * Devuelve una lista de todos los Turistas con el nickname, el email y su id.
 	 * @return List<DtTourist>
+	 * @throws Exception 
 	 */
-	public List<DtTourist>  getListTourist();
+	public List<DtTourist>  getListTourist() throws Exception;
 	
 	/**
 	 * Devuelve una lista de todos los Turistas con el nickname, el email y su id.
 	 * @return List<DtProvider>
+	 * @throws Exception 
 	 */
-	public List<DtProvider>  getListProvider();
+	public List<DtProvider>  getListProvider() throws Exception;
 	
 	/**
 	 * Modifica un usuario ya existente con nuevos datos

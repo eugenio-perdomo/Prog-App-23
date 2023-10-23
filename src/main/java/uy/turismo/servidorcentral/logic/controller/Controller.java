@@ -73,30 +73,41 @@ public class Controller implements IController {
 	
 
 	@Override
-	public List<DtUser> getListUser() {
+	public List<DtUser> getListUser() throws Exception {
 		UserDAO userDao = new UserDAOImpl();
 		List<User> users = userDao.findAll();
 		List<DtUser> usersOutput = new ArrayList<DtUser>();
-		
-		for(User usr : users) {
-			usersOutput.add(usr.getShortDt());
+		try {
+			for(User usr : users) {
+				usersOutput.add(usr.getShortDt());
+			}
+			
+		} catch (Exception e) {
+			throw e;
 		}
 		
 		return usersOutput;
 	}
 
 	@Override
-	public DtUser getUserData(Long id) {
+	public DtUser getUserData(Long id) throws Exception {
+
+		
 		UserDAO userDao = new UserDAOImpl();
 		User user = userDao.findById(id);
 		DtUser userOutput;
-		if(user instanceof Provider) {
-			Provider provider = (Provider) user;
-			userOutput = provider.getDt();
-		}else {
-			Tourist tourist = (Tourist) user;
-			userOutput = tourist.getDt();
+		try {
+			if(user instanceof Provider) {
+				Provider provider = (Provider) user;
+				userOutput = provider.getDt();
+			}else {
+				Tourist tourist = (Tourist) user;
+				userOutput = tourist.getDt();
+				
+			}
 			
+		} catch (Exception e) {
+			throw e;
 		}
 		
 		return userOutput;
@@ -104,26 +115,36 @@ public class Controller implements IController {
 	
 	
 	@Override
-	public List<DtTourist>  getListTourist(){
+	public List<DtTourist>  getListTourist() throws Exception{
 		UserDAO userDAO = new UserDAOImpl();
 		List<Tourist> users = userDAO.findAllTourists();
 		List<DtTourist> userOutput = new ArrayList<DtTourist>();
 		
-		for(Tourist tur : users){
-			userOutput.add((DtTourist)tur.getShortDt());
+		try {
+			for(Tourist tur : users){
+				userOutput.add((DtTourist)tur.getShortDt());
+			}
+			
+		} catch (Exception e) {
+			throw e;
 		}
 		
 		return userOutput;
 	}
 	
 	@Override
-	public List<DtProvider>  getListProvider(){
+	public List<DtProvider>  getListProvider() throws Exception{
 		UserDAO userDAO = new UserDAOImpl();
 		List<Provider> users = userDAO.findAllProviders();
 		List<DtProvider> userOutput = new ArrayList<DtProvider>();
 		
-		for(Provider prov : users){
-			userOutput.add((DtProvider)prov.getShortDt());
+		try {
+			for(Provider prov : users){
+				userOutput.add((DtProvider)prov.getShortDt());
+			}
+			
+		} catch (Exception e) {
+			throw e;
 		}
 		
 		return userOutput;
@@ -582,14 +603,19 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public DtUser checkCredentials(String email, String password) {
+	public DtUser checkCredentials(String email, String password) throws Exception {
 		UserDAO userDao = new UserDAOImpl();
 		
 		User user = userDao.checkCredentials(email, password);
-		if(user == null) {
-			return null;
-		}else {
-			return user.getDt();
+		try {
+			if(user == null) {
+				return null;
+			}else {
+				return user.getDt();
+			}
+			
+		} catch (Exception e) {
+			throw e;
 		}
 	}
 		

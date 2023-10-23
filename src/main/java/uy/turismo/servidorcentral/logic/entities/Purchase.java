@@ -106,12 +106,22 @@ public class Purchase implements Serializable {
 	
 	public DtPurchase getPurchaseDt() {
 		
+		DtTourist touristData = null;
+		
+		try {
+			touristData = (DtTourist) this.tourist.getShortDt();
+		} catch (Exception e) {
+			
+			System.out.println("Exception: " + e.getMessage());
+		}
+		
+		
 		DtPurchase purchase = new DtPurchase(this.id,
 				this.purchaseDate,
 				this.touristAmount,
 				this.totalCost,
 				this.expireDate,
-				(DtTourist) this.tourist.getShortDt(),
+				touristData,
 				this.touristicBundle.getShortDt());
 		
 		return purchase;
