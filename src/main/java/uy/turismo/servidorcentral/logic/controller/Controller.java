@@ -191,7 +191,7 @@ public class Controller implements IController {
 	}
 	
 	//testeo pendiente
-	public void registerUser(DtUser usrData) {
+	public void registerUser(DtUser usrData) throws Exception {
 		UserDAO usrDAO = new UserDAOImpl();
 		
 		if(usrData instanceof DtProvider) {
