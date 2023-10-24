@@ -364,7 +364,7 @@ public class Controller implements IController {
 		try {
 			activityDao.create(activity);
 		} catch (Exception e) {
-			e = new Exception("Falló al crear la actividad");
+			e = new Exception("El nombre: " + touristicActivityData.getName() + " ya existe para la actividad.");
 			throw e;
 		}
 	}
@@ -394,7 +394,7 @@ public class Controller implements IController {
 		try {
 			departureDao.create(departure);
 		} catch (Exception e) {
-			e = new Exception("Falló al crear la salida");
+			e = new Exception("La Salida: " + touristicDepartureData.getName() + " ya existe.");
 			throw e;
 		}
 		
