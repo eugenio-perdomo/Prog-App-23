@@ -119,14 +119,14 @@ public interface IController {
 	 * @param touristicBundleData
 	 * Da de alta un paquete Turistico con los datos pasados por parametros.
 	 */
-	public void registerTouristicBundle(DtTouristicBundle touristicBundleData);
+	public void registerTouristicBundle(DtTouristicBundle touristicBundleData) throws Exception;
 	
 	/**
 	 * 
 	 * @param departmentData
 	 * Da de alta un departamento con los datos pasados por parametro.
 	 */
-	public void registerDepartment(DtDepartment departmentData);
+	public void registerDepartment(DtDepartment departmentData) throws Exception;
 
 	
 	/**
@@ -145,13 +145,13 @@ public interface IController {
 	
 	public DtTouristicDeparture getTouristicDepartureData(long touristicDepartureId);
 
-	void registerInscription(DtInscription inscriptionData);
+	void registerInscription(DtInscription inscriptionData) throws Exception;
 	
 	/**
 	 * Registra una nueva categoria.
 	 * @param category -> Datos de la categoria a registrar
 	 */
-	public void registerCategory(DtCategory category);
+	public void registerCategory(DtCategory category) throws Exception;
 	
 	/**
 	 * 
