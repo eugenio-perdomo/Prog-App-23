@@ -61,7 +61,7 @@ wget -O src/main/resources/images/Departure/'Degusta Octubre.png' tinyurl.com/mr
 wget -O src/main/resources/images/Departure/'Degusta Noviembre.png' tinyurl.com/yzz6b7et
 
 #S16
-wget -O src/main/resources/images/Departure/'Tour Colonia del Sacrameinto 30-10.png' tinyurl.com/mv7etjx2
+wget -O src/main/resources/images/Departure/'Tour Colonia del Sacramento 30-10.png' tinyurl.com/mv7etjx2
 
 #S17
 wget -O src/main/resources/images/Departure/'Cabalgata Extrema.png' tinyurl.com/3vwzthcr
