@@ -238,6 +238,8 @@ public class Controller implements IController {
 				usrDAO.create(provUsr);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
+				e = new Exception("el usuario: " + provData.getNickname() + " O el e-mail: " + provData.getEmail() +" ya existe.");
+				throw e;
 			}
 			
 			
@@ -262,6 +264,8 @@ public class Controller implements IController {
 				usrDAO.create(touristUsr);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
+				e = new Exception("el usuario: " + touristData.getNickname() + " O el e-mail: " + touristData.getEmail() +" ya existe.");
+				throw e;
 			}
 			
 		}
@@ -331,7 +335,7 @@ public class Controller implements IController {
 	
 	
 	@Override
-	public void registeTouristicActivity(DtTouristicActivity touristicActivityData) {
+	public void registeTouristicActivity(DtTouristicActivity touristicActivityData) throws Exception {
 		DepartmentDAO departmentDao = new DepartmentDAOImpl();
 		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
 		UserDAO userDao = new UserDAOImpl(); 
@@ -381,12 +385,13 @@ public class Controller implements IController {
 		try {
 			activityDao.create(activity);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e = new Exception("El nombre: " + touristicActivityData.getName() + " ya existe para la actividad.");
+			throw e;
 		}
 	}
 
 	@Override
-	public void registerTouristicDeparture(DtTouristicDeparture touristicDepartureData) {
+	public void registerTouristicDeparture(DtTouristicDeparture touristicDepartureData) throws Exception{
 		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
 		TouristicDepartureDAO departureDao = new TouristicDepartureDAOImpl();
 		
@@ -410,7 +415,8 @@ public class Controller implements IController {
 		try {
 			departureDao.create(departure);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e = new Exception("La Salida: " + touristicDepartureData.getName() + " ya existe.");
+			throw e;
 		}
 		
 	}
@@ -449,7 +455,7 @@ public class Controller implements IController {
 	}
 	
 	@Override
-	public void registerTouristicBundle(DtTouristicBundle touristicBundleData) {
+	public void registerTouristicBundle(DtTouristicBundle touristicBundleData)  throws Exception{
 		
 		TouristicBundleDAO touristicBundleDAO = new TouristicBundleDAOImpl();
 		
@@ -466,10 +472,12 @@ public class Controller implements IController {
 			touristicBundleDAO.create(bundle);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			e = new Exception("El Paquete: " + touristicBundleData.getName() + " ya existe.");
+			throw e;
 		}
 	}
 	
-	public void registerDepartment(DtDepartment departmentData) {
+	public void registerDepartment(DtDepartment departmentData) throws Exception{
 		DepartmentDAO departmentDAO = new DepartmentDAOImpl();
 		
 		Department department = new Department(null, departmentData.getName(), departmentData.getDescription(), departmentData.getWebSite());
@@ -483,6 +491,8 @@ public class Controller implements IController {
 			departmentDAO.create(department);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			e = new Exception("El Departamento: " + departmentData.getName() + " ya existe.");
+			throw e;
 		}
 	}
 
@@ -495,7 +505,7 @@ public class Controller implements IController {
 		return outputBundle;
 	}
 	
-	public void registerInscription(DtInscription inscriptionData) {
+	public void registerInscription(DtInscription inscriptionData) throws Exception{
 		InscriptionDAO inscDAO = new InscriptionDAOImpl();
 		TouristicDepartureDAO departureDao = new TouristicDepartureDAOImpl();
 		UserDAO touristDao = new UserDAOImpl();
@@ -521,6 +531,8 @@ public class Controller implements IController {
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
+			e = new Exception("La Inscripcion: " + inscriptionData.getName() + " ya existe.");
+			throw e;
 		}
 	}
 	
@@ -544,7 +556,7 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public void registerCategory(DtCategory categoryData) {
+	public void registerCategory(DtCategory categoryData) throws Exception{
 		// TODO Auto-generated method stub
 		
 		TouristicActivityDAO activityDAO = new TouristicActivityDAOImpl();
@@ -558,6 +570,8 @@ public class Controller implements IController {
 			categoryDAO.create(category);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			e = new Exception("La Categoria: " + categoryData.getName() + " ya existe.");
+			throw e;
 		}
 	
 	}
@@ -636,7 +650,7 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public void registerPurchase(DtPurchase purchase) {
+	public void registerPurchase(DtPurchase purchase) throws Exception {
 		// TODO Auto-generated method stub
 		PurchaseDAO purchaseDAO = new PurchaseDAOImpl();
 		
@@ -659,7 +673,8 @@ public class Controller implements IController {
 		try {
 			purchaseDAO.create(newPurchase);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e = new Exception("Falló al realizar la compra, intente nuevamente.");
+			throw e;
 		}	
 	}
 

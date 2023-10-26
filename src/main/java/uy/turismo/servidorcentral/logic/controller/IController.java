@@ -98,14 +98,14 @@ public interface IController {
 	 * Da de alta una Actividad Turistica con los datos pasados por parametro
 	 * @param touristicActivityData
 	 */
-	public void registeTouristicActivity(DtTouristicActivity touristicActivityData);
+	public void registeTouristicActivity(DtTouristicActivity touristicActivityData) throws Exception;
 
 	
 	/**
 	 * Da de alta una Salida Turistica con los datos pasados por parametros
 	 * @param touristicDepartureData
 	 */
-	public void registerTouristicDeparture(DtTouristicDeparture touristicDepartureData);
+	public void registerTouristicDeparture(DtTouristicDeparture touristicDepartureData) throws Exception;
 	
 	
 	/**
@@ -124,14 +124,14 @@ public interface IController {
 	 * @param touristicBundleData
 	 * Da de alta un paquete Turistico con los datos pasados por parametros.
 	 */
-	public void registerTouristicBundle(DtTouristicBundle touristicBundleData);
+	public void registerTouristicBundle(DtTouristicBundle touristicBundleData) throws Exception;
 	
 	/**
 	 * 
 	 * @param departmentData
 	 * Da de alta un departamento con los datos pasados por parametro.
 	 */
-	public void registerDepartment(DtDepartment departmentData);
+	public void registerDepartment(DtDepartment departmentData) throws Exception;
 
 	
 	/**
@@ -150,13 +150,13 @@ public interface IController {
 	
 	public DtTouristicDeparture getTouristicDepartureData(long touristicDepartureId);
 
-	void registerInscription(DtInscription inscriptionData);
+	void registerInscription(DtInscription inscriptionData) throws Exception;
 	
 	/**
 	 * Registra una nueva categoria.
 	 * @param category -> Datos de la categoria a registrar
 	 */
-	public void registerCategory(DtCategory category);
+	public void registerCategory(DtCategory category) throws Exception;
 	
 	/**
 	 * 
@@ -183,7 +183,7 @@ public interface IController {
 	 * Crea una nueva compra
 	 * @param purchase -> datos de la compra.
 	 */
-	public void registerPurchase(DtPurchase purchase);
+	public void registerPurchase(DtPurchase purchase) throws Exception;
 	
 	public DtPurchase getPurchase(Long purchaseId);
 }

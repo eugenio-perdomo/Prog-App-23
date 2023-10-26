@@ -144,7 +144,12 @@ public class ControllerTest {
 				null
 				);
 		
-		controller.registerTouristicDeparture(departure);
+		try {
+			controller.registerTouristicDeparture(departure);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		System.out.println(yellow + "Info: DONE" + yellow);
 	}
@@ -240,7 +245,12 @@ public class ControllerTest {
 		
 		DtCategory categoryTest = new DtCategory(null, "Playas" , null, null);
 		
-		controller.registerCategory(categoryTest);
+		try {
+			controller.registerCategory(categoryTest);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		System.out.println(yellow + "Info: DONE" + yellow);
 		
@@ -281,25 +291,25 @@ public class ControllerTest {
 		System.out.println(activities);
 		
 	}
-	
-//	@Test
-//	public void registerPurchase() {
-//		IController controller = ControllerFactory.getIController();
-//		String yellow = "\u001B[33m";
-//		
-//		 LocalDate fechaHardcodeada = LocalDate.of(2023, 1, 1);
-//		 
-//		 LocalDate fechaHardcodeada2 = LocalDate.of(2023, 2, 2);
-//		 
-//		 DtTourist tourist = (DtTourist) controller.getUserData(1l);
-//		 
-//		 DtTouristicBundle bundle = controller.getTouristicBundleData(1l);
-//		 
-//		DtPurchase purchaseTest = new DtPurchase(null,fechaHardcodeada,11,2000d,fechaHardcodeada2, tourist, bundle);
-//		
-//		controller.registerPurchase(purchaseTest);
-//		
-//		System.out.println(yellow + "Info: DONE" + yellow);
-//	}
+
+	@Test
+	public void registerPurchase() throws Exception {
+		IController controller = ControllerFactory.getIController();
+		String yellow = "\u001B[33m";
+		
+		 LocalDate fechaHardcodeada = LocalDate.of(2023, 1, 1);
+		 
+		 LocalDate fechaHardcodeada2 = LocalDate.of(2023, 2, 2);
+		 
+		 DtTourist tourist = (DtTourist) controller.getUserData(1l);
+		 
+		 DtTouristicBundle bundle = controller.getTouristicBundleData(1l);
+		 
+		DtPurchase purchaseTest = new DtPurchase(null,fechaHardcodeada,11,2000d,fechaHardcodeada2, tourist, bundle);
+		
+		controller.registerPurchase(purchaseTest);
+		
+		System.out.println(yellow + "Info: DONE" + yellow);
+	}
 	
 }
