@@ -19,6 +19,7 @@ import uy.turismo.servidorcentral.logic.datatypes.DtPurchase;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 
 @Entity
 public class Purchase implements Serializable {
@@ -102,6 +103,11 @@ public class Purchase implements Serializable {
 
 	public TouristicBundle getTouristicBundle() {
 		return touristicBundle;
+	}
+	
+
+	public DtTouristicBundle getBundleShortDt() {
+		return this.touristicBundle.getShortDt();
 	}
 	
 	public DtPurchase getPurchaseDt() {

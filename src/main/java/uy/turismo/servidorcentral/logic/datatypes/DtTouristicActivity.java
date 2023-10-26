@@ -7,7 +7,6 @@ import java.util.List;
 
 import uy.turismos.servidorcentral.logic.enums.ActivityState;
 
-
 public class DtTouristicActivity extends DtBaseEntity {
 
 	private String description;
@@ -21,9 +20,9 @@ public class DtTouristicActivity extends DtBaseEntity {
 	private DtDepartment department;
 	private List<DtTouristicDeparture> departures;
 	private List<DtTouristicBundle> bundles;
-	//codigo agregado: LT
+	// codigo agregado: LT
 	private List<DtCategory> categories;
-	
+
 	public DtTouristicActivity() {
 		// TODO Auto-generated constructor stub
 	}
@@ -33,7 +32,8 @@ public class DtTouristicActivity extends DtBaseEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public DtTouristicActivity(Long id, String name, BufferedImage image, ActivityState state, String description,DtDepartment department , List<DtCategory> categories) {
+	public DtTouristicActivity(Long id, String name, BufferedImage image, ActivityState state, String description,
+			DtDepartment department, List<DtCategory> categories) {
 		super(id, name);
 		this.image = image;
 		this.state = state;
@@ -42,25 +42,13 @@ public class DtTouristicActivity extends DtBaseEntity {
 		this.categories = categories;
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	//codigo agregado: LT
-	public DtTouristicActivity(
-			Long id,
-			String name,
-			String description,
-			Double duration,
-			Double costPerTourist,
-			String city,
-			BufferedImage image,
-			ActivityState state,
-			LocalDate uploadDate,
-			DtProvider provider,
-			DtDepartment department,
-			List<DtTouristicDeparture> departures,
-			List<DtTouristicBundle> bundles,
+
+	// codigo agregado: LT
+	public DtTouristicActivity(Long id, String name, String description, Double duration, Double costPerTourist,
+			String city, BufferedImage image, ActivityState state, LocalDate uploadDate, DtProvider provider,
+			DtDepartment department, List<DtTouristicDeparture> departures, List<DtTouristicBundle> bundles,
 			List<DtCategory> categories) {
-		
+
 		super(id, name);
 		this.description = description;
 		this.duration = duration;
@@ -76,8 +64,6 @@ public class DtTouristicActivity extends DtBaseEntity {
 		this.categories = categories;
 	}
 
-	
-	
 	public String getDescription() {
 		return description;
 	}
@@ -93,8 +79,7 @@ public class DtTouristicActivity extends DtBaseEntity {
 	public String getCity() {
 		return city;
 	}
-	
-	
+
 	public BufferedImage getImage() {
 		return image;
 	}
@@ -118,14 +103,28 @@ public class DtTouristicActivity extends DtBaseEntity {
 	public List<DtTouristicBundle> getBundles() {
 		return bundles;
 	}
-	
-	//codigo agregado: LT
-	public List<DtCategory> getCategories(){
+
+	// codigo agregado: LT
+	public List<DtCategory> getCategories() {
 		return categories;
 	}
-	
+
 	public ActivityState getState() {
 		return state;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+
+		if (!(obj instanceof DtTouristicActivity)) {
+			return false;
+		}
+
+		if (this.id == ((DtTouristicActivity) obj).getId()) {
+			return true;
+		}
+
+		return false;
+	}
+
 }

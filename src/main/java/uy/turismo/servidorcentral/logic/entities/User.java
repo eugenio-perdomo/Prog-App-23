@@ -171,16 +171,18 @@ public abstract class User implements Serializable  {
 	public void setImage(BufferedImage image) {
 
 		String imageName = this.nickname + ".png";
+		
 		InputStream inputStram = getClass().getClassLoader().getResourceAsStream("config.properties");
 		Properties properties = new Properties();
 		
 		try {
 			properties.load(inputStram);
 			String imagesDirPath = properties.getProperty("imagesDirPath").concat("User/");
+			System.out.println("Direccion de las imagenes: " + imagesDirPath);
 			File saveFile = new File(imagesDirPath + imageName);
 			ImageIO.write(image, "png", saveFile);
 		} catch (Exception e) {
-			System.err.println("Error al guardar la imagen en " + this.getClass() + ":" + e.getMessage());
+			System.err.println("Error al guardar la imagen en " + this.getClass() + ": " + e.getMessage() + " tipo de excepcion:" + e.getClass());
 		}finally {
 			this.image = imageName;
 		}
