@@ -73,30 +73,41 @@ public class Controller implements IController {
 	
 
 	@Override
-	public List<DtUser> getListUser() {
+	public List<DtUser> getListUser() throws Exception {
 		UserDAO userDao = new UserDAOImpl();
 		List<User> users = userDao.findAll();
 		List<DtUser> usersOutput = new ArrayList<DtUser>();
-		
-		for(User usr : users) {
-			usersOutput.add(usr.getShortDt());
+		try {
+			for(User usr : users) {
+				usersOutput.add(usr.getShortDt());
+			}
+			
+		} catch (Exception e) {
+			throw e;
 		}
 		
 		return usersOutput;
 	}
 
 	@Override
-	public DtUser getUserData(Long id) {
+	public DtUser getUserData(Long id) throws Exception {
+
+		
 		UserDAO userDao = new UserDAOImpl();
 		User user = userDao.findById(id);
 		DtUser userOutput;
-		if(user instanceof Provider) {
-			Provider provider = (Provider) user;
-			userOutput = provider.getDt();
-		}else {
-			Tourist tourist = (Tourist) user;
-			userOutput = tourist.getDt();
+		try {
+			if(user instanceof Provider) {
+				Provider provider = (Provider) user;
+				userOutput = provider.getDt();
+			}else {
+				Tourist tourist = (Tourist) user;
+				userOutput = tourist.getDt();
+				
+			}
 			
+		} catch (Exception e) {
+			throw e;
 		}
 		
 		return userOutput;
@@ -104,26 +115,36 @@ public class Controller implements IController {
 	
 	
 	@Override
-	public List<DtTourist>  getListTourist(){
+	public List<DtTourist>  getListTourist() throws Exception{
 		UserDAO userDAO = new UserDAOImpl();
 		List<Tourist> users = userDAO.findAllTourists();
 		List<DtTourist> userOutput = new ArrayList<DtTourist>();
 		
-		for(Tourist tur : users){
-			userOutput.add((DtTourist)tur.getShortDt());
+		try {
+			for(Tourist tur : users){
+				userOutput.add((DtTourist)tur.getShortDt());
+			}
+			
+		} catch (Exception e) {
+			throw e;
 		}
 		
 		return userOutput;
 	}
 	
 	@Override
-	public List<DtProvider>  getListProvider(){
+	public List<DtProvider>  getListProvider() throws Exception{
 		UserDAO userDAO = new UserDAOImpl();
 		List<Provider> users = userDAO.findAllProviders();
 		List<DtProvider> userOutput = new ArrayList<DtProvider>();
 		
-		for(Provider prov : users){
-			userOutput.add((DtProvider)prov.getShortDt());
+		try {
+			for(Provider prov : users){
+				userOutput.add((DtProvider)prov.getShortDt());
+			}
+			
+		} catch (Exception e) {
+			throw e;
 		}
 		
 		return userOutput;
@@ -435,7 +456,7 @@ public class Controller implements IController {
 	}
 	
 	@Override
-	public void registerTouristicBundle(DtTouristicBundle touristicBundleData)  {
+	public void registerTouristicBundle(DtTouristicBundle touristicBundleData)  throws Exception{
 		
 		TouristicBundleDAO touristicBundleDAO = new TouristicBundleDAOImpl();
 		
@@ -452,10 +473,12 @@ public class Controller implements IController {
 			touristicBundleDAO.create(bundle);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			e = new Exception("El Paquete: " + touristicBundleData.getName() + " ya existe.");
+			throw e;
 		}
 	}
 	
-	public void registerDepartment(DtDepartment departmentData) {
+	public void registerDepartment(DtDepartment departmentData) throws Exception{
 		DepartmentDAO departmentDAO = new DepartmentDAOImpl();
 		
 		Department department = new Department(null, departmentData.getName(), departmentData.getDescription(), departmentData.getWebSite());
@@ -469,6 +492,8 @@ public class Controller implements IController {
 			departmentDAO.create(department);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			e = new Exception("El Departamento: " + departmentData.getName() + " ya existe.");
+			throw e;
 		}
 	}
 
@@ -481,7 +506,7 @@ public class Controller implements IController {
 		return outputBundle;
 	}
 	
-	public void registerInscription(DtInscription inscriptionData) {
+	public void registerInscription(DtInscription inscriptionData) throws Exception{
 		InscriptionDAO inscDAO = new InscriptionDAOImpl();
 		TouristicDepartureDAO departureDao = new TouristicDepartureDAOImpl();
 		UserDAO touristDao = new UserDAOImpl();
@@ -507,6 +532,8 @@ public class Controller implements IController {
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
+			e = new Exception("La Inscripcion: " + inscriptionData.getName() + " ya existe.");
+			throw e;
 		}
 	}
 	
@@ -530,7 +557,7 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public void registerCategory(DtCategory categoryData) {
+	public void registerCategory(DtCategory categoryData) throws Exception{
 		// TODO Auto-generated method stub
 		
 		TouristicActivityDAO activityDAO = new TouristicActivityDAOImpl();
@@ -544,6 +571,8 @@ public class Controller implements IController {
 			categoryDAO.create(category);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			e = new Exception("La Categoria: " + categoryData.getName() + " ya existe.");
+			throw e;
 		}
 	
 	}
@@ -589,14 +618,19 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public DtUser checkCredentials(String email, String password) {
+	public DtUser checkCredentials(String email, String password) throws Exception {
 		UserDAO userDao = new UserDAOImpl();
 		
 		User user = userDao.checkCredentials(email, password);
-		if(user == null) {
-			return null;
-		}else {
-			return user.getDt();
+		try {
+			if(user == null) {
+				return null;
+			}else {
+				return user.getDt();
+			}
+			
+		} catch (Exception e) {
+			throw e;
 		}
 	}
 		

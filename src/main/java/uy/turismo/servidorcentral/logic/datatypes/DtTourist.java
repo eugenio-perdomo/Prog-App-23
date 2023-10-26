@@ -11,6 +11,7 @@ public class DtTourist extends DtUser {
 	private String nationality;
 	private List<DtTouristicDeparture> departures;
 	private List<DtInscription> inscriptions;
+	private List<DtTouristicBundle> bundles;
 	private List<DtPurchase> purchases;
 	
 	public DtTourist() {
@@ -34,11 +35,13 @@ public class DtTourist extends DtUser {
 			List<DtTouristicDeparture> departures, 
 			String password,
 			List<DtInscription> inscriptions,
+			List<DtTouristicBundle> bundles,
 			List<DtPurchase> purchases) {
 		super(id, name, nickname, email, lastName, birthDate, image, password);
 		this.nationality = nationality;
 		this.departures = departures;
 		this.inscriptions = inscriptions;
+		this.bundles = bundles;
 		this.purchases = purchases;
 		// TODO Auto-generated constructor stub
 	}
@@ -58,4 +61,10 @@ public class DtTourist extends DtUser {
 	public List<DtPurchase> getPurchases() {
 		return purchases;
 	}
+
+	public List<DtTouristicBundle> getBundles() {
+		return bundles;
+	}
+	
+	
 }

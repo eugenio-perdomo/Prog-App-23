@@ -12,6 +12,7 @@ import jakarta.persistence.Transient;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
 import uy.turismo.servidorcentral.logic.datatypes.DtPurchase;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 
@@ -68,11 +69,13 @@ public class Tourist extends User {
 	/**
 	 * Crea un DtTourist con todos los datos del objeto y lo devuelve
 	 * @return
+	 * @throws Exception 
 	 */
 	@Override
-	public DtUser getDt() {
+	public DtUser getDt() throws Exception {
 		List<DtTouristicDeparture> listDepartures = new ArrayList<DtTouristicDeparture>();
 		List<DtInscription> listInscriptions = new ArrayList<DtInscription>();
+		List<DtTouristicBundle> listBundles = new ArrayList<DtTouristicBundle>();
 		List<DtPurchase> listPurchases = new ArrayList<DtPurchase>();
 		
 		if(this.inscriptions != null) {
@@ -83,35 +86,53 @@ public class Tourist extends User {
 			
 		}
 		
+		
 		if(this.purchases != null) {
 			for(Purchase purchase : this.purchases) {
 				listPurchases.add(purchase.getDtForTourist());
+				listBundles.add(purchase.getBundleShortDt());
 			}
 		}
 		
+		DtTourist outTouristData = null;
 		
-		return new DtTourist(
-				this.id,
-				this.name,
-				this.nickname,
-				this.email,
-				this.lastName,
-				this.birthDate,
-				this.getImage(),
-				this.nationality,
-				listDepartures,
-				this.password,
-				listInscriptions,
-				listPurchases);
+		try {
+			outTouristData = new DtTourist(
+					this.id,
+					this.name,
+					this.nickname,
+					this.email,
+					this.lastName,
+					this.birthDate,
+					this.getImage(),
+					this.nationality,
+					listDepartures,
+					this.password,
+					listInscriptions,
+					listBundles,
+					listPurchases);
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return outTouristData;
 	}
 
 	@Override
-	public DtUser getShortDt() {
-		DtUser dtOutput = new DtTourist(
-				this.id, 
-				this.nickname,
-				this.email,
-				this.getImage());
+	public DtUser getShortDt() throws Exception {
+		
+		DtUser dtOutput = null;
+		
+		try {
+			dtOutput = new DtTourist(
+					this.id, 
+					this.nickname,
+					this.email,
+					this.getImage());
+			
+		} catch (Exception e) {
+			throw e;
+		}
 	
 		return dtOutput;
 	}

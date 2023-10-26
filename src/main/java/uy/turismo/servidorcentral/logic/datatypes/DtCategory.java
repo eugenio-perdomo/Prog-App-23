@@ -29,6 +29,7 @@ public class DtCategory extends DtBaseEntity{
 		this.bundles = bundles;
 	}
 	
+	
 	public List<DtTouristicActivity> getActivities() {
 		return activities;
 	}

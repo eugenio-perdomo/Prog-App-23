@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import uy.turismo.servidorcentral.logic.entities.Category;
+
 
 public class DtTouristicDeparture extends DtBaseEntity {
 
@@ -81,8 +83,17 @@ public class DtTouristicDeparture extends DtBaseEntity {
 		return tourists;
 	}
 	
-	
-	
-	
-
+	@Override
+	 public boolean equals(Object obj) {
+		 
+		 if(!(obj instanceof DtTouristicDeparture)) {
+			 return false;
+		 }
+		 
+		 if(this.id == ((DtTouristicDeparture) obj).getId()) {
+			 return true;
+		 }
+		 
+		 return false;
+	 }
 }

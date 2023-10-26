@@ -79,9 +79,10 @@ public class Provider extends User {
 	/**
 	 * Crea un DtProvdier con todos los datos del objeto y lo devuelve
 	 * @return
+	 * @throws Exception 
 	 */
 	@Override
-	public DtUser getDt() {
+	public DtUser getDt() throws Exception {
 		
 		List<DtTouristicActivity> listDtActivities = new ArrayList<DtTouristicActivity>();
 		
@@ -92,8 +93,10 @@ public class Provider extends User {
 			
 		}
 		
-		
-		DtProvider DtOutput = new DtProvider(
+		DtProvider dtOutput = null;
+
+		try {
+		dtOutput = new DtProvider(
 				this.id,
 				this.name,
 				this.nickname,
@@ -104,17 +107,26 @@ public class Provider extends User {
 				this.webSite,
 				this.description,
 				listDtActivities,
-				this.password);	
-		return DtOutput;
+				this.password);		
+		} catch (Exception e) {
+			throw e;
+		}
+		return dtOutput;
 	}
 
 	@Override
-	public DtUser getShortDt() {
-		DtUser dtOutput = new DtProvider(
-				this.id, 
-				this.nickname,
-				this.email,
-				this.getImage());
+	public DtUser getShortDt() throws Exception {
+		DtUser dtOutput = null;
+		try {
+			dtOutput = new DtProvider(
+					this.id, 
+					this.nickname,
+					this.email,
+					this.getImage());
+			
+		} catch (Exception e) {
+			throw e;
+		}
 	
 		return dtOutput;
 	}

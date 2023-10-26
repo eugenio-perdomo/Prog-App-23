@@ -19,6 +19,7 @@ import uy.turismo.servidorcentral.logic.datatypes.DtPurchase;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 
 @Entity
 public class Purchase implements Serializable {
@@ -104,14 +105,29 @@ public class Purchase implements Serializable {
 		return touristicBundle;
 	}
 	
+
+	public DtTouristicBundle getBundleShortDt() {
+		return this.touristicBundle.getShortDt();
+	}
+	
 	public DtPurchase getPurchaseDt() {
+		
+		DtTourist touristData = null;
+		
+		try {
+			touristData = (DtTourist) this.tourist.getShortDt();
+		} catch (Exception e) {
+			
+			System.out.println("Exception: " + e.getMessage());
+		}
+		
 		
 		DtPurchase purchase = new DtPurchase(this.id,
 				this.purchaseDate,
 				this.touristAmount,
 				this.totalCost,
 				this.expireDate,
-				(DtTourist) this.tourist.getShortDt(),
+				touristData,
 				this.touristicBundle.getShortDt());
 		
 		return purchase;
