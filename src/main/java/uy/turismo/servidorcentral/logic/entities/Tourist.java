@@ -119,7 +119,7 @@ public class Tourist extends User {
 	}
 
 	@Override
-	public DtUser getShortDt() throws Exception {
+	public DtUser getShortDt(){
 		
 		DtUser dtOutput = null;
 		

@@ -31,76 +31,81 @@ public class ControllerTest {
 		session.close();	
 	}
 	
-//	@Test
-//	public void checkCredentialsTest() {
-//		IController controller = ControllerFactory.getIController();
-//		DtUser user = controller.checkCredentials("eldiez@socfomturriv.org.uy", "123");
-//		System.out.println("");
-//	}
-//	
-//	@Test
-//	public void getUserListTest() {
-//		IController controller = ControllerFactory.getIController();
-//
-//		List<DtUser> users = controller.getListUser();
-//		
-//		System.out.println();
-//	}
+	@Test
+	public void checkCredentialsTest() {
+		IController controller = ControllerFactory.getIController();
+		DtUser user = controller.checkCredentials("eldiez@socfomturriv.org.uy", "123");
+		System.out.println("");
+	}
 	
-//	@Test
-//	public void registerActivityTest() {
-//		IController controller = ControllerFactory.getIController();
-//		
-//		CategoryDAO categoryDAO = new CategoryDAOImpl();
-//		
-//		ArrayList<DtDepartment> departments = (ArrayList<DtDepartment>) controller.getListDepartment(false);
-//		
-//		DtDepartment department = departments.stream()
-//			.filter(d -> d.getName().equals("Rocha"))
-//			.findFirst()
-//			.get();
-//		
-//
-//		DtProvider provider = (DtProvider) controller.getUserData(11L);
-//		
-//		String name = "volar";
-//		String description = "algo ekisde";
-//		Double duration = 1d;
-//		Double costPerTourist = 120d;
-//		LocalDate date = LocalDate.now();
-//		String city = "Rocha";
-//		ActivityState state = ActivityState.ADDED;
-//		
-//		
-//		List<DtCategory> categories = new ArrayList<DtCategory>();
-//		
-//		DtCategory catTest = new DtCategory(1L, "Recorridos", null, null);
-//		
-//		categories.add(catTest);
-//		
-//		DtTouristicActivity activityTest = new DtTouristicActivity(
-//				null, 
-//				name, 
-//				description, 
-//				duration, 
-//				costPerTourist, 
-//				city,
-//				null,
-//				state, 
-//				date, 
-//				provider, 
-//				department, 
-//				null,
-//				null, 
-//				categories);
-//		
-//		controller.registeTouristicActivity(activityTest);
-//	}
+	@Test
+	public void getUserListTest() {
+		IController controller = ControllerFactory.getIController();
+
+		List<DtUser> users = controller.getListUser();
+		
+		System.out.println();
+	}
 	
-//	@Test
-//	public void getUserDataTest() {
-//		ControllerFactory.getIController().getUserData(1L);
-//	}
+	@Test
+	public void registerActivityTest() {
+		IController controller = ControllerFactory.getIController();
+		
+		CategoryDAO categoryDAO = new CategoryDAOImpl();
+		
+		ArrayList<DtDepartment> departments = (ArrayList<DtDepartment>) controller.getListDepartment(false);
+		
+		DtDepartment department = departments.stream()
+			.filter(d -> d.getName().equals("Rocha"))
+			.findFirst()
+			.get();
+		
+
+		DtProvider provider = (DtProvider) controller.getUserData(11L);
+		
+		String name = "volar";
+		String description = "algo ekisde";
+		Double duration = 1d;
+		Double costPerTourist = 120d;
+		LocalDate date = LocalDate.now();
+		String city = "Rocha";
+		ActivityState state = ActivityState.ADDED;
+		
+		
+		List<DtCategory> categories = new ArrayList<DtCategory>();
+		
+		DtCategory catTest = new DtCategory(1L, "Recorridos", null, null);
+		
+		categories.add(catTest);
+		
+		DtTouristicActivity activityTest = new DtTouristicActivity(
+				null, 
+				name, 
+				description, 
+				duration, 
+				costPerTourist, 
+				city,
+				null,
+				state, 
+				date, 
+				provider, 
+				department, 
+				null,
+				null, 
+				categories);
+		
+		try {
+			controller.registeTouristicActivity(activityTest);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void getUserDataTest() {
+		ControllerFactory.getIController().getUserData(1L);
+	}
 	
 	
 	@Test
@@ -193,28 +198,33 @@ public class ControllerTest {
 		controller.addTouristicActivityToBundle(1L, 5L);
 	}
 	
-//	@Test
-//	public void registerInscriptionTest() {
-//		IController controller = ControllerFactory.getIController();
-//        String yellow = "\u001B[33m";
-//		
-//		DtTourist tourist = (DtTourist) controller.getUserData(4L);
-//		DtTouristicDeparture departure = controller.getTouristicDepartureData(5L);
-//		
-//		DtInscription inscription = new DtInscription(
-//				null,
-//				LocalDate.of(2023, 10, 8),
-//				null,
-//				3,
-//				tourist,
-//				departure
-//				);
-//		
-//		controller.registerInscription(inscription);
-//		
-//		System.out.println(yellow + "Info: DONE" + yellow);
-//	}
-//	
+	@Test
+	public void registerInscriptionTest() {
+		IController controller = ControllerFactory.getIController();
+        String yellow = "\u001B[33m";
+		
+		DtTourist tourist = (DtTourist) controller.getUserData(4L);
+		DtTouristicDeparture departure = controller.getTouristicDepartureData(5L);
+		
+		DtInscription inscription = new DtInscription(
+				null,
+				LocalDate.of(2023, 10, 8),
+				null,
+				3,
+				tourist,
+				departure
+				);
+		
+		try {
+			controller.registerInscription(inscription);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(yellow + "Info: DONE" + yellow);
+	}
+	
 	@Test
 	public void listDepartureTest() {
 		IController controller = ControllerFactory.getIController();
@@ -251,7 +261,6 @@ public class ControllerTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		System.out.println(yellow + "Info: DONE" + yellow);
 		
 	}

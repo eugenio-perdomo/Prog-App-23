@@ -112,7 +112,7 @@ public class Provider extends User {
 	}
 
 	@Override
-	public DtUser getShortDt() throws Exception {
+	public DtUser getShortDt() {
 		DtUser dtOutput = null;
 		
 			dtOutput = new DtProvider(

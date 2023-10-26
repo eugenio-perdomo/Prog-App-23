@@ -29,7 +29,7 @@ public interface IController {
 	 * @return List<DtUser>
 	 * @throws Exception 
 	 */
-	public List<DtUser> getListUser() throws Exception;
+	public List<DtUser> getListUser();
 	
 	
 	/**
@@ -38,7 +38,7 @@ public interface IController {
 	 * @return DtUser
 	 * @throws Exception 
 	 */
-	public DtUser getUserData(Long id) throws Exception;
+	public DtUser getUserData(Long id) ;
 	
 	
 	/**

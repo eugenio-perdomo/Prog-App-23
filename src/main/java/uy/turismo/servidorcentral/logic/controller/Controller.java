@@ -73,24 +73,21 @@ public class Controller implements IController {
 	
 
 	@Override
-	public List<DtUser> getListUser() throws Exception {
+	public List<DtUser> getListUser() {
 		UserDAO userDao = new UserDAOImpl();
 		List<User> users = userDao.findAll();
 		List<DtUser> usersOutput = new ArrayList<DtUser>();
-		try {
-			for(User usr : users) {
-				usersOutput.add(usr.getShortDt());
-			}
-			
-		} catch (Exception e) {
-			throw e;
+		
+		for(User usr : users) {
+			usersOutput.add(usr.getShortDt());
 		}
+			
 		
 		return usersOutput;
 	}
 
 	@Override
-	public DtUser getUserData(Long id) throws Exception {
+	public DtUser getUserData(Long id) {
 
 		
 		UserDAO userDao = new UserDAOImpl();

@@ -196,7 +196,7 @@ public abstract class User implements Serializable  {
 	 * @return 
 	 * @throws Exception 
 	 */
-	public abstract DtUser getShortDt() throws Exception;
+	public abstract DtUser getShortDt();
 	
 	
 	/**
