@@ -81,4 +81,19 @@ public class DtTouristicBundle extends DtBaseEntity {
 	public Double getPrice(){
 		return price;
 	}
+	
+	@Override 
+	public boolean equals(Object obj) {
+		if(!(obj instanceof DtTouristicBundle)) {
+			return false;
+		}
+		
+		if(((DtTouristicBundle) obj).getId() != this.id) {
+			return false;
+		}
+		
+		return true;
+		
+		
+	}
 }
