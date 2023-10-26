@@ -353,19 +353,20 @@ public class Controller implements IController {
 				department
 				);
 		
+		
 
 		activity.setCategory(categoriesSelectedList);
-
-		if(touristicActivityData.getImage() != null) {
-			activity.setImage(touristicActivityData.getImage());
-		}
-
-		
+	
 		try {
 			activityDao.create(activity);
+			if(touristicActivityData.getImage() != null) {
+				activity.setImage(touristicActivityData.getImage());
+				activityDao.update(activity);
+			}
 		} catch (Exception e) {
 			e = new Exception("El nombre: " + touristicActivityData.getName() + " ya existe para la actividad.");
 			throw e;
+			
 		}
 	}
 
