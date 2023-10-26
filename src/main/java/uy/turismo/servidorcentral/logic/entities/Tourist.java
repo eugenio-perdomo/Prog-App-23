@@ -72,7 +72,7 @@ public class Tourist extends User {
 	 * @throws Exception 
 	 */
 	@Override
-	public DtUser getDt() throws Exception {
+	public DtUser getDt()  {
 		List<DtTouristicDeparture> listDepartures = new ArrayList<DtTouristicDeparture>();
 		List<DtInscription> listInscriptions = new ArrayList<DtInscription>();
 		List<DtTouristicBundle> listBundles = new ArrayList<DtTouristicBundle>();
@@ -123,16 +123,12 @@ public class Tourist extends User {
 		
 		DtUser dtOutput = null;
 		
-		try {
-			dtOutput = new DtTourist(
-					this.id, 
-					this.nickname,
-					this.email,
-					this.getImage());
-			
-		} catch (Exception e) {
-			throw e;
-		}
+		dtOutput = new DtTourist(
+				this.id, 
+				this.nickname,
+				this.email,
+				this.getImage());
+		
 	
 		return dtOutput;
 	}

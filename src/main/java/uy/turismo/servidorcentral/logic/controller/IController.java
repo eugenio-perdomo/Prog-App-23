@@ -22,7 +22,7 @@ public interface IController {
 	 * @return Devulve true si existe y false si no
 	 * @throws Exception 
 	 */
-	public DtUser checkCredentials(String email, String password) throws Exception;
+	public DtUser checkCredentials(String email, String password);
 	
 	/**
 	 * Devuelve una Lista de DtUser con id, nickname y email

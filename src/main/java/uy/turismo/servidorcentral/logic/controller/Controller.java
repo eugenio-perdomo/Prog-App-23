@@ -96,19 +96,16 @@ public class Controller implements IController {
 		UserDAO userDao = new UserDAOImpl();
 		User user = userDao.findById(id);
 		DtUser userOutput;
-		try {
-			if(user instanceof Provider) {
-				Provider provider = (Provider) user;
-				userOutput = provider.getDt();
-			}else {
-				Tourist tourist = (Tourist) user;
-				userOutput = tourist.getDt();
-				
-			}
+		
+		if(user instanceof Provider) {
+			Provider provider = (Provider) user;
+			userOutput = provider.getDt();
+		}else {
+			Tourist tourist = (Tourist) user;
+			userOutput = tourist.getDt();
 			
-		} catch (Exception e) {
-			throw e;
 		}
+			
 		
 		return userOutput;
 	}
@@ -256,12 +253,14 @@ public class Controller implements IController {
 					touristData.getNationality(),
 					touristData.getPassword());
 			
-			if(touristData.getImage() != null) {
-				touristUsr.setImage(touristData.getImage());
-			}
 			
 			try {
 				usrDAO.create(touristUsr);
+				if(touristData.getImage() != null) {
+					touristUsr.setImage(touristData.getImage());
+					usrDAO.update(touristUsr);
+					
+				}
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				e = new Exception("el usuario: " + touristData.getNickname() + " O el e-mail: " + touristData.getEmail() +" ya existe.");
@@ -415,6 +414,10 @@ public class Controller implements IController {
 		
 		try {
 			departureDao.create(departure);
+			if(touristicDepartureData.getImage() != null) {
+				departure.setImage(touristicDepartureData.getImage());
+				departureDao.update(departure);
+			}
 		} catch (Exception e) {
 			e = new Exception("La Salida: " + touristicDepartureData.getName() + " ya existe.");
 			throw e;
@@ -471,6 +474,10 @@ public class Controller implements IController {
 		
 		try {
 			touristicBundleDAO.create(bundle);
+			if(touristicBundleData.getImage() != null) {
+				bundle.setImage(touristicBundleData.getImage());
+				touristicBundleDAO.update(bundle);
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e = new Exception("El Paquete: " + touristicBundleData.getName() + " ya existe.");
@@ -618,19 +625,15 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public DtUser checkCredentials(String email, String password) throws Exception {
+	public DtUser checkCredentials(String email, String password){
 		UserDAO userDao = new UserDAOImpl();
 		
 		User user = userDao.checkCredentials(email, password);
-		try {
-			if(user == null) {
-				return null;
-			}else {
-				return user.getDt();
-			}
-			
-		} catch (Exception e) {
-			throw e;
+		
+		if(user == null) {
+			return null;
+		}else {
+			return user.getDt();
 		}
 	}
 		
