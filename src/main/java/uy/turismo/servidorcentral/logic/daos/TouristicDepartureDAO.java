@@ -35,6 +35,8 @@ public interface TouristicDepartureDAO {
 	 * @throws Exception -> En caso de no poder crear una salida turistica.
 	 */
 	public void create(TouristicDeparture departure) throws Exception;
+
+	public void update(TouristicDeparture departure) throws Exception;
 	
 	
 }

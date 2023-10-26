@@ -108,4 +108,24 @@ public class TouristicDepartureDAOImpl implements TouristicDepartureDAO {
 		session.close();
 	}
 
+	@Override
+	public void update(TouristicDeparture departure) throws Exception{
+		Session session = HibernateUtil
+				.getSessionFactory()
+				.openSession();
+		try {
+			session.beginTransaction();
+			session.merge(departure);
+			session.getTransaction().commit();
+			
+		} catch (PersistenceException e) {
+			session.getTransaction().rollback();
+			session.close();
+			throw new Exception("No se pudo crear la Salida : " + departure.getName() +
+					"\nError: " + e.getMessage());
+		}
+		session.close();
+		
+	}
+
 }

@@ -128,7 +128,7 @@ public abstract class User implements Serializable  {
 		this.birthDate = birthDate;
 	}
 	
-	public BufferedImage getImage() throws Exception {
+	public BufferedImage getImage() {
 		
 		BufferedImage image = null;
 		
@@ -146,7 +146,7 @@ public abstract class User implements Serializable  {
 			image = ImageIO.read(readFile);
 			
 		} catch (Exception e) {
-			throw e;
+			System.out.println("Error al cargar la imagen: " + e.getMessage());
 		}
 		
 		return image;
@@ -178,11 +178,11 @@ public abstract class User implements Serializable  {
 		try {
 			properties.load(inputStram);
 			String imagesDirPath = properties.getProperty("imagesDirPath").concat("User/");
-			System.out.println("Direccion de las imagenes: " + imagesDirPath);
 			File saveFile = new File(imagesDirPath + imageName);
 			ImageIO.write(image, "png", saveFile);
 		} catch (Exception e) {
-			System.err.println("Error al guardar la imagen en " + this.getClass() + ": " + e.getMessage() + " tipo de excepcion:" + e.getClass());
+			System.err.println("Error al guardar la imagen: " + e.getMessage());
+			
 		}finally {
 			this.image = imageName;
 		}
@@ -204,6 +204,6 @@ public abstract class User implements Serializable  {
 	 * @return
 	 * @throws Exception 
 	 */
-	public abstract DtUser getDt() throws Exception;
+	public abstract DtUser getDt();
 
 }

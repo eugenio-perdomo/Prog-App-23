@@ -82,7 +82,7 @@ public class Provider extends User {
 	 * @throws Exception 
 	 */
 	@Override
-	public DtUser getDt() throws Exception {
+	public DtUser getDt() {
 		
 		List<DtTouristicActivity> listDtActivities = new ArrayList<DtTouristicActivity>();
 		
@@ -95,7 +95,6 @@ public class Provider extends User {
 		
 		DtProvider dtOutput = null;
 
-		try {
 		dtOutput = new DtProvider(
 				this.id,
 				this.name,
@@ -107,26 +106,20 @@ public class Provider extends User {
 				this.webSite,
 				this.description,
 				listDtActivities,
-				this.password);		
-		} catch (Exception e) {
-			throw e;
-		}
+				this.password);	
+		
 		return dtOutput;
 	}
 
 	@Override
 	public DtUser getShortDt() throws Exception {
 		DtUser dtOutput = null;
-		try {
+		
 			dtOutput = new DtProvider(
 					this.id, 
 					this.nickname,
 					this.email,
 					this.getImage());
-			
-		} catch (Exception e) {
-			throw e;
-		}
 	
 		return dtOutput;
 	}
