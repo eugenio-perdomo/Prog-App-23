@@ -691,5 +691,25 @@ public class Controller implements IController {
 		return purchaseData;
 	}
 	
+	public List<DtPurchase> getPurchaseList() {
+		
+		PurchaseDAO purchaseDAO = new PurchaseDAOImpl();
+		List<Purchase> purchase = purchaseDAO.findAll();
+
+		List<DtPurchase> purchaseOutput = new ArrayList<DtPurchase>();
+		
+		try {
+			for(Purchase pur: purchase) {
+				purchaseOutput.add(pur.getPurchaseDt());
+			}
+			
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return purchaseOutput;
+		
+	}
+	
 	
 }

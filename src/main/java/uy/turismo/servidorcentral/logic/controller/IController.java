@@ -186,4 +186,6 @@ public interface IController {
 	public void registerPurchase(DtPurchase purchase) throws Exception;
 	
 	public DtPurchase getPurchase(Long purchaseId);
+	
+	public List<DtPurchase> getPurchaseList();
 }

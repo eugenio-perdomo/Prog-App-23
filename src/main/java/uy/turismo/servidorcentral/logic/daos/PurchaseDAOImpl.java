@@ -2,9 +2,17 @@ package uy.turismo.servidorcentral.logic.daos;
 
 import org.hibernate.Session;
 
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceException;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import uy.turismo.servidorcentral.logic.entities.Purchase;
+import uy.turismo.servidorcentral.logic.entities.User;
 import uy.turismo.servidorcentral.logic.util.HibernateUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PurchaseDAOImpl implements PurchaseDAO {
 
@@ -35,6 +43,37 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 				.openSession();
 		
 		Purchase purchase = session.find(Purchase.class, purchaseId);
+		session.close();
+		
+		return purchase;
+	}
+	
+	public List<Purchase> findAll()
+	{
+		Session session = HibernateUtil
+				.getSessionFactory()
+				.openSession();
+		
+		EntityManager em = session
+				.getEntityManagerFactory()
+				.createEntityManager();  
+		
+		CriteriaBuilder cb = em
+				.getCriteriaBuilder();
+		
+		CriteriaQuery<Purchase> cq = cb.createQuery(Purchase.class);
+		
+		Root<Purchase> entityRoot = cq.from(Purchase.class);
+		entityRoot.alias("purchase");
+		
+		cq.select(entityRoot);
+		
+		List<Purchase> purchase = em
+				.createQuery(cq)
+				.getResultList();
+	
+		
+		em.close();
 		session.close();
 		
 		return purchase;

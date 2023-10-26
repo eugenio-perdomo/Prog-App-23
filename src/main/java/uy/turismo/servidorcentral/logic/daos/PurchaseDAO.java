@@ -1,5 +1,7 @@
 package uy.turismo.servidorcentral.logic.daos;
 
+import java.util.List;
+
 import uy.turismo.servidorcentral.logic.entities.Purchase;
 
 public interface PurchaseDAO {
@@ -18,6 +20,12 @@ public interface PurchaseDAO {
 	 * @return -> compra que devuelve
 	 */
 	public Purchase findById(Long purchaseId);
+	
+	/**
+	 * Devuelve todas las compras
+	 * @return -> List<Purchase>
+	 */
+	public List<Purchase> findAll();
 	
 	
 }
