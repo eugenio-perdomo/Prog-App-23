@@ -163,8 +163,8 @@ public interface IController {
 	 * @return devuelve una  lista  de categorias con nombre e id.
 	 */
 	public List<DtCategory>  getListCategory();
-	
-//	public DtCategory getCategory(Long categoryId);
+
+	//public DtCategory getCategory(Long categoryId);
 	
 	
 	/**

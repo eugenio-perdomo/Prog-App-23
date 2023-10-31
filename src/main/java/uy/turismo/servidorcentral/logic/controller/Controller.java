@@ -476,11 +476,6 @@ public class Controller implements IController {
 		
 		Department department = new Department(null, departmentData.getName(), departmentData.getDescription(), departmentData.getWebSite());
 		
-		/**this.id = id;
-		this.name = name;
-		this.description = description;
-		this.webSite = webSite;*/
-		
 		try {
 			departmentDAO.create(department);
 		} catch (Exception e) {
@@ -585,15 +580,16 @@ public class Controller implements IController {
 		return categoriesDt;
 	}
 
-//	@Override
-//	public DtCategory getCategory(Long categoryId) {
-//		CategoryDAO categoryDAO = new CategoryDAOImpl();
-//		Category category = categoryDAO.findById(categoryId);
-//		
-//		DtCategory categoryData = category.getCategoryDt();
-//		return categoryData;
-//	}
-
+	/*
+	@Override
+	public DtCategory getCategory(Long categoryId) {
+		CategoryDAO categoryDAO = new CategoryDAOImpl();
+		Category category = categoryDAO.findById(categoryId);
+		
+		DtCategory categoryData = category.getCategoryDt();
+		return categoryData;
+	}
+	*/
 	
 	@Override
 	public void changeActivityState(Long id, ActivityState state) throws Exception {

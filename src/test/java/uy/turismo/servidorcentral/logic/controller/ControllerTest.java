@@ -25,17 +25,19 @@ import uy.turismos.servidorcentral.logic.enums.ActivityState;
 
 public class ControllerTest {
 
+	
 	@Test
 	public void initDataBase() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.close();	
 	}
 	
+	
 	@Test
 	public void checkCredentialsTest() {
 		IController controller = ControllerFactory.getIController();
 		DtUser user = controller.checkCredentials("eldiez@socfomturriv.org.uy", "123");
-		System.out.println("");
+		System.out.println(user.getEmail());
 	}
 	
 	@Test
@@ -104,14 +106,16 @@ public class ControllerTest {
 
 		List<DtUser> users = controller.getListUser();
 		
-		System.out.println();
+		Integer test = users.size();
+		
+		System.out.println(test);
 	}
 	
 	@Test
 	public void registerActivityTest() {
 		IController controller = ControllerFactory.getIController();
 		
-		CategoryDAO categoryDAO = new CategoryDAOImpl();
+		//CategoryDAO categoryDAO = new CategoryDAOImpl();
 		
 		ArrayList<DtDepartment> departments = (ArrayList<DtDepartment>) controller.getListDepartment(false);
 		
@@ -173,7 +177,7 @@ public class ControllerTest {
 		IController controller = ControllerFactory.getIController();
 		
 		List<DtTouristicDeparture> departuresTest = new ArrayList<DtTouristicDeparture>();
-		
+	
 		departuresTest = controller.getListTouristicDeparture();
 	}
 	
@@ -210,7 +214,7 @@ public class ControllerTest {
 		
 		DtTouristicDeparture departure = new DtTouristicDeparture(
 				null,
-				"Degusta Octubre",
+				"Degusta Diciembre",
 				4,
 				LocalDate.now(),
 				LocalDateTime.of(2023, 10, 17, 14, 0),
@@ -259,6 +263,7 @@ public class ControllerTest {
 		
 		DtTouristicActivity activity = controller.getTouristicActivityData(1L);
 		
+		System.out.println(activity.getName());
 	}
 	
 	
@@ -302,7 +307,7 @@ public class ControllerTest {
 		
 		List<DtTouristicDeparture> departures = controller.getListTouristicDeparture(1L);
 		
-		System.out.println();
+		System.out.println(departures.get(0).getName());
 	
 	}
 	
@@ -312,7 +317,7 @@ public class ControllerTest {
 		
 		DtTouristicDeparture departure = controller.getTouristicDepartureData(1);
 		
-		System.out.println();
+		System.out.println(departure.getName());
 		
 	}
 
@@ -389,6 +394,88 @@ public class ControllerTest {
 		
 		controller.registerPurchase(purchaseTest);
 		
+		System.out.println(yellow + "Info: DONE" + yellow);
+	}
+	
+	@Test
+	public void registerDepartment() throws Exception {
+		IController controller = ControllerFactory.getIController();
+		
+		String name = "Rocha2";
+		String desc = "Efectivamente es rocha2";
+		String url = "turismo.rocha.gub.com";
+		
+		DtDepartment departmentTest = new DtDepartment(null, name, desc, url, null);
+		
+		controller.registerDepartment(departmentTest);
+		
+		String yellow = "\u001B[33m";
+		System.out.println(yellow + "Info: DONE" + yellow);
+	}
+	
+	public void registerDepartmentFail() throws Exception {
+		IController controller = ControllerFactory.getIController();
+		
+		String name = "Rocha2";
+		String desc = "Efectivamente es rocha2";
+		String url = "turismo.rocha.gub.com";
+		
+		DtDepartment departmentTest = new DtDepartment(null, name, desc, url, null);
+		
+		controller.registerDepartment(departmentTest);
+		
+		String yellow = "\u001B[33m";
+		System.out.println(yellow + "Info: DONE" + yellow);
+	}
+	
+	@Test
+	public void getPurchaseTest() {
+		IController controller = ControllerFactory.getIController();
+		
+		DtPurchase purchase = controller.getPurchase(1L);
+		
+		System.out.println(purchase.getId());
+	}
+	
+	@Test
+	public void getListPurchase() {
+		IController controller = ControllerFactory.getIController();
+		
+		List<DtPurchase> purchaseList = controller.getPurchaseList();
+		
+		System.out.println(purchaseList.get(0).getId());
+	}
+	
+	@Test 
+	public void registerTouristcDeparture() throws Exception {
+		IController controller = ControllerFactory.getIController();
+		String yellow = "\u001B[33m";
+		String name = "BundleTest";
+		String desc = "Descripcion bundle Test";
+		Integer validity = 20;
+		Double discount = 20d;
+		LocalDate upload = LocalDate.now();
+		Double price = 200d;
+		
+		DtTouristicBundle bundle = new DtTouristicBundle(null, name, desc, validity, discount,upload, null, null, null, price);
+
+		controller.registerTouristicBundle(bundle);
+		System.out.println(yellow + "Info: DONE" + yellow);
+	}
+	
+	public void registerTouristcDepartureFail() throws Exception {
+		IController controller = ControllerFactory.getIController();
+		String yellow = "\u001B[33m";
+		String name = "BundleTest";
+		String desc = "Descripcion bundle Test";
+		Integer validity = 20;
+		Double discount = 20d;
+		LocalDate upload = LocalDate.now();
+		Double price = 200d;
+		
+		DtTouristicBundle bundle = new DtTouristicBundle(null, name, desc, validity, discount,upload, null, null, null, price);
+
+		controller.registerTouristicBundle(bundle);
 		System.out.println(yellow + "Info: DONE" + yellow);
 	}
 	
