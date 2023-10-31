@@ -46,14 +46,14 @@ public interface IController {
 	 * @return List<DtTourist>
 	 * @throws Exception 
 	 */
-	public List<DtTourist>  getListTourist() throws Exception;
+	public List<DtTourist>  getListTourist();
 	
 	/**
 	 * Devuelve una lista de todos los Turistas con el nickname, el email y su id.
 	 * @return List<DtProvider>
 	 * @throws Exception 
 	 */
-	public List<DtProvider>  getListProvider() throws Exception;
+	public List<DtProvider>  getListProvider();
 	
 	/**
 	 * Modifica un usuario ya existente con nuevos datos
@@ -163,8 +163,8 @@ public interface IController {
 	 * @return devuelve una  lista  de categorias con nombre e id.
 	 */
 	public List<DtCategory>  getListCategory();
-	
-	public DtCategory getCategory(Long categoryId);
+
+	//public DtCategory getCategory(Long categoryId);
 	
 	
 	/**

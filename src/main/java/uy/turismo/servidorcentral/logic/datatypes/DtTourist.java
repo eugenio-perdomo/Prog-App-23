@@ -65,6 +65,4 @@ public class DtTourist extends DtUser {
 	public List<DtTouristicBundle> getBundles() {
 		return bundles;
 	}
-	
-	
 }
