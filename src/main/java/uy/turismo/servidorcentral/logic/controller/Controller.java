@@ -540,7 +540,7 @@ public class Controller implements IController {
 		try {
 			bundleDao.update(bundle);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			
 		}
 	}
 

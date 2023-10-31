@@ -458,13 +458,15 @@ public class ControllerTest {
 		//de alta bien
 		controller.registerUser(touristTest);
 		
+		//de alta proveedor
+		controller.registerUser(providerTest);
+
 		//de alta mal
 		controller.registerUser(touristTest);
 		
-		//de alta proveedor
-		controller.registerUser(providerTest);
 	}
 	
+	@Test
 	public void registerDepartment() throws Exception {
 		IController controller = ControllerFactory.getIController();
 		
@@ -478,8 +480,10 @@ public class ControllerTest {
 		
 		String yellow = "\u001B[33m";
 		System.out.println(yellow + "Info: DONE" + yellow);
+			
 	}
 	
+	@Test
 	public void registerDepartmentFail() throws Exception {
 		IController controller = ControllerFactory.getIController();
 		
@@ -490,11 +494,10 @@ public class ControllerTest {
 		DtDepartment departmentTest = new DtDepartment(null, name, desc, url, null);
 		
 		controller.registerDepartment(departmentTest);
-		
-		String yellow = "\u001B[33m";
-		System.out.println(yellow + "Info: DONE" + yellow);
+			
 	}
 	
+
 	@Test
 	public void getPurchaseTest() {
 		IController controller = ControllerFactory.getIController();
@@ -527,9 +530,10 @@ public class ControllerTest {
 		DtTouristicBundle bundle = new DtTouristicBundle(null, name, desc, validity, discount,upload, null, null, null, price);
 
 		controller.registerTouristicBundle(bundle);
-		System.out.println(yellow + "Info: DONE" + yellow);
+
 	}
 	
+	@Test 
 	public void registerTouristcDepartureFail() throws Exception {
 		IController controller = ControllerFactory.getIController();
 		String yellow = "\u001B[33m";
@@ -543,7 +547,12 @@ public class ControllerTest {
 		DtTouristicBundle bundle = new DtTouristicBundle(null, name, desc, validity, discount,upload, null, null, null, price);
 
 		controller.registerTouristicBundle(bundle);
+		
 		System.out.println(yellow + "Info: DONE" + yellow);
 	}
+	
+	
+	
+
 	
 }
