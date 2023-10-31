@@ -53,7 +53,7 @@ public abstract class User implements Serializable  {
 
 	public User() {
 	}
-	
+    
 	public User(
 			Long id,
 			String nickname,

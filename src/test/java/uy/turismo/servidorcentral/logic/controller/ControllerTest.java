@@ -8,8 +8,6 @@ import java.util.List;
 import org.hibernate.Session;
 import org.junit.jupiter.api.Test;
 
-import uy.turismo.servidorcentral.logic.daos.CategoryDAO;
-import uy.turismo.servidorcentral.logic.daos.CategoryDAOImpl;
 import uy.turismo.servidorcentral.logic.datatypes.DtCategory;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
