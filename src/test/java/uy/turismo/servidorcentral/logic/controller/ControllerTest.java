@@ -343,6 +343,21 @@ public class ControllerTest {
 		System.out.println(yellow + "Info: DONE" + yellow);
 	}
 	
+	public void registerDepartmentFail() throws Exception {
+		IController controller = ControllerFactory.getIController();
+		
+		String name = "Rocha2";
+		String desc = "Efectivamente es rocha2";
+		String url = "turismo.rocha.gub.com";
+		
+		DtDepartment departmentTest = new DtDepartment(null, name, desc, url, null);
+		
+		controller.registerDepartment(departmentTest);
+		
+		String yellow = "\u001B[33m";
+		System.out.println(yellow + "Info: DONE" + yellow);
+	}
+	
 	@Test
 	public void getPurchaseTest() {
 		IController controller = ControllerFactory.getIController();
@@ -363,6 +378,22 @@ public class ControllerTest {
 	
 	@Test 
 	public void registerTouristcDeparture() throws Exception {
+		IController controller = ControllerFactory.getIController();
+		String yellow = "\u001B[33m";
+		String name = "BundleTest";
+		String desc = "Descripcion bundle Test";
+		Integer validity = 20;
+		Double discount = 20d;
+		LocalDate upload = LocalDate.now();
+		Double price = 200d;
+		
+		DtTouristicBundle bundle = new DtTouristicBundle(null, name, desc, validity, discount,upload, null, null, null, price);
+
+		controller.registerTouristicBundle(bundle);
+		System.out.println(yellow + "Info: DONE" + yellow);
+	}
+	
+	public void registerTouristcDepartureFail() throws Exception {
 		IController controller = ControllerFactory.getIController();
 		String yellow = "\u001B[33m";
 		String name = "BundleTest";
