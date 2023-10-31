@@ -164,7 +164,7 @@ public interface IController {
 	 */
 	public List<DtCategory>  getListCategory();
 	
-	public DtCategory getCategory(Long categoryId);
+	//public DtCategory getCategory(Long categoryId);
 	
 	
 	/**
