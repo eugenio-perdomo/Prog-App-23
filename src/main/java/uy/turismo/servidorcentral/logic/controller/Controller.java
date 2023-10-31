@@ -80,8 +80,7 @@ public class Controller implements IController {
 		
 		for(User usr : users) {
 			usersOutput.add(usr.getShortDt());
-		}
-			
+		}	
 		
 		return usersOutput;
 	}
@@ -109,36 +108,26 @@ public class Controller implements IController {
 	
 	
 	@Override
-	public List<DtTourist>  getListTourist() throws Exception{
+	public List<DtTourist>  getListTourist(){
 		UserDAO userDAO = new UserDAOImpl();
 		List<Tourist> users = userDAO.findAllTourists();
 		List<DtTourist> userOutput = new ArrayList<DtTourist>();
 		
-		try {
-			for(Tourist tur : users){
-				userOutput.add((DtTourist)tur.getShortDt());
-			}
-			
-		} catch (Exception e) {
-			throw e;
+		for(Tourist tur : users){
+			userOutput.add((DtTourist)tur.getShortDt());
 		}
 		
 		return userOutput;
 	}
 	
 	@Override
-	public List<DtProvider>  getListProvider() throws Exception{
+	public List<DtProvider>  getListProvider(){
 		UserDAO userDAO = new UserDAOImpl();
 		List<Provider> users = userDAO.findAllProviders();
 		List<DtProvider> userOutput = new ArrayList<DtProvider>();
 		
-		try {
-			for(Provider prov : users){
-				userOutput.add((DtProvider)prov.getShortDt());
-			}
-			
-		} catch (Exception e) {
-			throw e;
+		for(Provider prov : users){
+			userOutput.add((DtProvider)prov.getShortDt());
 		}
 		
 		return userOutput;
@@ -596,14 +585,14 @@ public class Controller implements IController {
 		return categoriesDt;
 	}
 
-	@Override
-	public DtCategory getCategory(Long categoryId) {
-		CategoryDAO categoryDAO = new CategoryDAOImpl();
-		Category category = categoryDAO.findById(categoryId);
-		
-		DtCategory categoryData = category.getCategoryDt();
-		return categoryData;
-	}
+//	@Override
+//	public DtCategory getCategory(Long categoryId) {
+//		CategoryDAO categoryDAO = new CategoryDAOImpl();
+//		Category category = categoryDAO.findById(categoryId);
+//		
+//		DtCategory categoryData = category.getCategoryDt();
+//		return categoryData;
+//	}
 
 	
 	@Override

@@ -39,6 +39,66 @@ public class ControllerTest {
 	}
 	
 	@Test
+	public void updateUserTest() {
+		IController controller = ControllerFactory.getIController();
+		
+		DtProvider provider = (DtProvider) controller.getUserData(13L);
+		
+		DtProvider updatedProvider = new DtProvider(
+				provider.getId(), 
+				provider.getName(), 
+				provider.getNickname(), 
+				provider.getEmail(), 
+				"Bergoglio", 
+				provider.getBirthDate(), 
+				provider.getImage(), 
+				provider.getUrl(), 
+				provider.getDescription(), 
+				null, 
+				provider.getPassword());
+		
+		DtTourist tourist = (DtTourist) controller.getUserData(3L);
+		
+		DtTourist updatedTourist = new DtTourist(
+				tourist.getId(),
+				"Hannibal",
+				tourist.getNickname(),
+				tourist.getEmail(),
+				tourist.getLastName(),
+				tourist.getBirthDate(),
+				tourist.getImage(),
+				tourist.getNationality(),
+				null,
+				tourist.getPassword(),
+				null,
+				null,
+				null
+				);
+
+		controller.updateUser(updatedProvider);
+		controller.updateUser(updatedTourist);
+				
+	}
+	
+	@Test
+	public void getProviderListTest() {
+		IController controller = ControllerFactory.getIController();
+		
+		List<DtProvider> providers = controller.getListProvider();
+		
+		System.out.println();
+	}
+	
+	@Test
+	public void getTouristListTest() {
+		IController controller = ControllerFactory.getIController();
+		
+		List<DtTourist> tourists = controller.getListTourist();
+		
+		System.out.println();
+	}
+	
+	@Test
 	public void getUserListTest() {
 		IController controller = ControllerFactory.getIController();
 
@@ -114,8 +174,19 @@ public class ControllerTest {
 		
 		List<DtTouristicDeparture> departuresTest = new ArrayList<DtTouristicDeparture>();
 		
-		//TODO : Cuando este implementada findAllProviders se puede continuar con este test
+		departuresTest = controller.getListTouristicDeparture();
 	}
+	
+	
+	@Test
+	public void getListCategoryTest() {
+		IController controller = ControllerFactory.getIController();
+		
+		List<DtCategory> categories = new ArrayList<DtCategory>();
+		
+		categories = controller.getListCategory();
+	}
+	
 	
 	@Test
 	public void registerDepartureTest() {
