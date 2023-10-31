@@ -1,5 +1,6 @@
 package uy.turismo.servidorcentral.logic.controller;
 
+import java.awt.image.BufferedImage;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -319,6 +320,74 @@ public class ControllerTest {
 		controller.registerPurchase(purchaseTest);
 		
 		System.out.println(yellow + "Info: DONE" + yellow);
+	}
+	
+	@Test
+	public void registerUserTest() throws Exception{
+		IController controller = ControllerFactory.getIController();
+		
+		String name1 = "Pepe";
+		String nickName1 = "El Pepe";
+		String email1 = "elPepe@pepe.pepecom";
+		String lastName1 = "pepito";
+		LocalDate birthDate1 = LocalDate.now();
+		BufferedImage image1 = null;
+		String nationality1 = "PUTO";
+		
+		List<DtTouristicDeparture> listDeparture1 = new ArrayList<DtTouristicDeparture>();
+		listDeparture1.add(controller.getTouristicDepartureData(1L));
+		
+		String password1 = "contrasenia";
+		List<DtInscription> listInscriptions1 = null;
+		List<DtTouristicBundle> listBundles1 = null;
+		List<DtPurchase> listPurchases1 = null;
+		//--------------------------------------------------------
+		String name2 = "Pepeados";
+		String nickName2 = "El Pepedor";
+		String email2 = "elPepe@pepepepito.com";
+		String lastName2 = "pepitopepeante";
+		LocalDate birthDate2 = LocalDate.now();
+		BufferedImage image2 = null;
+		String url2 = "uwu";
+		String desc2 = "pepeador barbaro";
+		List<DtTouristicActivity> listActivities = null;
+		String password2 = "contrasenia23";
+		
+		DtTourist touristTest = new DtTourist(null,
+				name1,
+				nickName1,
+				email1,
+				lastName1,
+				birthDate1,
+				image1,
+				nationality1,
+				listDeparture1,
+				password1,
+				listInscriptions1,
+				listBundles1,
+				listPurchases1);
+		
+		DtProvider providerTest = new DtProvider(null,
+				name2,
+				nickName2,
+				email2,
+				lastName2,
+				birthDate2,
+				image2,
+				url2,
+				desc2,
+				listActivities,
+				password2);
+		
+		//de alta bien
+		controller.registerUser(touristTest);
+		
+		//de alta mal
+		controller.registerUser(touristTest);
+		
+		//de alta proveedor
+		controller.registerUser(providerTest);
+		
 	}
 	
 }
