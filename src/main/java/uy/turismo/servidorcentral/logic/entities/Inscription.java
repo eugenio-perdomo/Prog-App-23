@@ -56,45 +56,45 @@ public class Inscription implements Serializable {
 
 	
 //  Getters and Setters
-//	public Long getId() {
-//		return id;
-//	}
-//	
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
-//	
-//	public LocalDate getInscriptionDate() {
-//		return inscriptionDate;
-//	}
-//
-//	public void setInscriptionDate(LocalDate inscriptionDate) {
-//		this.inscriptionDate = inscriptionDate;
-//	}
-//
-//	public Double getTotalCost() {
-//		return totalCost;
-//	}
-//
-//	public void setTotalCost(Double totalCost) {
-//		this.totalCost = totalCost;
-//	}
-//
-//	public Integer getTouristAmount() {
-//		return touristAmount;
-//	}
-//
-//	public void setTouristAmount(Integer touristAmount) {
-//		this.touristAmount = touristAmount;
-//	}
-//
-//	public Tourist getTourist() {
-//		return tourist;
-//	}
-//
-//	public TouristicDeparture getTouristicDeparture() {
-//		return touristicDeparture;
-//	}
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public LocalDate getInscriptionDate() {
+		return inscriptionDate;
+	}
+
+	public void setInscriptionDate(LocalDate inscriptionDate) {
+		this.inscriptionDate = inscriptionDate;
+	}
+
+	public Double getTotalCost() {
+		return totalCost;
+	}
+
+	public void setTotalCost(Double totalCost) {
+		this.totalCost = totalCost;
+	}
+
+	public Integer getTouristAmount() {
+		return touristAmount;
+	}
+
+	public void setTouristAmount(Integer touristAmount) {
+		this.touristAmount = touristAmount;
+	}
+
+	public Tourist getTourist() {
+		return tourist;
+	}
+
+	public TouristicDeparture getTouristicDeparture() {
+		return touristicDeparture;
+	}
 	
 	public DtTouristicDeparture getDepartureShortDt() {
 		return this.touristicDeparture.getShortDt();

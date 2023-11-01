@@ -101,42 +101,42 @@ public class TouristicBundle implements Serializable  {
 		return name;
 	}
 
-//	public void setName(String name) {
-//		this.name = name;
-//	}
-//
-//	public String getDescription() {
-//		return description;
-//	}
-//
-//	public void setDescription(String description) {
-//		this.description = description;
-//	}
-//
-//	public Integer getValidityPeriod() {
-//		return validityPeriod;
-//	}
-//
-//	public void setValidityPeriod(Integer validityPeriod) {
-//		this.validityPeriod = validityPeriod;
-//	}
-//
-//	public Double getDiscount() {
-//		return discount;
-//	}
-//
-//	public void setDiscount(Double discount) {
-//		this.discount = discount;
-//	}
-//	
-//
-//	public LocalDate getUploadDate() {
-//		return uploadDate;
-//	}
-//	
-//	public void setUploadDate(LocalDate uploadDate) {
-//		this.uploadDate = uploadDate;
-//	}
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Integer getValidityPeriod() {
+		return validityPeriod;
+	}
+
+	public void setValidityPeriod(Integer validityPeriod) {
+		this.validityPeriod = validityPeriod;
+	}
+
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
+	
+
+	public LocalDate getUploadDate() {
+		return uploadDate;
+	}
+	
+	public void setUploadDate(LocalDate uploadDate) {
+		this.uploadDate = uploadDate;
+	}
 	
 	public BufferedImage getImage() {
 		

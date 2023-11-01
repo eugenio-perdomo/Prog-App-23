@@ -53,15 +53,15 @@ public class Category implements Serializable{
 	
 	
 	
-	//getter y setter
-//	public Long getId() {
-//		return id;
-//	}
-//	
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
-//	
+
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -69,22 +69,22 @@ public class Category implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-//	
-//	public List<TouristicActivity> getTouristicActivites(){
-//		return touristicActivities;
-//	}
-//	
-//	public void setCategoriesToActivites(List<TouristicActivity> activitiesCats) {
-//		this.touristicActivities = activitiesCats;
-//	}
-//	
-//	public List<TouristicBundle> getTouristicBundle(){
-//		return touristicBundles;
-//	}
-//	
-//	public void setCategoriesToBundles(List<TouristicBundle> bundlesCats) {
-//		this.touristicBundles = bundlesCats;
-//	}
+	
+	public List<TouristicActivity> getTouristicActivites(){
+		return touristicActivities;
+	}
+	
+	public void setCategoriesToActivites(List<TouristicActivity> activitiesCats) {
+		this.touristicActivities = activitiesCats;
+	}
+	
+	public List<TouristicBundle> getTouristicBundle(){
+		return touristicBundles;
+	}
+	
+	public void setCategoriesToBundles(List<TouristicBundle> bundlesCats) {
+		this.touristicBundles = bundlesCats;
+	}
 	
 	
 	//shortDt
@@ -119,19 +119,19 @@ public class Category implements Serializable{
 		return dt;
 	}
 	
-//	 @Override
-//	 public boolean equals(Object obj) {
-//		 
-//		 if(!(obj instanceof Category)) {
-//			 return false;
-//		 }
-//		 
-//		 if(this.id == ((Category) obj).getId()) {
-//			 return true;
-//		 }
-//		 
-//		 return false;
-//	 }
+	 @Override
+	 public boolean equals(Object obj) {
+		 
+		 if(!(obj instanceof Category)) {
+			 return false;
+		 }
+		 
+		 if(this.id == ((Category) obj).getId()) {
+			 return true;
+		 }
+		 
+		 return false;
+	 }
 	 
 }
 
