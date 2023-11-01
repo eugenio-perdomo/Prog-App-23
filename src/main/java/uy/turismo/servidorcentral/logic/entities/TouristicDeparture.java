@@ -55,6 +55,9 @@ public class TouristicDeparture implements Serializable {
 	@Column(length = 104)
 	private String image;
 	
+	@Column(length = 10)
+	private Integer visitsAmount;
+	
 	@ManyToOne(targetEntity = TouristicActivity.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "touristic_activity")
 	private TouristicActivity touristicActivity;
@@ -75,7 +78,8 @@ public class TouristicDeparture implements Serializable {
 			LocalDate uploadDate,
 			LocalDateTime departureDateTime, 
 			String place,
-			TouristicActivity touristicActivity) {
+			TouristicActivity touristicActivity,
+			Integer visits) {
 		this.id = id;
 		this.name = name;
 		this.maxTourist = maxTourist;
@@ -85,6 +89,7 @@ public class TouristicDeparture implements Serializable {
 		this.image = null;
 		this.touristicActivity = touristicActivity;
 		this.initLists();
+		this.visitsAmount = visits;
 	}
 	
 	//Iniciadores
@@ -137,6 +142,15 @@ public class TouristicDeparture implements Serializable {
 
 	public void setPlace(String place) {
 		this.place = place;
+	}
+	
+	public Integer getVisits() {
+		return visitsAmount;
+	}
+
+
+	public void setVisits(Integer visits) {
+		this.visitsAmount = visits;
 	}
 	
 	
@@ -236,7 +250,8 @@ public class TouristicDeparture implements Serializable {
 				this.place,
 				this.getImage(),
 				this.touristicActivity.getShortDt(),
-				listTourist);
+				listTourist,
+				this.visitsAmount);
 		return dtDeparture;
 	}
 	

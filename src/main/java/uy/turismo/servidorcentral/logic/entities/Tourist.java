@@ -30,6 +30,7 @@ public class Tourist extends User {
 	private List<Purchase> purchases;
 
 	
+	
 	//Constructors
 	public Tourist() {
 

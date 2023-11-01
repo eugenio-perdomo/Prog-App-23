@@ -8,7 +8,9 @@ import java.util.List;
 import uy.turismos.servidorcentral.logic.enums.ActivityState;
 
 public class DtTouristicActivity extends DtBaseEntity {
-
+	
+	private Integer visitsAmount;
+	private String urlVideo;
 	private String description;
 	private Double duration;
 	private Double costPerTourist;
@@ -47,7 +49,7 @@ public class DtTouristicActivity extends DtBaseEntity {
 	public DtTouristicActivity(Long id, String name, String description, Double duration, Double costPerTourist,
 			String city, BufferedImage image, ActivityState state, LocalDate uploadDate, DtProvider provider,
 			DtDepartment department, List<DtTouristicDeparture> departures, List<DtTouristicBundle> bundles,
-			List<DtCategory> categories) {
+			List<DtCategory> categories, Integer visits, String videoURL) {
 
 		super(id, name);
 		this.description = description;
@@ -62,8 +64,19 @@ public class DtTouristicActivity extends DtBaseEntity {
 		this.departures = departures;
 		this.bundles = bundles;
 		this.categories = categories;
+		this.visitsAmount = visits;
+		this.urlVideo = videoURL;
 	}
-
+	
+	
+	public Integer getVisits() {
+		return visitsAmount;
+	}
+	
+	public String getVideoURL() {
+		return urlVideo;
+	}
+	
 	public String getDescription() {
 		return description;
 	}

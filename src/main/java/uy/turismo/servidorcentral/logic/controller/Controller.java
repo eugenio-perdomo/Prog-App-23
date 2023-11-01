@@ -386,8 +386,8 @@ public class Controller implements IController {
 				touristicDepartureData.getUploadDate(),
 				touristicDepartureData.getDepartureDateTime(),
 				touristicDepartureData.getPlace(),
-				activity
-				);
+				activity,
+				touristicDepartureData.getVisits());
 		
 		if(touristicDepartureData.getImage() != null) {
 			departure.setImage(touristicDepartureData.getImage());

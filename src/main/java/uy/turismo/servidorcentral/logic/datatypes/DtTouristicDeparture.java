@@ -11,6 +11,7 @@ import uy.turismo.servidorcentral.logic.entities.Category;
 public class DtTouristicDeparture extends DtBaseEntity {
 
 	private Integer maxTourist;
+	private Integer visitsAmount;
 	private LocalDate uploadDate;
 	private LocalDateTime departureDateTime;
 	private String place;
@@ -43,7 +44,8 @@ public class DtTouristicDeparture extends DtBaseEntity {
 			String place,
 			BufferedImage image,
 			DtTouristicActivity touristicActivity, 
-			List<DtTourist> tourists) {
+			List<DtTourist> tourists,
+			Integer visits) {
 		super(id, name);
 		this.maxTourist = maxTourist;
 		this.uploadDate = uploadDate;
@@ -52,6 +54,7 @@ public class DtTouristicDeparture extends DtBaseEntity {
 		this.image = image;
 		this.touristicActivity = touristicActivity;
 		this.tourists = tourists;
+		this.visitsAmount = visits;
 	}
 
 	//Getters
@@ -81,6 +84,10 @@ public class DtTouristicDeparture extends DtBaseEntity {
 
 	public List<DtTourist> getTourists() {
 		return tourists;
+	}
+	
+	public Integer getVisits() {
+		return visitsAmount;
 	}
 	
 	@Override

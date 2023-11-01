@@ -6,17 +6,22 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.imageio.ImageIO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 //import uy.turismo.servidorcentral.logic.datatypes.DtDepartment; to clean later
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 
@@ -49,6 +54,15 @@ public abstract class User implements Serializable  {
 	@Column(length = 100)
 	protected String password;
 	
+	/*
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "Follows", joinColumns = @JoinColumn(name = "followed"), inverseJoinColumns = @JoinColumn(name = "follower"))
+	protected ArrayList<User> followers; //seguidores
+	
+	
+	@ManyToMany(fetch = FetchType.EAGER)(mappedBy = "followers", fetch = FetchType.EAGER)
+	protected ArrayList<User> followed; //seguidos
+	*/
 	// Constructor
 
 	public User() {
@@ -82,7 +96,11 @@ public abstract class User implements Serializable  {
 	}
 	
 	
-
+	//Iniciadores
+		private void initLists() {
+			//this.followers = new ArrayList<User>();
+		}
+	
 	public String getName() {
 		return name;
 	}

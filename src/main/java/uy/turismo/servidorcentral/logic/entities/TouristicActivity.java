@@ -60,6 +60,12 @@ public class TouristicActivity implements Serializable{
 	@Column(length = 104)
 	private String image;
 	
+	@Column(length = 10)
+	private Integer visitsAmount;
+	
+	@Column(length = 100)
+	private String videoURL;
+	
 	private ActivityState state;
 	
 	@ManyToOne
@@ -351,7 +357,9 @@ public class TouristicActivity implements Serializable{
 					this.department.getShortDt(),
 					listDtDepartures,
 					listDtBundles,
-					listDtCategories);
+					listDtCategories,
+					this.visitsAmount,
+					this.videoURL);
 			
 		}catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage());
