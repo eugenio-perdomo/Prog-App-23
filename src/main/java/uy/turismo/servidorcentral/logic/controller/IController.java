@@ -67,7 +67,7 @@ public interface IController {
 	 * @param userData
 	 * @throws Exception 
 	 */
-	public void registerUser(DtUser userData) throws Exception;
+	public void registerUser(DtUser userData);
 	
 	
 	/**
@@ -131,7 +131,7 @@ public interface IController {
 	 * @param departmentData
 	 * Da de alta un departamento con los datos pasados por parametro.
 	 */
-	public void registerDepartment(DtDepartment departmentData) throws Exception;
+	public void registerDepartment(DtDepartment departmentData);
 
 	
 	/**

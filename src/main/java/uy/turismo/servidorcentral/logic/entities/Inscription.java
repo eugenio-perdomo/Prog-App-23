@@ -126,7 +126,4 @@ public class Inscription implements Serializable {
 				
 				
 	}
-	
-	
-	
 }

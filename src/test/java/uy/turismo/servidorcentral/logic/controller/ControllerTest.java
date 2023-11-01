@@ -463,7 +463,8 @@ public class ControllerTest {
 		controller.registerUser(providerTest);
 	}
 	
-	public void registerDepartment() throws Exception {
+	@Test
+	public void registerDepartment() {
 		IController controller = ControllerFactory.getIController();
 		
 		String name = "Rocha2";
@@ -478,7 +479,8 @@ public class ControllerTest {
 		System.out.println(yellow + "Info: DONE" + yellow);
 	}
 	
-	public void registerDepartmentFail() throws Exception {
+	@Test
+	public void registerDepartmentFail() {
 		IController controller = ControllerFactory.getIController();
 		
 		String name = "Rocha2";

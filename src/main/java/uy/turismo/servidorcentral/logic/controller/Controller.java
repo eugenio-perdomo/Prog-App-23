@@ -195,7 +195,7 @@ public class Controller implements IController {
 	}
 	
 	//testeo pendiente
-	public void registerUser(DtUser usrData) throws Exception {
+	public void registerUser(DtUser usrData) {
 		UserDAO usrDAO = new UserDAOImpl();
 		
 		if(usrData instanceof DtProvider) {
@@ -221,8 +221,6 @@ public class Controller implements IController {
 				usrDAO.create(provUsr);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
-				e = new Exception("el usuario: " + provData.getNickname() + " O el e-mail: " + provData.getEmail() +" ya existe.");
-				throw e;
 			}
 			
 			
@@ -249,8 +247,6 @@ public class Controller implements IController {
 				}
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
-				e = new Exception("el usuario: " + touristData.getNickname() + " O el e-mail: " + touristData.getEmail() +" ya existe.");
-				throw e;
 			}
 			
 		}
@@ -471,7 +467,7 @@ public class Controller implements IController {
 		}
 	}
 	
-	public void registerDepartment(DtDepartment departmentData) throws Exception{
+	public void registerDepartment(DtDepartment departmentData){
 		DepartmentDAO departmentDAO = new DepartmentDAOImpl();
 		
 		Department department = new Department(null, departmentData.getName(), departmentData.getDescription(), departmentData.getWebSite());
@@ -480,8 +476,6 @@ public class Controller implements IController {
 			departmentDAO.create(department);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			e = new Exception("El Departamento: " + departmentData.getName() + " ya existe.");
-			throw e;
 		}
 	}
 
