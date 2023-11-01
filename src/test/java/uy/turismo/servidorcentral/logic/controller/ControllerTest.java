@@ -365,15 +365,14 @@ public class ControllerTest {
 		//no puede ser nulo tho
 		IController controller = ControllerFactory.getIController();
 		String yellow = "\u001B[33m";
-		
+	
 		ActivityState stateAdded = ActivityState.ADDED;
 		ActivityState stateRejected = ActivityState.REJECTED;
 		ActivityState stateAccepted = ActivityState.ACCEPTED;
 		
 		List<DtTouristicActivity> activities = controller.getListActivityStated(stateAccepted);
-		
+
 		System.out.println(activities);
-		
 	}
 
 	@Test

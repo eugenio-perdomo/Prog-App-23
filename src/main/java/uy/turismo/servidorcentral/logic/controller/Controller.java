@@ -87,8 +87,7 @@ public class Controller implements IController {
 
 	@Override
 	public DtUser getUserData(Long id) {
-
-		
+	
 		UserDAO userDao = new UserDAOImpl();
 		User user = userDao.findById(id);
 		DtUser userOutput;
