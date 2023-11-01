@@ -92,7 +92,7 @@ public class TouristicDeparture implements Serializable {
 		this.inscriptions = new ArrayList<Inscription>();
 	}
 
-//	Getters and Setter
+	//Getters and Setter
 	public String getName() {
 		return name;
 	}
@@ -101,44 +101,44 @@ public class TouristicDeparture implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-
-	public Integer getMaxTourist() {
-		return maxTourist;
-	}
-
-
-	public void setMaxTourist(Integer maxTourist) {
-		this.maxTourist = maxTourist;
-	}
-
-
-	public LocalDate getUploadDate() {
-		return uploadDate;
-	}
-
-
-	public void setUploadDate(LocalDate uploadDate) {
-		this.uploadDate = uploadDate;
-	}
-
-
-	public LocalDateTime getDepartureDateTime() {
-		return departureDateTime;
-	}
-
-
-	public void setDepartureDateTime(LocalDateTime departureDateTime) {
-		this.departureDateTime = departureDateTime;
-	}
-
-	public String getPlace() {
-		return place;
-	}
-
-	public void setPlace(String place) {
-		this.place = place;
-	}
+//
+//
+//	public Integer getMaxTourist() {
+//		return maxTourist;
+//	}
+//
+//
+//	public void setMaxTourist(Integer maxTourist) {
+//		this.maxTourist = maxTourist;
+//	}
+//
+//
+//	public LocalDate getUploadDate() {
+//		return uploadDate;
+//	}
+//
+//
+//	public void setUploadDate(LocalDate uploadDate) {
+//		this.uploadDate = uploadDate;
+//	}
+//
+//
+//	public LocalDateTime getDepartureDateTime() {
+//		return departureDateTime;
+//	}
+//
+//
+//	public void setDepartureDateTime(LocalDateTime departureDateTime) {
+//		this.departureDateTime = departureDateTime;
+//	}
+//
+//	public String getPlace() {
+//		return place;
+//	}
+//
+//	public void setPlace(String place) {
+//		this.place = place;
+//	}
 	
 	
 	public BufferedImage getImage() {
