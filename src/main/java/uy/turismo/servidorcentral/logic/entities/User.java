@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.imageio.ImageIO;
@@ -22,6 +23,8 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import uy.turismo.servidorcentral.logic.datatypes.DtCategory;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 //import uy.turismo.servidorcentral.logic.datatypes.DtDepartment; to clean later
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 
@@ -54,6 +57,9 @@ public abstract class User implements Serializable  {
 	@Column(length = 100)
 	protected String password;
 	
+	
+	List<TouristicActivity> favorites; 
+	
 	/*
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "Follows", joinColumns = @JoinColumn(name = "followed"), inverseJoinColumns = @JoinColumn(name = "follower"))
@@ -63,6 +69,9 @@ public abstract class User implements Serializable  {
 	@ManyToMany(fetch = FetchType.EAGER)(mappedBy = "followers", fetch = FetchType.EAGER)
 	protected ArrayList<User> followed; //seguidos
 	*/
+	
+	//ver mapeo de actividades favoritas en bd
+	
 	// Constructor
 
 	public User() {
@@ -93,14 +102,20 @@ public abstract class User implements Serializable  {
 		this.birthDate = birthDate;
 		this.image = null;
 		this.password = password;
+		this.initLists();
 	}
 	
 	
 	//Iniciadores
 		private void initLists() {
 			//this.followers = new ArrayList<User>();
+			this.favorites = new ArrayList<TouristicActivity>();
 		}
 	
+	public List<TouristicActivity> getFavoritesActivities() {
+		return favorites;
+	}
+		
 	public String getName() {
 		return name;
 	}
@@ -206,7 +221,17 @@ public abstract class User implements Serializable  {
 		}
 		
 	}
-
+	
+	
+	/**
+	 * Agrega una actividad a la lista de favoritas del usuario. 
+	 * @param activity
+	 */
+	public void addFavoriteActivity(TouristicActivity activity) {
+		this.favorites.add(activity);
+	}
+	
+	
 	//Methods
 
 	/**

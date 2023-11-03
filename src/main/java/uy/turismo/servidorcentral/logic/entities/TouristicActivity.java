@@ -83,6 +83,8 @@ public class TouristicActivity implements Serializable{
 	private List<TouristicDeparture> touristicDepartures;
 	
 	
+	//actividad tiene lista de usuarios que las tienen como favoritas.
+	private List<User> usersFavorites;
 	
 	
 	//codigo agregado:LT
@@ -109,7 +111,9 @@ public class TouristicActivity implements Serializable{
 			ActivityState state,
 			LocalDate uploadDate,
 			Provider provider, 
-			Department department) {
+			Department department,
+			Integer visits,
+			String urlVideo) {
 		
 		this.id = id;
 		this.name = name;
@@ -123,6 +127,8 @@ public class TouristicActivity implements Serializable{
 		this.provider = provider;
 		this.department = department;
 		this.InitLists();
+		this.visitsAmount = visits;
+		this.videoURL = urlVideo;
 	}
 	
 	//Iniciadores 
@@ -133,6 +139,23 @@ public class TouristicActivity implements Serializable{
 	}
 
 	//Getters y Setters
+	public String getVideoURL() {
+		return videoURL;
+	}
+	
+	public void SetVideoURL(String urlVideo) {
+		this.videoURL = urlVideo;
+	}
+	
+	public Integer getVisits() {
+		return visitsAmount;
+	}
+	
+	public void SetVisits(Integer visits) {
+		this.visitsAmount = visits;
+	}
+	
+	
 	public Long getId() {
 		return id;
 	}

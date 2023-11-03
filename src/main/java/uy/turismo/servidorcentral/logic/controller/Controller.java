@@ -351,8 +351,9 @@ public class Controller implements IController {
 				touristicActivityData.getState(),
 				touristicActivityData.getUploadDate(),
 				provider,
-				department
-				);
+				department,
+				touristicActivityData.getVisits(),
+				touristicActivityData.getVideoURL());
 		
 		
 
@@ -536,7 +537,24 @@ public class Controller implements IController {
 			System.out.println(e.getMessage());
 		}
 	}
-
+	
+	
+	public void addActivityToFavorites(Long userId, Long activityId) {
+		//No esta testeada ver mapeo en bd
+		UserDAO userDao = new UserDAOImpl();
+		User user = userDao.findById(userId);
+		TouristicActivityDAO activityDAO = new TouristicActivityDAOImpl();
+		TouristicActivity activity = activityDAO.findById(activityId);
+		user.addFavoriteActivity(activity);
+		
+		try {
+			userDao.update(user);
+		}catch (Exception e) {
+			
+		}
+	}
+	
+	
 	@Override
 	public void registerCategory(DtCategory categoryData) throws Exception{
 		// TODO Auto-generated method stub
@@ -611,6 +629,8 @@ public class Controller implements IController {
 			return user.getDt();
 		}
 	}
+	
+	
 		
 	public List<DtTouristicActivity> getListActivityStated(ActivityState state){
 		
@@ -688,6 +708,8 @@ public class Controller implements IController {
 		return purchaseOutput;
 		
 	}
+	
+	
 	
 	
 }

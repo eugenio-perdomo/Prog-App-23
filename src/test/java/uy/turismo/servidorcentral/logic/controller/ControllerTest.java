@@ -126,14 +126,14 @@ public class ControllerTest {
 
 		DtProvider provider = (DtProvider) controller.getUserData(11L);
 		
-		String name = "volar";
+		String name = "volar2";
 		String description = "algo ekisde";
 		Double duration = 1d;
 		Double costPerTourist = 120d;
 		LocalDate date = LocalDate.now();
 		String city = "Rocha";
 		ActivityState state = ActivityState.ADDED;
-		
+		String video = "https://www.youtube.com/shorts/N_rXwhTtVVA";
 		
 		List<DtCategory> categories = new ArrayList<DtCategory>();
 		
@@ -155,7 +155,9 @@ public class ControllerTest {
 				department, 
 				null,
 				null, 
-				categories);
+				categories,
+				null,
+				video);
 		
 		try {
 			controller.registeTouristicActivity(activityTest);
@@ -220,6 +222,7 @@ public class ControllerTest {
 				"Sociedad Agropecuaria de Rocha",
 				null,
 				activity,
+				null,
 				null
 				);
 		
@@ -352,6 +355,7 @@ public class ControllerTest {
 			controller.changeActivityState(1L,stateRejected);
 			controller.changeActivityState(2L,stateRejected);
 			controller.changeActivityState(3L,stateAccepted);
+			controller.changeActivityState(17L,stateAccepted);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

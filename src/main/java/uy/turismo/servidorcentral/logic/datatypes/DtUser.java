@@ -4,6 +4,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
 
 public abstract class DtUser extends DtBaseEntity {
 	
@@ -13,6 +17,7 @@ public abstract class DtUser extends DtBaseEntity {
 	private LocalDate birthDate;
 	private BufferedImage image;
 	private String password;
+	private List<DtTouristicActivity> favorites; 
 	
 	public DtUser() {
 		
@@ -43,8 +48,19 @@ public abstract class DtUser extends DtBaseEntity {
 		this.birthDate = birthDate;
 		this.image = image;
 		this.password = password;
+		this.initLists();
+	}
+	
+	private void initLists() {
+		//this.followers = new ArrayList<User>();
+		this.favorites = new ArrayList<DtTouristicActivity>();
 	}
 
+	public List<DtTouristicActivity> getFavoritesActivities() {
+		return favorites;
+	}
+	
+	
 	public String getNickname() {
 		return nickname;
 	}
