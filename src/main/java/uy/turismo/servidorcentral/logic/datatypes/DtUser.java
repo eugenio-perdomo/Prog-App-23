@@ -18,7 +18,7 @@ public abstract class DtUser extends DtBaseEntity {
 	private BufferedImage image;
 	private String password;
 	private List<DtTouristicActivity> favorites;
-	private List<DtTourist> followed;
+	private List<DtUser> followed;
 	
 	public DtUser() {
 		
@@ -53,7 +53,7 @@ public abstract class DtUser extends DtBaseEntity {
 	}
 	
 	private void initLists() {
-		this.followed = new ArrayList<DtTourist>();
+		this.followed = new ArrayList<DtUser>();
 		this.favorites = new ArrayList<DtTouristicActivity>();
 	}
 
@@ -61,7 +61,7 @@ public abstract class DtUser extends DtBaseEntity {
 		return favorites;
 	}
 	
-	public List<DtTourist> getFollowed() {
+	public List<DtUser> getFollowed() {
 		return followed;
 	}
 	

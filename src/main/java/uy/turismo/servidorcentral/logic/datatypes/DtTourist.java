@@ -13,6 +13,8 @@ public class DtTourist extends DtUser {
 	private List<DtInscription> inscriptions;
 	private List<DtTouristicBundle> bundles;
 	private List<DtPurchase> purchases;
+	private List<DtTouristicActivity> favActivities;
+	
 	
 	public DtTourist() {
 		// TODO Auto-generated constructor stub
@@ -48,6 +50,10 @@ public class DtTourist extends DtUser {
 
 	public String getNationality() {
 		return nationality;
+	}
+	
+	public List<DtTouristicActivity> getFavActivties() {
+		return favActivities;
 	}
 
 	public List<DtTouristicDeparture> getDepartures() {
