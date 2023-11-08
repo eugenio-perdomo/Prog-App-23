@@ -533,6 +533,7 @@ public class ControllerTest {
 		System.out.println(yellow + "Info: DONE" + yellow);
 	}
 	
+	@Test 
 	public void registerTouristcDepartureFail() throws Exception {
 		IController controller = ControllerFactory.getIController();
 		String yellow = "\u001B[33m";
@@ -549,4 +550,57 @@ public class ControllerTest {
 		System.out.println(yellow + "Info: DONE" + yellow);
 	}
 	
+	@Test 
+	public void followUserTest() {
+		IController controller = ControllerFactory.getIController();
+		
+		Long follower = 1L;
+		
+		Long followed = 2L;
+		Long followed2 = 3L;
+		Long followed3 = 4L;
+		Long followed4 = 5L;
+		
+		controller.followUser(follower, followed); //1 sigue a 2
+		controller.followUser(follower, followed2);//1 sigue a 3
+		controller.followUser(follower, followed3);//1 sigue a 4
+		controller.followUser(follower, followed4);//1 sigue a 5
+		controller.followUser(follower, follower);//1 sigue a 1
+		
+		//controller.followUser(followed2, follower);
+	}
+	
+	@Test 
+	public void unFollowUserTest() {
+		IController controller = ControllerFactory.getIController();
+		
+		Long follower = 1L;
+		
+		//Long followed = 4L;
+		Long followed2 = 4L;
+		
+		controller.unFollowUser(follower, followed2);//1 deja de seguir a 5	
+	}
+	
+	@Test 
+	public void markFavoriteActivityTest() {
+		IController controller = ControllerFactory.getIController();
+		
+		Long user = 1L;
+		Long activity1 = 1L;
+		Long activity2 = 2L;
+		
+		controller.markFavoriteActivty(user, activity1);
+		controller.markFavoriteActivty(user, activity2);
+	}
+	
+	@Test
+	public void unMarkFavoriteActivityTest() {
+		IController controller = ControllerFactory.getIController();
+		
+		Long user = 1L;
+		Long activity = 2L;
+		
+		controller.unMarkFavoriteActivity(user, activity);
+	}
 }

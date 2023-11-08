@@ -41,6 +41,7 @@ public interface UserDAO {
 	 * @throws Exception si no se pudo hacer el merge
 	 */
 	public void update(User user) throws Exception;
+
 	
 	/**
 	 * Busca un usuario con email y contraseña pasados

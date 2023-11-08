@@ -185,7 +185,45 @@ public interface IController {
 	 */
 	public void registerPurchase(DtPurchase purchase) throws Exception;
 	
+	/**
+	 * Devuelve los datos de una compra
+	 * @param purchaseId -> identificador de la compra
+	 * @return
+	 */
 	public DtPurchase getPurchase(Long purchaseId);
 	
+	/**
+	 * Devuelve una lista de compras.
+	 * @return
+	 */
 	public List<DtPurchase> getPurchaseList();
+	
+	/**
+	 * Operacion para que un usuario pueda seguir a otro.
+	 * @param userId -> Id del usuario seguidor. SEGUIDOR
+	 * @param userToFollowId -> Id del usuario a seguir. SEGUIDO
+	 */
+	public void followUser(Long userId, Long userToFollowId);
+	
+	/**
+	 * Operacion para que un usuario pueda dejar de seguir a otro.
+	 * @param userId -> Id del usuario que quiere dejar de seguir.
+	 * @param userToUnFollowId -> Id del usuario a dejar  de seguir.
+	 */
+	public void unFollowUser(Long userId, Long userToUnFollowId);
+	
+	/**
+	 * Operacion para marcar una activdad turistica como favorita.
+	 * @param userId -> id del usuario(en sesion) que quiere marcar la actividad como favorita.
+	 * @param activityId -> actividad a la que se quiere marcar como favorita.
+	 */
+	public void markFavoriteActivty(Long userId, Long activityId);
+	
+	/**
+	 * Operacion para desmarcar una activdad turistica como favorita.
+	 * @param userId id del usuario(en sesion) que quiere desmarcar la actividad como favorita.
+	 * @param acitivtyId actividad a la que se quiere desmarcar como favorita.
+	 */
+	public void unMarkFavoriteActivity(Long userId, Long acitivtyId);
+
 }

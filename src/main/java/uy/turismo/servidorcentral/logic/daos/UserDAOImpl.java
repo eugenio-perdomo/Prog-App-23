@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
+import org.hibernate.query.criteria.JpaCriteriaDelete;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceException;
@@ -132,6 +136,7 @@ public class UserDAOImpl implements UserDAO {
 				.getSessionFactory()
 				.openSession();
 		try {
+			
 			session.beginTransaction();
 			session.persist(user);
 			session.getTransaction().commit();
@@ -167,7 +172,7 @@ public class UserDAOImpl implements UserDAO {
 		session.close();
 
 	}
-
+	
 	@Override
 	public User checkCredentials(String email, String password) {
 		Session session = HibernateUtil
@@ -213,5 +218,6 @@ public class UserDAOImpl implements UserDAO {
 		
 		return user;
 	}
+	
 
 }

@@ -57,20 +57,10 @@ public abstract class User implements Serializable  {
 	@Column(length = 100)
 	protected String password;
 	
-	
-	List<TouristicActivity> favorites; 
-	
-	/*
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "Follows", joinColumns = @JoinColumn(name = "followed"), inverseJoinColumns = @JoinColumn(name = "follower"))
-	protected ArrayList<User> followers; //seguidores
+	@JoinTable(name = "Follows", joinColumns = @JoinColumn(name = "follower"), inverseJoinColumns = @JoinColumn(name = "followed"))
+	protected List<User> follows; //seguidos
 	
-	
-	@ManyToMany(fetch = FetchType.EAGER)(mappedBy = "followers", fetch = FetchType.EAGER)
-	protected ArrayList<User> followed; //seguidos
-	*/
-	
-	//ver mapeo de actividades favoritas en bd
 	
 	// Constructor
 
@@ -107,15 +97,30 @@ public abstract class User implements Serializable  {
 	
 	
 	//Iniciadores
-		private void initLists() {
-			//this.followers = new ArrayList<User>();
-			this.favorites = new ArrayList<TouristicActivity>();
-		}
+	private void initLists() {
+		
+		this.follows = new ArrayList<User>();
+	}
 	
-	public List<TouristicActivity> getFavoritesActivities() {
-		return favorites;
+	
+	public Boolean follow(User user) {
+		follows.add(user);		
+		return follows.contains(user);
+	}
+	
+	public Boolean unFollow(User user) {
+		follows.remove(user);		
+		return !follows.contains(user);
+	}
+	
+	public List<User> getFollows() {
+		return follows;
 	}
 		
+	public void setFollows(List<User> followers) {
+		this.follows = followers;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -223,14 +228,6 @@ public abstract class User implements Serializable  {
 	}
 	
 	
-	/**
-	 * Agrega una actividad a la lista de favoritas del usuario. 
-	 * @param activity
-	 */
-	public void addFavoriteActivity(TouristicActivity activity) {
-		this.favorites.add(activity);
-	}
-	
 	
 	//Methods
 
@@ -248,5 +245,18 @@ public abstract class User implements Serializable  {
 	 * @throws Exception 
 	 */
 	public abstract DtUser getDt();
-
+	
+	 @Override
+	public boolean equals(Object obj) {
+		 
+		 if(!(obj instanceof User)) {
+			 return false;
+		 }
+		 
+		 if(this.id == ((User) obj).getId()) {
+			 return true;
+		 }
+		 
+		 return false;
+	 }
 }

@@ -24,7 +24,8 @@ public class DtTouristicActivity extends DtBaseEntity {
 	private List<DtTouristicBundle> bundles;
 	// codigo agregado: LT
 	private List<DtCategory> categories;
-
+	private List<DtTourist> favActivities;
+	
 	public DtTouristicActivity() {
 		// TODO Auto-generated constructor stub
 	}
@@ -120,6 +121,10 @@ public class DtTouristicActivity extends DtBaseEntity {
 	// codigo agregado: LT
 	public List<DtCategory> getCategories() {
 		return categories;
+	}
+	
+	public List<DtTourist> getUsers() {
+		return favActivities;
 	}
 
 	public ActivityState getState() {

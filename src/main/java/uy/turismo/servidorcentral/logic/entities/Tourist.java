@@ -7,6 +7,9 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
@@ -29,12 +32,16 @@ public class Tourist extends User {
 	@OneToMany(mappedBy = "tourist", fetch = FetchType.EAGER)
 	private List<Purchase> purchases;
 
-	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "Users_Fav_Activities", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "activity_id"))
+	List<TouristicActivity> favoriteActivities; 
 	
 	//Constructors
 	public Tourist() {
 
 	}
+	
+	
 
 	public Tourist(
 			Long id,
@@ -54,18 +61,39 @@ public class Tourist extends User {
 	
 	//Iniciadores
 	private void initLists() {
+		this.favoriteActivities = new ArrayList<TouristicActivity>();
 		this.inscriptions = new ArrayList<Inscription>();
 		this.purchases = new ArrayList<Purchase>();
 	}
 
 	//Getters and Setter
+	
+	public Boolean markFavoriteActivity(TouristicActivity activity) {
+		favoriteActivities.add(activity);		
+		return favoriteActivities.contains(activity);
+	}
+	
+	public Boolean unMarkFavoriteActivity(TouristicActivity activity) {
+		favoriteActivities.remove(activity);		
+		return !favoriteActivities.contains(activity);
+	}
+	
 	public String getNationality() {
 		return nationality;
 	}
-
+	
 	public void setNationality(String nationality) {
 		this.nationality = nationality;
 	}
+
+	public List<TouristicActivity> getFavoritesActivities() {
+		return favoriteActivities;
+	}
+	
+	public void setFavoritesActivities(List<TouristicActivity> activity) {
+		this.favoriteActivities =  activity;
+	}
+	
 	
 	/**
 	 * Crea un DtTourist con todos los datos del objeto y lo devuelve
@@ -135,7 +163,18 @@ public class Tourist extends User {
 	}
 	
 	
-
-	
-
+	 @Override
+		public boolean equals(Object obj) {
+			 
+			 if(!(obj instanceof Tourist)) {
+				 return false;
+			 }
+			 
+			 if(this.id == ((Tourist) obj).getId()) {
+				 return true;
+			 }
+			 
+			 return false;
+		 }
+	 
 }

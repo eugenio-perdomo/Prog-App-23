@@ -11,6 +11,8 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
+import org.hibernate.Session;
+
 import uy.turismo.servidorcentral.logic.daos.DepartmentDAO;
 import uy.turismo.servidorcentral.logic.daos.DepartmentDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.InscriptionDAO;
@@ -47,6 +49,7 @@ import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
 import uy.turismo.servidorcentral.logic.entities.TouristicBundle;
 import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.User;
+import uy.turismo.servidorcentral.logic.util.HibernateUtil;
 import uy.turismos.servidorcentral.logic.enums.ActivityState;
 
 public class Controller implements IController {
@@ -539,21 +542,6 @@ public class Controller implements IController {
 	}
 	
 	
-	public void addActivityToFavorites(Long userId, Long activityId) {
-		//No esta testeada ver mapeo en bd
-		UserDAO userDao = new UserDAOImpl();
-		User user = userDao.findById(userId);
-		TouristicActivityDAO activityDAO = new TouristicActivityDAOImpl();
-		TouristicActivity activity = activityDAO.findById(activityId);
-		user.addFavoriteActivity(activity);
-		
-		try {
-			userDao.update(user);
-		}catch (Exception e) {
-			
-		}
-	}
-	
 	
 	@Override
 	public void registerCategory(DtCategory categoryData) throws Exception{
@@ -708,8 +696,94 @@ public class Controller implements IController {
 		return purchaseOutput;
 		
 	}
+
+	@Override
+	public void followUser(Long userId, Long userToFollowId) {
+		
+		UserDAO userDAO = new UserDAOImpl();
+		
+		if(userId == userToFollowId) {
+			System.out.println("No puedes seguirte a ti mismo.");
+		}else {
+			User userFollower = userDAO.findById(userId);
+		
+			User userFollowed = userDAO.findById(userToFollowId);
+			
+			if(userFollower.follow(userFollowed)) {	
+				try {
+					userDAO.update(userFollower);
+				}catch (Exception e){
+					
+				}
+			}
+		}		
+	}
 	
 	
+	//revisar como eliminar.
+	@Override
+	public void unFollowUser(Long userId, Long userToUnFollowId) {
+		UserDAO userDAO = new UserDAOImpl();
+		User userFollower = userDAO.findById(userId);
+		User userFollowed = userDAO.findById(userToUnFollowId);
+		
+		if(userId == userToUnFollowId) {
+			System.out.println("No puedes seguirte/dejar de seguir a ti mismo.");
+		}else {
+			if(userFollower.unFollow(userFollowed)) {	
+				try {
+					userDAO.update(userFollower);
+				}catch (Exception e){
+					
+				}
+			}
+		}	
+	}
+
+	//revisar como hacer los updates.
+	@Override
+	public void markFavoriteActivty(Long userId, Long activityId) {
+
+		UserDAO userDAO = new UserDAOImpl();
+		TouristicActivityDAO activityDAO = new TouristicActivityDAOImpl();
+		
+		Tourist tourist = (Tourist) userDAO.findById(userId);
+		
+		TouristicActivity activity = activityDAO.findById(activityId);
+		
+		List<TouristicActivity> act = tourist.getFavoritesActivities();
+		
+		for(TouristicActivity activities : act) {
+			
+			if(activities.getId() == activityId) {
+				System.out.println("Ya sigues esta actividad!");
+			}else {
+				if(tourist.markFavoriteActivity(activity)) {	
+					try {
+						userDAO.update(tourist);
+					}catch (Exception e){
+						
+					}
+				}
+			}
+		}
+	}
+	
+	public void unMarkFavoriteActivity(Long userId, Long activityId) {
+		UserDAO userDAO = new UserDAOImpl();
+		TouristicActivityDAO activityDAO = new TouristicActivityDAOImpl();
+		
+		Tourist tourist = (Tourist) userDAO.findById(userId);
+		TouristicActivity activity = activityDAO.findById(activityId);
+		
+		if(tourist.unMarkFavoriteActivity(activity)) {	
+			try {
+				userDAO.update(tourist);
+			}catch (Exception e){
+				
+			}
+		}
+	}
 	
 	
 }

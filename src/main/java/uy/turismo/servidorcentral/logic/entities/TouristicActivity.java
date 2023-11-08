@@ -83,10 +83,6 @@ public class TouristicActivity implements Serializable{
 	private List<TouristicDeparture> touristicDepartures;
 	
 	
-	//actividad tiene lista de usuarios que las tienen como favoritas.
-	private List<User> usersFavorites;
-	
-	
 	//codigo agregado:LT
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "Activity_Categories", joinColumns = @JoinColumn(name = "activity"), inverseJoinColumns = @JoinColumn(name = "category"))	
@@ -304,8 +300,6 @@ public class TouristicActivity implements Serializable{
 	public void setCategory(List<Category> category) {
 		this.categories = category;
 	}
-	
-	
 	/**
 	 * Devuelve un DtTouristicActivity con id y nombre del objeto 
 	 * @return
@@ -390,5 +384,5 @@ public class TouristicActivity implements Serializable{
 		
 		return dtOutput;	
 	}
-	
+
 }
