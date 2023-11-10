@@ -56,7 +56,8 @@ public class ControllerTest {
 				provider.getUrl(), 
 				provider.getDescription(), 
 				null, 
-				provider.getPassword());
+				provider.getPassword(),
+				null);
 		
 		DtTourist tourist = (DtTourist) controller.getUserData(3L);
 		
@@ -71,6 +72,8 @@ public class ControllerTest {
 				tourist.getNationality(),
 				null,
 				tourist.getPassword(),
+				null,
+				null,
 				null,
 				null,
 				null
@@ -442,7 +445,9 @@ public class ControllerTest {
 				password1,
 				listInscriptions1,
 				listBundles1,
-				listPurchases1);
+				listPurchases1,
+				null,
+				null);
 		
 		DtProvider providerTest = new DtProvider(null,
 				name2,
@@ -454,7 +459,8 @@ public class ControllerTest {
 				url2,
 				desc2,
 				listActivities,
-				password2);
+				password2,
+				null);
 		
 		//de alta bien
 		controller.registerUser(touristTest);
@@ -555,19 +561,27 @@ public class ControllerTest {
 		IController controller = ControllerFactory.getIController();
 		
 		Long follower = 1L;
+		Long follower2 = 2L;
 		
 		Long followed = 2L;
 		Long followed2 = 3L;
 		Long followed3 = 4L;
 		Long followed4 = 5L;
-		
+		/*
 		controller.followUser(follower, followed); //1 sigue a 2
 		controller.followUser(follower, followed2);//1 sigue a 3
 		controller.followUser(follower, followed3);//1 sigue a 4
 		controller.followUser(follower, followed4);//1 sigue a 5
 		controller.followUser(follower, follower);//1 sigue a 1
 		
-		//controller.followUser(followed2, follower);
+		
+		controller.followUser(follower2, followed); //2 sigue a 2
+		controller.followUser(follower2, followed2);//2 sigue a 3
+		controller.followUser(follower2, followed3);//2 sigue a 4
+		controller.followUser(follower2, followed4);//2 sigue a 5
+		controller.followUser(follower2, follower);//2 sigue a 1 
+		controller.followUser(8L, 9L);
+		*/
 	}
 	
 	@Test 
@@ -576,10 +590,9 @@ public class ControllerTest {
 		
 		Long follower = 1L;
 		
-		//Long followed = 4L;
-		Long followed2 = 4L;
+		Long followed4 = 4L;
 		
-		controller.unFollowUser(follower, followed2);//1 deja de seguir a 5	
+		controller.unFollowUser(follower, followed4);//1 deja de seguir a 4
 	}
 	
 	@Test 
@@ -587,20 +600,29 @@ public class ControllerTest {
 		IController controller = ControllerFactory.getIController();
 		
 		Long user = 1L;
+		Long user2 = 2L;
 		Long activity1 = 1L;
 		Long activity2 = 2L;
-		
+		Long activity3 = 3L;
+		Long activity4 = 4L;
+		Long activity5 = 5L;
+		Long activity6 = 6L;
 		controller.markFavoriteActivty(user, activity1);
 		controller.markFavoriteActivty(user, activity2);
+		controller.markFavoriteActivty(user, activity3);
+		controller.markFavoriteActivty(user2, activity3);
+		controller.markFavoriteActivty(user2, activity4);
+		controller.markFavoriteActivty(user2, activity5);
+		controller.markFavoriteActivty(user2, activity6);
+		controller.markFavoriteActivty(6L, 6L);
+		
 	}
 	
 	@Test
 	public void unMarkFavoriteActivityTest() {
 		IController controller = ControllerFactory.getIController();
 		
-		Long user = 1L;
-		Long activity = 2L;
-		
-		controller.unMarkFavoriteActivity(user, activity);
+		controller.unMarkFavoriteActivity(1l, 2l);
+		controller.unMarkFavoriteActivity(2l, 6l);
 	}
 }

@@ -38,13 +38,16 @@ public class DtTourist extends DtUser {
 			String password,
 			List<DtInscription> inscriptions,
 			List<DtTouristicBundle> bundles,
-			List<DtPurchase> purchases) {
-		super(id, name, nickname, email, lastName, birthDate, image, password);
+			List<DtPurchase> purchases,
+			List<DtTouristicActivity> activities,
+			List<DtUser> users) {
+		super(id, name, nickname, email, lastName, birthDate, image, password, users);
 		this.nationality = nationality;
 		this.departures = departures;
 		this.inscriptions = inscriptions;
 		this.bundles = bundles;
 		this.purchases = purchases;
+		this.favActivities = activities;
 		// TODO Auto-generated constructor stub
 	}
 

@@ -85,6 +85,13 @@ public class Provider extends User {
 	public DtUser getDt() {
 		
 		List<DtTouristicActivity> listDtActivities = new ArrayList<DtTouristicActivity>();
+		List<DtUser> userList = new ArrayList<DtUser>();
+		
+		if(this.follows != null) {
+			for(User user: this.follows) {
+				userList.add(user.getShortDt());
+			}
+		}
 		
 		if(this.touristicActivities != null) {
 			for(TouristicActivity td : this.touristicActivities) {
@@ -106,7 +113,8 @@ public class Provider extends User {
 				this.webSite,
 				this.description,
 				listDtActivities,
-				this.password);	
+				this.password,
+				userList);	
 		
 		return dtOutput;
 	}

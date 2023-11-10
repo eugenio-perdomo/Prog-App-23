@@ -717,19 +717,19 @@ public class Controller implements IController {
 				}
 			}
 		}		
-	}
-	
+	}	
 	
 	//revisar como eliminar.
 	@Override
 	public void unFollowUser(Long userId, Long userToUnFollowId) {
 		UserDAO userDAO = new UserDAOImpl();
-		User userFollower = userDAO.findById(userId);
-		User userFollowed = userDAO.findById(userToUnFollowId);
 		
 		if(userId == userToUnFollowId) {
 			System.out.println("No puedes seguirte/dejar de seguir a ti mismo.");
 		}else {
+			User userFollower = userDAO.findById(userId);
+			User userFollowed = userDAO.findById(userToUnFollowId);
+			
 			if(userFollower.unFollow(userFollowed)) {	
 				try {
 					userDAO.update(userFollower);
@@ -748,25 +748,16 @@ public class Controller implements IController {
 		TouristicActivityDAO activityDAO = new TouristicActivityDAOImpl();
 		
 		Tourist tourist = (Tourist) userDAO.findById(userId);
-		
 		TouristicActivity activity = activityDAO.findById(activityId);
 		
-		List<TouristicActivity> act = tourist.getFavoritesActivities();
-		
-		for(TouristicActivity activities : act) {
-			
-			if(activities.getId() == activityId) {
-				System.out.println("Ya sigues esta actividad!");
-			}else {
-				if(tourist.markFavoriteActivity(activity)) {	
-					try {
-						userDAO.update(tourist);
-					}catch (Exception e){
-						
-					}
-				}
+		if(tourist.markFavoriteActivity(activity)) {	
+			try {
+				userDAO.update(tourist);
+			}catch (Exception e){
+				
 			}
 		}
+		
 	}
 	
 	public void unMarkFavoriteActivity(Long userId, Long activityId) {
@@ -775,14 +766,14 @@ public class Controller implements IController {
 		
 		Tourist tourist = (Tourist) userDAO.findById(userId);
 		TouristicActivity activity = activityDAO.findById(activityId);
-		
-		if(tourist.unMarkFavoriteActivity(activity)) {	
-			try {
-				userDAO.update(tourist);
+
+		if(tourist.unMarkFavoriteActivity(activity)) {
+			try {	
+				userDAO.update(tourist);		
 			}catch (Exception e){
 				
-			}
-		}
+			}	
+		}	
 	}
 	
 	

@@ -97,8 +97,7 @@ public abstract class User implements Serializable  {
 	
 	
 	//Iniciadores
-	private void initLists() {
-		
+	private void initLists() {	
 		this.follows = new ArrayList<User>();
 	}
 	

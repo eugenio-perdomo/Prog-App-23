@@ -15,6 +15,7 @@ import jakarta.persistence.Transient;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
 import uy.turismo.servidorcentral.logic.datatypes.DtPurchase;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
+import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
@@ -106,6 +107,20 @@ public class Tourist extends User {
 		List<DtInscription> listInscriptions = new ArrayList<DtInscription>();
 		List<DtTouristicBundle> listBundles = new ArrayList<DtTouristicBundle>();
 		List<DtPurchase> listPurchases = new ArrayList<DtPurchase>();
+		List<DtTouristicActivity> listFavActivities = new ArrayList<DtTouristicActivity>();
+		List<DtUser> userList = new ArrayList<DtUser>();
+		
+		if(this.follows != null) {
+			for(User user: this.follows) {
+				userList.add(user.getShortDt());
+			}
+		}
+		
+		if(this.favoriteActivities != null) {
+			for(TouristicActivity activity: this.favoriteActivities) {
+				listFavActivities.add(activity.getShortDt());
+			}
+		}
 		
 		if(this.inscriptions != null) {
 			for(Inscription inscription : this.inscriptions) {
@@ -139,7 +154,9 @@ public class Tourist extends User {
 					this.password,
 					listInscriptions,
 					listBundles,
-					listPurchases);
+					listPurchases,
+					listFavActivities,
+					userList);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -164,17 +181,17 @@ public class Tourist extends User {
 	
 	
 	 @Override
-		public boolean equals(Object obj) {
-			 
-			 if(!(obj instanceof Tourist)) {
-				 return false;
-			 }
-			 
-			 if(this.id == ((Tourist) obj).getId()) {
-				 return true;
-			 }
-			 
+	public boolean equals(Object obj) {
+		 
+		 if(!(obj instanceof Tourist)) {
 			 return false;
 		 }
+		 
+		 if(this.id == ((Tourist) obj).getId()) {
+			 return true;
+		 }
+		 
+		 return false;
+	 }
 	 
 }

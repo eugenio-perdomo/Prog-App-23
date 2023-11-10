@@ -384,5 +384,20 @@ public class TouristicActivity implements Serializable{
 		
 		return dtOutput;	
 	}
-
+	
+	
+	
+	 @Override
+	public boolean equals(Object obj) {
+		 
+		 if(!(obj instanceof TouristicActivity)) {
+			 return false;
+		 }
+		 
+		 if(this.id == ((TouristicActivity) obj).getId()) {
+			 return true;
+		 }
+		 
+		 return false;
+	 }
 }

@@ -41,7 +41,9 @@ public abstract class DtUser extends DtBaseEntity {
 			String lastName, 
 			LocalDate birthDate,
 			BufferedImage image,
-			String password) {
+			String password,
+			List<DtUser> users
+			) {
 		super(id, name);
 		this.nickname = nickname;
 		this.email = email;
@@ -49,13 +51,10 @@ public abstract class DtUser extends DtBaseEntity {
 		this.birthDate = birthDate;
 		this.image = image;
 		this.password = password;
-		this.initLists();
+		this.followed = users;
 	}
 	
-	private void initLists() {
-		this.followed = new ArrayList<DtUser>();
-		this.favorites = new ArrayList<DtTouristicActivity>();
-	}
+
 
 	public List<DtTouristicActivity> getFavoritesActivities() {
 		return favorites;

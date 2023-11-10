@@ -23,8 +23,9 @@ public class DtProvider extends DtUser {
 			String url, 
 			String description,
 			List<DtTouristicActivity> touristicActivities, 
-			String password) {
-		super(id, name, nickname, email, lastName, birthDate, image, password);
+			String password,
+			List<DtUser> users) {
+		super(id, name, nickname, email, lastName, birthDate, image, password, users);
 
 		this.url = url;
 		this.description = description;
@@ -34,8 +35,6 @@ public class DtProvider extends DtUser {
 	public DtProvider(Long id, String nickname, String email, BufferedImage image) {
 		super(id, nickname, email, image);
 	}
-	
-
 
 	public String getUrl() {
 		return url;
