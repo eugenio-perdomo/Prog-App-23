@@ -17,7 +17,7 @@ public abstract class DtUser extends DtBaseEntity {
 	private LocalDate birthDate;
 	private BufferedImage image;
 	private String password;
-	private List<DtTouristicActivity> favorites;
+	//private List<DtTouristicActivity> favorites;
 	private List<DtUser> followed;
 	
 	public DtUser() {
@@ -56,9 +56,9 @@ public abstract class DtUser extends DtBaseEntity {
 	
 
 
-	public List<DtTouristicActivity> getFavoritesActivities() {
-		return favorites;
-	}
+//	public List<DtTouristicActivity> getFavoritesActivities() {
+//		return favorites;
+//	}
 	
 	public List<DtUser> getFollowed() {
 		return followed;
