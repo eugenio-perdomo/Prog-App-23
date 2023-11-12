@@ -2,6 +2,8 @@ package uy.turismo.servidorcentral.logic.datatypes;
 
 import java.time.LocalDate;
 
+import uy.turismo.servidorcentral.logic.ws.datatypes.DtPurchaseWS;
+
 public class DtPurchase extends DtBaseEntity {
 	
 	private LocalDate purchaseDate;
@@ -10,6 +12,16 @@ public class DtPurchase extends DtBaseEntity {
 	private LocalDate expireDate;
 	private DtTourist tourist;
 	private DtTouristicBundle bundle;
+	
+	public DtPurchase(DtPurchaseWS p) {
+		super(p.getId());
+		this.purchaseDate = Converter.convertStringToLD(p.getPurchaseDate());
+		this.touristAmount = p.getTouristAmount();
+		this.totalCost = p.getTotalCost();
+		this.expireDate = Converter.convertStringToLD(p.getExpireDate());
+		this.tourist = new DtTourist(p.getTourist().getId());
+		this.bundle = new DtTouristicBundle(p.getBundle().getId());
+	}
 	
 	public DtPurchase(
 			Long id, 

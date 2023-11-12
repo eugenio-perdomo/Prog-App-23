@@ -1,5 +1,6 @@
 package uy.turismo.servidorcentral.logic.daos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -8,13 +9,14 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceException;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import uy.turismo.servidorcentral.logic.entities.Department;
 import uy.turismo.servidorcentral.logic.entities.Provider;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
 import uy.turismo.servidorcentral.logic.entities.User;
+import uy.turismo.servidorcentral.logic.enums.ActivityState;
 import uy.turismo.servidorcentral.logic.util.HibernateUtil;
-import uy.turismos.servidorcentral.logic.enums.ActivityState;
 
 public class TouristicActivityDAOImpl implements TouristicActivityDAO {
 
@@ -51,7 +53,7 @@ public class TouristicActivityDAOImpl implements TouristicActivityDAO {
 	}
 
 	@Override
-	public List<TouristicActivity> findAll() {
+	public ArrayList<TouristicActivity> findAll() {
 		Session session = HibernateUtil
 				.getSessionFactory()
 				.openSession();
@@ -70,7 +72,7 @@ public class TouristicActivityDAOImpl implements TouristicActivityDAO {
 		
 		cq.select(entityRoot);
 		
-		List<TouristicActivity> activities = em
+		ArrayList<TouristicActivity> activities = (ArrayList<TouristicActivity>) em
 				.createQuery(cq)
 				.getResultList();
 		
@@ -98,7 +100,7 @@ public class TouristicActivityDAOImpl implements TouristicActivityDAO {
 		session.close();
 	}
 
-	public List<TouristicActivity> findAllbyState(ActivityState state) {
+	public ArrayList<TouristicActivity> findAllbyState(ActivityState state) {
 		Session session = HibernateUtil
 				.getSessionFactory()
 				.openSession();
@@ -117,7 +119,7 @@ public class TouristicActivityDAOImpl implements TouristicActivityDAO {
 		
 		cq.select(entityRoot).where(cb.equal(entityRoot.get("state"), state));
 		
-		List<TouristicActivity> activities = em
+		ArrayList<TouristicActivity> activities = (ArrayList<TouristicActivity>) em
 				.createQuery(cq)
 				.getResultList();
 		
@@ -125,5 +127,78 @@ public class TouristicActivityDAOImpl implements TouristicActivityDAO {
 		session.close();
 		return activities;
 	}
+
+	@Override
+	public Boolean checkName(String name) {
+		Session session = HibernateUtil
+				.getSessionFactory()
+				.openSession();
+		
+		EntityManager em = session
+				.getEntityManagerFactory()
+				.createEntityManager();  
+		
+		CriteriaBuilder cb = em
+				.getCriteriaBuilder();
+		
+		CriteriaQuery<TouristicActivity> cq = cb.createQuery(TouristicActivity.class);
+
+		Root<TouristicActivity> entityRoot = cq.from(TouristicActivity.class);
+
+	    cq.select(entityRoot)
+	    	.where(cb.equal(entityRoot.get("name"), name));
+
+	    try {
+	    	TouristicActivity activity = em
+	    			.createQuery(cq)
+	    			.getSingleResult();
+		} catch (Exception e) {
+			em.close();
+			session.close();
+			return false;
+		}
+	
+		
+		em.close();
+		session.close();
+		
+		return true;
+
+	}
+	
+	public List<TouristicActivity> findByNameDescription(String str){
+		Session session = HibernateUtil
+				.getSessionFactory()
+				.openSession();
+		
+		EntityManager em = session
+				.getEntityManagerFactory()
+				.createEntityManager();  
+		
+		CriteriaBuilder cb = em
+				.getCriteriaBuilder();
+		
+		CriteriaQuery<TouristicActivity> cq = cb.createQuery(TouristicActivity.class);
+
+		Root<TouristicActivity> entityRoot = cq.from(TouristicActivity.class);
+		
+
+        // Construir la expresión para la condición de búsqueda en el nombre
+        Predicate nameCondition = cb.like(entityRoot.get("name"), "%" + str + "%");
+
+        // Construir la expresión para la condición de búsqueda en la descripción
+        Predicate descriptionCondition = cb.like(entityRoot.get("description"), "%" + str + "%");
+        
+        Predicate condition = cb.or(nameCondition, descriptionCondition);
+        
+        cq.select(entityRoot).where(condition);
+        
+        List<TouristicActivity> activities = em
+        		.createQuery(cq)
+        		.getResultList();
+        
+        return activities;
+	}
+	
 
 }

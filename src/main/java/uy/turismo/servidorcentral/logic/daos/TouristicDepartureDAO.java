@@ -4,7 +4,7 @@ import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
 
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface TouristicDepartureDAO {
 
@@ -13,7 +13,7 @@ public interface TouristicDepartureDAO {
 	 * 
 	 * @return Devuelve una lista con todas las salidas turisticas.
 	 */
-	public List<TouristicDeparture> findAll();
+	public ArrayList<TouristicDeparture> findAll();
 	
 	/**
 	 * 
@@ -27,7 +27,7 @@ public interface TouristicDepartureDAO {
 	 * @param activityId -> identificador de la actividad turistica
 	 * @return -> Devuelve una lista de las salidas turisticas de aquellas actividades turisticas cuyo id = activityId
 	 */
-	public List<TouristicDeparture> findByActivity(TouristicActivity activity);
+	public ArrayList<TouristicDeparture> findByActivity(TouristicActivity activity);
 	
 	/**
 	 * 
@@ -37,6 +37,8 @@ public interface TouristicDepartureDAO {
 	public void create(TouristicDeparture departure) throws Exception;
 
 	public void update(TouristicDeparture departure) throws Exception;
+
+	public Boolean checkName(String name);
 	
 	
 }

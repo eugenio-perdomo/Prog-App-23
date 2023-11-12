@@ -1,6 +1,6 @@
 package uy.turismo.servidorcentral.logic.daos;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.hibernate.Session;
 
@@ -17,7 +17,7 @@ import uy.turismo.servidorcentral.logic.util.HibernateUtil;
 public class TouristicDepartureDAOImpl implements TouristicDepartureDAO {
 
 	@Override
-	public List<TouristicDeparture> findAll() {
+	public ArrayList<TouristicDeparture> findAll() {
 		Session session = HibernateUtil
 				.getSessionFactory()
 				.openSession();
@@ -36,7 +36,7 @@ public class TouristicDepartureDAOImpl implements TouristicDepartureDAO {
 		
 		cq.select(entityRoot);
 		
-		List<TouristicDeparture> departures = em
+		ArrayList<TouristicDeparture> departures = (ArrayList<TouristicDeparture>) em
 				.createQuery(cq)
 				.getResultList();
 		
@@ -60,7 +60,7 @@ public class TouristicDepartureDAOImpl implements TouristicDepartureDAO {
 	}
 
 	@Override
-	public List<TouristicDeparture> findByActivity(TouristicActivity activity) {
+	public ArrayList<TouristicDeparture> findByActivity(TouristicActivity activity) {
 		Session session = HibernateUtil
 				.getSessionFactory()
 				.openSession();
@@ -79,7 +79,7 @@ public class TouristicDepartureDAOImpl implements TouristicDepartureDAO {
 		
 		cq.where(cb.equal(entityRoot.get("touristicActivity"), activity)).select(entityRoot);
 		
-		List<TouristicDeparture> departures = em
+		ArrayList<TouristicDeparture> departures = (ArrayList<TouristicDeparture>) em
 				.createQuery(cq)
 				.getResultList();
 		
@@ -128,4 +128,42 @@ public class TouristicDepartureDAOImpl implements TouristicDepartureDAO {
 		
 	}
 
+	@Override
+	public Boolean checkName(String name) {
+		Session session = HibernateUtil
+				.getSessionFactory()
+				.openSession();
+		
+		EntityManager em = session
+				.getEntityManagerFactory()
+				.createEntityManager();  
+		
+		CriteriaBuilder cb = em
+				.getCriteriaBuilder();
+		
+		CriteriaQuery<TouristicDeparture> cq = cb.createQuery(TouristicDeparture.class);
+
+		Root<TouristicDeparture> entityRoot = cq.from(TouristicDeparture.class);
+
+	    cq.select(entityRoot)
+	    	.where(cb.equal(entityRoot.get("name"), name));
+
+	    try {
+	    	TouristicDeparture departure = em
+	    			.createQuery(cq)
+	    			.getSingleResult();
+		} catch (Exception e) {
+			em.close();
+			session.close();
+			return false;
+		}
+	
+		
+		em.close();
+		session.close();
+		
+		return true;
+
+	}
+	
 }

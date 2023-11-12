@@ -18,15 +18,12 @@ import javax.imageio.ImageIO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Transient;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 
@@ -55,7 +52,7 @@ public class TouristicDeparture implements Serializable {
 	@Column(length = 104)
 	private String image;
 	
-	@Column(length = 10)
+	@Column(name = "visits_amount")
 	private Integer visitsAmount;
 	
 	@ManyToOne(targetEntity = TouristicActivity.class, fetch = FetchType.EAGER)
@@ -250,8 +247,8 @@ public class TouristicDeparture implements Serializable {
 				this.place,
 				this.getImage(),
 				this.touristicActivity.getShortDt(),
-				listTourist,
-				this.visitsAmount);
+				this.visitsAmount,
+				(ArrayList<DtTourist>) listTourist);
 		return dtDeparture;
 	}
 	

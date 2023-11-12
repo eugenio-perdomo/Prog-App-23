@@ -1,7 +1,6 @@
 package uy.turismo.servidorcentral.logic.daos;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.Session;
 
@@ -12,13 +11,14 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import uy.turismo.servidorcentral.logic.entities.Category;
 import uy.turismo.servidorcentral.logic.entities.Department;
+import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
 import uy.turismo.servidorcentral.logic.entities.TouristicBundle;
 import uy.turismo.servidorcentral.logic.util.HibernateUtil;
 
 public class CategoryDAOImpl implements CategoryDAO{
 
 	@Override
-	public List<Category> findAll() {
+	public ArrayList<Category> findAll() {
 		Session session = HibernateUtil
 				.getSessionFactory()
 				.openSession();
@@ -37,7 +37,7 @@ public class CategoryDAOImpl implements CategoryDAO{
 		
 		cq.select(entityRoot);
 		
-		List<Category> categories = em
+		ArrayList<Category> categories = (ArrayList<Category>) em
 				.createQuery(cq)
 				.getResultList();
 		
@@ -68,7 +68,7 @@ public class CategoryDAOImpl implements CategoryDAO{
 	}
 
 	@Override
-	public List<Category> findManyById(ArrayList<Long> id) {
+	public ArrayList<Category> findManyById(ArrayList<Long> id) {
 		Session session = HibernateUtil
 				.getSessionFactory()
 				.openSession();
@@ -95,5 +95,4 @@ public class CategoryDAOImpl implements CategoryDAO{
 		session.close();
 		return category;
 	}
-
 }

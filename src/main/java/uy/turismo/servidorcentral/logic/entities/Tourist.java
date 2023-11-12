@@ -11,7 +11,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Transient;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
 import uy.turismo.servidorcentral.logic.datatypes.DtPurchase;
 import uy.turismo.servidorcentral.logic.datatypes.DtTourist;
@@ -56,8 +55,7 @@ public class Tourist extends User {
 			LocalDate birthDate, String nationality, String password) {
 		super(id, name, nickname, email, lastName, birthDate, password);
 		this.nationality = nationality;
-		this.initLists();
-		// TODO Auto-generated constructor stub
+//		this.initLists();
 	}
 	
 	//Iniciadores
@@ -96,23 +94,40 @@ public class Tourist extends User {
 	}
 	
 	
+	
+	public List<Inscription> getInscriptions() {
+		return inscriptions;
+	}
+
+	public void setInscriptions(List<Inscription> inscriptions) {
+		this.inscriptions = inscriptions;
+	}
+
+	public List<Purchase> getPurchases() {
+		return purchases;
+	}
+
+	public void setPurchases(List<Purchase> purchases) {
+		this.purchases = purchases;
+	}
+
 	/**
 	 * Crea un DtTourist con todos los datos del objeto y lo devuelve
 	 * @return
 	 * @throws Exception 
 	 */
 	@Override
-	public DtUser getDt()  {
+	public DtUser getDt(ArrayList<DtUser> followers)  {
 		List<DtTouristicDeparture> listDepartures = new ArrayList<DtTouristicDeparture>();
 		List<DtInscription> listInscriptions = new ArrayList<DtInscription>();
 		List<DtTouristicBundle> listBundles = new ArrayList<DtTouristicBundle>();
 		List<DtPurchase> listPurchases = new ArrayList<DtPurchase>();
 		List<DtTouristicActivity> listFavActivities = new ArrayList<DtTouristicActivity>();
-		List<DtUser> userList = new ArrayList<DtUser>();
+		List<DtUser> followsList = new ArrayList<DtUser>();
 		
 		if(this.follows != null) {
 			for(User user: this.follows) {
-				userList.add(user.getShortDt());
+				followsList.add(user.getShortDt());
 			}
 		}
 		
@@ -150,13 +165,14 @@ public class Tourist extends User {
 					this.birthDate,
 					this.getImage(),
 					this.nationality,
-					listDepartures,
+					(ArrayList<DtTouristicDeparture>) listDepartures,
 					this.password,
-					listInscriptions,
-					listBundles,
-					listPurchases,
-					listFavActivities,
-					userList);
+					(ArrayList<DtInscription>) listInscriptions,
+					(ArrayList<DtTouristicBundle>) listBundles,
+					(ArrayList<DtPurchase>) listPurchases,
+					(ArrayList<DtUser>) followsList,
+					followers,
+					(ArrayList<DtTouristicActivity>) listFavActivities);
 		} catch (Exception e) {
 			throw e;
 		}

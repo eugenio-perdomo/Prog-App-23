@@ -1,6 +1,6 @@
 package uy.turismo.servidorcentral.logic.daos;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import uy.turismo.servidorcentral.logic.entities.Department;
 
@@ -9,7 +9,7 @@ public interface DepartmentDAO {
 	 * 
 	 * @return lista con todos los Departamentos de la BD
 	 */
-	public List<Department> findAll();
+	public ArrayList<Department> findAll();
 	
 	/**
 	 * Busca un Departamento por id
@@ -24,5 +24,4 @@ public interface DepartmentDAO {
 	 * @throws Exception si no se pudo persistir en la BD
 	 */
 	public void create(Department department) throws Exception;
-
 }

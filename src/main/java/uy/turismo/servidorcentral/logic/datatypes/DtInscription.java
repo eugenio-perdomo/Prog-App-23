@@ -2,8 +2,7 @@ package uy.turismo.servidorcentral.logic.datatypes;
 
 import java.time.LocalDate;
 
-import uy.turismo.servidorcentral.logic.entities.Tourist;
-import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
+import uy.turismo.servidorcentral.logic.ws.datatypes.DtInscriptionWS;
 
 public class DtInscription extends DtBaseEntity {
 
@@ -13,8 +12,13 @@ public class DtInscription extends DtBaseEntity {
 	private DtTourist tourist;
 	private DtTouristicDeparture departure;
 	
-	public DtInscription() {
-		// TODO Auto-generated constructor stub
+	public DtInscription(DtInscriptionWS i) {
+		super(i.getId());
+		this.inscriptionDate = Converter.convertStringToLD(i.getInscriptionDate());
+		this.totalCost = i.getTotalCost();
+		this.touristAmount = i.getTouristAmount();
+		this.tourist = new DtTourist(i.getTourist().getId());
+		this.departure = new DtTouristicDeparture(i.getTouristicDeparture().getId());
 	}
 
 	public DtInscription(Long id) {

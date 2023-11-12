@@ -82,14 +82,13 @@ public class Provider extends User {
 	 * @throws Exception 
 	 */
 	@Override
-	public DtUser getDt() {
-		
-		List<DtTouristicActivity> listDtActivities = new ArrayList<DtTouristicActivity>();
-		List<DtUser> userList = new ArrayList<DtUser>();
+	public DtUser getDt(ArrayList<DtUser> followers) {
+		ArrayList<DtTouristicActivity> listDtActivities = new ArrayList<DtTouristicActivity>();
+		ArrayList<DtUser> followsList = new ArrayList<DtUser>();
 		
 		if(this.follows != null) {
 			for(User user: this.follows) {
-				userList.add(user.getShortDt());
+				followsList.add(user.getShortDt());
 			}
 		}
 		
@@ -114,7 +113,8 @@ public class Provider extends User {
 				this.description,
 				listDtActivities,
 				this.password,
-				userList);	
+				followsList,
+				followers);	
 		
 		return dtOutput;
 	}

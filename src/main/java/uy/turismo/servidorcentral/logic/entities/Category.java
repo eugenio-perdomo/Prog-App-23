@@ -74,7 +74,7 @@ public class Category implements Serializable{
 		return touristicActivities;
 	}
 	
-	public void setCategoriesToActivites(List<TouristicActivity> activitiesCats) {
+	public void setCategoriesToActivites(ArrayList<TouristicActivity> activitiesCats) {
 		this.touristicActivities = activitiesCats;
 	}
 	
@@ -82,7 +82,7 @@ public class Category implements Serializable{
 		return touristicBundles;
 	}
 	
-	public void setCategoriesToBundles(List<TouristicBundle> bundlesCats) {
+	public void setCategoriesToBundles(ArrayList<TouristicBundle> bundlesCats) {
 		this.touristicBundles = bundlesCats;
 	}
 	
@@ -98,9 +98,9 @@ public class Category implements Serializable{
 	//dt con actividades
 	public DtCategory getCategoryDt() {
 		
-		List<DtTouristicActivity> activities= new ArrayList<DtTouristicActivity>();
+		ArrayList<DtTouristicActivity> activities= new ArrayList<DtTouristicActivity>();
 		
-		List<DtTouristicBundle> bundles = new ArrayList<DtTouristicBundle>();
+		ArrayList<DtTouristicBundle> bundles = new ArrayList<DtTouristicBundle>();
 		
 		if(this.touristicActivities != null) {
 			for (int i = 0; i < this.touristicActivities.size(); i++) {

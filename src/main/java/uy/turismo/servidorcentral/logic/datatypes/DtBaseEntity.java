@@ -1,9 +1,12 @@
 package uy.turismo.servidorcentral.logic.datatypes;
 
-public abstract class DtBaseEntity {
+import java.io.Serializable;
+
+
+public abstract class DtBaseEntity implements Serializable {
 	
 	protected Long id; 
-	private String name;
+	protected String name;
 	
 	
 	public DtBaseEntity() {

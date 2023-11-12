@@ -1,11 +1,12 @@
 package uy.turismo.servidorcentral.logic.daos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uy.turismo.servidorcentral.logic.entities.Department;
 import uy.turismo.servidorcentral.logic.entities.Provider;
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
-import uy.turismos.servidorcentral.logic.enums.ActivityState;
+import uy.turismo.servidorcentral.logic.enums.ActivityState;
 
 public interface TouristicActivityDAO {
 
@@ -29,17 +30,19 @@ public interface TouristicActivityDAO {
 	 * @return Devuelve todas las actividades turisticas.
 	 */
 	
-	public List<TouristicActivity> findAll();
+	public ArrayList<TouristicActivity> findAll();
 	
-	public List<TouristicActivity> findAllbyState(ActivityState state);
+	public ArrayList<TouristicActivity> findAllbyState(ActivityState state);
 	
+	public void update(TouristicActivity activity) throws Exception;
+	
+	public Boolean checkName(String name);
 
-	void update(TouristicActivity activity) throws Exception;
-	
 	/**
-	 * Devuelve una lista de las actividades de dicho proveedor
-	 * @param provider
+	 * Devuelve todas las Actividades cuyo nombre o descripcion contenga una cadena de caracteres especifica
+	 * @param str
 	 * @return
 	 */
+	public List<TouristicActivity> findByNameDescription(String str);
 	
 }

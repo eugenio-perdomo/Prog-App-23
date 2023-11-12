@@ -4,20 +4,37 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.ArrayList;
+
+import jakarta.xml.bind.annotation.XmlElement;
+import uy.turismo.servidorcentral.logic.ws.datatypes.DtTouristWS;
 
 public class DtTourist extends DtUser {
 
 	private String nationality;
-	private List<DtTouristicDeparture> departures;
-	private List<DtInscription> inscriptions;
-	private List<DtTouristicBundle> bundles;
-	private List<DtPurchase> purchases;
-	private List<DtTouristicActivity> favActivities;
+	private ArrayList<DtTouristicActivity> favActivities;
+	private ArrayList<DtTouristicDeparture> departures;
+	private ArrayList<DtInscription> inscriptions;
+	private ArrayList<DtTouristicBundle> bundles;
+	private ArrayList<DtPurchase> purchases;
 	
 	
-	public DtTourist() {
-		// TODO Auto-generated constructor stub
+	public DtTourist(DtTouristWS t) {
+		super(
+				t.getId(),
+				t.getName(),
+				t.getNickname(),
+				t.getEmail(),
+				t.getLastName(),
+				Converter.convertStringToLD(t.getBirthDate()),
+				Converter.convertArrayToBI(t.getImage()),
+				t.getPassword()
+				);
+		this.nationality = t.getNationality();
+	}
+	
+	public DtTourist(Long id) {
+		super(id);
 	}
 
 	public DtTourist(Long id, String nickname, String email, BufferedImage image) {
@@ -34,14 +51,15 @@ public class DtTourist extends DtUser {
 			LocalDate birthDate,
 			BufferedImage image, 
 			String nationality,
-			List<DtTouristicDeparture> departures, 
+			ArrayList<DtTouristicDeparture> departures, 
 			String password,
-			List<DtInscription> inscriptions,
-			List<DtTouristicBundle> bundles,
-			List<DtPurchase> purchases,
-			List<DtTouristicActivity> activities,
-			List<DtUser> users) {
-		super(id, name, nickname, email, lastName, birthDate, image, password, users);
+			ArrayList<DtInscription> inscriptions,
+			ArrayList<DtTouristicBundle> bundles,
+			ArrayList<DtPurchase> purchases,
+			ArrayList<DtUser> follows,
+			ArrayList<DtUser> followers,
+			ArrayList<DtTouristicActivity> activities) {
+		super(id, name, nickname, email, lastName, birthDate, image, password, follows, followers);
 		this.nationality = nationality;
 		this.departures = departures;
 		this.inscriptions = inscriptions;
@@ -51,27 +69,28 @@ public class DtTourist extends DtUser {
 		// TODO Auto-generated constructor stub
 	}
 
+	@XmlElement
 	public String getNationality() {
 		return nationality;
 	}
 	
-	public List<DtTouristicActivity> getFavActivties() {
+	public ArrayList<DtTouristicActivity> getFavActivties() {
 		return favActivities;
 	}
 
-	public List<DtTouristicDeparture> getDepartures() {
+	public ArrayList<DtTouristicDeparture> getDepartures() {
 		return departures;
 	}
 
-	public List<DtInscription> getInscriptions() {
+	public ArrayList<DtInscription> getInscriptions() {
 		return inscriptions;
 	}
 
-	public List<DtPurchase> getPurchases() {
+	public ArrayList<DtPurchase> getPurchases() {
 		return purchases;
 	}
 
-	public List<DtTouristicBundle> getBundles() {
+	public ArrayList<DtTouristicBundle> getBundles() {
 		return bundles;
 	}
 }

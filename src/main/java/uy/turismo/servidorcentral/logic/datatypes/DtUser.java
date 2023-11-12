@@ -3,13 +3,15 @@ package uy.turismo.servidorcentral.logic.datatypes;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
 
-public abstract class DtUser extends DtBaseEntity {
+
+public abstract class DtUser extends DtBaseEntity{
 	
 	private String nickname;
 	private String email;
@@ -18,14 +20,14 @@ public abstract class DtUser extends DtBaseEntity {
 	private BufferedImage image;
 	private String password;
 	//private List<DtTouristicActivity> favorites;
-	private List<DtUser> followed;
+	private List<DtUser> follows;
+	private List<DtUser> followers;
 	
-	public DtUser() {
-		
+	
+	public DtUser(Long id) {
+		super(id);
 	}
 
-	
-	
 	public DtUser(Long id, String nickname, String email, BufferedImage image) {
 
 		super(id);
@@ -41,8 +43,7 @@ public abstract class DtUser extends DtBaseEntity {
 			String lastName, 
 			LocalDate birthDate,
 			BufferedImage image,
-			String password,
-			List<DtUser> users
+			String password
 			) {
 		super(id, name);
 		this.nickname = nickname;
@@ -51,7 +52,31 @@ public abstract class DtUser extends DtBaseEntity {
 		this.birthDate = birthDate;
 		this.image = image;
 		this.password = password;
-		this.followed = users;
+		this.follows = follows;
+		this.followers = followers;
+	}
+	
+
+	public DtUser(Long id, 
+			String name, 
+			String nickname, 
+			String email, 
+			String lastName, 
+			LocalDate birthDate,
+			BufferedImage image,
+			String password,
+			List<DtUser> follows, //seguidos
+			List<DtUser> followers //seguidores
+			) {
+		super(id, name);
+		this.nickname = nickname;
+		this.email = email;
+		this.lastName = lastName;
+		this.birthDate = birthDate;
+		this.image = image;
+		this.password = password;
+		this.follows = follows;
+		this.followers = followers;
 	}
 	
 
@@ -60,19 +85,23 @@ public abstract class DtUser extends DtBaseEntity {
 //		return favorites;
 //	}
 	
-	public List<DtUser> getFollowed() {
-		return followed;
+	public List<DtUser> getFollows() {
+		return follows;
 	}
 	
-	
+	public List<DtUser> getFollowers() {
+		return followers;
+	}
+
 	public String getNickname() {
 		return nickname;
 	}
-
+	
 	public String getEmail() {
 		return email;
 	}
 
+	
 	public String getLastName() {
 		return lastName;
 	}
@@ -84,12 +113,9 @@ public abstract class DtUser extends DtBaseEntity {
 	public BufferedImage getImage() {
 		return image;
 	} 
+	
 	public String getPassword() {
 		return password;
 	}
-	
-	
-	
-	
 	
 }

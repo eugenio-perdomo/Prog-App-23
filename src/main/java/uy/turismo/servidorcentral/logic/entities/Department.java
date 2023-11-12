@@ -12,7 +12,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 //import jakarta.persistence.ManyToOne; to clean later
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Transient;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 
@@ -84,7 +83,7 @@ public class Department implements Serializable {
 		return touristicActivities;
 	}
 
-	public void setTouristicActivities(List<TouristicActivity> touristicActivities) {
+	public void setTouristicActivities(ArrayList<TouristicActivity> touristicActivities) {
 		this.touristicActivities = touristicActivities;
 	}
 
@@ -105,7 +104,7 @@ public class Department implements Serializable {
 	 */
 	public DtDepartment getDtWithActivities() {
 		
-		List<DtTouristicActivity> listDtActivities = new ArrayList<DtTouristicActivity>();
+		ArrayList<DtTouristicActivity> listDtActivities = new ArrayList<DtTouristicActivity>();
 		
 		if(this.touristicActivities != null) {
 			for(TouristicActivity td : this.touristicActivities) {

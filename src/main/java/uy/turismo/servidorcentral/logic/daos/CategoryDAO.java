@@ -1,7 +1,6 @@
 package uy.turismo.servidorcentral.logic.daos;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import uy.turismo.servidorcentral.logic.entities.Category;
 
@@ -12,7 +11,7 @@ public interface CategoryDAO {
 	 * @return devuelve una lista de categorias.
 	 */
 	
-	public List<Category> findAll();
+	public ArrayList<Category> findAll();
 	
 	
 	/**
@@ -27,7 +26,7 @@ public interface CategoryDAO {
 	 * @param id -> lista de id de las categorias 
 	 * @return devuelvo lista de categorias, que busque por id
 	 */
-	public List<Category> findManyById(ArrayList<Long> id);
+	public ArrayList<Category> findManyById(ArrayList<Long> id);
 
 	
 	/**
@@ -35,6 +34,6 @@ public interface CategoryDAO {
 	 * @param id -> Identificador de la catetoria.
 	 * @return devuelve los datos de una categoria
 	 */
-	Category findById(Long id);
+	public Category findById(Long id);
 	
 }

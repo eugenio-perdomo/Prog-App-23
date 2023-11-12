@@ -1,7 +1,6 @@
 package uy.turismo.servidorcentral.logic.daos;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,6 +10,7 @@ import org.hibernate.query.criteria.JpaCriteriaDelete;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceException;
+import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
@@ -24,7 +24,7 @@ import uy.turismo.servidorcentral.logic.util.HibernateUtil;
 public class UserDAOImpl implements UserDAO {
 
 	@Override
-	public List<User> findAll() {
+	public ArrayList<User> findAll() {
 		Session session = HibernateUtil
 				.getSessionFactory()
 				.openSession();
@@ -45,7 +45,7 @@ public class UserDAOImpl implements UserDAO {
 		
 	    cq.select(entityRoot);
 		
-		List<User> users = em
+		ArrayList<User> users = (ArrayList<User>) em
 				.createQuery(cq)
 				.getResultList();
 	
@@ -57,7 +57,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public List<Tourist> findAllTourists() {
+	public ArrayList<Tourist> findAllTourists() {
 		Session session = HibernateUtil
 				.getSessionFactory()
 				.openSession();
@@ -76,7 +76,7 @@ public class UserDAOImpl implements UserDAO {
 		
 		cq.select(entityRoot);
 		
-		List<Tourist> tourists = em
+		ArrayList<Tourist> tourists = (ArrayList<Tourist>) em
 				.createQuery(cq)
 				.getResultList();
 		
@@ -88,7 +88,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public List<Provider> findAllProviders() {
+	public ArrayList<Provider> findAllProviders() {
 		Session session = HibernateUtil
 				.getSessionFactory()
 				.openSession();
@@ -107,7 +107,7 @@ public class UserDAOImpl implements UserDAO {
 		
 		cq.select(entityRoot);
 		
-		List<Provider> providers = em
+		ArrayList<Provider> providers = (ArrayList<Provider>) em
 				.createQuery(cq)
 				.getResultList();
 		
@@ -220,4 +220,77 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 
+	@Override
+	public Boolean checkNick(String nickname) {
+		Session session = HibernateUtil
+				.getSessionFactory()
+				.openSession();
+		
+		EntityManager em = session
+				.getEntityManagerFactory()
+				.createEntityManager();  
+		
+		CriteriaBuilder cb = em
+				.getCriteriaBuilder();
+		
+		CriteriaQuery<User> cq = cb.createQuery(User.class);
+
+		Root<User> entityRoot = cq.from(User.class);
+
+	    cq.select(entityRoot)
+	    	.where(cb.equal(entityRoot.get("nickname"), nickname));
+	    
+	    try {
+	    	User user = em
+	    			.createQuery(cq)
+	    			.getSingleResult();
+		} catch (Exception e) {
+			em.close();
+			session.close();
+			return false;
+		}
+	
+		
+		em.close();
+		session.close();
+		
+		return true;
+	}
+
+	@Override
+	public Boolean checkEmail(String email) {
+		Session session = HibernateUtil
+				.getSessionFactory()
+				.openSession();
+		
+		EntityManager em = session
+				.getEntityManagerFactory()
+				.createEntityManager();  
+		
+		CriteriaBuilder cb = em
+				.getCriteriaBuilder();
+		
+		CriteriaQuery<User> cq = cb.createQuery(User.class);
+
+		Root<User> entityRoot = cq.from(User.class);
+
+	    cq.select(entityRoot)
+	    	.where(cb.equal(entityRoot.get("email"), email));
+
+	    try {
+	    	User user = em
+	    			.createQuery(cq)
+	    			.getSingleResult();
+		} catch (Exception e) {
+			em.close();
+			session.close();
+			return false;
+		}
+	
+		
+		em.close();
+		session.close();
+		
+		return true;
+	}
 }

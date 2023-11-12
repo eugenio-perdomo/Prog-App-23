@@ -3,10 +3,9 @@ package uy.turismo.servidorcentral.logic.datatypes;
 import java.awt.image.BufferedImage;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.ArrayList;
 
-import uy.turismo.servidorcentral.logic.entities.Category;
-
+import uy.turismo.servidorcentral.logic.ws.datatypes.DtTouristicDepartureWS;
 
 public class DtTouristicDeparture extends DtBaseEntity {
 
@@ -17,22 +16,25 @@ public class DtTouristicDeparture extends DtBaseEntity {
 	private String place;
 	private BufferedImage image;
 	private DtTouristicActivity touristicActivity;
-	private List<DtTourist> tourists;
-	
-	
-	public DtTouristicDeparture() {
-		// TODO Auto-generated constructor stub
+	private ArrayList<DtTourist> tourists;
+
+	public DtTouristicDeparture(DtTouristicDepartureWS d) {
+		super(d.getId(), d.getName());
+		this.maxTourist = d.getMaxTourist();
+		this.uploadDate = Converter.convertStringToLD(d.getUploadDate());
+		this.departureDateTime = Converter.convertstringToLDT(d.getDepartureDateTime());
+		this.place = d.getPlace();
+		this.image = Converter.convertArrayToBI(d.getImage());
+		this.touristicActivity = new DtTouristicActivity(d.getTouristicActivity());
 	}
 
 	public DtTouristicDeparture(Long id) {
 		super(id);
-		// TODO Auto-generated constructor stub
 	}
-
+	
 	public DtTouristicDeparture(Long id, String name, BufferedImage image) {
 		super(id, name);
 		this.image = image;
-		// TODO Auto-generated constructor stub
 	}
 
 	public DtTouristicDeparture(
@@ -44,8 +46,8 @@ public class DtTouristicDeparture extends DtBaseEntity {
 			String place,
 			BufferedImage image,
 			DtTouristicActivity touristicActivity, 
-			List<DtTourist> tourists,
-			Integer visits) {
+			Integer visits,
+			ArrayList<DtTourist> tourists) {
 		super(id, name);
 		this.maxTourist = maxTourist;
 		this.uploadDate = uploadDate;
@@ -82,7 +84,7 @@ public class DtTouristicDeparture extends DtBaseEntity {
 		return touristicActivity;
 	}
 
-	public List<DtTourist> getTourists() {
+	public ArrayList<DtTourist> getTourists() {
 		return tourists;
 	}
 	

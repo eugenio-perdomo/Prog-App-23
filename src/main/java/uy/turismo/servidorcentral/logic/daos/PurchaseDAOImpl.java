@@ -12,7 +12,7 @@ import uy.turismo.servidorcentral.logic.entities.User;
 import uy.turismo.servidorcentral.logic.util.HibernateUtil;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayList;
 
 public class PurchaseDAOImpl implements PurchaseDAO {
 
@@ -48,7 +48,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 		return purchase;
 	}
 	
-	public List<Purchase> findAll()
+	public ArrayList<Purchase> findAll()
 	{
 		Session session = HibernateUtil
 				.getSessionFactory()
@@ -68,7 +68,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 		
 		cq.select(entityRoot);
 		
-		List<Purchase> purchase = em
+		ArrayList<Purchase> purchase = (ArrayList<Purchase>) em
 				.createQuery(cq)
 				.getResultList();
 	

@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -243,7 +242,23 @@ public abstract class User implements Serializable  {
 	 * @return
 	 * @throws Exception 
 	 */
-	public abstract DtUser getDt();
+	public abstract DtUser getDt(ArrayList<DtUser> followers);
+	
+	/**
+	 * Chackea si este usuario sigue a otro usuario en especifico
+	 * @param user
+	 * @return true si lo sigue
+	 */
+	public Boolean isFollowerOf(User user) {
+		
+		if(this.follows != null && !this.follows.isEmpty()) {
+			if(this.follows.contains(user)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 	
 	 @Override
 	public boolean equals(Object obj) {

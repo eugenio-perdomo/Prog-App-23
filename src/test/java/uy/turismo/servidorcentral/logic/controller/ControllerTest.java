@@ -9,6 +9,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.junit.jupiter.api.Test;
 
+import uy.turismo.servidorcentral.logic.datatypes.DtBaseEntity;
 import uy.turismo.servidorcentral.logic.datatypes.DtCategory;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
@@ -19,8 +20,9 @@ import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 import uy.turismo.servidorcentral.logic.datatypes.DtUser;
+import uy.turismo.servidorcentral.logic.enums.ActivityState;
+import uy.turismo.servidorcentral.logic.enums.EntityType;
 import uy.turismo.servidorcentral.logic.util.HibernateUtil;
-import uy.turismos.servidorcentral.logic.enums.ActivityState;
 
 public class ControllerTest {
 
@@ -31,12 +33,52 @@ public class ControllerTest {
 		session.close();	
 	}
 	
-	
 	@Test
 	public void checkCredentialsTest() {
 		IController controller = ControllerFactory.getIController();
 		DtUser user = controller.checkCredentials("eldiez@socfomturriv.org.uy", "123");
 		System.out.println(user.getEmail());
+	}
+	
+	@Test
+	public void checkNickEmail() {
+		IController controller = ControllerFactory.getIController();
+		
+		String nick = "lachota";
+		String email = "papito@mail.com";
+		
+		Boolean existsEmail = controller.existsEmail(email);
+		Boolean existsNick = controller.existsNick(nick);
+		
+		
+		System.out.println("\nEl email: "+ email + (existsEmail ? " ya existe" : " no existe"));
+		System.out.println("El nickname: "+ nick + (existsNick ? " ya existe" : " no existe"));
+	}
+	
+	@Test
+	public void checkEntityName() {
+		IController controller = ControllerFactory.getIController();
+		
+		String name = "Degusta";
+		EntityType type = EntityType.Activity;
+		
+		Boolean existsName = controller.existsName(name, type);
+		
+
+		System.out.println("\nEl nombre: "+ name + (existsName ? " ya existe" : " no existe"));
+		
+	}
+	
+	@Test
+	public void filterByStringTest() {
+		IController controller = ControllerFactory.getIController();
+		
+		String str = "rocha";
+		
+		List<DtBaseEntity> list = controller.filterByString(str);
+		
+		System.out.println();
+		
 	}
 	
 	@Test
@@ -57,6 +99,7 @@ public class ControllerTest {
 				provider.getDescription(), 
 				null, 
 				provider.getPassword(),
+				null,
 				null);
 		
 		DtTourist tourist = (DtTourist) controller.getUserData(3L);
@@ -72,6 +115,7 @@ public class ControllerTest {
 				tourist.getNationality(),
 				null,
 				tourist.getPassword(),
+				null,
 				null,
 				null,
 				null,
@@ -138,7 +182,7 @@ public class ControllerTest {
 		ActivityState state = ActivityState.ADDED;
 		String video = "https://www.youtube.com/shorts/N_rXwhTtVVA";
 		
-		List<DtCategory> categories = new ArrayList<DtCategory>();
+		ArrayList<DtCategory> categories = new ArrayList<DtCategory>();
 		
 		DtCategory catTest = new DtCategory(1L, "Recorridos", null, null);
 		
@@ -253,7 +297,7 @@ public class ControllerTest {
 	public void getTouristicBundleDataTest() {
 		IController controller = ControllerFactory.getIController();
 		
-		DtTouristicBundle pruebaBundle = controller.getTouristicBundleData(1);
+		DtTouristicBundle pruebaBundle = controller.getTouristicBundleData(1L);
 		
 		System.out.println(pruebaBundle.getName() + "/" +
 						   pruebaBundle.getId() + "/" +
@@ -310,7 +354,7 @@ public class ControllerTest {
 	public void listDepartureTest() {
 		IController controller = ControllerFactory.getIController();
 		
-		List<DtTouristicDeparture> departures = controller.getListTouristicDeparture(1L);
+		List<DtTouristicDeparture> departures = controller.getDeparturesByActivity(1L);
 		
 		System.out.println(departures.get(0).getName());
 	
@@ -414,13 +458,13 @@ public class ControllerTest {
 		BufferedImage image1 = null;
 		String nationality1 = "PUTO";
 		
-		List<DtTouristicDeparture> listDeparture1 = new ArrayList<DtTouristicDeparture>();
+		ArrayList<DtTouristicDeparture> listDeparture1 = new ArrayList<DtTouristicDeparture>();
 		listDeparture1.add(controller.getTouristicDepartureData(1L));
 		
 		String password1 = "contrasenia";
-		List<DtInscription> listInscriptions1 = null;
-		List<DtTouristicBundle> listBundles1 = null;
-		List<DtPurchase> listPurchases1 = null;
+		ArrayList<DtInscription> listInscriptions1 = null;
+		ArrayList<DtTouristicBundle> listBundles1 = null;
+		ArrayList<DtPurchase> listPurchases1 = null;
 		//--------------------------------------------------------
 		String name2 = "Pepeados";
 		String nickName2 = "El Pepedor";
@@ -430,7 +474,7 @@ public class ControllerTest {
 		BufferedImage image2 = null;
 		String url2 = "uwu";
 		String desc2 = "pepeador barbaro";
-		List<DtTouristicActivity> listActivities = null;
+		ArrayList<DtTouristicActivity> listActivities = null;
 		String password2 = "contrasenia23";
 		
 		DtTourist touristTest = new DtTourist(null,
@@ -447,6 +491,7 @@ public class ControllerTest {
 				listBundles1,
 				listPurchases1,
 				null,
+				null,
 				null);
 		
 		DtProvider providerTest = new DtProvider(null,
@@ -460,6 +505,7 @@ public class ControllerTest {
 				desc2,
 				listActivities,
 				password2,
+				null,
 				null);
 		
 		//de alta bien
@@ -607,14 +653,14 @@ public class ControllerTest {
 		Long activity4 = 4L;
 		Long activity5 = 5L;
 		Long activity6 = 6L;
-		controller.markFavoriteActivty(user, activity1);
-		controller.markFavoriteActivty(user, activity2);
-		controller.markFavoriteActivty(user, activity3);
-		controller.markFavoriteActivty(user2, activity3);
-		controller.markFavoriteActivty(user2, activity4);
-		controller.markFavoriteActivty(user2, activity5);
-		controller.markFavoriteActivty(user2, activity6);
-		controller.markFavoriteActivty(6L, 6L);
+//		controller.markFavoriteActivty(user, activity1);
+//		controller.markFavoriteActivty(user, activity2);
+//		controller.markFavoriteActivty(user, activity3);
+//		controller.markFavoriteActivty(user2, activity3);
+//		controller.markFavoriteActivty(user2, activity4);
+//		controller.markFavoriteActivty(user2, activity5);
+//		controller.markFavoriteActivty(user2, activity6);
+		controller.markFavoriteActivty(7L, 7L);
 		
 	}
 	

@@ -1,6 +1,6 @@
 package uy.turismo.servidorcentral.logic.daos;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.hibernate.Session;
 
@@ -9,6 +9,7 @@ import jakarta.persistence.PersistenceException;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import uy.turismo.servidorcentral.logic.entities.Category;
 import uy.turismo.servidorcentral.logic.entities.Department;
 import uy.turismo.servidorcentral.logic.entities.Provider;
 import uy.turismo.servidorcentral.logic.entities.User;
@@ -21,7 +22,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 	 * @return List<Department>
 	 */
 	@Override
-	public List<Department> findAll() {
+	public ArrayList<Department> findAll() {
 		Session session = HibernateUtil
 				.getSessionFactory()
 				.openSession();
@@ -40,7 +41,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 		
 		cq.select(entityRoot);
 		
-		List<Department> departments = em
+		ArrayList<Department> departments = (ArrayList<Department>) em
 				.createQuery(cq)
 				.getResultList();
 		

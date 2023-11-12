@@ -2,7 +2,9 @@ package uy.turismo.servidorcentral.logic.datatypes;
 
 import java.awt.image.BufferedImage;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.ArrayList;
+
+import uy.turismo.servidorcentral.logic.ws.datatypes.DtTouristicBundleWS;
 
 
 public class DtTouristicBundle extends DtBaseEntity {
@@ -15,16 +17,18 @@ public class DtTouristicBundle extends DtBaseEntity {
 	
 	private LocalDate uploadDate;
 	private BufferedImage image;
-	private List<DtTouristicActivity> activities;
-	private List<DtCategory> categories;
+	private ArrayList<DtTouristicActivity> activities;
+	private ArrayList<DtCategory> categories;
 	
-	public DtTouristicBundle() {
-		// TODO Auto-generated constructor stub
-	}
 
-	public DtTouristicBundle(Long id) {
-		super(id);
-		// TODO Auto-generated constructor stub
+	public DtTouristicBundle(DtTouristicBundleWS b) {
+		super(b.getId(), b.getName());
+		this.description = b.getDescription();
+		this.validityPeriod = b.getValidityPeriod();
+		this.discount = b.getDiscount();
+		this.price = b.getPrice();
+		this.uploadDate = Converter.convertStringToLD(b.getUploadDate());
+		this.image = Converter.convertArrayToBI(b.getImage());
 	}	
 	
 	public DtTouristicBundle(Long id, String name, BufferedImage image) {
@@ -33,10 +37,13 @@ public class DtTouristicBundle extends DtBaseEntity {
 		// TODO Auto-generated constructor stub
 	}
 
+	public DtTouristicBundle(Long id) {
+		super(id);
+	}
 	
 
 	public DtTouristicBundle(Long id, String  name, String description, Integer validity, Double discount, LocalDate uploadDate, 
-			BufferedImage image, List<DtTouristicActivity> activities, List<DtCategory> categories, Double price) {
+			BufferedImage image, ArrayList<DtTouristicActivity> activities, ArrayList<DtCategory> categories, Double price) {
 
 		super (id,name);
 		this.description  = description;
@@ -70,11 +77,11 @@ public class DtTouristicBundle extends DtBaseEntity {
 		return image;
 	}
 
-	public List<DtTouristicActivity> getActivities() {
+	public ArrayList<DtTouristicActivity> getActivities() {
 		return activities;
 	}
 	
-	public List<DtCategory> getCategories(){
+	public ArrayList<DtCategory> getCategories(){
 		return categories;
 	}
 

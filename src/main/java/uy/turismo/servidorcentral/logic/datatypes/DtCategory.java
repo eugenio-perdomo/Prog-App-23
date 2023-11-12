@@ -1,20 +1,17 @@
 package uy.turismo.servidorcentral.logic.datatypes;
 
-import java.util.List;
+import java.util.ArrayList;
+
+import uy.turismo.servidorcentral.logic.ws.datatypes.DtCategoryWS;
 
 public class DtCategory extends DtBaseEntity{
 
-	private List<DtTouristicActivity> activities;
-	private List<DtTouristicBundle> bundles;
-	
-	public DtCategory() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	private ArrayList<DtTouristicActivity> activities;
+	private ArrayList<DtTouristicBundle> bundles;
 
-	public DtCategory(Long id) {
-		super(id);
-		// TODO Auto-generated constructor stub
+	
+	public DtCategory(DtCategoryWS c) {
+		super(c.getId(), c.getName());
 	}
 	
 	public DtCategory(Long id, String name) {
@@ -23,18 +20,18 @@ public class DtCategory extends DtBaseEntity{
 	}
 
 
-	public DtCategory(Long id, String name, List<DtTouristicActivity> activities, List<DtTouristicBundle> bundles) {
+	public DtCategory(Long id, String name, ArrayList<DtTouristicActivity> activities, ArrayList<DtTouristicBundle> bundles) {
 		super(id,name);
 		this.activities = activities;
 		this.bundles = bundles;
 	}
 	
 	
-	public List<DtTouristicActivity> getActivities() {
+	public ArrayList<DtTouristicActivity> getActivities() {
 		return activities;
 	}
 	
-	public List<DtTouristicBundle> getBundles(){
+	public ArrayList<DtTouristicBundle> getBundles(){
 		return bundles;
 	}
 }

@@ -3,9 +3,10 @@ package uy.turismo.servidorcentral.logic.datatypes;
 import java.awt.image.BufferedImage;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
-import uy.turismos.servidorcentral.logic.enums.ActivityState;
+import uy.turismo.servidorcentral.logic.enums.ActivityState;
+import uy.turismo.servidorcentral.logic.ws.datatypes.DtCategoryWS;
+import uy.turismo.servidorcentral.logic.ws.datatypes.DtTouristicActivityWS;
 
 public class DtTouristicActivity extends DtBaseEntity {
 	
@@ -20,37 +21,49 @@ public class DtTouristicActivity extends DtBaseEntity {
 	private LocalDate uploadDate;
 	private DtProvider provider;
 	private DtDepartment department;
-	private List<DtTouristicDeparture> departures;
-	private List<DtTouristicBundle> bundles;
+	private ArrayList<DtTouristicDeparture> departures;
+	private ArrayList<DtTouristicBundle> bundles;
 	// codigo agregado: LT
-	private List<DtCategory> categories;
-	private List<DtTourist> favActivities;
+	private ArrayList<DtCategory> categories;
 	
 	public DtTouristicActivity() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public DtTouristicActivity(Long id) {
-		super(id);
-		// TODO Auto-generated constructor stub
+	public DtTouristicActivity(DtTouristicActivityWS a) {
+		super(a.getId(), a.getName());
+		this.description = a.getDescription();
+		this.duration = a.getDuration();
+		this.costPerTourist = a.getCostPerTourist();
+		this.city = a.getCity();
+		this.image = Converter.convertArrayToBI(a.getImage());
+		this.state = a.getState();
+		this.uploadDate = Converter.convertStringToLD(a.getUploadDate());
+		this.provider = new DtProvider(a.getProvider().getId());
+		this.department = new DtDepartment(a.getDepartment().getId());
+		
+		if(a.getCategories() != null) {
+			for(DtCategoryWS category : a.getCategories()) {
+				this.categories.add(new DtCategory(category));
+			}
+		}
 	}
 
 	public DtTouristicActivity(Long id, String name, BufferedImage image, ActivityState state, String description,
-			DtDepartment department, List<DtCategory> categories) {
+			DtDepartment department, ArrayList<DtCategory> categories) {
 		super(id, name);
 		this.image = image;
 		this.state = state;
 		this.description = description;
 		this.department = department;
 		this.categories = categories;
-		// TODO Auto-generated constructor stub
 	}
 
 	// codigo agregado: LT
 	public DtTouristicActivity(Long id, String name, String description, Double duration, Double costPerTourist,
 			String city, BufferedImage image, ActivityState state, LocalDate uploadDate, DtProvider provider,
-			DtDepartment department, List<DtTouristicDeparture> departures, List<DtTouristicBundle> bundles,
-			List<DtCategory> categories, Integer visits, String videoURL) {
+			DtDepartment department, ArrayList<DtTouristicDeparture> departures, ArrayList<DtTouristicBundle> bundles,
+			ArrayList<DtCategory> categories, Integer visits, String videoURL) {
 
 		super(id, name);
 		this.description = description;
@@ -86,6 +99,7 @@ public class DtTouristicActivity extends DtBaseEntity {
 		return duration;
 	}
 
+	
 	public Double getCostPerTourist() {
 		return costPerTourist;
 	}
@@ -93,6 +107,7 @@ public class DtTouristicActivity extends DtBaseEntity {
 	public String getCity() {
 		return city;
 	}
+
 
 	public BufferedImage getImage() {
 		return image;
@@ -110,21 +125,17 @@ public class DtTouristicActivity extends DtBaseEntity {
 		return department;
 	}
 
-	public List<DtTouristicDeparture> getDepartures() {
+	public ArrayList<DtTouristicDeparture> getDepartures() {
 		return departures;
 	}
 
-	public List<DtTouristicBundle> getBundles() {
+	public ArrayList<DtTouristicBundle> getBundles() {
 		return bundles;
 	}
 
 	// codigo agregado: LT
-	public List<DtCategory> getCategories() {
+	public ArrayList<DtCategory> getCategories() {
 		return categories;
-	}
-	
-	public List<DtTourist> getUsers() {
-		return favActivities;
 	}
 
 	public ActivityState getState() {

@@ -1,6 +1,7 @@
 package uy.turismo.servidorcentral.logic.daos;
 
 import uy.turismo.servidorcentral.logic.entities.TouristicBundle;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -9,7 +10,7 @@ public interface TouristicBundleDAO {
 	/**
 	 * @return Devuelve una lista con los paquetes turisticos registrados en la bd. 
 	 * */
-	public List<TouristicBundle> findAll();
+	public ArrayList<TouristicBundle> findAll();
 	
 	
 	/**
@@ -37,5 +38,12 @@ public interface TouristicBundleDAO {
 	/**
 	 * @return Devuelve una lista con los paquetes turisticos que no han sido comprados registrados en la bd. 
 	 * */
-	public List<TouristicBundle> findPurchaseless();
+	public ArrayList<TouristicBundle> findPurchaseless();
+	
+	/**
+	 * Devuelve todos los Paquetes cuyo nombre o descripcion contenga una cadena de caracteres especifica
+	 * @param str
+	 * @return
+	 */
+	public List<TouristicBundle> findByNameDescription(String str);
 }

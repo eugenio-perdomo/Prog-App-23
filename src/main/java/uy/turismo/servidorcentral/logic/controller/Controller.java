@@ -1,17 +1,7 @@
 package uy.turismo.servidorcentral.logic.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-
-import javax.imageio.ImageIO;
-
-import org.hibernate.Session;
 
 import uy.turismo.servidorcentral.logic.daos.DepartmentDAO;
 import uy.turismo.servidorcentral.logic.daos.DepartmentDAOImpl;
@@ -29,6 +19,7 @@ import uy.turismo.servidorcentral.logic.daos.CategoryDAO;
 import uy.turismo.servidorcentral.logic.daos.CategoryDAOImpl;
 import uy.turismo.servidorcentral.logic.daos.UserDAO;
 import uy.turismo.servidorcentral.logic.daos.UserDAOImpl;
+import uy.turismo.servidorcentral.logic.datatypes.DtBaseEntity;
 import uy.turismo.servidorcentral.logic.datatypes.DtCategory;
 import uy.turismo.servidorcentral.logic.datatypes.DtDepartment;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
@@ -49,8 +40,8 @@ import uy.turismo.servidorcentral.logic.entities.TouristicActivity;
 import uy.turismo.servidorcentral.logic.entities.TouristicBundle;
 import uy.turismo.servidorcentral.logic.entities.TouristicDeparture;
 import uy.turismo.servidorcentral.logic.entities.User;
-import uy.turismo.servidorcentral.logic.util.HibernateUtil;
-import uy.turismos.servidorcentral.logic.enums.ActivityState;
+import uy.turismo.servidorcentral.logic.enums.ActivityState;
+import uy.turismo.servidorcentral.logic.enums.EntityType;
 
 public class Controller implements IController {
 	
@@ -72,14 +63,13 @@ public class Controller implements IController {
 	}
 
 	//Metodos
-	
-	
 
 	@Override
-	public List<DtUser> getListUser() {
+	public ArrayList<DtUser> getListUser() {
+		System.out.println("Se accedio a la operacion");
 		UserDAO userDao = new UserDAOImpl();
-		List<User> users = userDao.findAll();
-		List<DtUser> usersOutput = new ArrayList<DtUser>();
+		ArrayList<User> users = userDao.findAll();
+		ArrayList<DtUser> usersOutput = new ArrayList<DtUser>();
 		
 		for(User usr : users) {
 			usersOutput.add(usr.getShortDt());
@@ -87,33 +77,94 @@ public class Controller implements IController {
 		
 		return usersOutput;
 	}
+	
+	@Override
+	public Boolean existsNick(String userNickname) {
+		UserDAO userDao = new UserDAOImpl();
+		
+		return userDao.checkNick(userNickname);
+	}
 
 	@Override
-	public DtUser getUserData(Long id) {
+	public Boolean existsEmail(String userEmail) {
+		UserDAO userDao = new UserDAOImpl();
+		
+		return userDao.checkEmail(userEmail);
+	}
+	
+	@Override
+	public Boolean existsName(String name, EntityType entityType ) {
+		Boolean existsname = null;
+		switch(entityType) {
+			case Activity:
+				TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
+				existsname = activityDao.checkName(name);
+				break;
+			case Departure:
+				TouristicDepartureDAO departureDao = new TouristicDepartureDAOImpl();
+				existsname = departureDao.checkName(name);
+				break;
+		}
+		
+		return existsname;
+	}
+
+	public List<DtBaseEntity> filterByString(String str){
+		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
+		TouristicBundleDAO bundleDao = new TouristicBundleDAOImpl();
+		
+		List<TouristicActivity> activityList = activityDao.findByNameDescription(str);
+		List<TouristicBundle> bundleList = bundleDao.findByNameDescription(str);
+		
+		List<DtBaseEntity> outputList = new ArrayList<DtBaseEntity>();
+		
+		for(TouristicActivity activity : activityList) {
+			outputList.add(activity.getShortDt());
+		}
+		
+		for(TouristicBundle bundle : bundleList) {
+			outputList.add(bundle.getShortDt());
+		}
+		
+		return outputList;
+	}
+	
+	@Override
+	public DtUser getUserData(
+			Long id) {
 	
 		UserDAO userDao = new UserDAOImpl();
 		User user = userDao.findById(id);
 		DtUser userOutput;
+		 
+		ArrayList<User> userList = userDao.findAll();
+		ArrayList<DtUser> followers = new ArrayList<DtUser>();
+		
+		for(User u : userList) {
+			if(u.isFollowerOf(user)) {
+				followers.add(u.getShortDt());
+			}
+		}
 		
 		if(user instanceof Provider) {
 			Provider provider = (Provider) user;
-			userOutput = provider.getDt();
+			userOutput = provider.getDt(followers);
 		}else {
 			Tourist tourist = (Tourist) user;
-			userOutput = tourist.getDt();
+			userOutput = tourist.getDt(followers);
 			
 		}
 			
-		
 		return userOutput;
 	}
 	
 	
 	@Override
-	public List<DtTourist>  getListTourist(){
+	
+	public ArrayList<DtTourist>  getListTourist(){
 		UserDAO userDAO = new UserDAOImpl();
-		List<Tourist> users = userDAO.findAllTourists();
-		List<DtTourist> userOutput = new ArrayList<DtTourist>();
+		ArrayList<Tourist> users = userDAO.findAllTourists();
+		ArrayList<DtTourist> userOutput = new ArrayList<DtTourist>();
 		
 		for(Tourist tur : users){
 			userOutput.add((DtTourist)tur.getShortDt());
@@ -123,10 +174,11 @@ public class Controller implements IController {
 	}
 	
 	@Override
-	public List<DtProvider>  getListProvider(){
+	
+	public ArrayList<DtProvider>  getListProvider(){
 		UserDAO userDAO = new UserDAOImpl();
-		List<Provider> users = userDAO.findAllProviders();
-		List<DtProvider> userOutput = new ArrayList<DtProvider>();
+		ArrayList<Provider> users = userDAO.findAllProviders();
+		ArrayList<DtProvider> userOutput = new ArrayList<DtProvider>();
 		
 		for(Provider prov : users){
 			userOutput.add((DtProvider)prov.getShortDt());
@@ -136,7 +188,8 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public void updateUser(DtUser userData) {
+	
+	public void updateUser( DtUser userData) {
 		UserDAO userDao = new UserDAOImpl();
 			
 		
@@ -192,12 +245,11 @@ public class Controller implements IController {
 				System.out.println(e.getMessage());
 			}
 		}
-		
-		
 	}
 	
-	//testeo pendiente
-	public void registerUser(DtUser usrData) {
+
+	
+	public void registerUser( DtUser usrData) {
 		UserDAO usrDAO = new UserDAOImpl();
 		
 		if(usrData instanceof DtProvider) {
@@ -250,16 +302,15 @@ public class Controller implements IController {
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
-			
 		}
-		
 	}
 	
 
-	public List<DtDepartment> getListDepartment(Boolean alsoActivities) {
+	
+	public ArrayList<DtDepartment> getListDepartment( Boolean alsoActivities) {
 		DepartmentDAO departmentDAO = new DepartmentDAOImpl();
-		List<Department> depas = departmentDAO.findAll();
-		List<DtDepartment> departmentOutput = new ArrayList<DtDepartment>();
+		ArrayList<Department> depas = departmentDAO.findAll();
+		ArrayList<DtDepartment> departmentOutput = new ArrayList<DtDepartment>();
 		
 		if(alsoActivities) {
 			for(Department der : depas) {
@@ -275,12 +326,19 @@ public class Controller implements IController {
 		}
 	}
 
-	//testeo pendiente
 	@Override
+	
 	public DtTouristicActivity getTouristicActivityData(Long touristicActivityId) {
 		
 		TouristicActivityDAO touristicActivityDAO = new TouristicActivityDAOImpl();
 		TouristicActivity touristicActivity = touristicActivityDAO.findById(touristicActivityId);
+		touristicActivity.setVisits(touristicActivity.getVisits() + 1);
+		
+		try {
+			touristicActivityDAO.update(touristicActivity);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		DtTouristicActivity dtTouristicActivity = touristicActivity.getDt();
 
@@ -288,21 +346,21 @@ public class Controller implements IController {
 		
 	}
 	
-	//testeo pendiente QUE NUNCA LLEGO
 	@Override
-	public List<DtTouristicDeparture> getListTouristicDeparture(Long touristicActivityId) {
+	
+	public ArrayList<DtTouristicDeparture> getDeparturesByActivity( Long touristicActivityId) {
 				
 		TouristicActivityDAO touristicActivityDAO = new TouristicActivityDAOImpl();
 		TouristicActivity activity = touristicActivityDAO.findById(touristicActivityId);
 		//obtengo actividad.
 		
 		TouristicDepartureDAO touristicDepartureDAO = new TouristicDepartureDAOImpl();
-		List<TouristicDeparture> touristicDepartureByAct = touristicDepartureDAO.findByActivity(activity);
+		ArrayList<TouristicDeparture> touristicDepartureByAct = touristicDepartureDAO.findByActivity(activity);
 		//lista de salidas turisticas con esa actividad.
 		
 		//agrego salidas al dt.
-//		List<DtTouristicDeparture> dtTouristicDeparture = (List<DtTouristicDeparture>) new DtTouristicDeparture();
-		List<DtTouristicDeparture> dtTouristicDeparture = new ArrayList<DtTouristicDeparture>();
+//		ArrayList<DtTouristicDeparture> dtTouristicDeparture = (ArrayList<DtTouristicDeparture>) new DtTouristicDeparture();
+		ArrayList<DtTouristicDeparture> dtTouristicDeparture = new ArrayList<DtTouristicDeparture>();
 
 //		for (int i = 0; i < touristicDepartureByAct.size(); i++) {
 //			dtTouristicDeparture.add((DtTouristicDeparture) touristicDepartureByAct);
@@ -318,7 +376,8 @@ public class Controller implements IController {
 	
 	
 	@Override
-	public void registeTouristicActivity(DtTouristicActivity touristicActivityData) throws Exception {
+	
+	public void registeTouristicActivity( DtTouristicActivity touristicActivityData){
 		DepartmentDAO departmentDao = new DepartmentDAOImpl();
 		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
 		UserDAO userDao = new UserDAOImpl(); 
@@ -333,7 +392,7 @@ public class Controller implements IController {
 				.getId());
 		
 		//categorias seleccionadas
-		List<DtCategory> categoriesSelected = touristicActivityData.getCategories();
+		ArrayList<DtCategory> categoriesSelected = touristicActivityData.getCategories();
 		
 		ArrayList<Long> categories = new ArrayList<>();
 		
@@ -341,7 +400,7 @@ public class Controller implements IController {
 			categories.add(categoriesSelected.get(i).getId());
 		}
 		
-		List<Category> categoriesSelectedList = categoryDAO.findManyById(categories);
+		ArrayList<Category> categoriesSelectedList = categoryDAO.findManyById(categories);
 		
 		//pasar categorias
 		TouristicActivity activity = new TouristicActivity(
@@ -358,7 +417,6 @@ public class Controller implements IController {
 				touristicActivityData.getVisits(),
 				touristicActivityData.getVideoURL());
 		
-		
 
 		activity.setCategory(categoriesSelectedList);
 	
@@ -369,14 +427,17 @@ public class Controller implements IController {
 				activityDao.update(activity);
 			}
 		} catch (Exception e) {
-			e = new Exception("El nombre: " + touristicActivityData.getName() + " ya existe para la actividad.");
-			throw e;
+			e.printStackTrace();
+			
+//			e = new Exception("El nombre: " + touristicActivityData.getName() + " ya existe para la actividad.");
+//			throw e;
 			
 		}
 	}
 
 	@Override
-	public void registerTouristicDeparture(DtTouristicDeparture touristicDepartureData) throws Exception{
+	
+	public void registerTouristicDeparture( DtTouristicDeparture touristicDepartureData){
 		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
 		TouristicDepartureDAO departureDao = new TouristicDepartureDAOImpl();
 		
@@ -404,17 +465,19 @@ public class Controller implements IController {
 				departureDao.update(departure);
 			}
 		} catch (Exception e) {
-			e = new Exception("La Salida: " + touristicDepartureData.getName() + " ya existe.");
-			throw e;
+			e.printStackTrace();
+//			e = new Exception("La Salida: " + touristicDepartureData.getName() + " ya existe.");
+//			throw e;
 		}
 		
 	}
 
 	@Override
-	public List<DtTouristicDeparture> getListTouristicDeparture() {
+	
+	public ArrayList<DtTouristicDeparture> getListTouristicDeparture() {
 		TouristicDepartureDAO departureDAO = new TouristicDepartureDAOImpl();
-		List<TouristicDeparture> departures = departureDAO.findAll();
-		List<DtTouristicDeparture> departureOutput = new ArrayList<DtTouristicDeparture>();
+		ArrayList<TouristicDeparture> departures = departureDAO.findAll();
+		ArrayList<DtTouristicDeparture> departureOutput = new ArrayList<DtTouristicDeparture>();
 		
 		for(TouristicDeparture der : departures ) {
 			departureOutput.add(der.getShortDt());
@@ -426,15 +489,25 @@ public class Controller implements IController {
 		
 		TouristicDepartureDAO touristicDepartureDAO = new TouristicDepartureDAOImpl();
 		TouristicDeparture tourDeparture = touristicDepartureDAO.findById(touristicDepartureId);
+		tourDeparture.setVisits(tourDeparture.getVisits() + 1);
+		
+		try {
+			touristicDepartureDAO.update(tourDeparture);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 		DtTouristicDeparture dtTouristicActivity = tourDeparture.getDt();
 		return dtTouristicActivity;
 	}
 
 	@Override
-	public List<DtTouristicBundle> getListTouristicBundle() {
+	
+	public ArrayList<DtTouristicBundle> getListTouristicBundle() {
 		TouristicBundleDAO bundleDAO = new TouristicBundleDAOImpl();
-		List<TouristicBundle> bundles = bundleDAO.findAll();
-		List<DtTouristicBundle> outputBundles = new ArrayList<DtTouristicBundle>();
+		ArrayList<TouristicBundle> bundles = bundleDAO.findAll();
+		ArrayList<DtTouristicBundle> outputBundles = new ArrayList<DtTouristicBundle>();
 		
 		for(TouristicBundle bun : bundles) {
 			outputBundles.add(bun.getShortDt());
@@ -444,14 +517,19 @@ public class Controller implements IController {
 	}
 	
 	@Override
-	public void registerTouristicBundle(DtTouristicBundle touristicBundleData)  throws Exception{
+	
+	public void registerTouristicBundle( DtTouristicBundle touristicBundleData){
 		
 		TouristicBundleDAO touristicBundleDAO = new TouristicBundleDAOImpl();
 		
 		
-		TouristicBundle bundle = new TouristicBundle(null, touristicBundleData.getName(),
-				touristicBundleData.getDescription(), touristicBundleData.getValidityPeriod(), 
-				touristicBundleData.getDiscount(), touristicBundleData.getUploadDate());
+		TouristicBundle bundle = new TouristicBundle(
+				null, 
+				touristicBundleData.getName(),
+				touristicBundleData.getDescription(), 
+				touristicBundleData.getValidityPeriod(), 
+				touristicBundleData.getDiscount(), 
+				touristicBundleData.getUploadDate());
 		
 		if(touristicBundleData.getImage() != null) {
 			bundle.setImage(touristicBundleData.getImage());
@@ -465,12 +543,13 @@ public class Controller implements IController {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			e = new Exception("El Paquete: " + touristicBundleData.getName() + " ya existe.");
-			throw e;
+//			e = new Exception("El Paquete: " + touristicBundleData.getName() + " ya existe.");
+//			throw e;
 		}
 	}
+
 	
-	public void registerDepartment(DtDepartment departmentData){
+	public void registerDepartment( DtDepartment departmentData){
 		DepartmentDAO departmentDAO = new DepartmentDAOImpl();
 		
 		Department department = new Department(null, departmentData.getName(), departmentData.getDescription(), departmentData.getWebSite());
@@ -483,7 +562,8 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public DtTouristicBundle getTouristicBundleData(long touristicBundleId) {
+	
+	public DtTouristicBundle getTouristicBundleData(Long touristicBundleId) {
 		TouristicBundleDAO bundleDAO = new TouristicBundleDAOImpl();
 		TouristicBundle bundle = bundleDAO.findById(touristicBundleId);
 		
@@ -491,7 +571,7 @@ public class Controller implements IController {
 		return outputBundle;
 	}
 	
-	public void registerInscription(DtInscription inscriptionData) throws Exception{
+	public void registerInscription(DtInscription inscriptionData){
 		InscriptionDAO inscDAO = new InscriptionDAOImpl();
 		TouristicDepartureDAO departureDao = new TouristicDepartureDAOImpl();
 		UserDAO touristDao = new UserDAOImpl();
@@ -517,12 +597,14 @@ public class Controller implements IController {
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
-			e = new Exception("La Inscripcion: " + inscriptionData.getName() + " ya existe.");
-			throw e;
+//			e = new Exception("La Inscripcion: " + inscriptionData.getName() + " ya existe.");
+//			throw e;
 		}
 	}
+
 	
-	public void addTouristicActivityToBundle(Long touristicBundleId, Long touristicActivityId) {
+	public void addTouristicActivityToBundle( Long touristicBundleId,
+			 Long touristicActivityId) {
 		TouristicBundleDAO bundleDao = new TouristicBundleDAOImpl();
 		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
 		
@@ -544,8 +626,8 @@ public class Controller implements IController {
 	
 	
 	@Override
-	public void registerCategory(DtCategory categoryData) throws Exception{
-		// TODO Auto-generated method stub
+	
+	public void registerCategory( DtCategory categoryData){
 		
 		TouristicActivityDAO activityDAO = new TouristicActivityDAOImpl();
 		//como pasar actividades.
@@ -558,19 +640,20 @@ public class Controller implements IController {
 			categoryDAO.create(category);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			e = new Exception("La Categoria: " + categoryData.getName() + " ya existe.");
-			throw e;
+//			e = new Exception("La Categoria: " + categoryData.getName() + " ya existe.");
+//			throw e;
 		}
 	
 	}
 
 	@Override
-	public List<DtCategory> getListCategory() {
+	
+	public ArrayList<DtCategory> getListCategory() {
 		CategoryDAO  categoryDAO = new CategoryDAOImpl();
 		
-		List<Category> categories = categoryDAO.findAll();
+		ArrayList<Category> categories = categoryDAO.findAll();
 		
-		List<DtCategory> categoriesDt = new ArrayList<DtCategory>();
+		ArrayList<DtCategory> categoriesDt = new ArrayList<DtCategory>();
 		
 		for (Category cat : categories) {
 			categoriesDt.add(cat.getCategoryDt());
@@ -591,7 +674,8 @@ public class Controller implements IController {
 	*/
 	
 	@Override
-	public void changeActivityState(Long id, ActivityState state) throws Exception {
+	
+	public void changeActivityState( Long id,  ActivityState state) {
 		
 		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
 		TouristicActivity touristicActivity = activityDao.findById(id);
@@ -606,7 +690,8 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public DtUser checkCredentials(String email, String password){
+	
+	public DtUser checkCredentials( String email,  String password){
 		UserDAO userDao = new UserDAOImpl();
 		
 		User user = userDao.checkCredentials(email, password);
@@ -614,17 +699,18 @@ public class Controller implements IController {
 		if(user == null) {
 			return null;
 		}else {
-			return user.getDt();
+			return user.getShortDt();
 		}
 	}
 	
 	
 		
-	public List<DtTouristicActivity> getListActivityStated(ActivityState state){
+	
+	public ArrayList<DtTouristicActivity> getListActivityStated( ActivityState state){
 		
 		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
-		List<TouristicActivity> activities = activityDao.findAllbyState(state);
-		List<DtTouristicActivity> activityOutput = new ArrayList<DtTouristicActivity>();
+		ArrayList<TouristicActivity> activities = activityDao.findAllbyState(state);
+		ArrayList<DtTouristicActivity> activityOutput = new ArrayList<DtTouristicActivity>();
 		
 		if(activities != null || !activities.isEmpty()) {
 			
@@ -637,8 +723,8 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public void registerPurchase(DtPurchase purchase) throws Exception {
-		// TODO Auto-generated method stub
+	
+	public void registerPurchase( DtPurchase purchase){
 		PurchaseDAO purchaseDAO = new PurchaseDAOImpl();
 		
 		TouristicBundleDAO bundleDAO = new TouristicBundleDAOImpl();
@@ -660,12 +746,14 @@ public class Controller implements IController {
 		try {
 			purchaseDAO.create(newPurchase);
 		} catch (Exception e) {
-			e = new Exception("Falló al realizar la compra, intente nuevamente.");
-			throw e;
+			e.printStackTrace();
+//			e = new Exception("Falló al realizar la compra, intente nuevamente.");
+//			throw e;
 		}	
 	}
 
 	@Override
+	
 	public DtPurchase getPurchase(Long purchaseId) {
 		
 		PurchaseDAO purchaseDAO = new PurchaseDAOImpl();
@@ -677,12 +765,12 @@ public class Controller implements IController {
 		return purchaseData;
 	}
 	
-	public List<DtPurchase> getPurchaseList() {
+	public ArrayList<DtPurchase> getPurchaseList() {
 		
 		PurchaseDAO purchaseDAO = new PurchaseDAOImpl();
-		List<Purchase> purchase = purchaseDAO.findAll();
+		ArrayList<Purchase> purchase = purchaseDAO.findAll();
 
-		List<DtPurchase> purchaseOutput = new ArrayList<DtPurchase>();
+		ArrayList<DtPurchase> purchaseOutput = new ArrayList<DtPurchase>();
 		
 		try {
 			for(Purchase pur: purchase) {
@@ -696,7 +784,7 @@ public class Controller implements IController {
 		return purchaseOutput;
 		
 	}
-
+	
 	@Override
 	public void followUser(Long userId, Long userToFollowId) {
 		
@@ -750,11 +838,13 @@ public class Controller implements IController {
 		Tourist tourist = (Tourist) userDAO.findById(userId);
 		TouristicActivity activity = activityDAO.findById(activityId);
 		
-		if(tourist.markFavoriteActivity(activity)) {	
+		if(tourist.markFavoriteActivity(activity)) {
+			activity.setFavouritesAmmout(activity.getFavouritesAmmout() + 1);
 			try {
+				activityDAO.update(activity);
 				userDAO.update(tourist);
 			}catch (Exception e){
-				
+				e.printStackTrace();
 			}
 		}
 		
@@ -768,13 +858,14 @@ public class Controller implements IController {
 		TouristicActivity activity = activityDAO.findById(activityId);
 
 		if(tourist.unMarkFavoriteActivity(activity)) {
-			try {	
+			activity.setFavouritesAmmout(activity.getFavouritesAmmout() - 1);
+			try {
+				activityDAO.update(activity);	
 				userDAO.update(tourist);		
 			}catch (Exception e){
-				
+				e.printStackTrace();
 			}	
 		}	
 	}
-	
 	
 }

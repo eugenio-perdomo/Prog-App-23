@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -24,13 +23,12 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Transient;
 import uy.turismo.servidorcentral.logic.datatypes.DtCategory;
 import uy.turismo.servidorcentral.logic.datatypes.DtProvider;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
-import uy.turismos.servidorcentral.logic.enums.ActivityState;
+import uy.turismo.servidorcentral.logic.enums.ActivityState;
 
 
 @Entity(name = "Touristic_Activity")
@@ -60,13 +58,16 @@ public class TouristicActivity implements Serializable{
 	@Column(length = 104)
 	private String image;
 	
-	@Column(length = 10)
+	@Column(name = "visits_amount")
 	private Integer visitsAmount;
 	
-	@Column(length = 100)
+	@Column(name = "video",  length = 100)
 	private String videoURL;
 	
 	private ActivityState state;
+	
+	@Column(name = "favourites_amount")
+	private Integer favouritesAmount;
 	
 	@ManyToOne
 	@JoinColumn(name = "provider")
@@ -123,6 +124,7 @@ public class TouristicActivity implements Serializable{
 		this.provider = provider;
 		this.department = department;
 		this.InitLists();
+		this.favouritesAmount = 0;
 		this.visitsAmount = visits;
 		this.videoURL = urlVideo;
 	}
@@ -147,7 +149,7 @@ public class TouristicActivity implements Serializable{
 		return visitsAmount;
 	}
 	
-	public void SetVisits(Integer visits) {
+	public void setVisits(Integer visits) {
 		this.visitsAmount = visits;
 	}
 	
@@ -250,7 +252,6 @@ public class TouristicActivity implements Serializable{
 		}
 		
 	}
-	
 
 	public Provider getProvider() {
 		return provider;
@@ -292,6 +293,16 @@ public class TouristicActivity implements Serializable{
 		return this.state;
 	}
 	
+	public Integer getFavouritesAmmout() {
+		return favouritesAmount;
+	}
+
+	public void setFavouritesAmmout(Integer favouritesAmmout) {
+		this.favouritesAmount = favouritesAmmout;
+	}
+
+
+
 	//codigo agregado : LT.
 	public List<Category> getCategories(){
 		return categories;
@@ -320,7 +331,7 @@ public class TouristicActivity implements Serializable{
 				this.state,
 				this.description,
 				this.department.getShortDt(),
-				listDtCategories);
+				(ArrayList) listDtCategories);
 		return dtOutput;
 	}
 	
@@ -372,9 +383,9 @@ public class TouristicActivity implements Serializable{
 					this.uploadDate,
 					(DtProvider) this.provider.getShortDt(),
 					this.department.getShortDt(),
-					listDtDepartures,
-					listDtBundles,
-					listDtCategories,
+					(ArrayList<DtTouristicDeparture>) listDtDepartures,
+					(ArrayList<DtTouristicBundle>) listDtBundles,
+					(ArrayList<DtCategory>) listDtCategories,
 					this.visitsAmount,
 					this.videoURL);
 			

@@ -14,7 +14,6 @@ import javax.imageio.ImageIO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,11 +21,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Transient;
 import uy.turismo.servidorcentral.logic.datatypes.DtCategory;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
-import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 
 @Entity(name = "Touristic_Bundle")
 public class TouristicBundle implements Serializable  {
@@ -231,8 +228,17 @@ public class TouristicBundle implements Serializable  {
 		}
 		
 
-		DtTouristicBundle dt = new DtTouristicBundle(this.id, this.name, this.description, this.validityPeriod, 
-				this.discount, this.uploadDate, this.getImage(),activities,categoriesList,price);
+		DtTouristicBundle dt = new DtTouristicBundle(
+				this.id, 
+				this.name, 
+				this.description, 
+				this.validityPeriod, 
+				this.discount, 
+				this.uploadDate, 
+				this.getImage(),
+				(ArrayList<DtTouristicActivity>) activities,
+				(ArrayList<DtCategory>) categoriesList,
+				price);
 		return dt;
 	}
 	

@@ -122,8 +122,6 @@ public class Inscription implements Serializable {
 				this.touristAmount,
 				null,
 				null
-				);
-				
-				
+				);		
 	}
 }

@@ -1,6 +1,6 @@
 package uy.turismo.servidorcentral.logic.daos;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import uy.turismo.servidorcentral.logic.entities.Provider;
 import uy.turismo.servidorcentral.logic.entities.Tourist;
@@ -12,17 +12,17 @@ public interface UserDAO {
 	 *
 	 * @return Devuelve una lista con todos los usuarios de la BD
 	 */
-	public List<User> findAll();	
+	public ArrayList<User> findAll();	
 	/**
 	 *
 	 * @return Devuelve una lista con todos los Turistas de la BD
 	 */
-	public List<Tourist> findAllTourists();
+	public ArrayList<Tourist> findAllTourists();
 	/**
 	 *
 	 * @return Devuelve una lista con todos los Proveedores de la BD
 	 */
-	public List<Provider> findAllProviders();
+	public ArrayList<Provider> findAllProviders();
 	/**
 	 * Busca un usuario por id 
 	 * @param id
@@ -50,4 +50,18 @@ public interface UserDAO {
 	 * @return Devuelve el usuario si lo encontro, sino devuelve null
 	 */
 	public User checkCredentials(String email, String password);
+	
+	/**
+	 * Busca si hay un usuario con el nickname en cuestion
+	 * @param nickname
+	 * @return
+	 */
+	public Boolean checkNick(String nickname);
+	
+	/**
+	 * Busca si hay un usuario con el email en cuestion
+	 * @param email
+	 * @return
+	 */
+	public Boolean checkEmail(String email);
 }
