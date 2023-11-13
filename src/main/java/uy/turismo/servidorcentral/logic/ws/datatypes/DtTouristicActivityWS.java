@@ -128,6 +128,7 @@ public class DtTouristicActivityWS extends DtBaseEntityWS {
 	}
 
 	// codigo agregado: LT
+	@XmlElement
 	public DtCategoryWS[] getCategories() {
 		return categories;
 	}
