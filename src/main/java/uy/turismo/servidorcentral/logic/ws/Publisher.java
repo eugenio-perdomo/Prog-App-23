@@ -3,9 +3,17 @@ package uy.turismo.servidorcentral.logic.ws;
 import java.awt.image.DataBufferByte;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Scanner;
+import java.io.*;
+
+import java.net.URL;
+import java.net.URLConnection;
 
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
@@ -47,10 +55,68 @@ public class Publisher {
 	private Endpoint endpoint;
 
 	@WebMethod(exclude = true)
-	public void publish() {
-		endpoint = Endpoint.publish("http://localhost:8181/controller", this);
+	public String publish() {
+		String serviceURL = "http://"+ getHostAddress() +":8181/controller";
+		endpoint = Endpoint.publish(serviceURL , this);
+		updateWSDL(serviceURL + "?wsdl");
+		return "Web Service levantado en " + serviceURL;
 	}
 	
+	/**
+	 * Metodo para conseguir la IP privada del host
+	 * @return
+	 */
+	@WebMethod(exclude = true)
+	public String getHostAddress() {
+
+		try {
+            Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+            while (interfaces.hasMoreElements()) {
+                NetworkInterface networkInterface = interfaces.nextElement();
+                if (!networkInterface.isLoopback() && !networkInterface.isVirtual() && networkInterface.isUp()) {
+                    Enumeration<InetAddress> addresses = networkInterface.getInetAddresses();
+                    while (addresses.hasMoreElements()) {
+                        InetAddress addr = addresses.nextElement();
+                        if (!addr.isLinkLocalAddress() && !addr.isLoopbackAddress() && addr.isSiteLocalAddress()) {
+                            return addr.getHostAddress();
+//                        	System.out.println("IP privada: " + addr.getHostAddress());
+                        }
+                    }
+                }
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+		return "localhost";
+	}
+	
+	@WebMethod(exclude = true)
+	public void updateWSDL(String wsdlURL) {
+		String fileURL = wsdlURL;
+        String saveDir = System.getProperty("user.dir") + "/src/main/resources/";
+
+        try {
+            URL url = new URL(fileURL);
+            URLConnection conn = url.openConnection();
+            InputStream inputStream = conn.getInputStream();
+            String saveFilePath = saveDir + "publisher.wsdl";
+
+            FileOutputStream outputStream = new FileOutputStream(saveFilePath);
+
+            int bytesRead;
+            byte[] buffer = new byte[1024];
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+
+            outputStream.close();
+            inputStream.close();
+
+            System.out.println("Archivo WSDL guardado en " + saveFilePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
 
 	@WebMethod(exclude = true)
 	public Endpoint getEndpoint() {
@@ -393,7 +459,7 @@ public class Publisher {
 	@WebMethod
 	@WebResult(name = "departmentsList")
 	public DtDepartmentWS[] getListDepartment(
-			@WebParam(name = "withActivities?") 
+			@WebParam(name = "withActivities") 
 			Boolean alsoActivities){
 
 		IController controller = ControllerFactory.getIController();
