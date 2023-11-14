@@ -61,6 +61,12 @@ public class Publisher {
 		updateWSDL(serviceURL + "?wsdl");
 		return "Web Service levantado en " + serviceURL;
 	}
+
+	@WebMethod(exclude = true)
+	public String stop() {
+		endpoint.stop();
+		return "Web Service Detenido";
+	}
 	
 	/**
 	 * Metodo para conseguir la IP privada del host
