@@ -690,7 +690,6 @@ public class Controller implements IController {
 	}
 
 	@Override
-	
 	public DtUser checkCredentials( String email,  String password){
 		UserDAO userDao = new UserDAOImpl();
 		
@@ -699,7 +698,7 @@ public class Controller implements IController {
 		if(user == null) {
 			return null;
 		}else {
-			return user.getShortDt();
+			return user.getDt(null);
 		}
 	}
 	
