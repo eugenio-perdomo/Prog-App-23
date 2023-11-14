@@ -1,6 +1,7 @@
 package uy.turismo.servidorcentral.logic.ws.datatypes;
 
 import java.awt.image.DataBufferByte;
+import java.util.ArrayList;
 
 import jakarta.xml.bind.annotation.XmlElement;
 import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
@@ -15,6 +16,7 @@ import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 public class DtTouristWS extends DtUserWS {
 
 	private String nationality;
+	private DtTouristicActivityWS[] favActivities;
 	private DtTouristicDepartureWS[] departures;
 	private DtInscriptionWS[] inscriptions;
 	private DtTouristicBundleWS[] bundles;
@@ -99,6 +101,16 @@ public class DtTouristWS extends DtUserWS {
 					i++;
 				}
 			}
+
+			if(t.getFavActivties() != null && !t.getFavActivties().isEmpty()) {
+				this.favActivities = new DtTouristicActivityWS[t.getFavActivties().size()];
+				int i = 0;
+				for(DtTouristicActivity a : t.getFavActivties()) {
+					this.favActivities[i] = new DtTouristicActivityWS(a, true);
+					i++;
+				}
+			}
+			
 		}
 		
 	}
@@ -123,4 +135,11 @@ public class DtTouristWS extends DtUserWS {
 	public DtTouristicBundleWS[] getBundles() {
 		return bundles;
 	}
+
+	@XmlElement
+	public DtTouristicActivityWS[] getFavActivities() {
+		return favActivities;
+	}
+	
+	
 }
