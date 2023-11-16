@@ -69,6 +69,7 @@ public class Publisher {
 	}
 	
 	/**
+				touristicDepartureData.getVisits()
 	 * Metodo para conseguir la IP privada del host
 	 * @return
 	 */
@@ -325,7 +326,8 @@ public class Publisher {
 		IController controller = ControllerFactory.getIController();
 		
 		if(userData instanceof DtTouristWS) {
-			controller.updateUser(new DtTourist((DtTouristWS) userData));
+			DtTourist touristData = new DtTourist((DtTouristWS) userData);
+			controller.updateUser(touristData);
 		}else {
 			controller.updateUser(new DtProvider((DtProviderWS) userData));
 		}

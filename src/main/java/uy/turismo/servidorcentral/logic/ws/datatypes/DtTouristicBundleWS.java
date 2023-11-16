@@ -8,14 +8,26 @@ import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 
 public class DtTouristicBundleWS extends DtBaseEntityWS {
 
+	@XmlElement
 	private String description;
+	@XmlElement
 	private Integer validityPeriod;
+	@XmlElement
 	private Double discount;
+	@XmlElement
 	private Double price;
+	@XmlElement
 	private String uploadDate;
+	@XmlElement
 	private byte[] image;
+	@XmlElement
 	private DtTouristicActivityWS[] activities;
+	@XmlElement
 	private DtCategoryWS[] categories;
+	
+	public DtTouristicBundleWS() {
+		
+	}
 	
 	public DtTouristicBundleWS(DtTouristicBundle b, Boolean isShort) {
 		super(
@@ -50,42 +62,42 @@ public class DtTouristicBundleWS extends DtBaseEntityWS {
 		}
 	}
 
-	@XmlElement
+	
 	public String getDescription() {
 		return description;
 	}
 
-	@XmlElement
+	
 	public Integer getValidityPeriod() {
 		return validityPeriod;
 	}
 
-	@XmlElement
+	
 	public Double getDiscount() {
 		return discount;
 	}
 
-	@XmlElement
+	
 	public String getUploadDate() {
 		return uploadDate;
 	}
 	
-	@XmlElement
+	
 	public byte[] getImage() {
 		return image;
 	}
 
-	@XmlElement
+	
 	public DtTouristicActivityWS[] getActivities() {
 		return activities;
 	}
 
-	@XmlElement
+	
 	public DtCategoryWS[] getCategories(){
 		return categories;
 	}
 
-	@XmlElement
+	
 	public Double getPrice(){
 		return price;
 	}

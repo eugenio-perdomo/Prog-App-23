@@ -8,10 +8,17 @@ import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 
 public class DtProviderWS extends DtUserWS {
 
+	@XmlElement
 	private String url;
+	@XmlElement
 	private String description;
+	@XmlElement
 	private DtTouristicActivityWS[] touristicActivities;
 
+	public DtProviderWS() {
+		
+	}
+	
 	public DtProviderWS(DtProvider p, Boolean isShort) {
 		super(
 				p.getId(),
@@ -67,17 +74,17 @@ public class DtProviderWS extends DtUserWS {
 		
 	}
 	
-	@XmlElement
+	
 	public String getUrl() {
 		return url;
 	}
 
-	@XmlElement
+	
 	public String getDescription() {
 		return description;
 	}
 
-	@XmlElement
+	
 	public DtTouristicActivityWS[] getTouristicActivities() {
 		return touristicActivities;
 	}

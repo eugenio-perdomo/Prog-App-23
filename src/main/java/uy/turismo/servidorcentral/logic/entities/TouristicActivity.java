@@ -109,7 +109,6 @@ public class TouristicActivity implements Serializable{
 			LocalDate uploadDate,
 			Provider provider, 
 			Department department,
-			Integer visits,
 			String urlVideo) {
 		
 		this.id = id;
@@ -125,7 +124,7 @@ public class TouristicActivity implements Serializable{
 		this.department = department;
 		this.InitLists();
 		this.favouritesAmount = 0;
-		this.visitsAmount = visits;
+		this.visitsAmount = 0;
 		this.videoURL = urlVideo;
 	}
 	

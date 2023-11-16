@@ -5,11 +5,20 @@ import uy.turismo.servidorcentral.logic.datatypes.DtInscription;
 
 public class DtInscriptionWS extends DtBaseEntityWS {
 
+	@XmlElement
 	private String inscriptionDate;
+	@XmlElement
 	private Double totalCost;
+	@XmlElement
 	private Integer touristAmount;
+	@XmlElement
 	private DtTouristWS tourist;
+	@XmlElement
 	private DtTouristicDepartureWS departure;
+	
+	public DtInscriptionWS() {
+		
+	}
 	
 	public DtInscriptionWS(DtInscription i ) {
 		super(i.getId());
@@ -25,27 +34,27 @@ public class DtInscriptionWS extends DtBaseEntityWS {
 		}
 	}	
 
-	@XmlElement
+	
 	public String getInscriptionDate() {
 		return inscriptionDate;
 	}
 
-	@XmlElement
+	
 	public Double getTotalCost() {
 		return totalCost;
 	}
 
-	@XmlElement
+	
 	public Integer getTouristAmount() {
 		return touristAmount;
 	}
 
-	@XmlElement
+	
 	public DtTouristWS getTourist() {
 		return tourist;
 	}
 
-	@XmlElement
+	
 	public DtTouristicDepartureWS getTouristicDeparture() {
 		return departure;
 	}

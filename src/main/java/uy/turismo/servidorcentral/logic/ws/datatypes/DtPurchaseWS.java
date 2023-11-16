@@ -4,13 +4,23 @@ import jakarta.xml.bind.annotation.XmlElement;
 import uy.turismo.servidorcentral.logic.datatypes.DtPurchase;
 
 public class DtPurchaseWS extends DtBaseEntityWS {
-	
+
+	@XmlElement
 	private String purchaseDate;
+	@XmlElement
 	private Integer touristAmount;
+	@XmlElement
 	private Double totalCost;
+	@XmlElement
 	private String expireDate;
+	@XmlElement
 	private DtTouristWS tourist;
+	@XmlElement
 	private DtTouristicBundleWS bundle;
+	
+	public DtPurchaseWS() {
+		
+	}
 	
 	public DtPurchaseWS(DtPurchase p) {
 		super(p.getId());
@@ -28,32 +38,32 @@ public class DtPurchaseWS extends DtBaseEntityWS {
 		}
 	}
 
-	@XmlElement
+	
 	public String getPurchaseDate() {
 		return purchaseDate;
 	}
 
-	@XmlElement
+	
 	public Integer getTouristAmount() {
 		return touristAmount;
 	}
 
-	@XmlElement
+	
 	public Double getTotalCost() {
 		return totalCost;
 	}
 
-	@XmlElement
+	
 	public String getExpireDate() {
 		return expireDate;
 	}
 
-	@XmlElement
+	
 	public DtTouristWS getTourist() {
 		return tourist;
 	}
 
-	@XmlElement
+	
 	public DtTouristicBundleWS getBundle() {
 		return bundle;
 	}

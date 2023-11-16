@@ -27,7 +27,6 @@ public class DtTouristicActivity extends DtBaseEntity {
 	private ArrayList<DtCategory> categories;
 	
 	public DtTouristicActivity() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public DtTouristicActivity(DtTouristicActivityWS a) {
@@ -38,11 +37,20 @@ public class DtTouristicActivity extends DtBaseEntity {
 		this.city = a.getCity();
 		this.image = Converter.convertArrayToBI(a.getImage());
 		this.state = a.getState();
-		this.uploadDate = Converter.convertStringToLD(a.getUploadDate());
-		this.provider = new DtProvider(a.getProvider().getId());
-		this.department = new DtDepartment(a.getDepartment().getId());
+		
+		if(a.getUploadDate() != null) {
+			this.uploadDate = Converter.convertStringToLD(a.getUploadDate());	
+		}
+		if(a.getDepartment() != null) {
+			this.provider = new DtProvider(a.getProvider().getId());
+		}
+		if(a.getProvider() != null) {
+			this.department = new DtDepartment(a.getDepartment().getId());
+			
+		}
 		
 		if(a.getCategories() != null) {
+			this.categories = new ArrayList<DtCategory>();
 			for(DtCategoryWS category : a.getCategories()) {
 				this.categories.add(new DtCategory(category));
 			}

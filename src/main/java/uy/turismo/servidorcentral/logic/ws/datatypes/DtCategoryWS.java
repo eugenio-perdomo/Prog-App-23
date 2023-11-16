@@ -7,8 +7,14 @@ import uy.turismo.servidorcentral.logic.datatypes.DtTouristicBundle;
 
 public class DtCategoryWS extends DtBaseEntityWS{
 
+	@XmlElement
 	private DtTouristicActivityWS[] activities;
+	@XmlElement
 	private DtTouristicBundleWS[] bundles;
+	
+	public DtCategoryWS(){
+		
+	}
 	
 	public DtCategoryWS(DtCategory c, Boolean isShort) {
 		super(c.getId(), c.getName());
@@ -34,12 +40,10 @@ public class DtCategoryWS extends DtBaseEntityWS{
 		}
 	}
 
-	@XmlElement
 	public DtTouristicActivityWS[] getActivities() {
 		return activities;
 	}
 
-	@XmlElement
 	public DtTouristicBundleWS[] getBundles() {
 		return bundles;
 	}

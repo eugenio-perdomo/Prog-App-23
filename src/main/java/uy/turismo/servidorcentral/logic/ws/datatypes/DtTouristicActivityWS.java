@@ -9,21 +9,39 @@ import uy.turismo.servidorcentral.logic.enums.ActivityState;
 
 public class DtTouristicActivityWS extends DtBaseEntityWS {
 
+	@XmlElement
 	private String description;
+	@XmlElement
 	private Double duration;
+	@XmlElement
 	private Double costPerTourist;
+	@XmlElement
 	private String city;
+	@XmlElement
 	private byte[] image;
+	@XmlElement
 	private ActivityState state;
+	@XmlElement
 	private String uploadDate;
+	@XmlElement
 	private DtProviderWS provider;
+	@XmlElement
 	private DtDepartmentWS department;
+	@XmlElement
 	private DtTouristicDepartureWS[] departures;
+	@XmlElement
 	private DtTouristicBundleWS[] bundles;
+	@XmlElement
 	private DtCategoryWS[] categories;
+	@XmlElement
 	private Integer visitsAmount;
+	@XmlElement
 	private String urlVideo;
 
+	public DtTouristicActivityWS() {
+		
+	}
+	
 	public DtTouristicActivityWS(DtTouristicActivity a, Boolean isShort) {
 		super(
 				a.getId(),
@@ -73,77 +91,77 @@ public class DtTouristicActivityWS extends DtBaseEntityWS {
 		
 	}
 
-	@XmlElement
+	
 	public String getDescription() {
 		return description;
 	}
 
 
-	@XmlElement
+	
 	public Double getDuration() {
 		return duration;
 	}
 
 
-	@XmlElement
+	
 	public Double getCostPerTourist() {
 		return costPerTourist;
 	}
 
 
-	@XmlElement
+	
 	public String getCity() {
 		return city;
 	}
 
 
-	@XmlElement
+	
 	public byte[] getImage() {
 		return image;
 	}
 
-	@XmlElement
+	
 	public String getUploadDate() {
 		return uploadDate;
 	}
 
-	@XmlElement
+	
 	public DtProviderWS getProvider() {
 		return provider;
 	}
 
-	@XmlElement
+	
 	public DtDepartmentWS getDepartment() {
 		return department;
 	}
 
-	@XmlElement
+	
 	public DtTouristicDepartureWS[] getDepartures() {
 		return departures;
 	}
 
-	@XmlElement
+	
 	public DtTouristicBundleWS[] getBundles() {
 		return bundles;
 	}
 
 	// codigo agregado: LT
-	@XmlElement
+	
 	public DtCategoryWS[] getCategories() {
 		return categories;
 	}
 
-	@XmlElement
+	
 	public ActivityState getState() {
 		return state;
 	}
 	
-	@XmlElement
+	
 	public Integer getVisitsAmount() {
 		return visitsAmount;
 	}
 
-	@XmlElement
+	
 	public String getUrlVideo() {
 		return urlVideo;
 	}

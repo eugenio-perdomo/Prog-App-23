@@ -15,13 +15,23 @@ import uy.turismo.servidorcentral.logic.datatypes.DtUser;
 
 public class DtTouristWS extends DtUserWS {
 
+	@XmlElement
 	private String nationality;
+	@XmlElement
 	private DtTouristicActivityWS[] favActivities;
+	@XmlElement
 	private DtTouristicDepartureWS[] departures;
+	@XmlElement
 	private DtInscriptionWS[] inscriptions;
+	@XmlElement
 	private DtTouristicBundleWS[] bundles;
+	@XmlElement
 	private DtPurchaseWS[] purchases;
 	
+	public DtTouristWS() {
+		super();
+	}
+
 	public DtTouristWS(DtTourist t, Boolean isShort) {
 		super(
 				t.getId(), 
@@ -115,28 +125,28 @@ public class DtTouristWS extends DtUserWS {
 		
 	}
 
-	@XmlElement
+	
 	public String getNationality() {
 		return nationality;
 	}
-	@XmlElement
+	
 	public DtTouristicDepartureWS[] getDepartures() {
 		return departures;
 	}
-	@XmlElement
+	
 	public DtInscriptionWS[] getInscriptions() {
 		return inscriptions;
 	}
-	@XmlElement
+	
 	public DtPurchaseWS[] getPurchases() {
 		return purchases;
 	}
-	@XmlElement
+	
 	public DtTouristicBundleWS[] getBundles() {
 		return bundles;
 	}
 
-	@XmlElement
+	
 	public DtTouristicActivityWS[] getFavActivities() {
 		return favActivities;
 	}

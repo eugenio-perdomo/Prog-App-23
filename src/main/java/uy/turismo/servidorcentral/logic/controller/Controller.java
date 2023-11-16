@@ -414,7 +414,6 @@ public class Controller implements IController {
 				touristicActivityData.getUploadDate(),
 				provider,
 				department,
-				touristicActivityData.getVisits(),
 				touristicActivityData.getVideoURL());
 		
 
@@ -451,8 +450,7 @@ public class Controller implements IController {
 				touristicDepartureData.getUploadDate(),
 				touristicDepartureData.getDepartureDateTime(),
 				touristicDepartureData.getPlace(),
-				activity,
-				touristicDepartureData.getVisits());
+				activity);
 		
 		if(touristicDepartureData.getImage() != null) {
 			departure.setImage(touristicDepartureData.getImage());

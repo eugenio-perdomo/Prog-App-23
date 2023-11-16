@@ -6,10 +6,16 @@ import uy.turismo.servidorcentral.logic.datatypes.DtTouristicActivity;
 
 public class DtDepartmentWS extends DtBaseEntityWS {
 
+	@XmlElement
 	private String description;
+	@XmlElement
 	private String webSite; 
+	@XmlElement
 	private DtTouristicActivityWS[] activities;
 
+	public DtDepartmentWS(){
+		
+	}
 
 	public DtDepartmentWS(DtDepartment d, Boolean isShort) {
 		super(d.getId(), d.getName());
@@ -29,17 +35,14 @@ public class DtDepartmentWS extends DtBaseEntityWS {
 		}
 	}
 
-	@XmlElement
 	public String getDescription() {
 		return description;
 	}
 
-	@XmlElement
 	public String getWebSite() {
 		return webSite;
 	}
 
-	@XmlElement
 	public DtTouristicActivityWS[] getActivities() {
 		return activities;
 	}

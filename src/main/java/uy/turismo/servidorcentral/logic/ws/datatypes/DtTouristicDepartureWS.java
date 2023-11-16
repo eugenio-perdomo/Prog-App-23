@@ -6,15 +6,26 @@ import uy.turismo.servidorcentral.logic.datatypes.DtTouristicDeparture;
 
 public class DtTouristicDepartureWS extends DtBaseEntityWS {
 
+	@XmlElement
 	private Integer maxTourist;
+	@XmlElement
 	private String uploadDate;
+	@XmlElement
 	private String departureDateTime;
+	@XmlElement
 	private String place;
+	@XmlElement
 	private byte[] image;
+	@XmlElement
 	private Integer visitsAmount;
+	@XmlElement
 	private DtTouristicActivityWS touristicActivity;
+	@XmlElement
 	private DtTouristWS[] tourists;
 	
+	public DtTouristicDepartureWS() {
+		
+	}
 
 	public DtTouristicDepartureWS(DtTouristicDeparture d, Boolean isShort) {
 		super(
@@ -42,42 +53,42 @@ public class DtTouristicDepartureWS extends DtBaseEntityWS {
 	}
 
 	//Getters
-	@XmlElement
+	
 	public Integer getMaxTourist() {
 		return maxTourist;
 	}
 
-	@XmlElement
+	
 	public String getUploadDate() {
 		return uploadDate;
 	}
 
-	@XmlElement
+	
 	public String getDepartureDateTime() {
 		return departureDateTime;
 	}
 
-	@XmlElement
+	
 	public String getPlace() {
 		return place;
 	}
 
-	@XmlElement
+	
 	public byte[] getImage() {
 		return image;
 	}
 
-	@XmlElement
+	
 	public DtTouristicActivityWS getTouristicActivity() {
 		return touristicActivity;
 	}
 
-	@XmlElement
+	
 	public DtTouristWS[] getTourists() {
 		return tourists;
 	}
 	
-	@XmlElement
+	
 	public Integer getVisitsAmount() {
 		return visitsAmount;
 	}

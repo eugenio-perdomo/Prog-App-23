@@ -1,16 +1,27 @@
 package uy.turismo.servidorcentral.logic.ws.datatypes;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 import jakarta.xml.bind.annotation.XmlElement;
 
 public abstract class DtUserWS extends DtBaseEntityWS{
-	
+
+	@XmlElement
 	protected String nickname;
+	@XmlElement
 	protected String email;
+	@XmlElement
 	protected String lastName;
+	@XmlElement
 	protected String birthDate;
+	@XmlElement
 	protected byte[] image;
+	@XmlElement
 	protected String password;
+	@XmlElement
 	protected DtUserWS[] follows;
+	@XmlElement
 	protected DtUserWS[] followers;
 	
 	public DtUserWS() {
@@ -46,46 +57,43 @@ public abstract class DtUserWS extends DtBaseEntityWS{
 		this.followers = followers;
 	}
 
-	@XmlElement
+	
 	public String getNickname() {
 		return nickname;
 	}
 
-	@XmlElement
+	
 	public String getEmail() {
 		return email;
 	}
 
-	@XmlElement
+	
 	public String getLastName() {
 		return lastName;
 	}
 
-	@XmlElement
+	
 	public String getBirthDate() {
 		return birthDate;
 	}
 
-	@XmlElement
+	
 	public byte[] getImage() {
 		return image;
 	} 
 	
-	@XmlElement
+	
 	public String getPassword() {
 		return password;
 	}
 
-	@XmlElement
+	
 	public DtUserWS[] getFollows() {
 		return follows;
 	}
 
-	@XmlElement
+	
 	public DtUserWS[] getFollowers() {
 		return followers;
 	}
-	
-	
-	
 }

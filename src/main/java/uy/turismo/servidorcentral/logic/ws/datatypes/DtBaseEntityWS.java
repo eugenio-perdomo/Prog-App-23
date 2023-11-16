@@ -7,7 +7,9 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public abstract class DtBaseEntityWS {
 	
+	@XmlElement
 	protected Long id; 
+	@XmlElement
 	protected String name;
 	
 	
@@ -23,12 +25,10 @@ public abstract class DtBaseEntityWS {
 		this.name = name;
 	}
 
-	@XmlElement
 	public Long getId() {
 		return id;
 	}
 
-	@XmlElement
 	public String getName() {
 		return name;
 	}

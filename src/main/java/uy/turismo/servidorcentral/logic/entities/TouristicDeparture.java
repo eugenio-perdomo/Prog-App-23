@@ -75,8 +75,7 @@ public class TouristicDeparture implements Serializable {
 			LocalDate uploadDate,
 			LocalDateTime departureDateTime, 
 			String place,
-			TouristicActivity touristicActivity,
-			Integer visits) {
+			TouristicActivity touristicActivity) {
 		this.id = id;
 		this.name = name;
 		this.maxTourist = maxTourist;
@@ -86,7 +85,7 @@ public class TouristicDeparture implements Serializable {
 		this.image = null;
 		this.touristicActivity = touristicActivity;
 		this.initLists();
-		this.visitsAmount = visits;
+		this.visitsAmount = 0;
 	}
 	
 	//Iniciadores
