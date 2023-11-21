@@ -210,7 +210,7 @@ public interface IController {
 	 * Cambia el estado de una Actividad turistica
 	 * @param touristicActivityData
 	 */
-	public void changeActivityState(Long id, ActivityState state);
+	public void changeActivityState(Long id, ActivityState state) throws Exception;
 	
 	/**
 	 * Devuelve todas las actividades con el estado especificado

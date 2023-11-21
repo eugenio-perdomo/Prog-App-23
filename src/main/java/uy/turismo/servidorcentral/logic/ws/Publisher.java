@@ -640,8 +640,12 @@ public class Publisher {
 			ActivityState state) {
 
 		IController controller = ControllerFactory.getIController();
+		try {
+			controller.changeActivityState(id, state);
+		} catch (Exception e) {
+			System.out.println("me quiero morir uwu");
+		}
 		
-		controller.changeActivityState(id, state);
 	}
 
 	@WebMethod

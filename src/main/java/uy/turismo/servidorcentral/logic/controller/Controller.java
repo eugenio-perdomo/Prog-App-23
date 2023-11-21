@@ -1,5 +1,6 @@
 package uy.turismo.servidorcentral.logic.controller;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -684,10 +685,26 @@ public class Controller implements IController {
 	
 	@Override
 	
-	public void changeActivityState( Long id,  ActivityState state) {
+	public void changeActivityState( Long id,  ActivityState state) throws Exception {
 		
 		TouristicActivityDAO activityDao = new TouristicActivityDAOImpl();
 		TouristicActivity touristicActivity = activityDao.findById(id);
+		
+		try{
+			if(state.equals(ActivityState.FINISHED)) {
+				
+				List<TouristicDeparture> departuresToCheck = touristicActivity.getTouristicDepartures();
+				
+				for(TouristicDeparture departure : departuresToCheck) {
+					
+					if(departure.getDepartureDateTime().isAfter(LocalDateTime.now())) {
+						throw new Exception();
+					}
+				}
+			}
+		} catch (Exception e) {
+			e = new Exception("No se puede finalizar una actividad con salidas vigentes");
+		}
 		
 		touristicActivity.setActivityState(state);
 		

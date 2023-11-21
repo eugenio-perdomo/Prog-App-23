@@ -65,6 +65,12 @@ public class DtTouristicDeparture extends DtBaseEntity {
 		this.visitsAmount = visits;
 	}
 
+	public DtTouristicDeparture(Long id, String name, BufferedImage image, LocalDateTime departureDateTime) {
+		super(id, name);
+		this.image = image;
+		this.departureDateTime = departureDateTime;
+	}
+
 	//Getters
 	public Integer getMaxTourist() {
 		return maxTourist;
