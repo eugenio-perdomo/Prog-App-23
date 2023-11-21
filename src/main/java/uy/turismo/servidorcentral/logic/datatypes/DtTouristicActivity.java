@@ -66,6 +66,18 @@ public class DtTouristicActivity extends DtBaseEntity {
 		this.department = department;
 		this.categories = categories;
 	}
+	
+	public DtTouristicActivity(Long id, String name, DtProvider provider, ArrayList<DtTouristicDeparture> departures, Integer visits) {
+		super(id, name);
+		this.provider = provider;
+		this.departures = departures;
+		this.visitsAmount = visits;
+	}
+	
+	public DtTouristicActivity(Long id, String name, DtProvider provider) {
+		super(id, name);
+		this.provider = provider;
+	}
 
 	// codigo agregado: LT
 	public DtTouristicActivity(Long id, String name, String description, Double duration, Double costPerTourist,

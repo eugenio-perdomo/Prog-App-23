@@ -79,6 +79,11 @@ public abstract class DtUser extends DtBaseEntity{
 		this.followers = followers;
 	}
 	
+	public DtUser(Long id, 
+			String name) {
+		super(id, name);
+	}
+	
 
 
 //	public List<DtTouristicActivity> getFavoritesActivities() {

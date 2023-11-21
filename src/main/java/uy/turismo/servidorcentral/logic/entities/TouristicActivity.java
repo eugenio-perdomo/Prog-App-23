@@ -334,6 +334,42 @@ public class TouristicActivity implements Serializable{
 		return dtOutput;
 	}
 	
+	public DtTouristicActivity getVisitsDt() {
+		List<DtTouristicDeparture> listDtDepartures= new ArrayList<DtTouristicDeparture>();
+		
+		if(this.touristicDepartures != null) {
+			for(TouristicDeparture dep: this.touristicDepartures) {
+				listDtDepartures.add(dep.getVisitDt());
+			}
+		}
+		
+		DtTouristicActivity dtOutput = new DtTouristicActivity(
+				this.id, 
+				this.name,
+				(DtProvider) this.provider.getNameDt(),
+				(ArrayList) listDtDepartures,
+				this.visitsAmount);
+		return dtOutput;
+	}
+	
+	public DtTouristicActivity getProviderDt() {
+		
+		DtTouristicActivity dtOutput = new DtTouristicActivity(
+				this.id, 
+				this.name,
+				(DtProvider) this.provider.getNameDt());
+		return dtOutput;
+	}
+	
+public DtTouristicActivity getProviderVisitsDt() {
+		
+		DtTouristicActivity dtOutput = new DtTouristicActivity(
+				this.id, 
+				this.name,
+				(DtProvider) this.provider.getNameDt());
+		return dtOutput;
+	}
+	
 	/**
 	 * Devuelve un DtTouristicActivity con todos los datos del objeto 
 	 * @return

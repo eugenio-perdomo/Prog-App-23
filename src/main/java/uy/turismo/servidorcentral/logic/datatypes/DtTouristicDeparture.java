@@ -36,6 +36,12 @@ public class DtTouristicDeparture extends DtBaseEntity {
 		super(id, name);
 		this.image = image;
 	}
+	
+	public DtTouristicDeparture(Long id, String name, DtTouristicActivity activity, Integer visits ) {
+		super(id, name);
+		this.touristicActivity = activity;
+		this.visitsAmount = visits;
+	}
 
 	public DtTouristicDeparture(
 			Long id, 
