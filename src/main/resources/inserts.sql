@@ -8,15 +8,17 @@ INSERT INTO `Touristic_Departure` (`image`,`max_tourist`,`upload_date`,`departur
 
 INSERT INTO `Inscription` (`inscription_date`,`total_cost`,`tourist_amount`,`tourist`,`touristic_departure`) VALUES ('2022-08-15',2400,3,1,1),('2022-08-16',4000,5,5,1),('2022-08-18',1200,3,1,6),('2022-08-19',400,1,2,6),('2022-08-19',1600,2,10,8),('2022-08-19',500,1,9,3),('2022-08-20',5000,10,9,4),('2022-08-20',1000,2,7,4),('2022-08-21',500,1,3,4),('2022-08-21',8800,11,8,2);
 
-INSERT INTO `Touristic_Bundle` (`image`,`discount`,`upload_date`,`validityPeriod`,`name`,`description`) VALUES ('Disfrutar Rocha.png',20,'2022-08-10',60,'Disfrutar Rocha','Actividades para hacer en familia y disfrutar arte y gastronomia'),('Un dia en Colonia.png',15,'2022-08-01',45,'Un dia en Colonia','Paseos por el casco hist ́orico y se puede terminar con Almuerzo en la Plaza de Toros'), ('Valle Del Lunagrejo.png',15,'2022-09-15',60,'Valle Del Lunagrejo','Visite un area protegida con un paisaje natural hermoso');
+INSERT INTO `Touristic_Bundle` (`image`,`discount`,`upload_date`,`validityPeriod`,`name`,`description`) VALUES ('Disfrutar Rocha.png',20,'2022-08-10',60,'Disfrutar Rocha','Actividades para hacer en familia y disfrutar arte y gastronomia'),('Un dia en Colonia.png',15,'2022-08-01',45,'Un dia en Colonia','Paseos por el casco hist ́orico y se puede terminar con Almuerzo en la Plaza de Toros'), ('Valle Del Lunagrejo.png',15,'2022-09-15',60,'Valle Del Lunagrejo','Visite un area protegida con un paisaje natural hermoso'),(null, 30, '2022-11-07',45,'Rocha de fiesta','Para cerrar el año a lo grande en nuestro departamento mas oceanico');
 
 INSERT INTO `Purchase` (`tourist`,`touristic_bundle`,`tourist_amount`,`purchase_date`,`expire_date`,`total_cost`) VALUES (1,1,2,'2022-08-15','2022-10-14',2080),(1,2,5,'2022-08-20','2022-10-04',5100),(4,2,1,'2022-09-15','2022-10-30',1020),(5,1,10,'2022-09-01','2022-10-31',10400),(5,2,2,'2022-09-18','2022-11-02',2040),(10,2,6,'2022-09-02','2022-10-17',6120);
 
-INSERT INTO `Activities_In_Bundles` (`bundle`,`activity`) VALUES (1,1),(1,2),(2,3),(2,4),(3,5),(3,6);
+INSERT INTO `Activities_In_Bundles` (`bundle`,`activity`) VALUES (1,1),(1,2),(2,3),(2,4),(3,5),(3,6),(4,1);
 
 INSERT INTO `Categories` (`name`) VALUES ('Aventura y Deporte'),('Campo y Naturaleza'),('Cultura y Patrimonio'),('Gastronomia'),('Turismo Playas');
 
 INSERT INTO `Activity_Categories` (`activity`,`category`) VALUES (1,4),(2,3),(2,4),(3,3),(4,4),(5,2),(5,4),(6,2),(7,3),(8,3),(9,1),(9,5),(10,3);
+
+INSERT INTO `Bundle_Categories` (`bundle`,`category`) VALUES (1,3),(1,4),(2,3),(2,4),(3,2),(3,4),(4,4);
 
 INSERT INTO `Follows` (`followed`,`follower`) VALUES (2,1),(10,1),(11,1),(12,1),(3,1),(1,2),(4,3),(6,3),(7,3),(13,3),(2,4),(11,4),(7,5),(8,5),(12,5),(1,6),(4,6),(10,6),(3,7),(6,7),(9,8),(12,8),(5,9),(10,9),(11,9),(13,9),(10,11),(4,11),(8,12),(1,13),(2,13),(4,13),(6,13);
 
