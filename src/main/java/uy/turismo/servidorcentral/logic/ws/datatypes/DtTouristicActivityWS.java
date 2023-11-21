@@ -48,6 +48,7 @@ public class DtTouristicActivityWS extends DtBaseEntityWS {
 				a.getName());
 		this.image = Converter.convertImageToArray(a.getImage());
 		this.state = a.getState();
+		this.uploadDate = Converter.convertDateToString(a.getUploadDate());
 		this.description = a.getDescription();
 		this.department = new DtDepartmentWS(a.getDepartment(), true);
 		this.visitsAmount = a.getVisits();
@@ -65,7 +66,6 @@ public class DtTouristicActivityWS extends DtBaseEntityWS {
 		if(!isShort) {
 			this.duration = a.getDuration();
 			this.costPerTourist = a.getCostPerTourist();
-			this.uploadDate = Converter.convertDateToString(a.getUploadDate());
 			this.city = a.getCity();
 			this.provider = new DtProviderWS(a.getProvider(), true);
 			

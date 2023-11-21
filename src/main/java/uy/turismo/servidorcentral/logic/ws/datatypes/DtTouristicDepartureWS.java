@@ -92,18 +92,4 @@ public class DtTouristicDepartureWS extends DtBaseEntityWS {
 	public Integer getVisitsAmount() {
 		return visitsAmount;
 	}
-
-	@Override
-	 public boolean equals(Object obj) {
-		 
-		 if(!(obj instanceof DtTouristicDepartureWS)) {
-			 return false;
-		 }
-		 
-		 if(this.id == ((DtTouristicDepartureWS) obj).getId()) {
-			 return true;
-		 }
-		 
-		 return false;
-	 }
 }
