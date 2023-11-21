@@ -222,6 +222,15 @@ public class TouristicDeparture implements Serializable {
 		return dtDepartureShort;
 	}
 	
+	public DtTouristicDeparture getVisitDt() {
+		DtTouristicDeparture dtDepartureVisits = new DtTouristicDeparture(
+				this.id,
+				this.name,
+				this.touristicActivity.getProviderDt(),
+				this.visitsAmount);
+		return dtDepartureVisits;
+	}
+	
 	/**
 	 * Crea un DtTouristicDeparture con todos los datos del objeto
 	 * @return

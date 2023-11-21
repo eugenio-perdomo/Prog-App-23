@@ -29,6 +29,7 @@ public class DtProviderWS extends DtUserWS {
 		if(!isShort) {
 			this.name = p.getName();
 			this.lastName = p.getLastName();
+			this.birthDate = Converter.convertDateToString(p.getBirthDate());
 			this.password = p.getPassword();
 			this.url = p.getUrl();
 			this.description = p.getDescription();

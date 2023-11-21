@@ -37,6 +37,7 @@ public class DtTouristicActivity extends DtBaseEntity {
 		this.city = a.getCity();
 		this.image = Converter.convertArrayToBI(a.getImage());
 		this.state = a.getState();
+		this.urlVideo = a.getUrlVideo();
 		
 		if(a.getUploadDate() != null) {
 			this.uploadDate = Converter.convertStringToLD(a.getUploadDate());	
@@ -57,14 +58,35 @@ public class DtTouristicActivity extends DtBaseEntity {
 		}
 	}
 
-	public DtTouristicActivity(Long id, String name, BufferedImage image, ActivityState state, String description,
-			DtDepartment department, ArrayList<DtCategory> categories) {
+	//Para el ShortDt
+	public DtTouristicActivity(
+			Long id, 
+			String name, 
+			LocalDate uploadDate,
+			BufferedImage image, 
+			ActivityState state, 
+			String description,
+			DtDepartment department, 
+			ArrayList<DtCategory> categories) {
 		super(id, name);
 		this.image = image;
+		this.uploadDate = uploadDate;
 		this.state = state;
 		this.description = description;
 		this.department = department;
 		this.categories = categories;
+	}
+	
+	public DtTouristicActivity(Long id, String name, DtProvider provider, ArrayList<DtTouristicDeparture> departures, Integer visits) {
+		super(id, name);
+		this.provider = provider;
+		this.departures = departures;
+		this.visitsAmount = visits;
+	}
+	
+	public DtTouristicActivity(Long id, String name, DtProvider provider) {
+		super(id, name);
+		this.provider = provider;
 	}
 
 	// codigo agregado: LT

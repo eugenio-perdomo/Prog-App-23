@@ -482,6 +482,17 @@ public class Controller implements IController {
 		}
 		return departureOutput;
 	}
+	
+	public ArrayList<DtTouristicActivity> getListTouristicActivityWithVisits() {
+		TouristicActivityDAO activityDAO = new TouristicActivityDAOImpl();
+		ArrayList<TouristicActivity> activities = activityDAO.findAll();
+		ArrayList<DtTouristicActivity> activitiesOutput = new ArrayList<DtTouristicActivity>();
+		
+		for(TouristicActivity act : activities ) {
+			activitiesOutput.add(act.getVisitsDt());
+		}
+		return activitiesOutput;
+	}
 
 	public DtTouristicDeparture getTouristicDepartureData(long touristicDepartureId){
 		

@@ -58,7 +58,7 @@ public class Publisher {
 	public String publish() {
 		String serviceURL = "http://"+ getHostAddress() +":8181/controller";
 		endpoint = Endpoint.publish(serviceURL , this);
-		updateWSDL(serviceURL + "?wsdl");
+//		updateWSDL(serviceURL + "?wsdl");
 		return "Web Service levantado en " + serviceURL;
 	}
 
@@ -97,33 +97,33 @@ public class Publisher {
 		return "localhost";
 	}
 	
-	@WebMethod(exclude = true)
-	public void updateWSDL(String wsdlURL) {
-		String fileURL = wsdlURL;
-        String saveDir = System.getProperty("user.dir") + "/src/main/resources/";
-
-        try {
-            URL url = new URL(fileURL);
-            URLConnection conn = url.openConnection();
-            InputStream inputStream = conn.getInputStream();
-            String saveFilePath = saveDir + "publisher.wsdl";
-
-            FileOutputStream outputStream = new FileOutputStream(saveFilePath);
-
-            int bytesRead;
-            byte[] buffer = new byte[1024];
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
-            }
-
-            outputStream.close();
-            inputStream.close();
-
-            System.out.println("Archivo WSDL guardado en " + saveFilePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-	}
+//	@WebMethod(exclude = true)
+//	public void updateWSDL(String wsdlURL) {
+//		String fileURL = wsdlURL;
+//        String saveDir = System.getProperty("user.dir") + "/src/main/resources/";
+//
+//        try {
+//            URL url = new URL(fileURL);
+//            URLConnection conn = url.openConnection();
+//            InputStream inputStream = conn.getInputStream();
+//            String saveFilePath = saveDir + "publisher.wsdl";
+//
+//            FileOutputStream outputStream = new FileOutputStream(saveFilePath);
+//
+//            int bytesRead;
+//            byte[] buffer = new byte[1024];
+//            while ((bytesRead = inputStream.read(buffer)) != -1) {
+//                outputStream.write(buffer, 0, bytesRead);
+//            }
+//
+//            outputStream.close();
+//            inputStream.close();
+//
+//            System.out.println("Archivo WSDL guardado en " + saveFilePath);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//	}
 
 	@WebMethod(exclude = true)
 	public Endpoint getEndpoint() {
@@ -142,7 +142,7 @@ public class Publisher {
 		
 		DtUser userData = controller.checkCredentials(email, password);
 		
-		DtUserWS userOutput = null;
+		DtUserWS userOutput = new DtProviderWS();
 		
 		if(userData != null) {
 			if(userData instanceof DtTourist) {
@@ -512,7 +512,6 @@ public class Publisher {
 				.getDeparturesByActivity(touristicActivityId);
 		
 		DtTouristicDepartureWS[] departureArray = null;
-		
 		
 		if(departureList != null && !departureList.isEmpty()) {
 			departureArray = new DtTouristicDepartureWS[departureList.size()];

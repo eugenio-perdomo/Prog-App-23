@@ -149,6 +149,12 @@ public interface IController {
 	public ArrayList<DtTouristicDeparture> getListTouristicDeparture(); 
 	
 	/**
+	 * Devuelve una lista con el id y el nombre de todas las Salidas Turisticas
+	 * @return ArrayList<DtTouristicActivity>
+	 */
+	public ArrayList<DtTouristicActivity> getListTouristicActivityWithVisits();
+	
+	/**
 	 * Devuelve una lista con el id y el nombre de todos los Paquetes Turisticos
 	 * @return ArrayList<DtTouristBundle>
 	 */

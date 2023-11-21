@@ -131,4 +131,13 @@ public class Provider extends User {
 	
 		return dtOutput;
 	}
+	
+	public DtProvider getNameDt() {
+		DtProvider dtOutput = null;
+		
+			dtOutput = new DtProvider(
+					this.id, 
+					this.name);
+		return dtOutput;
+	}
 }
