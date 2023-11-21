@@ -30,7 +30,9 @@ public class ControllerTest {
 	@Test
 	public void initDataBase() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		session.close();	
+		session.close();
+		String yellow = "\u001B[33m";
+		System.out.println( yellow + "Info: Done" + yellow);
 	}
 	
 	@Test

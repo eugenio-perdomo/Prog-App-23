@@ -637,13 +637,13 @@ public class Publisher {
 			@WebParam(name = "activityId")
 			Long id, 
 			@WebParam(name = "activityState")
-			ActivityState state) {
+			ActivityState state) throws Exception {
 
 		IController controller = ControllerFactory.getIController();
 		try {
 			controller.changeActivityState(id, state);
 		} catch (Exception e) {
-			System.out.println("me quiero morir uwu");
+			throw e;
 		}
 		
 	}

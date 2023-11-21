@@ -703,7 +703,7 @@ public class Controller implements IController {
 				}
 			}
 		} catch (Exception e) {
-			e = new Exception("No se puede finalizar una actividad con salidas vigentes");
+			throw new Exception("No se puede finalizar una actividad con salidas vigentes");
 		}
 		
 		touristicActivity.setActivityState(state);
