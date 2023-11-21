@@ -31,10 +31,16 @@ public class DtTouristicBundle extends DtBaseEntity {
 		this.image = Converter.convertArrayToBI(b.getImage());
 	}	
 	
-	public DtTouristicBundle(Long id, String name, BufferedImage image) {
+	public DtTouristicBundle(
+			Long id, 
+			String name, 
+			BufferedImage image,
+			LocalDate uploadDate,
+			ArrayList<DtCategory> categories) {
 		super(id, name);
 		this.image = image;
-		// TODO Auto-generated constructor stub
+		this.uploadDate = uploadDate;
+		this.categories = categories;
 	}
 
 	public DtTouristicBundle(Long id) {

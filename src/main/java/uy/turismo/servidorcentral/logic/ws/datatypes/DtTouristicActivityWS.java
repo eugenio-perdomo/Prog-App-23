@@ -50,7 +50,7 @@ public class DtTouristicActivityWS extends DtBaseEntityWS {
 		this.state = a.getState();
 		this.uploadDate = Converter.convertDateToString(a.getUploadDate());
 		this.description = a.getDescription();
-		this.department = new DtDepartmentWS(a.getDepartment(), true);
+		this.department = new DtDepartmentWS(a.getDepartment(), true, false);
 		this.visitsAmount = a.getVisits();
 		this.urlVideo = a.getVideoURL();
 

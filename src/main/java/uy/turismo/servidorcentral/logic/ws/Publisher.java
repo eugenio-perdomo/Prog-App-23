@@ -480,7 +480,7 @@ public class Publisher {
 			departmentArray = new DtDepartmentWS[departmentList.size()];
 			int i = 0;
 			for(DtDepartment department : departmentList) {
-				departmentArray[i] = new DtDepartmentWS(department, true);
+				departmentArray[i] = new DtDepartmentWS(department, true, true);
 				i++;
 			}
 		}

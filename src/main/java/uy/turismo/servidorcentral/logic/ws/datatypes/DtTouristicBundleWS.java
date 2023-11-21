@@ -34,13 +34,22 @@ public class DtTouristicBundleWS extends DtBaseEntityWS {
 				b.getId(),
 				b.getName());
 		this.image = Converter.convertImageToArray(b.getImage());
+		this.uploadDate = Converter.convertDateToString(b.getUploadDate());
+
+		if(b.getCategories() != null && !b.getCategories().isEmpty()) {
+			this.categories = new DtCategoryWS[b.getCategories().size()];
+			int i = 0;
+			for(DtCategory c : b.getCategories()) {
+				this.categories[i] = new DtCategoryWS(c, true);
+				i++;
+			}
+		}
 		
 		if(!isShort) {
 			this.description = b.getDescription();
 			this.validityPeriod = b.getValidityPeriod();
 			this.discount = b.getDiscount();
 			this.price = b.getPrice();
-			this.uploadDate = Converter.convertDateToString(b.getUploadDate());
 			
 			if(b.getActivities() != null && !b.getActivities().isEmpty()) {
 				this.activities = new DtTouristicActivityWS[b.getActivities().size()];
@@ -51,14 +60,6 @@ public class DtTouristicBundleWS extends DtBaseEntityWS {
 				}
 			}
 			
-			if(b.getCategories() != null && !b.getCategories().isEmpty()) {
-				this.categories = new DtCategoryWS[b.getCategories().size()];
-				int i = 0;
-				for(DtCategory c : b.getCategories()) {
-					this.categories[i] = new DtCategoryWS(c, true);
-					i++;
-				}
-			}
 		}
 	}
 

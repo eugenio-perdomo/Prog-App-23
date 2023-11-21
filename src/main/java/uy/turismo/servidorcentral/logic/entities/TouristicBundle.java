@@ -188,10 +188,19 @@ public class TouristicBundle implements Serializable  {
 	 * @return
 	 */
 	public DtTouristicBundle getShortDt() {
+		
+		ArrayList<DtCategory> categoryList = new ArrayList<DtCategory>();
+		
+		for(Category category : this.categories) {
+			categoryList.add(category.getShortDt());
+		}
+		
 		DtTouristicBundle shortDt = new  DtTouristicBundle(
 				this.id,
 				this.name,
-				this.getImage());
+				this.getImage(),
+				this.uploadDate,
+				categoryList);
 		
 		return shortDt;
 	}

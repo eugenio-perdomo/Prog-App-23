@@ -17,8 +17,19 @@ public class DtDepartmentWS extends DtBaseEntityWS {
 		
 	}
 
-	public DtDepartmentWS(DtDepartment d, Boolean isShort) {
+	public DtDepartmentWS(DtDepartment d, Boolean isShort, Boolean alsoActivities) {
 		super(d.getId(), d.getName());
+		
+		if(alsoActivities) {
+			if(d.getActivities() != null && !d.getActivities().isEmpty()) {
+				this.activities = new DtTouristicActivityWS[d.getActivities().size()];
+				int i = 0;
+				for(DtTouristicActivity a : d.getActivities()) {
+					this.activities[i] = new DtTouristicActivityWS(a, true);
+					i++;
+				}
+			}
+		}
 		
 		if(!isShort) {
 			this.description = d.getDescription();
