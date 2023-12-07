@@ -2,12 +2,27 @@ package uy.turismo.servidorcentral.logic.ws;
 
 import java.util.Scanner;
 
+import org.hibernate.Session;
+
+import uy.turismo.servidorcentral.logic.util.HibernateUtil;
+
 
 public class Main {
 
 	public static void main(String[] args) {
 		
 		Scanner scanner = new Scanner(System.in);
+		
+		System.out.println("¿Desea iniciar la base de datos? y/Y");
+		String bdOption = scanner.nextLine();
+		if(bdOption.equalsIgnoreCase("y") || bdOption.equalsIgnoreCase("Y")) {
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			session.close();
+			String yellow = "\u001B[33m";
+			System.out.println( yellow + "Info: Done" + yellow);
+		}
+		
+		
 		Publisher publisher = new Publisher();
 		System.out.println(publisher.publish());
 		String option = "";
